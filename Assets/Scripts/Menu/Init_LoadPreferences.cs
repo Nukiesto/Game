@@ -30,7 +30,7 @@ namespace SpeedTutorMainMenuSystem
 
         [Space(20)]
         [SerializeField] private bool canUse = false;
-        [SerializeField] private MenuController menuController;
+        [SerializeField] private MenuControllerTutor menuController;
         #endregion
 
         private void Awake()

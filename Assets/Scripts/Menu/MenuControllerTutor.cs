@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 namespace SpeedTutorMainMenuSystem
 {
-    public class MenuController : MonoBehaviour
+    public class MenuControllerTutor : MonoBehaviour
     {
         #region Default Values
         [Header("Default Menu Values")]
@@ -15,6 +14,7 @@ namespace SpeedTutorMainMenuSystem
         [SerializeField] private float defaultVolume;
         [SerializeField] private int defaultSen;
         [SerializeField] private bool defaultInvertY;
+        [SerializeField] private bool isGame;
 
         [Header("Levels To Load")]
         public string _newGameButtonLevel;
@@ -25,7 +25,8 @@ namespace SpeedTutorMainMenuSystem
 
         #region Menu Dialogs
         [Header("Main Menu Components")]
-        [SerializeField] private GameObject menuDefaultCanvas;
+        [SerializeField] private GameObject mainMenuCanvas;
+        [SerializeField] private GameObject pauseMenuCanvas;
         [SerializeField] private GameObject GeneralSettingsCanvas;
         [SerializeField] private GameObject graphicsMenu;
         [SerializeField] private GameObject soundMenu;
@@ -138,21 +139,21 @@ namespace SpeedTutorMainMenuSystem
 
             if (buttonType == "Options")
             {
-                menuDefaultCanvas.SetActive(false);
+                mainMenuCanvas.SetActive(false);
                 GeneralSettingsCanvas.SetActive(true);
                 menuNumber = 2;
             }
 
             if (buttonType == "LoadGame")
             {
-                menuDefaultCanvas.SetActive(false);
+                mainMenuCanvas.SetActive(false);
                 loadGameDialog.SetActive(true);
                 menuNumber = 8;
             }
 
             if (buttonType == "NewGame")
             {
-                menuDefaultCanvas.SetActive(false);
+                mainMenuCanvas.SetActive(false);
                 newGameDialog.SetActive(true);
                 menuNumber = 7;
             }
@@ -272,7 +273,7 @@ namespace SpeedTutorMainMenuSystem
                 else
                 {
                     Debug.Log("Load Game Dialog");
-                    menuDefaultCanvas.SetActive(false);
+                    mainMenuCanvas.SetActive(false);
                     loadGameDialog.SetActive(false);
                     noSaveDialog.SetActive(true);
                 }
@@ -302,7 +303,7 @@ namespace SpeedTutorMainMenuSystem
 
         public void GoBackToMainMenu()
         {
-            menuDefaultCanvas.SetActive(true);
+            mainMenuCanvas.SetActive(true);
             newGameDialog.SetActive(false);
             loadGameDialog.SetActive(false);
             noSaveDialog.SetActive(false);
