@@ -10,6 +10,7 @@ public class SettingsMenu : MenuUnit
             if (dialog.GetTypeDialog() == type)
             {
                 dialog.SetActive(true);
+                AddDialog(dialog);
             }
         }
     }

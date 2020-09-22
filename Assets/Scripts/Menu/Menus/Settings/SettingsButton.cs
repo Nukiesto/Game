@@ -61,7 +61,7 @@ public class SettingsButton : ButtonUnit
     }
     private void ButtonClickActionBack()
     {
-        menuController.SetPreviosMenu();
+        menu.controller.TrySetPreviosMenu();
     }
 
     public void ButtonClick()

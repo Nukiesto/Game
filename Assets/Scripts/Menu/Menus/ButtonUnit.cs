@@ -2,7 +2,6 @@
 
 public class ButtonUnit : MonoBehaviour
 {
-    [HideInInspector] public MenuController menuController;
     [HideInInspector] public MenuUnit menu;
 
     protected delegate void delegButtonClickAction();

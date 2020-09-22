@@ -50,7 +50,7 @@ public class MainMenuButton : ButtonUnit
     }
     private void ButtonClickActionSettings()
     {
-        menuController.SetMenu(Menu.Settings);
+        menu.controller.SetMenu(Menu.Settings);
     }
     private void ButtonClickActionExit()
     {

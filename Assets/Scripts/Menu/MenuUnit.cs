@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class MenuUnit : MonoBehaviour
 {
@@ -7,18 +8,18 @@ public abstract class MenuUnit : MonoBehaviour
 
     public Menu menuType;
 
-    private MenuController controller;
-
+    [HideInInspector] public MenuController controller;
+    [HideInInspector] public Stack<DialogUnit> dialogsOpened = new Stack<DialogUnit>();
     private void Start()
     {
         controller = FindObjectOfType<MenuController>();
         foreach (var button in buttons)
         {
-            button.menuController = controller;
-        }
-        foreach (var button in buttons)
-        {
             button.menu = this;
+        }
+        foreach (var dialog in dialogs)
+        {
+            dialog.menu = this;
         }
     }
     public virtual void StartDialog(dynamic type = null)
@@ -28,10 +29,14 @@ public abstract class MenuUnit : MonoBehaviour
     public virtual void SetActiveMenu(bool value)
     {
         gameObject.SetActive(value);
-        foreach (var dialog in dialogs)
-        {
-            dialog.SetActive(false);
-        }
+        //foreach (var dialog in dialogs)
+        //{
+        //    dialog.SetActive(false);
+        //}
+    }
+    public bool ActiveMenu()
+    {
+        return gameObject.activeSelf;
     }
 
     public void SetActiveButtons(bool value)
@@ -47,5 +52,18 @@ public abstract class MenuUnit : MonoBehaviour
         {
             dialog.SetActive(value);
         }
+    }
+
+    public void AddDialog(DialogUnit dialog)
+    {
+        dialogsOpened.Push(dialog);
+    }
+    public void CloseFirstDialog()
+    {
+        dialogsOpened.Pop().SetActive(false);
+    }
+    public bool OpenIsDialog()
+    {
+        return dialogsOpened.Count > 0;
     }
 }

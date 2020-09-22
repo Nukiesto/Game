@@ -1,18 +1,14 @@
 ﻿
-using static MainMenuDialog;
+using static PauseDialog;
 
-public class MainMenu : MenuUnit
+public class PauseMenu : MenuUnit
 {
-    //public override void SetActiveMenu(bool value)
-    //{
-    //    base.SetActiveMenu(value);
-    //}
-    public string gameSceneName;
+    public string sceneMainMenu;
 
     public void StartDialogLocal(DialogType type)
     {
         foreach (var dialog in dialogs)
-        {           
+        {
             if (dialog.GetTypeDialog() == type)
             {
                 dialog.SetActive(true);
