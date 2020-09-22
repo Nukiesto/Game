@@ -7,15 +7,16 @@ public enum Menu
     Pause,
     Settings
 }
+public enum ButtonDialog
+{
+    Yes,
+    No,
+    Cancel
+}
 
 public class MenuController : MonoBehaviour
 {       
-    public enum ButtonDialog
-    {
-        Yes,
-        No,
-        Cancel
-    }
+    
     
     public Menu startMenuEnum;
     public bool loadMenuInStart;
