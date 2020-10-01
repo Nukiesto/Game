@@ -10,6 +10,7 @@ public abstract class MenuUnit : MonoBehaviour
 
     [HideInInspector] public MenuController controller;
     [HideInInspector] public Stack<DialogUnit> dialogsOpened = new Stack<DialogUnit>();
+
     private void Start()
     {
         controller = FindObjectOfType<MenuController>();
@@ -22,10 +23,12 @@ public abstract class MenuUnit : MonoBehaviour
             dialog.menu = this;
         }
     }
+
     public virtual void StartDialog(dynamic type = null)
     {
         SetActiveButtons(false);
     }
+
     public virtual void SetActiveMenu(bool value)
     {
         gameObject.SetActive(value);
@@ -34,6 +37,7 @@ public abstract class MenuUnit : MonoBehaviour
         //    dialog.SetActive(false);
         //}
     }
+
     public bool ActiveMenu()
     {
         return gameObject.activeSelf;
@@ -46,6 +50,7 @@ public abstract class MenuUnit : MonoBehaviour
             button.SetActive(value);
         }
     }
+
     public void SetActiveDialogs(bool value)
     {
         foreach (var dialog in dialogs)
@@ -58,11 +63,13 @@ public abstract class MenuUnit : MonoBehaviour
     {
         dialogsOpened.Push(dialog);
     }
+
     public void CloseFirstDialog()
     {
         dialogsOpened.Pop().SetActive(false);
     }
-    public bool OpenIsDialog()
+
+    public bool DialogIsOpen()
     {
         return dialogsOpened.Count > 0;
     }

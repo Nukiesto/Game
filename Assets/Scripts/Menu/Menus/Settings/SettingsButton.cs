@@ -1,5 +1,4 @@
-﻿
-using static SettingsDialog;
+﻿using static SettingsDialog;
 
 public class SettingsButton : ButtonUnit
 {
@@ -11,6 +10,7 @@ public class SettingsButton : ButtonUnit
         Controls,
         Back
     }
+
     public ButtonType buttonType;
 
     private void Start()
@@ -25,18 +25,23 @@ public class SettingsButton : ButtonUnit
             case ButtonType.Graphics:
                 ButtonClickAction = ButtonClickActionGraphics;
                 break;
+
             case ButtonType.Sound:
                 ButtonClickAction = ButtonClickActionSound;
                 break;
+
             case ButtonType.GamePlay:
                 ButtonClickAction = ButtonClickActionGamePlay;
                 break;
+
             case ButtonType.Controls:
                 ButtonClickAction = ButtonClickActionControls;
                 break;
+
             case ButtonType.Back:
                 ButtonClickAction = ButtonClickActionBack;
                 break;
+
             default:
                 ButtonClickAction = ButtonClickActionNone;
                 break;
@@ -47,18 +52,22 @@ public class SettingsButton : ButtonUnit
     {
         menu.StartDialog(DialogType.Graphics);
     }
+
     private void ButtonClickActionSound()
     {
         menu.StartDialog(DialogType.Sound);
     }
+
     private void ButtonClickActionGamePlay()
     {
         menu.StartDialog(DialogType.GamePlay);
     }
+
     private void ButtonClickActionControls()
     {
         menu.StartDialog(DialogType.Controls);
     }
+
     private void ButtonClickActionBack()
     {
         menu.controller.TrySetPreviosMenu();

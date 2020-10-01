@@ -1,5 +1,4 @@
-﻿
-using static SettingsDialog;
+﻿using static SettingsDialog;
 
 public class SettingsMenu : MenuUnit
 {

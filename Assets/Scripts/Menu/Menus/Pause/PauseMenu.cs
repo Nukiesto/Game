@@ -1,5 +1,4 @@
-﻿
-using static PauseDialog;
+﻿using static PauseDialog;
 
 public class PauseMenu : MenuUnit
 {

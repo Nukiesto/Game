@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum Menu
 {
@@ -7,6 +6,7 @@ public enum Menu
     Pause,
     Settings
 }
+
 public enum ButtonDialog
 {
     Yes,
@@ -15,32 +15,32 @@ public enum ButtonDialog
 }
 
 public class MenuController : MonoBehaviour
-{       
-    
-    
+{
+    [Header("Основные параметры")]
     public Menu startMenuEnum;
     public bool loadMenuInStart;
     public bool allowDisableMenu;
     public MenuUnit[] menu;
 
+    [Header("Меню")]
     private MenuUnit currentMenu;
     private MenuUnit previousMenu;
     private MenuUnit startMenu;
 
-    void Start()
+    private void Start()
     {
-        if (loadMenuInStart) 
+        if (loadMenuInStart)
         {
             SetMenu(startMenuEnum);
             startMenu = currentMenu;
-        }      
+        }
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (currentMenu != null && currentMenu.OpenIsDialog())//Если открыт диалог
+            if (currentMenu != null && currentMenu.DialogIsOpen())//Если открыт диалог
             {
                 CloseCurrentDialog();//Закрываем его
             }
@@ -63,9 +63,9 @@ public class MenuController : MonoBehaviour
                         {
                             currentMenu.SetActiveMenu(!currentMenu.ActiveMenu());
                         }
-                    }                    
-                }               
-            }            
+                    }
+                }
+            }
         }
     }
 
@@ -83,6 +83,7 @@ public class MenuController : MonoBehaviour
             }
         }
     }
+
     public bool TrySetPreviosMenu()
     {
         if (previousMenu != null)
@@ -97,18 +98,21 @@ public class MenuController : MonoBehaviour
         }
         return false;
     }
+
     public void CloseCurrentDialog()
     {
         currentMenu.CloseFirstDialog();//Выключаем диалог
-        if (!currentMenu.OpenIsDialog())//Если не открыт диалог
+        if (!currentMenu.DialogIsOpen())//Если не открыт диалог
         {
             currentMenu.SetActiveButtons(true);//Включаем кнопки
         }
     }
+
     public void SetActiveCurrentMenu(bool value)
     {
         currentMenu?.SetActiveMenu(value);
     }
+
     public bool IsCurrentMenuActive()
     {
         return currentMenu.gameObject.activeSelf;

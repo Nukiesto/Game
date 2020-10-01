@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuDialog : DialogUnit
@@ -12,7 +11,7 @@ public class MainMenuDialog : DialogUnit
     }
 
     public DialogType type;
-    
+
     public override dynamic GetTypeDialog()
     {
         return type;
@@ -35,6 +34,7 @@ public class MainMenuDialog : DialogUnit
             menu.controller.CloseCurrentDialog();
         }
     }
+
     public void ClickLoadGame(string buttonType)
     {
         if (buttonType == ButtonType.Yes.ToString())
@@ -46,7 +46,7 @@ public class MainMenuDialog : DialogUnit
              //SceneManager.LoadScene(levelToLoad);
             }
             else
-            {//Если их нет выводим диалог об их отсувствии                
+            {//Если их нет выводим диалог об их отсувствии
                 MainMenu a = (MainMenu)menu;
                 a.StartDialog(DialogType.NoSaveGame);
             }
@@ -61,5 +61,3 @@ public class MainMenuDialog : DialogUnit
         }
     }
 }
-
-

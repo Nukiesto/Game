@@ -1,5 +1,4 @@
-﻿
-public class PauseDialog : DialogUnit
+﻿public class PauseDialog : DialogUnit
 {
     public enum DialogType
     {

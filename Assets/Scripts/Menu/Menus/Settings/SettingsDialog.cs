@@ -1,5 +1,4 @@
-﻿
-public class SettingsDialog : DialogUnit
+﻿public class SettingsDialog : DialogUnit
 {
     public enum DialogType
     {

@@ -5,12 +5,13 @@ public class ButtonUnit : MonoBehaviour
     [HideInInspector] public MenuUnit menu;
 
     protected delegate void delegButtonClickAction();
+
     protected delegButtonClickAction ButtonClickAction;
 
     protected void ButtonClickActionNone()
     {
-
     }
+
     public void SetActive(bool value)
     {
         gameObject.SetActive(value);

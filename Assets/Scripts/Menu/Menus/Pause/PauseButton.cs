@@ -1,6 +1,4 @@
-﻿
-using UnityEngine.SceneManagement;
-using static PauseDialog;
+﻿using UnityEngine.SceneManagement;
 
 public class PauseButton : ButtonUnit
 {
@@ -10,6 +8,7 @@ public class PauseButton : ButtonUnit
         Settings,
         MainMenu
     }
+
     public ButtonType buttonType;
 
     private void Start()
@@ -24,12 +23,15 @@ public class PauseButton : ButtonUnit
             case ButtonType.Continue:
                 ButtonClickAction = ButtonClickActionContinue;
                 break;
+
             case ButtonType.Settings:
                 ButtonClickAction = ButtonClickActionSettings;
                 break;
+
             case ButtonType.MainMenu:
                 ButtonClickAction = ButtonClickActionMainMenu;
                 break;
+
             default:
                 ButtonClickAction = ButtonClickActionNone;
                 break;
@@ -40,10 +42,12 @@ public class PauseButton : ButtonUnit
     {
         menu.controller.SetActiveCurrentMenu(false);
     }
+
     private void ButtonClickActionSettings()
     {
         menu.controller.SetMenu(Menu.Settings);
     }
+
     private void ButtonClickActionMainMenu()
     {
         MoveToMainMenu();
@@ -55,6 +59,7 @@ public class PauseButton : ButtonUnit
 
         SceneManager.LoadScene(a.sceneMainMenu);
     }
+
     public void ButtonClick()
     {
         ButtonClickAction();
