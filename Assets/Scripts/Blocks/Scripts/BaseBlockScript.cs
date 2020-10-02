@@ -2,5 +2,5 @@
 
 public abstract class BaseBlockScript : ScriptableObject
 {
-    public virtual void UpdateBlock(BlockMemoryPackUpdaterBase packData = null) {}
+    public virtual void UpdateBlock(BlockMemoryPackToUpdaterBase packData = null) {}
 }
