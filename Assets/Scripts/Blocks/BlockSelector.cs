@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using LeopotamGroup.Common;
+using LeopotamGroup.Math;
+using UnityEngine;
 
-public class BlockSelector : MonoBehaviour
+public class BlockSelector : MonoBehaviourBase
 {
     [SerializeField] private Camera cameraMain;
 
@@ -20,8 +22,8 @@ public class BlockSelector : MonoBehaviour
     {
         var pos = transform.position;
 
-        pos.x = Mathf.Floor(pos.x) + 0.5f;
-        pos.y = Mathf.Floor(pos.y) + 0.5f;
+        pos.x = MathFast.Floor(pos.x) + 0.5f;
+        pos.y = MathFast.Floor(pos.y) + 0.5f;
         pos.z = 0;
 
         transform.position = pos;

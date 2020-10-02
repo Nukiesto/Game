@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using LeopotamGroup.Common;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(BlockUnitUpdate))]
 [RequireComponent(typeof(BlockUnitMemory))]
-public class BlockUnit : MonoBehaviour
+public class BlockUnit : MonoBehaviourBase
 {
     //Inspector
     [SerializeField] private string blockName;
