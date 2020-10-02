@@ -1,7 +1,7 @@
 ﻿using LeopotamGroup.Common;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+//[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(BlockUnitUpdate))]
 [RequireComponent(typeof(BlockUnitMemory))]
@@ -11,7 +11,7 @@ public class BlockUnit : MonoBehaviourBase
     [SerializeField] private string blockName;
 
     //Components
-    private SpriteRenderer sprite;
+    //private SpriteRenderer sprite;
     private BoxCollider2D boxCollider2D;
     private BlockUnitUpdate updater;
     private BlockUnitMemory memory;
@@ -21,7 +21,7 @@ public class BlockUnit : MonoBehaviourBase
 
     private void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        //sprite = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         memory = GetComponent<BlockUnitMemory>();
         memory.SetBlockUnit(this);
@@ -37,7 +37,7 @@ public class BlockUnit : MonoBehaviourBase
         data = null;
         updater.Remove();
         memory.Remove();
-        sprite.sprite = null;
+        //sprite.sprite = null;
     }
     public void SetData(BlockData data)
     {
@@ -50,7 +50,7 @@ public class BlockUnit : MonoBehaviourBase
 
     private void SetBlockProperties()
     {
-        sprite.sprite = data.sprite;
+        //sprite.sprite = data.;
         SetActiveUpdate(data.HasScript());//Переклчючает updater от наличия скрипта update`а
         InitSolid();
     }
@@ -68,9 +68,9 @@ public class BlockUnit : MonoBehaviourBase
     }
     public void SetDrawing(bool value)
     {
-        sprite.enabled = value;
+        //sprite.enabled = value;
     }
-    public bool IsDrawing() => sprite.enabled;
+    //public bool IsDrawing() => sprite.enabled;
 
     public void SetActiveUpdate(bool value)
     {

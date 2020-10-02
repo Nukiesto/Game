@@ -13,14 +13,14 @@ public class BlockData : ScriptableObject
     public BaseBlockMemory memory;
 
     [Header("Ресурсы")]
-    public Sprite sprite;
+    public Texture2D texture;
 
     [Header("Предмет")]
     public ItemData.Data data;
 
     private void Awake()
     {
-        data.sprite = sprite;   
+        data.texture = texture;   
     }
 
     public bool HasScript() => script != null;

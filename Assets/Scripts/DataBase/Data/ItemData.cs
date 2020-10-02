@@ -24,7 +24,7 @@ public class ItemData : ScriptableObject
         public TranslateString description;
 
         [Header("Ресурсы")]
-        public Sprite sprite;
+        public Texture2D texture;
     }
 }
 
