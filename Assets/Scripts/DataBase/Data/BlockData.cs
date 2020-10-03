@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Block/BlocksData", fileName = "BlockData")]
 public class BlockData : ScriptableObject
@@ -13,15 +14,10 @@ public class BlockData : ScriptableObject
     public BaseBlockMemory memory;
 
     [Header("Ресурсы")]
-    public Texture2D texture;
+    public Tile tile;
 
     [Header("Предмет")]
-    public ItemData.Data data;
-
-    private void Awake()
-    {
-        data.texture = texture;   
-    }
+    public ItemData.Data item;
 
     public bool HasScript() => script != null;
     public bool HasMemory() => memory != null;

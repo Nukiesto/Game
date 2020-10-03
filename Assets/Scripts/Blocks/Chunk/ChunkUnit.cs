@@ -1,105 +1,123 @@
-﻿using LeopotamGroup.Collections;
-using LeopotamGroup.Common;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(TilemapCollider2D))]
 [RequireComponent(typeof(TilemapRenderer))]
-public class ChunkUnit : MonoBehaviourBase
+public class ChunkUnit : MonoBehaviour
 {
-    //Inspector
-    [SerializeField] private BlockUnit blockInit;
-    [SerializeField, HideInInspector] private float meshWidth = 16f;
-    [SerializeField, HideInInspector] private float meshHeight = 16f;
+    [Header("Main")]
+    [SerializeField] private BlockData blockInit;
+    [SerializeField] private GameObject blockPrefab;
+    [Header("Tilemap")]
+    private Tilemap tilemap;
 
+    //Other
+    private int chunkSize;
+    private ChunkManager _chunkManager;
+    public ChunkManager chunkManager { set => _chunkManager = value; }
     //Data
-    [SerializeField, HideInInspector] private BlockUnit[,] blocks;
+    private BlockUnit[,] blocks;
+    private Vector3 posObj;
+    private void Start()
+    {
+        InitComponents();     
+        chunkSize = GameConstants.chunkSize;
+        blocks = new BlockUnit[chunkSize, chunkSize];
+        posObj = transform.position;
+        BuildChunk();
+    }
+    //private void OnBecameInvisible()
+    //{
+    //    //Debug.Log(this);
+    //    _chunkManager.BecameInvisible(this);
+    //    SetActive(false);
+    //}
 
-    //Tilemap
-    void Start()
+    private void BuildChunk()
     {
-        InitComponents();
-        InitBlocks();
+        Vector3Int pos = Vector3Int.zero;
 
-    }
-
-    #region Mesh
-    
-    #endregion
-    #region ContextMenu
-    [ContextMenu("SetEnableAllBlocks")]
-    public void SetEnableAllBlocks()
-    {
-        SetActiveAllBlocks(true);
-    }
-    [ContextMenu("SetDisableAllBlocks")]
-    public void SetDisableAllBlocks()
-    {
-        SetActiveAllBlocks(false);
-    }
-    [ContextMenu("ToggleSetDrawAllBlocks")]
-    public void ToggleSetDrawAllBlocks()
-    {
-        //meshRenderer.enabled = !meshRenderer.enabled;
-    }
-    [ContextMenu("SetDisableRandomBlock")]
-    public void SetDisableRandomBlock()
-    {
-        SetActiveBlock(Random.Range(0, 8), Random.Range(0, 8), false);
-    }
-    #endregion
-
-    private void InitComponents()
-    {
-        //meshFilter = GetComponent<MeshFilter>();
-        //meshCollider = GetComponent<MeshCollider>();
-        //meshRenderer = GetComponent<MeshRenderer>();
-    }
-
-    private bool ToBlockDraw(int x, int y)
-    {
-        return blocks[x, y] != null;
-    }
-    private void InitBlocks()
-    {
-        blocks = new BlockUnit[8, 8];
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < chunkSize; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < chunkSize; j++)
             {
-                int a = Random.Range(0, 2);
-                blocks[i, j] = (a == 1) ? blockInit : null;
-                //Debug.Log(a + ";" + blocks[i, j]);
+                pos.x = i;
+                pos.y = j;
+
+                if (Random.Range(0, 2) == 1)
+                    SetBlock(pos, blockInit, true);              
             }
         }
     }
-    public void SetActive(bool value)
-    {
-        gameObject.SetActive(value);
+    private void DebugClick(Vector3 pos) {
+        Vector3Int toSetBlockPos = tilemap.WorldToCell(pos);
+
+        Debug.Log("ClickPos: " + tilemap.WorldToCell(pos) + " ;In Bounds: " + InBounds(toSetBlockPos));
     }
-    public void SetActiveAllBlocks(bool value)
-    {
-        //for (int i = 0; i < blockInit.Length; i++)
-        //{
-        //    blockInit[i].SetActive(value);
-        //}      
+    public void SetBlock(Vector3Int pos, BlockData data, bool checkCollisions)
+    {        
+        if (InBounds(pos) && !(!checkCollisions && !OnBlock(pos)))
+        {          
+            tilemap.SetTile(pos, data.tile);
+            Vector3 posSet = posObj + new Vector3(pos.x + 0.5f, pos.y + 0.5f);
+            GameObject block = PoolManager.GetObject("Block", posSet, Quaternion.identity);
+            BlockUnit blockUnit = block.GetComponent<BlockUnit>();
+            blockUnit.SetData(data);
+            blocks[pos.x, pos.y] = blockUnit;
+            block.transform.position = posObj + new Vector3(pos.x + 0.5f, pos.y + 0.5f);
+            block.transform.parent = transform;
+        }
     }
-    public void SetActiveBlock(int i, int j, bool value)
+    public void SetBlock(Vector3 pos, BlockData data, bool checkCollisions)
     {
-        //blocks[i, j]?.SetActive(value);
+        Vector3Int posInt = tilemap.WorldToCell(pos);
+
+        SetBlock(posInt, data, checkCollisions);
     }
-    public void SetBlock(int i, int j, BlockData data)
+    public void DeleteBlock(Vector3 pos, bool createItem)
     {
-        SetActiveBlock(i, j, true);
-        blocks[i, j].SetData(data);
+        Vector3Int blockPos = tilemap.WorldToCell(pos);
+        if (InBounds(blockPos) && (tilemap.GetTile(blockPos) != null))
+        {
+            BlockUnit blockUnit = blocks[blockPos.x, blockPos.y];
+            if (createItem)
+            {
+                Vector3 posCreateItem = new Vector3
+                {
+                    x = Mathf.Floor(pos.x),
+                    y = Mathf.Floor(pos.y)
+                };
+                ItemManager.CreateItem(posCreateItem, blockUnit.data.item);
+            }
+            blockUnit.gameObject.GetComponent<PoolObject>().ReturnToPool();
+            blocks[blockPos.x, blockPos.y] = null;
+
+            tilemap.SetTile(blockPos, null);                                          
+        }           
     }
+    private bool InBounds(Vector3Int pos)
+    {
+        return pos.x >= 0 && pos.x < chunkSize && pos.y >= 0 && pos.y < chunkSize;
+    }
+    public bool OnBlock(Vector3 pos)
+    {
+        return OnBlock(tilemap.WorldToCell(pos));
+    }
+    public bool OnBlock(Vector3Int pos)
+    {
+        return (tilemap.HasTile(pos));
+    }
+    private void InitComponents()
+    {
+        tilemap = GetComponent<Tilemap>();
+    }
+
 #if UNITY_EDITOR
-    public void OnDrawGizmosSelected()
+    public void OnDrawGizmos()
     {
         Vector3 pos = transform.position;
-        int size = GameConstants.chunkSize;
+        int size = chunkSize;
 
         Gizmos.color = Color.red;
         

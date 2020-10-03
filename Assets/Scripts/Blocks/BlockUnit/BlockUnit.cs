@@ -1,8 +1,7 @@
 ﻿using LeopotamGroup.Common;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-//[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(BlockUnitUpdate))]
 [RequireComponent(typeof(BlockUnitMemory))]
 public class BlockUnit : MonoBehaviourBase
@@ -11,26 +10,28 @@ public class BlockUnit : MonoBehaviourBase
     [SerializeField] private string blockName;
 
     //Components
-    //private SpriteRenderer sprite;
-    private BoxCollider2D boxCollider2D;
-    private BlockUnitUpdate updater;
-    private BlockUnitMemory memory;
+    [SerializeField, HideInInspector] private TileBase tile;
+    [SerializeField, HideInInspector] private BlockUnitUpdate updater;
+    [SerializeField, HideInInspector] private BlockUnitMemory memory;
 
     //Data
-    public BlockData data;
+    [SerializeField] public BlockData data;
 
-    private void Start()
+    private void Awake()
     {
-        //sprite = GetComponent<SpriteRenderer>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
+        base.Awake();
+        InitComponents();
+        SetBlockProperties();
+    }
+
+    private void InitComponents()
+    {
         memory = GetComponent<BlockUnitMemory>();
         memory.SetBlockUnit(this);
 
         updater = GetComponent<BlockUnitUpdate>();
         updater.SetMemory(memory);
-        SetBlockProperties();
     }
-
     #region Data
     public void ClearData()
     {
@@ -50,27 +51,12 @@ public class BlockUnit : MonoBehaviourBase
 
     private void SetBlockProperties()
     {
-        //sprite.sprite = data.;
         SetActiveUpdate(data.HasScript());//Переклчючает updater от наличия скрипта update`а
-        InitSolid();
-    }
-    private void InitSolid()
-    {
-        SetSolid(data.isSolid);
-    }
-    private void SetSolid(bool value)
-    {
-        boxCollider2D.enabled = value;
     }
     public void SetActive(bool value)
     {
         gameObject.SetActive(value);
     }
-    public void SetDrawing(bool value)
-    {
-        //sprite.enabled = value;
-    }
-    //public bool IsDrawing() => sprite.enabled;
 
     public void SetActiveUpdate(bool value)
     {

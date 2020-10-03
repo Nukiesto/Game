@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public enum ItemType 
+public enum ItemType
 { 
     tool,
     block,
@@ -24,7 +24,7 @@ public class ItemData : ScriptableObject
         public TranslateString description;
 
         [Header("Ресурсы")]
-        public Texture2D texture;
+        public Sprite sprite;
     }
 }
 
