@@ -14,10 +14,9 @@ public class BlockUnitMemory : MonoBehaviour
         memory = null;        
     }
 
-    public void SetBlockUnit(BlockUnit block)
+    public void SetBlockUnit(BlockUnit _block)
     {
-        this.block = block;
-        SetMemory(block.data);
+        block = _block;
     }
 }
 

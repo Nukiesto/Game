@@ -5,7 +5,6 @@ using System.Collections.Generic;
 [AddComponentMenu("Pool/ObjectPooling")]
 public class ObjectPooling
 {
-
 	#region Data
 	List<PoolObject> objects;
 	Transform objectsParent;
@@ -19,6 +18,15 @@ public class ObjectPooling
 		for (int i = 0; i < count; i++)
 		{
 			AddObject(sample, objects_parent);
+		}
+	}
+	public void Initialize(int count, PoolObject sample, Transform objects_parent, int n)
+	{
+		objects = new List<PoolObject>();
+		objectsParent = objects_parent;
+		for (int i = 0; i < count; i++)
+		{
+			AddObject(sample, objects_parent, n);
 		}
 	}
 
@@ -40,9 +48,20 @@ public class ObjectPooling
 	#region Methods
 	void AddObject(PoolObject sample, Transform objects_parent)
 	{
-		GameObject temp;		
-		temp = GameObject.Instantiate(sample.gameObject);
-		temp.name = sample.name;
+		GameObject temp;
+		temp = Object.Instantiate(sample.gameObject);
+		InitObject(temp, objects_parent);
+	}
+	void AddObject(PoolObject sample, Transform objects_parent, int n)
+	{
+		GameObject temp;
+		temp = Object.Instantiate(sample.gameObject);
+		temp.name = sample.name + n;
+		InitObject(temp, objects_parent);
+	}
+
+	void InitObject(GameObject temp, Transform objects_parent)
+	{
 		temp.transform.SetParent(objects_parent);
 		objects.Add(temp.GetComponent<PoolObject>());
 		if (temp.GetComponent<Animator>())

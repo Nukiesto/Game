@@ -44,7 +44,7 @@ public class ChunkManager : MonoBehaviour
                 chunkObj = Instantiate(chunk);
                 chunkObj.transform.parent = transform;
                 chunkObj.transform.position = posZero + new Vector3(i * chunkSize, j* chunkSize);
-
+                chunkObj.name = "Chunk(" + i + ", " + j + ")";
                 //Debug.Log(new Vector3(i * chunkSize, j * chunkSize));
 
                 chunkUnit = chunkObj.GetComponent<ChunkUnit>();

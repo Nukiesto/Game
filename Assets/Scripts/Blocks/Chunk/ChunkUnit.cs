@@ -9,13 +9,13 @@ public class ChunkUnit : MonoBehaviour
     [Header("Main")]
     [SerializeField] private BlockData blockInit;
     [SerializeField] private GameObject blockPrefab;
-    [Header("Tilemap")]
-    private Tilemap tilemap;
 
+    //Components
+    private Tilemap tilemap;
+    private PoolManagerLocal pool;
     //Other
     private int chunkSize;
-    private ChunkManager _chunkManager;
-    public ChunkManager chunkManager { set => _chunkManager = value; }
+    [HideInInspector]public ChunkManager chunkManager;
     //Data
     private BlockUnit[,] blocks;
     private Vector3 posObj;
@@ -56,12 +56,12 @@ public class ChunkUnit : MonoBehaviour
         Debug.Log("ClickPos: " + tilemap.WorldToCell(pos) + " ;In Bounds: " + InBounds(toSetBlockPos));
     }
     public void SetBlock(Vector3Int pos, BlockData data, bool checkCollisions)
-    {        
+    {
         if (InBounds(pos) && !(!checkCollisions && !OnBlock(pos)))
-        {          
+        {
             tilemap.SetTile(pos, data.tile);
             Vector3 posSet = posObj + new Vector3(pos.x + 0.5f, pos.y + 0.5f);
-            GameObject block = PoolManager.GetObject("Block", posSet, Quaternion.identity);
+            GameObject block = pool.GetObject("Block", posSet, Quaternion.identity);
             BlockUnit blockUnit = block.GetComponent<BlockUnit>();
             blockUnit.SetData(data);
             blocks[pos.x, pos.y] = blockUnit;
@@ -111,6 +111,7 @@ public class ChunkUnit : MonoBehaviour
     private void InitComponents()
     {
         tilemap = GetComponent<Tilemap>();
+        pool = GetComponent<PoolManagerLocal>();
     }
 
 #if UNITY_EDITOR

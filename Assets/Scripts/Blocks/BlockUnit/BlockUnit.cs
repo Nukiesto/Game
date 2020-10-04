@@ -1,27 +1,24 @@
-﻿using LeopotamGroup.Common;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(BlockUnitUpdate))]
 [RequireComponent(typeof(BlockUnitMemory))]
-public class BlockUnit : MonoBehaviourBase
+public class BlockUnit : MonoBehaviour
 {
     //Inspector
     [SerializeField] private string blockName;
 
     //Components
-    [SerializeField, HideInInspector] private TileBase tile;
-    [SerializeField, HideInInspector] private BlockUnitUpdate updater;
-    [SerializeField, HideInInspector] private BlockUnitMemory memory;
+    private TileBase tile;
+    private BlockUnitUpdate updater;
+    private BlockUnitMemory memory;
 
     //Data
     [SerializeField] public BlockData data;
 
     private void Awake()
     {
-        base.Awake();
         InitComponents();
-        SetBlockProperties();
     }
 
     private void InitComponents()
@@ -38,7 +35,6 @@ public class BlockUnit : MonoBehaviourBase
         data = null;
         updater.Remove();
         memory.Remove();
-        //sprite.sprite = null;
     }
     public void SetData(BlockData data)
     {

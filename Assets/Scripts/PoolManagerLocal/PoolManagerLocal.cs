@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public static class PoolManager
+[AddComponentMenu("PoolLocal/PoolManagerLocal")]
+public class PoolManagerLocal : MonoBehaviour
 {
 	private static PoolPart[] pools;
-	private static GameObject objectsParent;
 
 	[System.Serializable]
 	public struct PoolPart
@@ -14,25 +14,23 @@ public static class PoolManager
 		public ObjectPooling ferula;
 	}
 
-	public static void Initialize(PoolPart[] newPools)
+	public void Initialize(PoolPart[] newPools)
 	{
 		pools = newPools;
-        objectsParent = new GameObject
-        {
-            name = "Pool"
-        };
         for (int i = 0; i < pools.Length; i++)
 		{
+			Debug.Log("a" + i);
 			if (pools[i].prefab != null)
 			{
+				Debug.Log(i);
 				pools[i].ferula = new ObjectPooling();
-				pools[i].ferula.Initialize(pools[i].count, pools[i].prefab, objectsParent.transform);
+				pools[i].ferula.Initialize(pools[i].count, pools[i].prefab, transform, i);
 			}
 		}
 	}
 
 
-	public static GameObject GetObject(string name, Vector3 position, Quaternion rotation)
+	public GameObject GetObject(string name, Vector3 position, Quaternion rotation)
 	{
 		GameObject result = null;
 		if (pools != null)
