@@ -13,7 +13,7 @@ public class PoolSetupLocal : MonoBehaviour
 	void OnValidate()
 	{
 		for (int i = 0; i < pools.Length; i++)
-		{
+        {			      
 			pools[i].name = pools[i].prefab?.name ?? "";
 		}
 	}

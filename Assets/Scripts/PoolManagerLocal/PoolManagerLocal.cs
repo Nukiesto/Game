@@ -19,12 +19,12 @@ public class PoolManagerLocal : MonoBehaviour
 		pools = newPools;
         for (int i = 0; i < pools.Length; i++)
 		{
-			Debug.Log("a" + i);
+			//Debug.Log("a" + i);
 			if (pools[i].prefab != null)
 			{
-				Debug.Log(i);
+				//Debug.Log(i);
 				pools[i].ferula = new ObjectPooling();
-				pools[i].ferula.Initialize(pools[i].count, pools[i].prefab, transform, i);
+				pools[i].ferula.Initialize(pools[i].count, pools[i].prefab, transform);
 			}
 		}
 	}

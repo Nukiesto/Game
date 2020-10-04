@@ -20,21 +20,12 @@ public class ObjectPooling
 			AddObject(sample, objects_parent);
 		}
 	}
-	public void Initialize(int count, PoolObject sample, Transform objects_parent, int n)
-	{
-		objects = new List<PoolObject>();
-		objectsParent = objects_parent;
-		for (int i = 0; i < count; i++)
-		{
-			AddObject(sample, objects_parent, n);
-		}
-	}
-
 
 	public PoolObject GetObject()
 	{
 		for (int i = 0; i < objects.Count; i++)
 		{
+			Debug.Log(i);
 			if (objects[i].gameObject.activeInHierarchy == false)
 			{
 				return objects[i];
