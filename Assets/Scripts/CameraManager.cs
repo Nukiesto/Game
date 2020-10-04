@@ -1,39 +1,92 @@
 using UnityEngine;
-using UnityEngine.U2D;
-
+[RequireComponent(typeof(Camera))]
 public class CameraManager : MonoBehaviour
 {
-    #region Init
-    Vector3 VectorNone = new Vector3();
-    public float defaultSpeed = 15.0f;
-    public float mainSpeed = 15.0f; //обычная скорость
-    public float shiftAdd = 20.0f; //умножается на то, как долго держится сдвиг. В основном работает
-    public float maxShift = 1000.0f; //Максимальная скорость при удержании gshift
-    private float totalRun = 1.0f;
 
-    public PixelPerfectCamera pixelCamera;
-    #endregion
+    public enum Mode { Player, Cursor };
+
+    public Mode face; // вектор смещения, относительно "лица" персонажа или положения курсора
+    public float smooth = 2.5f; // сглаживание при следовании за персонажем
+    public float offset; // значение смещения (отключить = 0)
+    public Bounds bounds; // спрайт, в рамках которого будет перемещаться камера
+    public bool useBounds = true; // использовать или нет, границы для камеры
+
     #region Init Zoom
+    [Header("Настройки зума:")]
     [Range(0, 999)]
-    public int minZoom = 4;
-    [Range(16, 64)]
-    public int normalZoom = 16;
+    public int minZoom = 1;
+    [Range(1, 64)]
+    public int normalZoom = 5;
     [Range(0, 128)]
-    public int maxZoom = 64;
-    [Range(1, 16)]
+    public int maxZoom = 10;
+    [Range(1, 4)]
     public int stepZoom = 4;
-
-    private int _zoom = 16;
-    private float ratio;
+    [SerializeField]
+    private int _zoom = 5;
+    //private float ratio;
     #endregion
+
+    private Transform target;
+    private Vector3 min, max, direction;
+    private static CameraManager _inst;
+    private Camera cam;
+    
+    private void Awake()
+    {
+        _inst = this;
+        cam = GetComponent<Camera>();
+        cam.orthographic = true;
+        CalculateBounds();
+        FindTarget();
+    }
     private void Start()
     {
+        _zoom = normalZoom;
         SetZoom();
+        CalculateBounds();
     }
-    void Update()
+    private void Update()
     {
-        #region Zoom
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        UpdateZoom();
+    }
+    private void LateUpdate()
+    {
+        if (target)
+        {
+            Follow();
+        }
+    }
+
+    #region Public
+    public static void SetTarget(Transform target)
+    {
+        _inst.target = target;
+    }
+
+    // переключатель, для использования из другого класса
+    public static void UseCameraBounds(bool value)
+    {
+        _inst.UseCameraBounds_inst(value);
+    }
+
+    public static void FindTarget()
+    {
+        _inst.FindPlayer_inst();
+    }
+
+    // если в процессе игры, было изменено разрешение экрана
+    // или параметр "Orthographic Size", то следует сделать вызов данной функции повторно
+    public static void CalculateBounds()
+    {
+        _inst?.CalculateBounds_inst();
+    }
+    #endregion
+
+    #region Private
+    //zoom
+    private void UpdateZoom()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         { // forward
             _zoom += stepZoom;
             if (_zoom > maxZoom)
@@ -42,7 +95,7 @@ public class CameraManager : MonoBehaviour
             }
             SetZoom();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         { // backwards
             _zoom -= stepZoom;
             if (_zoom < minZoom)
@@ -52,7 +105,7 @@ public class CameraManager : MonoBehaviour
             SetZoom();
         }
 
-        if (((Input.GetKey(KeyCode.LeftControl)) && (Input.GetKey(KeyCode.Equals))) || (Input.GetMouseButtonDown(2)))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(2))
         {
             _zoom = normalZoom;
             SetZoom();
@@ -62,72 +115,70 @@ public class CameraManager : MonoBehaviour
             _zoom = maxZoom;
             SetZoom();
         }
-        if ((Input.GetKey(KeyCode.LeftControl)) && (Input.GetMouseButtonDown(2))) {
+        if ((Input.GetKey(KeyCode.LeftControl)) && (Input.GetKey(KeyCode.LeftShift)) && (Input.GetMouseButtonDown(2)))
+        {
             _zoom = minZoom;
             SetZoom();
         }
-        #endregion
-        #region Move
-        Vector3 p = GetBaseInput();
-        if (p != VectorNone)
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                totalRun += Time.deltaTime;
-                p = p * totalRun * shiftAdd;
-                p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-                p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-                p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-            }
-            else
-            {
-                totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-                p *= mainSpeed;
-            }
-        }
-        else
-        {
-            //Debug.Log("Test");
-        }
-        p *= Time.deltaTime;
-
-        transform.Translate(p); 
-        #endregion
     }
     private void SetZoom()
-    {     
-        pixelCamera.assetsPPU = _zoom;
-        //изменение скорости камеры
-        if (_zoom < normalZoom)
-        {
-            ratio = normalZoom / _zoom / 2;
-            mainSpeed = defaultSpeed * ratio;
-        }
-        else
-        {
-            ratio = _zoom / normalZoom;
-            mainSpeed = defaultSpeed / ratio;
-        }      
+    {
+        cam.orthographicSize = _zoom;
+        CalculateBounds();
     }
-    private Vector3 GetBaseInput()
-    { 
-        Vector3 p_Velocity = new Vector3();
-        if (Input.GetKey(KeyCode.W))
-        {
-            p_Velocity += new Vector3(0, 1, 0);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            p_Velocity += new Vector3(0, -1, 0);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            p_Velocity += new Vector3(-1, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            p_Velocity += new Vector3(1, 0, 0);
-        }
-        return p_Velocity;
+    //public
+    private void CalculateBounds_inst()
+    {
+        if (this.bounds == null) return;
+        Bounds bounds = Camera2DBounds();
+        min = bounds.max + this.bounds.min;
+        max = bounds.min + this.bounds.max;
     }
+    private void FindPlayer_inst()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (target)
+        {
+            if (face == Mode.Player) direction = target.right; else direction = (Mouse() - target.position).normalized;
+            Vector3 position = target.position + direction * offset;
+            position.z = transform.position.z;
+            transform.position = MoveInside(position, new Vector3(min.x, min.y, position.z), new Vector3(max.x, max.y, position.z));
+        }
+    }
+    private void UseCameraBounds_inst(bool value)
+    {
+        useBounds = value;
+    }
+
+    private void Follow()
+    {
+        if (face == Mode.Player) direction = target.right; else direction = (Mouse() - target.position).normalized;
+        Vector3 position = target.position + direction * offset;
+        position.z = transform.position.z;
+        position = MoveInside(position, new Vector3(min.x, min.y, position.z), new Vector3(max.x, max.y, position.z));
+        transform.position = Vector3.Lerp(transform.position, position, smooth * Time.deltaTime);
+    }
+
+    private Bounds Camera2DBounds()
+    {
+        float height = cam.orthographicSize * 2;
+        return new Bounds(Vector3.zero, new Vector3(height * cam.aspect, height, 0));
+    }
+
+    private Vector3 MoveInside(Vector3 current, Vector3 pMin, Vector3 pMax)
+    {
+        if (!useBounds || bounds == null) return current;
+        current = Vector3.Max(current, pMin);
+        current = Vector3.Min(current, pMax);
+        return current;
+    }
+
+    private Vector3 Mouse()
+    {
+        Vector3 mouse = Input.mousePosition;
+        mouse.z = -transform.position.z;
+        return cam.ScreenToWorldPoint(mouse);
+    }
+    #endregion
 }

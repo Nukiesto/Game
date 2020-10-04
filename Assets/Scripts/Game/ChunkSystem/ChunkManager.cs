@@ -132,8 +132,8 @@ public class ChunkManager : MonoBehaviour
     public void OnDrawGizmos()
     {
         Vector3 pos = transform.position;
-        int sizeX = chunkSize * generator.worldWidthInChunks;
-        int sizeY = chunkSize * generator.worldHeightInChunks;
+        int sizeX = generator.worldWidth;
+        int sizeY = generator.worldHeight;
 
         Gizmos.color = Color.green;
 
