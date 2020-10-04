@@ -23,7 +23,7 @@ public class BlockSelector : MonoBehaviourBase
     {
         ChunkUnit chunk = chunkManager.GetChunk(onWorldPos);
         //Debug.Log(chunk);
-        chunk.DeleteBlock(onWorldPos, true);
+        chunk?.DeleteBlock(onWorldPos, true);
     }
     private void ClickPlaceBlock()
     {

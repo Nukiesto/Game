@@ -4,28 +4,29 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(TilemapCollider2D))]
 [RequireComponent(typeof(TilemapRenderer))]
+[RequireComponent(typeof(ChunkBlockController))]
 public class ChunkUnit : MonoBehaviour
-{
-    [Header("Main")]
-    [SerializeField] private BlockData blockInit;
-    [SerializeField] private GameObject blockPrefab;
-
+{    
     //Components
     private Tilemap tilemap;
-    private PoolManagerLocal pool;
+    private ChunkBlockController controller;
+
     //Other
-    private int chunkSize;
+    private static readonly int chunkSize = GameConstants.chunkSize;
     [HideInInspector]public ChunkManager chunkManager;
+
     //Data
-    private BlockUnit[,] blocks;
     private Vector3 posObj;
+    private Vector3Int posObjGlobal;
     private void Start()
     {
-        InitComponents();     
-        chunkSize = GameConstants.chunkSize;
-        blocks = new BlockUnit[chunkSize, chunkSize];
+        InitComponents();
+
         posObj = transform.position;
-        BuildChunk();
+        posObjGlobal = new Vector3Int(Mathf.FloorToInt(posObj.x), Mathf.FloorToInt(posObj.y), 0);
+        controller.chunk = this;
+
+        BuildChunk();       
     }
     //private void OnBecameInvisible()
     //{
@@ -33,11 +34,12 @@ public class ChunkUnit : MonoBehaviour
     //    _chunkManager.BecameInvisible(this);
     //    SetActive(false);
     //}
-
     private void BuildChunk()
     {
         Vector3Int pos = Vector3Int.zero;
+        Vector2Int posGlobal = Vector2Int.zero;
 
+        WorldGenerator generator = chunkManager.generator;
         for (int i = 0; i < chunkSize; i++)
         {
             for (int j = 0; j < chunkSize; j++)
@@ -45,8 +47,11 @@ public class ChunkUnit : MonoBehaviour
                 pos.x = i;
                 pos.y = j;
 
-                if (Random.Range(0, 2) == 1)
-                    SetBlock(pos, blockInit, true);              
+                posGlobal.x = posObjGlobal.x + i;
+                posGlobal.y = posObjGlobal.y + j;
+
+                //Debug.Log(posGlobal);
+                SetBlock(pos, generator.GetBlock(posGlobal), true);      
             }
         }
     }
@@ -59,14 +64,12 @@ public class ChunkUnit : MonoBehaviour
     {
         if (InBounds(pos) && !(!checkCollisions && !OnBlock(pos)))
         {
-            tilemap.SetTile(pos, data.tile);
-            Vector3 posSet = posObj + new Vector3(pos.x + 0.5f, pos.y + 0.5f);
-            GameObject block = pool.GetObject("Block", posSet, Quaternion.identity);
-            BlockUnit blockUnit = block.GetComponent<BlockUnit>();
-            blockUnit.SetData(data);
-            blocks[pos.x, pos.y] = blockUnit;
-            block.transform.position = posObj + new Vector3(pos.x + 0.5f, pos.y + 0.5f);
-            block.transform.parent = transform;
+            if (data != null)
+            {
+                tilemap.SetTile(pos, data.tile);
+            }            
+            controller.AddUnit(data, pos.x, pos.y);
+            //Debug.Log(pos);
         }
     }
     public void SetBlock(Vector3 pos, BlockData data, bool checkCollisions)
@@ -80,24 +83,25 @@ public class ChunkUnit : MonoBehaviour
         Vector3Int blockPos = tilemap.WorldToCell(pos);
         if (InBounds(blockPos) && (tilemap.GetTile(blockPos) != null))
         {
-            BlockUnit blockUnit = blocks[blockPos.x, blockPos.y];
+            BlockUnit blockUnit = controller.GetBlock(blockPos.x, blockPos.y);
             if (createItem)
             {
                 Vector3 posCreateItem = new Vector3
                 {
-                    x = Mathf.Floor(pos.x),
-                    y = Mathf.Floor(pos.y)
+                    x = Mathf.Floor(pos.x) + 0.5f,
+                    y = Mathf.Floor(pos.y) + 0.5f
                 };
-                ItemManager.CreateItem(posCreateItem, blockUnit.data.item);
+                ItemManager.CreateItem(posCreateItem, blockUnit.GetItem());
             }
-            blockUnit.gameObject.GetComponent<PoolObject>().ReturnToPool();
-            blocks[blockPos.x, blockPos.y] = null;
+
+            controller.DeleteUnit(blockUnit);
 
             tilemap.SetTile(blockPos, null);                                          
         }           
     }
     private bool InBounds(Vector3Int pos)
     {
+        //Debug.Log("pos.x: " + pos.x + " ;pos.y: " + pos.y + "chunkSize: " + chunkSize);
         return pos.x >= 0 && pos.x < chunkSize && pos.y >= 0 && pos.y < chunkSize;
     }
     public bool OnBlock(Vector3 pos)
@@ -111,9 +115,8 @@ public class ChunkUnit : MonoBehaviour
     private void InitComponents()
     {
         tilemap = GetComponent<Tilemap>();
-        pool = GetComponent<PoolManagerLocal>();
+        controller = GetComponent<ChunkBlockController>();
     }
-
 #if UNITY_EDITOR
     public void OnDrawGizmos()
     {

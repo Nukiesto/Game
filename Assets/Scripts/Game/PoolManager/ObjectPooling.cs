@@ -25,7 +25,7 @@ public class ObjectPooling
 	{
 		for (int i = 0; i < objects.Count; i++)
 		{
-			Debug.Log(i);
+			//Debug.Log(i);
 			if (objects[i].gameObject.activeInHierarchy == false)
 			{
 				return objects[i];

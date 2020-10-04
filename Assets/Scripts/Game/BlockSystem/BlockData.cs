@@ -17,8 +17,5 @@ public class BlockData : ScriptableObject
     public Tile tile;
 
     [Header("Предмет")]
-    public ItemData.Data item;
-
-    public bool HasScript() => script != null;
-    public bool HasMemory() => memory != null;
+    public ItemData.Data item;    
 }
