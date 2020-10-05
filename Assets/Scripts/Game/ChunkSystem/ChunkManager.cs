@@ -260,7 +260,7 @@ public class WorldGenerator
                     xx = Random.Range(0, worldWidth);
                     yy = Random.Range(startHeight, worldHeight);
                 }
-                Debug.Log("x: " + xx + " ;y:" + yy);
+                //Debug.Log("x: " + xx + " ;y:" + yy);
                 if (xx < worldWidth && yy < worldHeight) 
                     world[xx, yy] = null;
             }

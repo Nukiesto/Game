@@ -16,6 +16,25 @@ public class BlockData : ScriptableObject
     [Header("Ресурсы")]
     public Tile tile;
 
-    [Header("Предмет")]
-    public ItemData.Data item;    
+    [HideInInspector] public ItemData.Data Item;
+
+    private void Awake()
+    {
+        InitItem();
+    }
+    public void InitItem()
+    {
+        Item = new ItemData.Data
+        {
+            sprite = tile.sprite         
+        };
+        Debug.Log(tile.sprite);
+    }
+    public void TryInitItem()
+    {
+        if (Item == null)
+        {
+            InitItem();
+        }
+    }
 }

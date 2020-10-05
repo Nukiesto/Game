@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Net.Http.Headers;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -6,9 +7,10 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(TilemapRenderer))]
 [RequireComponent(typeof(ChunkBlockController))]
 public class ChunkUnit : MonoBehaviour
-{    
+{
     //Components
     private Tilemap tilemap;
+    private TilemapCollider2D tilemapCollider;
     private ChunkBlockController controller;
 
     //Other
@@ -50,8 +52,11 @@ public class ChunkUnit : MonoBehaviour
                 posGlobal.x = posObjGlobal.x + i;
                 posGlobal.y = posObjGlobal.y + j;
 
+
                 //Debug.Log(posGlobal);
-                SetBlock(pos, generator.GetBlock(posGlobal), true);      
+                BlockData block = generator.GetBlock(posGlobal);
+                //block?.InitItem();
+                SetBlock(pos, block, true);      
             }
         }
     }
@@ -69,6 +74,7 @@ public class ChunkUnit : MonoBehaviour
                 tilemap.SetTile(pos, data.tile);
             }            
             controller.AddUnit(data, pos.x, pos.y);
+            
             //Debug.Log(pos);
         }
     }
@@ -91,9 +97,11 @@ public class ChunkUnit : MonoBehaviour
                     x = Mathf.Floor(pos.x) + 0.5f,
                     y = Mathf.Floor(pos.y) + 0.5f
                 };
+                //ItemUnit item = 
                 ItemManager.CreateItem(posCreateItem, blockUnit.GetItem());
+                //item.sprite.sprite = blockUnit.data.tile.sprite;
             }
-
+            tilemapCollider.ProcessTilemapChanges();
             controller.DeleteUnit(blockUnit);
 
             tilemap.SetTile(blockPos, null);                                          
@@ -116,6 +124,7 @@ public class ChunkUnit : MonoBehaviour
     {
         tilemap = GetComponent<Tilemap>();
         controller = GetComponent<ChunkBlockController>();
+        tilemapCollider = GetComponent<TilemapCollider2D>();
     }
 #if UNITY_EDITOR
     public void OnDrawGizmos()

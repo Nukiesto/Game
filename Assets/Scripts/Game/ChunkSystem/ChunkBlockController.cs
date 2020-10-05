@@ -77,6 +77,7 @@ public class BlockUnit
 
     public ItemData.Data GetItem()
     {
-        return data.item;
+        //Debug.Log(data.Item.sprite);
+        return data.Item;
     }
 }
