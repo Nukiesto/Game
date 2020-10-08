@@ -37,18 +37,18 @@ public class ItemUnit : MonoBehaviour
         return false;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        foreach (ContactPoint2D contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-        }
-        Debug.Log(collision.gameObject);
-        if (Check(collision.gameObject))
-        {
-            Debug.Log("True");
-            GetComponent<PoolObject>().ReturnToPool();
-        }
-        //Debug.Log("Trueasfsfa");
-    }   
+    //public void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    foreach (ContactPoint2D contact in collision.contacts)
+    //    {
+    //        Debug.DrawRay(contact.point, contact.normal, Color.white);
+    //    }
+    //    //Debug.Log(collision.gameObject);
+    //    if (Check(collision.gameObject))
+    //    {
+    //        //Debug.Log("True");
+    //        GetComponent<PoolObject>().ReturnToPool();
+    //    }
+    //    //Debug.Log("Trueasfsfa");
+    //}   
 }

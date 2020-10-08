@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class ItemManager 
+public static class ItemManager
 {
     public static ItemUnit CreateItem(Vector3 pos, ItemData.Data data)
     {
