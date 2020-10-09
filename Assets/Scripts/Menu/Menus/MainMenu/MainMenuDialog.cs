@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuDialog : DialogUnit
 {
@@ -21,9 +20,7 @@ public class MainMenuDialog : DialogUnit
     {
         if (buttonType == ButtonType.Yes.ToString())
         {
-            MainMenu a = (MainMenu)menu;
-
-            SceneManager.LoadScene(a.gameSceneName);
+            menu.controller.SetGame();
         }
         if (buttonType == ButtonType.No.ToString())
         {

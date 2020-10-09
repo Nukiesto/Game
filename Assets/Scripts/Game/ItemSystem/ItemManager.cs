@@ -2,9 +2,9 @@
 
 public static class ItemManager
 {
-    public static ItemUnit CreateItem(Vector3 pos, ItemData.Data data)
+    public static Item CreateItem(Vector3 pos, ItemData.Data data)
     {
-        ItemUnit item = PoolManager.GetObject("Item", pos, Quaternion.identity).GetComponent<ItemUnit>();
+        Item item = PoolManager.GetObject("Item", pos, Quaternion.identity).GetComponent<Item>();
 
         item.data = data;
         item.InitSprite();

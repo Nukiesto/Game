@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Menu
 {
@@ -6,7 +7,11 @@ public enum Menu
     Pause,
     Settings
 }
-
+public enum CurrentScene
+{
+    Game,
+    MainMenu
+}
 public enum ButtonDialog
 {
     Yes,
@@ -16,23 +21,70 @@ public enum ButtonDialog
 
 public class MenuController : MonoBehaviour
 {
-    [Header("Основные параметры")]
-    public Menu startMenuEnum;
-    public bool loadMenuInStart;
-    public bool allowDisableMenu;
-    public MenuUnit[] menu;
+    //Основные параметры
+    private bool allowDisableMenu;
+
+    [SerializeField] private MenuUnit[] menu;
+
+    [SerializeField] private CurrentScene currentScene;
 
     [Header("Меню")]
     private MenuUnit currentMenu;
     private MenuUnit previousMenu;
     private MenuUnit startMenu;
 
-    private void Start()
+    public void SetMainMenu()
     {
-        if (loadMenuInStart)
+        allowDisableMenu = false;
+
+        SceneManager.LoadScene("MainMenu");
+
+        SetMenu(Menu.Main);
+        startMenu = currentMenu;
+        SetActiveCurrentMenu(true);
+
+        if (currentScene == CurrentScene.Game)
         {
-            SetMenu(startMenuEnum);
-            startMenu = currentMenu;
+            SceneManager.UnloadSceneAsync("Game");
+        }       
+
+        currentScene = CurrentScene.MainMenu;      
+    }
+    public void SetGame()
+    {
+        allowDisableMenu = true;        
+
+        SceneManager.LoadSceneAsync("Game");
+
+        if (currentScene == CurrentScene.MainMenu)
+        {
+            CloseCurrentDialog();
+            SceneManager.UnloadSceneAsync("MainMenu");
+        }
+
+        SetMenu(Menu.Pause);
+        startMenu = currentMenu;
+
+        SetActiveCurrentMenu(false);      
+
+        currentScene = CurrentScene.Game;        
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        switch (currentScene)
+        {
+            case CurrentScene.Game:
+                SetGame();
+                break;
+            case CurrentScene.MainMenu:
+                SetMainMenu();
+                break;
+            default:
+                SetMainMenu();
+                break;
         }
     }
 
@@ -54,8 +106,9 @@ public class MenuController : MonoBehaviour
                 {
                     if (startMenu == null)
                     {
-                        SetMenu(startMenuEnum);
-                        startMenu = currentMenu;
+                        Debug.LogWarning("StartMenu null");
+                        //SetMenu();
+                        //startMenu = currentMenu;
                     }
                     else
                     {

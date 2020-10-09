@@ -4,27 +4,31 @@
 using UnityEngine;
 
 namespace SimpleLocalizator {
-	public abstract class MultiLangTextBase : MultiLangComponent{
-		#region Unity scene settings
-		[SerializeField] int _labelID;
-		[SerializeField] bool toUpper=false;
-		#endregion
+    public abstract class MultiLangTextBase : MultiLangComponent
+    {
+        #region Unity scene settings
+        [SerializeField] int _labelID;
+        [SerializeField] bool toUpper = false;
+        #endregion
 
-		#region Interface
-		public int labelID {
-			get {
-				return _labelID;
-			}
-			set {
-				_labelID = value;
-			    Refresh();
-			}
-		}
+        #region Interface
+        public int labelID
+        {
+            get
+            {
+                return _labelID;
+            }
+            set
+            {
+                _labelID = value;
+                Refresh();
+            }
+        }
 
-		public void SetLabelId(int id)
-		{
-			labelID = id;
-		}
+        public void SetLabelId(int id)
+        {
+            labelID = id;
+        }
         #endregion
 
         #region Methods
@@ -32,12 +36,12 @@ namespace SimpleLocalizator {
         {
             bool local = (Application.isEditor && !Application.isPlaying);
             string str = local ? LanguageManager.GetString(labelID, currentLanguage) : LanguageManager.GetString(labelID);
-		    if (toUpper)
+            if (toUpper)
                 str = str.ToUpper();
-		    VisualizeString(str);
-		}
+            VisualizeString(str);
+        }
 
-	    protected abstract void VisualizeString(string str);
-	    #endregion
-	}
+        protected abstract void VisualizeString(string str);
+        #endregion
+    }
 }

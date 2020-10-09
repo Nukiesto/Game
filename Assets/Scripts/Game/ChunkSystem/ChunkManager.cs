@@ -22,7 +22,6 @@ public class ChunkManager : MonoBehaviour
 
         RefreshPos();
         
-
         generator.posZeroWorld = posZero;
         generator.InitProps();
 
@@ -104,30 +103,8 @@ public class ChunkManager : MonoBehaviour
         //return pos.x >= posObj.x && pos.x < chunkSize * generator.worldWidth && pos.y >= posObj.y && pos.y < chunkSize * generator.worldHeight;
         return bounds.Contains(pos);
     }
-    //private void Moving(int v, int h)
-    //{
-    //    Vector3 pos = transform.position;
 
-    //    pos.x += v * chunkSize;
-    //    pos.y += h * chunkSize;
-
-    //    transform.position = pos;
-    //}
-    //public void BecameInvisible(ChunkUnit chunk)
-    //{        
-    //    chunksUnloaded.Add(chunk);
-    //    Debug.Log("Reported" + chunksUnloaded.Count);
-    //    if (chunksUnloaded.Count == 4)
-    //    {
-    //        Moving(1, 0);
-    //        for (int i = 0; i < 4; i++)
-    //        {
-    //            chunksUnloaded[i].SetActive(true);
-    //            chunksUnloaded.RemoveAt(i);
-    //        }
-            
-    //    }      
-    //}
+    #region Debugging
 #if UNITY_EDITOR
     public void OnDrawGizmos()
     {
@@ -142,7 +119,8 @@ public class ChunkManager : MonoBehaviour
         Gizmos.DrawLine(pos, pos + new Vector3(0, sizeY));
         Gizmos.DrawLine(pos + new Vector3(sizeX, 0), pos + new Vector3(sizeX, sizeY));
     }
-#endif
+#endif 
+    #endregion
 }
 
 [Serializable] 

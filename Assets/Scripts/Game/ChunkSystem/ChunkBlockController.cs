@@ -10,12 +10,12 @@ public class ChunkBlockController : MonoBehaviour
     {
         blocks = new List<BlockUnit>();
     }
-    public BlockUnit AddUnit(BlockData data, Vector2Int posChunk)
+    public BlockUnit AddUnit(BlockData data, Vector2Int posLocal)
     {
-        //Debug.Log("Data: " + data + " ;posChunk: " + posChunk);
+        //Debug.Log("Data: " + data + " ;posLocal: " + posLocal);
         if (data != null)
         {
-            BlockUnit block = new BlockUnit(data, posChunk);
+            BlockUnit block = new BlockUnit(data, posLocal);
 
             //Debug.Log("BlockUnit: " + block);
             //Debug.Log(blocks);
@@ -23,6 +23,10 @@ public class ChunkBlockController : MonoBehaviour
             return block;
         }
         return null;
+    }
+    public BlockUnit AddUnit(BlockData data, Vector3Int posLocal)
+    {
+        return AddUnit(data, new Vector2Int(posLocal.x, posLocal.y));
     }
     public BlockUnit AddUnit(BlockData data, int x, int y)
     {

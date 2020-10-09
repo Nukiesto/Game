@@ -28,14 +28,12 @@ public class DemoScene : MonoBehaviour
 
 		// listen to some events for illustration purposes
 		_controller.onControllerCollidedEvent += onControllerCollider;
-		_controller.onTriggerEnterEvent += onTriggerEnterEvent;
-		_controller.onTriggerExitEvent += onTriggerExitEvent;
 	}
 
 
 	#region Event Listeners
 
-	void onControllerCollider( RaycastHit2D hit )
+	void onControllerCollider(RaycastHit2D hit)
 	{
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
@@ -44,29 +42,16 @@ public class DemoScene : MonoBehaviour
 		// logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
 		//Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
 	}
-
-
-	void onTriggerEnterEvent( Collider2D col )
-	{
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
-	}
-
-
-	void onTriggerExitEvent( Collider2D col )
-	{
-		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
-	}
-
 	#endregion
 
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
-		if( _controller.isGrounded )
+		if ( _controller.isGrounded )
 			_velocity.y = 0;
 
-		if( Input.GetKey( KeyCode.RightArrow ) )
+		if(Input.GetButton("Right"))//Input.GetKey( KeyCode.RightArrow ) )
 		{
 			normalizedHorizontalSpeed = 1;
 			if( transform.localScale.x < 0f )
@@ -75,7 +60,7 @@ public class DemoScene : MonoBehaviour
 			if( _controller.isGrounded )
 				_animator.Play( Animator.StringToHash( "Run" ) );
 		}
-		else if( Input.GetKey( KeyCode.LeftArrow ) )
+		else if(Input.GetButton("Left"))//Input.GetKey( KeyCode.LeftArrow ) )
 		{
 			normalizedHorizontalSpeed = -1;
 			if( transform.localScale.x > 0f )
@@ -92,9 +77,9 @@ public class DemoScene : MonoBehaviour
 				_animator.Play( Animator.StringToHash( "Idle" ) );
 		}
 
-
+		
 		// we can only jump whilst grounded
-		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
+		if( _controller.isGrounded && Input.GetButton("Jump")) //Input.GetKeyDown( KeyCode.UpArrow ) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			_animator.Play( Animator.StringToHash( "Jump" ) );
@@ -110,7 +95,7 @@ public class DemoScene : MonoBehaviour
 
 		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
 		// this lets us jump down through one way platforms
-		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
+		if( _controller.isGrounded && Input.GetButton("Down"))//Input.GetKey( KeyCode.DownArrow ) )
 		{
 			_velocity.y *= 3f;
 			_controller.ignoreOneWayPlatformsThisFrame = true;

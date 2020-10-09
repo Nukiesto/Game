@@ -55,9 +55,7 @@ public class PauseButton : ButtonUnit
 
     private void MoveToMainMenu()
     {
-        PauseMenu a = (PauseMenu)menu;
-
-        SceneManager.LoadScene(a.sceneMainMenu);
+        menu.controller.SetMainMenu();
     }
 
     public void ButtonClick()

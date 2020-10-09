@@ -199,29 +199,7 @@ public class PlayerMovement : MonoBehaviour
 			if( ( triggerMask.value & 1 << i ) == 0 )
 				Physics2D.IgnoreLayerCollision( gameObject.layer, i );
 		}
-	}
-
-
-	public void OnTriggerEnter2D( Collider2D col )
-	{
-		if( onTriggerEnterEvent != null )
-			onTriggerEnterEvent( col );
-	}
-
-
-	public void OnTriggerStay2D( Collider2D col )
-	{
-		if( onTriggerStayEvent != null )
-			onTriggerStayEvent( col );
-	}
-
-
-	public void OnTriggerExit2D( Collider2D col )
-	{
-		if( onTriggerExitEvent != null )
-			onTriggerExitEvent( col );
-	}
-
+	}	
 	#endregion
 
 

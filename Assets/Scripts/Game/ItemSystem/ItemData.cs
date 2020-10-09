@@ -18,10 +18,12 @@ public class ItemData : ScriptableObject
     {
         [Header("Основные параметры")]
         public ItemType type;
+        public int maxCount;
 
         [Header("Наименование")]
         public TranslateString name;
         public TranslateString description;
+        public BlockData block;
 
         [Header("Ресурсы")]
         public Sprite sprite;
