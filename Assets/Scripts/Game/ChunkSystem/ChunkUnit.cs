@@ -80,41 +80,58 @@ public class ChunkUnit : MonoBehaviour
         BlockData[,] chunkFront = new BlockData[chunkSize, chunkSize];
         BlockData[,] chunkBack  = new BlockData[chunkSize, chunkSize];
 
-        //int meter;
-        //int a = posGlobal.y + Random.Range(12, 18);
-        ////Generating Enviroment
-        //for (int i = 0; i < chunkSize; i++)
-        //{
-        //    for (meter = a; meter < chunkSize; meter++)
-        //    {
-        //        if (meter < Random.Range(19, 26))
-        //        {
-        //            chunkFront[i, meter - posGlobal.y] = dirt;
-        //        }
-        //        else
-        //        {
-        //            chunkFront[i, meter - posGlobal.y] = stone;
-        //        }
-        //    }
-        //    a = posGlobal.y + Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
-        //}
-        ////Clearing
-        //for (int i = 1; i < chunkSize - 1; i += 1)
-        //{
-        //    for (int j = 1; j < chunkSize - 1; j += 1)
-        //    {
-        //        if (chunkFront[i, j] == dirt)
-        //        {
-        //            if ((chunkFront[i - 1, j] == null)
-        //            && (chunkFront[i + 1, j] == null)
-        //            && (chunkFront[i, j - 1] == null))
-        //            {
-        //                chunkFront[i, j] = null;
-        //            }
-        //        }
-        //    }
-        //}
-        //chunkBack = chunkFront;
+        int worldHeight = generator.worldHeight;
+
+        Vector2Int chunkCoord = chunkManager.ChunkPosInWorld(this);
+        int chunk_level = chunkCoord.y * chunkSize;//Высота от начала мира до начала чанка
+
+        int surface_level = worldHeight - Random.Range(12, 18);//Высота от начала мира до поверхности земли
+
+        //int height_surface = 0;//высота от начала чанка до поверхности земли
+
+        
+        //Generating Enviroment
+        for (int i = 0; i < chunkSize; i++)
+        {
+            for (int j = 0; j < chunkSize; j++)
+            {
+                int height_dirt = Random.Range(4-1, 8+1);//Толщина земляного покрова
+
+                //height_surface = 0;
+                //Debug.Log("i: " + i + " ;j: " + j);
+
+                if (chunk_level + j < surface_level)
+                {
+                    chunkFront[i, j] = stone;
+                }
+                else
+                {
+                    if (chunk_level + j < surface_level + height_dirt)
+                    {
+                        chunkFront[i, j] = dirt;
+                    }                    
+                }                                                               
+            }
+            //height_surface = 0;
+            surface_level = worldHeight - Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
+        }
+        //Clearing
+        for (int i = 1; i < chunkSize - 1; i += 1)
+        {
+            for (int j = 1; j < chunkSize - 1; j += 1)
+            {
+                if (chunkFront[i, j] == dirt)
+                {
+                    if ((chunkFront[i - 1, j] == null)
+                    && (chunkFront[i + 1, j] == null)
+                    && (chunkFront[i, j - 1] == null))
+                    {
+                        chunkFront[i, j] = null;
+                    }
+                }
+            }
+        }
+        chunkBack = chunkFront;
 
         //Building
         for (int i = 0; i < chunkSize; i++)
@@ -124,11 +141,11 @@ public class ChunkUnit : MonoBehaviour
                 pos.x = i;
                 pos.y = j;
 
-                posGlobal.x = posObjGlobal.x + i;
-                posGlobal.y = posObjGlobal.y + j;
+                //posGlobal.x = posObjGlobal.x + i;
+                //posGlobal.y = posObjGlobal.y + j;
 
-                chunkFront[i, j] = dirt;
-                chunkBack[i, j]  = dirt;
+                //chunkFront[i, j] = dirt;
+                //chunkBack[i, j]  = dirt;
 
                 SetBlock(pos, chunkBack[i, j], true, tilemap_BackWorld);
 
@@ -139,24 +156,29 @@ public class ChunkUnit : MonoBehaviour
 
     #region SetBlock
     //Local
-    public void SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap)
+    public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap)
     {
-        if (InBounds(pos) && !(!checkCollisions && !HasBlock(pos, tilemap)))
+        bool hasBlock = checkCollisions && HasBlock(pos, tilemap);//controller.GetBlock(new Vector2Int(pos.x, pos.y)) != null;
+
+        if (InBounds(pos) && !hasBlock)
         {
             if (data != null)
             {
                 tilemap.SetTile(pos, data.tile);
-            }
-            controller.AddUnit(data, pos);
+                controller.AddUnit(data, pos);
+                //Debug.Log("True Placed; InBounds:" + InBounds(pos) + " ;Collisions: " + hasBlock);
+                return true;
+            }           
         }
+        return false;        
     }
     //Global
-    public void SetBlock(Vector3 pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.front)
+    public bool SetBlock(Vector3 pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.front)
     {
-        Tilemap tilemap = GetTileOfLayer(layer);
+        Tilemap tilemap = GetTileMapOfLayer(layer);
         Vector3Int posInt = tilemap.WorldToCell(pos);
 
-        SetBlock(posInt, data, checkCollisions, tilemap);
+        return SetBlock(posInt, data, checkCollisions, tilemap);
     }
     #endregion
     #region DeleteBlock
@@ -187,14 +209,14 @@ public class ChunkUnit : MonoBehaviour
     //Global
     public void DeleteBlock(Vector3 pos, BlockLayer layer = BlockLayer.front)
     {
-        Tilemap tilemap = GetTileOfLayer(layer);//Получение тайлмапа
+        Tilemap tilemap = GetTileMapOfLayer(layer);//Получение тайлмапа
         Vector3Int blockPos = tilemap.WorldToCell(pos);//Получение расположения
 
         DeleteBlock(blockPos, tilemap);
     } 
     #endregion
 
-    private Tilemap GetTileOfLayer(BlockLayer layer)
+    private Tilemap GetTileMapOfLayer(BlockLayer layer)
     {
         return dic_tile[layer];
     }
@@ -209,7 +231,7 @@ public class ChunkUnit : MonoBehaviour
     //Global
     public bool HasBlock(Vector3 pos, BlockLayer layer = BlockLayer.front)
     {
-        Tilemap tilemap = GetTileOfLayer(layer);
+        Tilemap tilemap = GetTileMapOfLayer(layer);
         return HasBlock(tilemap.WorldToCell(pos), layer);
     }
     //Local 
@@ -219,7 +241,7 @@ public class ChunkUnit : MonoBehaviour
     }
     public bool HasBlock(Vector3Int pos, BlockLayer layer = BlockLayer.front)
     {
-        Tilemap tilemap = GetTileOfLayer(layer);
+        Tilemap tilemap = GetTileMapOfLayer(layer);
         return tilemap.HasTile(pos);
     }
     #endregion
@@ -227,7 +249,7 @@ public class ChunkUnit : MonoBehaviour
     #region Debugging
     private void DebugClick(Vector3 pos, BlockLayer layer)
     {
-        Tilemap tilemap = GetTileOfLayer(layer);
+        Tilemap tilemap = GetTileMapOfLayer(layer);
         Vector3Int toSetBlockPos = tilemap.WorldToCell(pos);
 
         Debug.Log("ClickPos: " + tilemap.WorldToCell(pos) + " ;In Bounds: " + InBounds(toSetBlockPos));

@@ -28,12 +28,18 @@ public class Inventory : MonoBehaviour
     private Texture2D dragging_texture;
     private Vector3 curPos;
 
+    //Control
+    private int rollSelect;
+    private List<KeyCode> inventoryKeyCodes;
+
+    //Player
+    [SerializeField] private PlayerController player;
     private Dictionary<InventoryType, PanelItemsBase> panels;
     public class PanelItemsBase
     {
         [SerializeField] private UIItemPanel uipanel;
-        private int maxCount;
-        private List<ItemUnit> items;//Основная панель предметов
+        internal int maxCount;
+        internal List<ItemUnit> items;//Основная панель предметов
         public Inventory inventory;
 
         public void SetActive(bool value)
@@ -90,9 +96,11 @@ public class Inventory : MonoBehaviour
                 //Debug.Log("i:" + i + " " + fastPanel[i].data?.name.translations[0].text + "; " + data.name.translations[0].text);
                 if (items[i].data == data)
                 {
-                    items[i].AddItem();
-                    Debug.Log("Is Had");
-                    return true;
+                    if (items[i].AddItem())
+                    {
+                        //Debug.Log("Is Had");
+                        return true;
+                    }                    
                 }
             }
             //Debug.Log("StartFinding Null");
@@ -102,7 +110,7 @@ public class Inventory : MonoBehaviour
                 if (!items[i].HasData())
                 {
                     items[i].SetData(data);
-                    Debug.Log("NULL");
+                    //Debug.Log("NULL");
                     return true;
                 }
             }
@@ -140,6 +148,10 @@ public class Inventory : MonoBehaviour
         {
             panels[i].Init();
         }
+
+        InitKeys();
+        InitItemSelect();
+        
     }
     void Update()
     {
@@ -147,45 +159,67 @@ public class Inventory : MonoBehaviour
         {
             ToggleOpenMain();
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            KickSelectItem();
+        }
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
+        {
+            KickSelectItemStack();
+        }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
         {
-            if (itemSelect.panelType == InventoryType.fast & itemSelect.unit.data != null)
+            if (itemSelect != null && itemSelect.panelType == InventoryType.fast & itemSelect.unit.data != null)
             {
                 MoveItems(itemSelect.unit, InventoryType.fast, InventoryType.main);
             }
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.W))
         {
-            if (itemSelect.panelType == InventoryType.main & itemSelect.unit.data != null)
+            if (itemSelect != null && itemSelect.panelType == InventoryType.main & itemSelect.unit.data != null)
             {
                 MoveItems(itemSelect.unit, InventoryType.main, InventoryType.fast);
             }
         }
+        SetControlSelect();
     }
+    private void KickSelectItem()
+    {
+        if (itemSelect != null && itemSelect.panelType == InventoryType.fast & itemSelect.unit.data != null)
+        {            
+            if (player.CanToCreateItem())
+            {
+                player.CreateItemKick(itemSelect.unit.data, 1);
+                ItemUnit unit = itemSelect.unit;
 
+                unit.RemoveItem();
+            }                  
+        }
+    }
+    private void KickSelectItemStack()
+    {
+        if (itemSelect != null && itemSelect.panelType == InventoryType.fast & itemSelect.unit.data != null)
+        {
+            if (player.CanToCreateItem())
+            {
+                player.CreateItemKick(itemSelect.unit.data, itemSelect.unit.Count);
+                ItemUnit unit = itemSelect.unit;
+
+                unit.Clear();
+                unit.Reset();
+            }
+        }
+    }
     private void ToggleOpenMain()
     {
         isOpenMain = !isOpenMain;
         mainItems.SetActive(isOpenMain);
-
-        if (itemSelect.itemSelectUI != null && itemSelect.panelType == InventoryType.main)
+        if (itemSelect != null && itemSelect.itemSelectUI != null && itemSelect.panelType == InventoryType.main)
         {
             selector.SetActive(false);
-        }
-    }
+        }            
+    }  
 
-    public void SetItemSelect(UIItemPanelSlot item)
-    {
-        if (itemSelect == null)
-            itemSelect = new ItemSelect();
-
-        itemSelect.itemSelectUI = item;
-        itemSelect.unit = panels[itemSelect.panelType].GetItemUnit(item);
-        itemSelect.panelType = item.type;
-
-        selector.SetActive(true);
-        selector.transform.position = item.transform.position;
-    }
     public void AddItem(ItemData.Data data)
     {
         for (InventoryType i = 0; (int)i < panels.Count; i++)
@@ -238,6 +272,86 @@ public class Inventory : MonoBehaviour
             GUI.Label(new Rect(mousePos.x - shift, mousePos.y - shift, 50, 50), dragging_texture);
         }
     }
+
+    #region Control
+    public void SetItemSelect(UIItemPanelSlot item)
+    {
+        InitItemSelect();
+
+        itemSelect.itemSelectUI = item;
+        itemSelect.panelType = item.type;
+        itemSelect.unit = panels[itemSelect.panelType].GetItemUnit(item);
+
+        selector.SetActive(true);
+        selector.transform.position = item.transform.position;
+    }
+    public void SetItemSelect(ItemUnit unit)
+    {
+        InitItemSelect();
+
+        itemSelect.itemSelectUI = unit.uislot;
+        itemSelect.panelType = unit.uislot.type;
+        itemSelect.unit = unit;
+
+        selector.SetActive(true);
+        selector.transform.position = unit.uislot.transform.position;
+    }
+
+    private void InitKeys()
+    {
+        inventoryKeyCodes = new List<KeyCode>();
+        inventoryKeyCodes.Add(KeyCode.Keypad0);
+        inventoryKeyCodes.Add(KeyCode.Keypad1);
+        inventoryKeyCodes.Add(KeyCode.Keypad2);
+        inventoryKeyCodes.Add(KeyCode.Keypad3);
+        inventoryKeyCodes.Add(KeyCode.Keypad4);
+        inventoryKeyCodes.Add(KeyCode.Keypad5);
+        inventoryKeyCodes.Add(KeyCode.Keypad6);
+        inventoryKeyCodes.Add(KeyCode.Keypad7);
+    }
+    private void InitItemSelect()
+    {
+        if (itemSelect == null)
+            itemSelect = new ItemSelect();
+    }
+    private void SetControlSelect()
+    {
+        RollSet();
+        KeyDownFast();
+    }
+    private void RollSet()
+    {        
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        { // вправо
+            
+            if (rollSelect < fastItems.maxCount - 1)
+            {
+                rollSelect++;
+                SetItemSelect(fastItems.items[rollSelect]);
+            }
+            
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        { // влево
+            if (rollSelect > 0)
+            {
+                rollSelect--;
+                SetItemSelect(fastItems.items[rollSelect]);
+            }           
+        }
+        
+    }
+    private void KeyDownFast()
+    {
+        for (int i = 0; i < fastItems.maxCount; i++)
+        {
+            if (Input.GetKeyDown(inventoryKeyCodes[i]))
+            {
+                SetItemSelect(fastItems.items[i]);
+            }
+        }
+    }
+    #endregion
 }
 
 [Serializable]
@@ -271,13 +385,15 @@ public class ItemUnit
         Count++;
         uislot.SetCount(Count);
     }
-    public void AddItem()
+    public bool AddItem()
     {
         if (Count < MaxCount)
         {
             Count++;
             uislot.SetCount(Count);
+            return true;
         }
+        return false;
     }
     public bool HasData()
     {

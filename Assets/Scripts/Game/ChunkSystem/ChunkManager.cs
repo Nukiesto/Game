@@ -27,7 +27,7 @@ public class ChunkManager : MonoBehaviour
 
         RefreshBounds();
 
-        generator.Generation();
+        //generator.Generation();
         BuildChunks();                    
     }
     private void RefreshPos()
@@ -95,6 +95,20 @@ public class ChunkManager : MonoBehaviour
         }
 
         return null;       
+    }
+    public Vector2Int ChunkPosInWorld(ChunkUnit unit)
+    {
+        for (int i = 0; i < generator.worldWidthInChunks; i++)
+        {
+            for (int j = 0; j < generator.worldHeightInChunks; j++)
+            {
+                if (chunks[i, j] == unit)
+                {
+                    return new Vector2Int(i, j);
+                } 
+            }
+        }
+        return new Vector2Int(-1, -1);
     }
     public bool InBounds(Vector3 pos)
     {

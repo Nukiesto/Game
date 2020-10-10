@@ -10,6 +10,10 @@ public class BlockData : ScriptableObject
     public bool toCreateItem = true;
     public bool isBreackable = true;
 
+    [Header("")]
+    [Range(0, 1000)]
+    public int hp;
+
     [Header("Компоненты")]
     public BaseBlockScript script;
     public BaseBlockMemory memory;

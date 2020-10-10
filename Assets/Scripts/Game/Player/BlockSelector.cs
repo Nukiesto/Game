@@ -49,48 +49,56 @@ public class BlockSelector : MonoBehaviour
         ItemUnit item = inventory.GetSelectedItem();
         if (item.data != null && item.data.type == ItemType.block)
         {
-            Physics2D.queriesStartInColliders = false;
-            Vector3 pos = transform.position;
-            pos.x -= 0.5f;
-            pos.y -= 0.5f;
-            List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>();
-            hits.Add(Physics2D.RaycastAll(pos, Vector2.right, 1));
-            hits.Add(Physics2D.RaycastAll(new Vector3(pos.x + 1, pos.y), Vector2.up, 1));
-            hits.Add(Physics2D.RaycastAll(pos, Vector2.up, 1));
-            hits.Add(Physics2D.RaycastAll(pos, new Vector2(0.5f, 0.5f), 1));
-            hits.Add(Physics2D.RaycastAll(new Vector3(pos.x + 1f, pos.y), new Vector2(-0.5f, 0.5f), 1));
-            hits.Add(Physics2D.RaycastAll(new Vector3(pos.x, pos.y + 0.1f), Vector2.right, 1));
-            hits.Add(Physics2D.RaycastAll(new Vector3(pos.x, pos.y + 1), Vector2.right, 1));
-
-            for (int i = 0; i < hits.Count; i++)
+            if (!CheckCollisions())
             {
-                for (int z = 0; z < hits[i].Length; z++)
+                ChunkUnit chunk = chunkManager.GetChunk(onWorldPos);
+
+                if (chunk.SetBlock(onWorldPos, item.data.block, true))
                 {
-                    if (hits[i][z].collider != null)
+                    item.RemoveItem();
+                }               
+            }          
+        }       
+    }
+
+    private bool CheckCollisions()
+    {
+        Physics2D.queriesStartInColliders = false;
+        Vector3 pos = transform.position;
+        pos.x -= 0.5f;
+        pos.y -= 0.5f;
+        List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>();
+        hits.Add(Physics2D.RaycastAll(pos, Vector2.right, 1));
+        hits.Add(Physics2D.RaycastAll(new Vector3(pos.x + 1, pos.y), Vector2.up, 1));
+        hits.Add(Physics2D.RaycastAll(pos, Vector2.up, 1));
+        hits.Add(Physics2D.RaycastAll(pos, new Vector2(0.5f, 0.5f), 1));
+        hits.Add(Physics2D.RaycastAll(new Vector3(pos.x + 1f, pos.y), new Vector2(-0.5f, 0.5f), 1));
+        hits.Add(Physics2D.RaycastAll(new Vector3(pos.x, pos.y + 0.1f), Vector2.right, 1));
+        hits.Add(Physics2D.RaycastAll(new Vector3(pos.x, pos.y + 1), Vector2.right, 1));
+
+        for (int i = 0; i < hits.Count; i++)
+        {
+            for (int z = 0; z < hits[i].Length; z++)
+            {
+                if (hits[i][z].collider != null)
+                {
+                    string layer = LayerMask.LayerToName(hits[i][z].collider.gameObject.layer);
+                    //Debug.Log(layer);
+                    //Debug.Log(layer);
+                    for (int j = 0; j < 2; j++)
                     {
-                        string layer = LayerMask.LayerToName(hits[i][z].collider.gameObject.layer);
-                        //Debug.Log(layer);
-                        //Debug.Log(layer);
-                        for (int j = 0; j < 2; j++)
+                        //Debug.Log(layer + "; " + layers[j]);
+                        if (layer == layers[j])
                         {
-                            //Debug.Log(layer + "; " + layers[j]);
-                            if (layer == layers[j])
-                            {
-                                //Debug.Log("Has solid" + i);
-                                return;
-                            }
+                            //Debug.Log("Has solid" + i);
+                            return true;
                         }
                     }
                 }
             }
-
-            ChunkUnit chunk = chunkManager.GetChunk(onWorldPos);
-
-            chunk.SetBlock(onWorldPos, item.data.block, true);
-            item.RemoveItem();
-        }       
+        }
+        return false;
     }
-
     private void ClickBlock()
     {
         if (sys.IsPointerOverGameObject())
@@ -106,7 +114,6 @@ public class BlockSelector : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             ClickPlaceBlock();
-            return;
         }       
     }
     
