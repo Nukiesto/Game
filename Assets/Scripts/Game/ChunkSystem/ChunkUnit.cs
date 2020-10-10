@@ -188,21 +188,23 @@ public class ChunkUnit : MonoBehaviour
         if (InBounds(pos) && (tilemap.GetTile(pos) != null))
         {
             BlockUnit blockUnit = controller.GetBlock(pos.x, pos.y);
-
-            //Очистка
-            controller.DeleteUnit(blockUnit);
-            tilemap.SetTile(pos, null);
-
-            #region CreateItem
-            if (blockUnit.data.toCreateItem)
+            if (blockUnit.data.isBreackable)
             {
-                Vector3 posCreateItem = new Vector3//Создание предмета в центре блока
+                //Очистка
+                controller.DeleteUnit(blockUnit);
+                tilemap.SetTile(pos, null);
+
+                #region CreateItem
+                if (blockUnit.data.toCreateItem)
                 {
-                    x = posObj.x + Mathf.Floor(pos.x) + 0.5f,
-                    y = posObj.y + Mathf.Floor(pos.y) + 0.5f
-                };
-                ItemManager.CreateItem(posCreateItem, blockUnit.GetItem());
-            }
+                    Vector3 posCreateItem = new Vector3//Создание предмета в центре блока
+                    {
+                        x = posObj.x + Mathf.Floor(pos.x) + 0.5f,
+                        y = posObj.y + Mathf.Floor(pos.y) + 0.5f
+                    };
+                    ItemManager.CreateItem(posCreateItem, blockUnit.GetItem());
+                }
+            }            
             #endregion
         }
     }
