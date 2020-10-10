@@ -1,6 +1,7 @@
 ﻿using SimpleLocalizator;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static ItemData;
 
 [CreateAssetMenu(menuName = "Block/BlocksData", fileName = "BlockData")]
 public class BlockData : ScriptableObject
@@ -24,7 +25,7 @@ public class BlockData : ScriptableObject
     [Header("Предмет")]
     public TranslateString nameTranslations;
     public TranslateString descriptionTranslations;
-    [HideInInspector] public ItemData.Data Item { get; private set; }
+    [HideInInspector] public Data Item { get; private set; }
 
     private void OnEnable()
     {
@@ -37,8 +38,8 @@ public class BlockData : ScriptableObject
         Debug.Log(descriptionTranslations);
     }
     public void InitItem()
-    {
-        Item = new ItemData.Data
+    {        
+        Item = new Data
         {
             type = ItemType.block,
             sprite = tile.sprite,

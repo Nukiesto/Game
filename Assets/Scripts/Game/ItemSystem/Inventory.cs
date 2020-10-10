@@ -185,7 +185,7 @@ public class Inventory : MonoBehaviour
     }
     private void KickSelectItem()
     {
-        if (itemSelect != null && itemSelect.panelType == InventoryType.fast & itemSelect.unit.data != null)
+        if (itemSelect != null && itemSelect.unit != null && itemSelect.unit.data != null)
         {            
             if (player.CanToCreateItem())
             {
@@ -198,7 +198,7 @@ public class Inventory : MonoBehaviour
     }
     private void KickSelectItemStack()
     {
-        if (itemSelect != null && itemSelect.panelType == InventoryType.fast & itemSelect.unit.data != null)
+        if (itemSelect != null && itemSelect.unit != null && itemSelect.unit.data != null)
         {
             if (player.CanToCreateItem())
             {
