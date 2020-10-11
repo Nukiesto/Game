@@ -129,9 +129,19 @@ public class ChunkManager : MonoBehaviour
             system.worldsList = new WorldSavingSystem.WorldDataList(system);
         }
         worldSaving = new WorldSavingSystem.WorldSaving(system, system.worldsList);
-        string name = "TestWorldSave" + Random.Range(0, 1000);
-        Debug.Log("World Created" + name);
-        worldSaving.CreateWorld(new WorldSavingSystem.WorldDataUnit(system) { name = name, width = generator.worldWidthInChunks, height = generator.worldHeightInChunks });
+        string name = "TestWorldSave";// + Random.Range(0, 1000);
+        //Debug.Log("World Created" + name);
+        WorldSavingSystem.WorldDataUnit world = new WorldSavingSystem.WorldDataUnit(system)
+        {
+            name = name,
+            width = generator.worldWidthInChunks,
+            height = generator.worldHeightInChunks
+        };
+        //Debug.Log(worldSaving);
+        if (!worldSaving.CreateWorld(world))
+        {
+            worldSaving.LoadWorldName(name);
+        }
     }
     public void ClickSaveWorld()
     {
@@ -166,15 +176,14 @@ public class ChunkManager : MonoBehaviour
                 worldSaving.AddChunk(chunk);
             }
         }
-
-        worldSaving.SaveWorld();
+        worldSaving.SaveWorld();       
     }
     public void ClickLoadWorld()
     {
         worldSaving.LoadWorld();
         int count = generator.CountChunks;
         for (int i = 0; i < count; i++)
-        {          
+        {
             WorldSavingSystem.ChunkData chunk = worldSaving.GetChunkData(i);
             //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;" + j);
             if (chunk != null)
@@ -190,7 +199,7 @@ public class ChunkManager : MonoBehaviour
                         BlockData blockDataMain = dataBase.GetBlock(blockData.name);
 
                         unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.front);
-                            
+
                     }
                     if (blockData.blockLayer == (int)BlockLayer.back)
                     {
@@ -199,7 +208,7 @@ public class ChunkManager : MonoBehaviour
                         unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.back);
                     }
                 }
-            }                        
+            }
         }       
     }
     #region Debugging
