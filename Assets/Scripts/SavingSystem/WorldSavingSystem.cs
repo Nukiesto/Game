@@ -112,6 +112,7 @@ namespace SavingSystem
             private WorldSavingSystem system;
             private WorldDataList worldList;
             private WorldDataUnit worldDataUnit;
+            public PlayerData playerData;
 
             public string fnameInfo { get => worldDataUnit.Dirname + "/" + worldDataUnit.name + ".info"; }
             public WorldSaving(WorldSavingSystem system, WorldDataList worldList)
@@ -192,20 +193,20 @@ namespace SavingSystem
                 }
             }
             public void SaveInfo()
-            {
-                List<string> data = new List<string>();
-
-                data.Add(worldDataUnit.width.ToString());
-                data.Add(worldDataUnit.height.ToString());
-
-                //Debug.Log(fnameInfo);
-                // Конвертируем в json
-                string jsonString = JsonHelper.ToJson(data.ToArray(), true);
-                //Записываем
+            {             
                 using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
                     using (var writer = new StreamWriter(fs))
                     {
+                        string[] data = new string[1];
+
+                        data[0] = worldDataUnit.width.ToString();
+                        data[1] = worldDataUnit.height.ToString();
+
+                        //Debug.Log(fnameInfo);
+                        // Конвертируем в json
+                        string jsonString = JsonHelper.ToJson(data, true);
+                        //Записываем
                         writer.Write(jsonString);
                     }
                 }
@@ -232,6 +233,36 @@ namespace SavingSystem
                     }
                 }
             }
+            public void SavePlayerData()
+            {
+                using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+                {
+                    using (var writer = new StreamWriter(fs))
+                    {
+                        string jsonString = JsonConvert.SerializeObject(playerData);
+
+                        writer.Write(jsonString);
+                    }
+                }
+            }
+            public void LoadPlayerData()
+            {
+                string pathFile = fnameInfo;
+
+                using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
+                {
+                    using (var writer = new StreamReader(fs))
+                    {
+                        string jsonString = writer.ReadToEnd();
+
+                        if (jsonString != "")
+                        {
+                            playerData = JsonConvert.DeserializeObject<PlayerData>(jsonString);
+                        }
+                    }
+                }
+            }
+
             private void CreateWorldDir()
             {
                 string dirname = worldDataUnit.Dirname;
@@ -343,12 +374,19 @@ namespace SavingSystem
                     {                       
                         string[] data = new string[chunkData.blocks.Count];
 
-                        for (int i = 0; i < chunkData.blocks.Count; i++)
+                        data[0] = chunkData.blocks.Count.ToString();
+                        data[1] = chunkData.items.Count.ToString();
+
+                        int start = 2; int end = 2 + chunkData.blocks.Count;
+                        for (int i = start; i < end; i++)
                         {
                             data[i] = JsonConvert.SerializeObject(chunkData.blocks[i]);
-                            //Debug.Log("n: " + i + " ;string: " + data[i]);
                         }
-                        //Debug.Log("Count: " + chunkData.blocks.Count);
+                        start = end + 1; end = start + chunkData.items.Count;
+                        for (int i = start; i < end; i++)
+                        {
+                            data[i] = JsonConvert.SerializeObject(chunkData.items[i]);
+                        }
                         // Конвертируем в json
                         string jsonString = JsonHelper.ToJson(data, true);
 
@@ -370,15 +408,20 @@ namespace SavingSystem
                         {
                             string[] data = JsonHelper.FromJson<string>(text);
                             chunkData.blocks.Clear();
-                            //chunkData.x = chunkData.x;
-                            //chunkData.y = chunkData.y;
-                            for (int i = 0; i < data.Length; i++)
-                            {
-                                //Debug.Log("n: " + i + " ;string: " + data[i]);
+
+                            int start = 2; int end = 2 + int.Parse(data[0]);
+                            for (int i = start; i < end; i++)
+                            {                             
                                 BlockChunkData blockData = JsonConvert.DeserializeObject<BlockChunkData>(data[i]);
                                 chunkData.AddChunkBlock(blockData);
                             }
-                        }
+                            start = end + 1; end = start + int.Parse(data[1]);
+                            for (int i = start; i < end; i++)
+                            {
+                                ItemChunkData entityData = JsonConvert.DeserializeObject<ItemChunkData>(data[i]);
+                                chunkData.AddChunkItem(entityData);
+                            }
+                         }
                     }
                 }
             }
@@ -390,19 +433,20 @@ namespace SavingSystem
             public int y;
 
             public List<BlockChunkData> blocks = new List<BlockChunkData>();
+            public List<ItemChunkData> items = new List<ItemChunkData>();
             public int chunkSize = GameConstants.chunkSize;
             public ChunkData(int x, int y)
             {
                 this.x = x;
                 this.y = y;
             }
-            public void AddBlock(int x, int y, string name, int blockLayer)
-            {
-                blocks.Add(new BlockChunkData(x, y, name, blockLayer));
-            }
             public void AddChunkBlock(BlockChunkData data)
             {
                 blocks.Add(data);
+            }
+            public void AddChunkItem(ItemChunkData data)
+            {
+                items.Add(data);
             }
         }
         [JsonObject(IsReference = true)]
@@ -421,6 +465,24 @@ namespace SavingSystem
                 this.name = name;
                 this.blockLayer = blockLayer;
             }
+        }
+        [JsonObject(IsReference = true)]
+        public class EntityChunkData
+        {
+            public int x;
+            public int y;
+        }
+        [JsonObject(IsReference = true)]
+        public class ItemChunkData
+        {
+            public EntityChunkData entity;
+        }
+        [JsonObject(IsReference = true)]
+        [Serializable]
+        public class PlayerData
+        {           
+            public int x;
+            public int y;           
         }
         #endregion
     }
