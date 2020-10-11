@@ -4,8 +4,8 @@ using UnityEngine.Tilemaps;
 
 public enum BlockLayer
 {
-    front,
-    back
+    front = 0,
+    back = 1
 }
 [RequireComponent(typeof(ChunkBlockController))]
 public class ChunkUnit : MonoBehaviour
@@ -16,13 +16,12 @@ public class ChunkUnit : MonoBehaviour
     [SerializeField] private Tilemap tilemap_FrontWorld;
 
     private Dictionary<BlockLayer, Tilemap> dic_tile;
-
     //Components
     private ChunkBlockController controller;
 
     //Other
     private static readonly int chunkSize = GameConstants.chunkSize;
-    [HideInInspector]public ChunkManager chunkManager;
+    [HideInInspector] public ChunkManager chunkManager;
 
     //Position Cash
     private Vector3 posObj;
@@ -32,7 +31,9 @@ public class ChunkUnit : MonoBehaviour
     {
         InitMethods();
 
-        BuildChunk();       
+        BuildChunk();
+
+        //BuildFillChunk();
     }
 
     #region InitMethods
@@ -55,7 +56,7 @@ public class ChunkUnit : MonoBehaviour
             { BlockLayer.front, tilemap_FrontWorld },
             { BlockLayer.back, tilemap_BackWorld }
         };
-    } 
+    }
     private void InitPosition()
     {
         posObj = transform.position;
@@ -63,6 +64,31 @@ public class ChunkUnit : MonoBehaviour
     }
     #endregion
 
+    private void BuildFillChunk()
+    {
+        WorldGenerator generator = chunkManager.generator;
+
+        BlockData dirt = generator.dirt;
+
+        //Building
+        for (int i = 0; i < chunkSize; i++)
+        {
+            for (int j = 0; j < chunkSize; j++)
+            {
+                Vector3Int pos = Vector3Int.zero;
+
+                pos.x = i;
+                pos.y = j;
+                //Debug.Log(tilemap_BackWorld);
+                SetBlock(pos, dirt, true, tilemap_BackWorld, BlockLayer.back);
+
+                SetBlock(pos, dirt, true, tilemap_FrontWorld);
+                
+                //Debug.Log("BlockBack: " + i + "; " + j + "; " + controller.GetBlock(new Vector2Int(i, j), BlockLayer.back));
+                //Debug.Log("BlockFront: " + i + "; " + j + "; " + controller.GetBlock(new Vector2Int(i, j), BlockLayer.front));
+            }
+        }
+    }
     private void BuildChunk()
     {
         Vector3Int pos = Vector3Int.zero;
@@ -78,7 +104,7 @@ public class ChunkUnit : MonoBehaviour
         int terrainDestruct = 2;
 
         BlockData[,] chunkFront = new BlockData[chunkSize, chunkSize];
-        BlockData[,] chunkBack  = new BlockData[chunkSize, chunkSize];
+        BlockData[,] chunkBack = new BlockData[chunkSize, chunkSize];
 
         int worldHeight = generator.worldHeight;
 
@@ -89,13 +115,13 @@ public class ChunkUnit : MonoBehaviour
 
         //int height_surface = 0;//высота от начала чанка до поверхности земли
 
-        
+
         //Generating Enviroment
         for (int i = 0; i < chunkSize; i++)
         {
             for (int j = 0; j < chunkSize; j++)
             {
-                int height_dirt = Random.Range(4-1, 8+1);//Толщина земляного покрова
+                int height_dirt = Random.Range(4 - 1, 8 + 1);//Толщина земляного покрова
 
                 //height_surface = 0;
                 //Debug.Log("i: " + i + " ;j: " + j);
@@ -109,8 +135,8 @@ public class ChunkUnit : MonoBehaviour
                     if (chunk_level + j < surface_level + height_dirt)
                     {
                         chunkFront[i, j] = dirt;
-                    }                    
-                }                                                               
+                    }
+                }
             }
             //height_surface = 0;
             surface_level = worldHeight - Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
@@ -147,16 +173,16 @@ public class ChunkUnit : MonoBehaviour
                 //chunkFront[i, j] = dirt;
                 //chunkBack[i, j]  = dirt;
 
-                SetBlock(pos, chunkBack[i, j], true, tilemap_BackWorld);
+                SetBlock(pos, chunkBack[i, j], true, tilemap_BackWorld, BlockLayer.back);
 
-                SetBlock(pos, chunkFront[i, j], true, tilemap_FrontWorld);               
+                SetBlock(pos, chunkFront[i, j], true, tilemap_FrontWorld);
             }
         }
     }
 
     #region SetBlock
     //Local
-    public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap)
+    public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap, BlockLayer layer = BlockLayer.front)
     {
         bool hasBlock = checkCollisions && HasBlock(pos, tilemap);//controller.GetBlock(new Vector2Int(pos.x, pos.y)) != null;
 
@@ -165,14 +191,20 @@ public class ChunkUnit : MonoBehaviour
             if (data != null)
             {
                 tilemap.SetTile(pos, data.tile);
-                controller.AddUnit(data, pos);
+                controller.AddUnit(data, pos, layer);
                 //Debug.Log("True Placed; InBounds:" + InBounds(pos) + " ;Collisions: " + hasBlock);
                 return true;
-            }           
+            }
         }
-        return false;        
+        return false;
     }
     //Global
+    public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.front)
+    {
+        Tilemap tilemap = GetTileMapOfLayer(layer);
+        return SetBlock(pos, data, checkCollisions, tilemap, layer);
+    }   
+
     public bool SetBlock(Vector3 pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.front)
     {
         Tilemap tilemap = GetTileMapOfLayer(layer);
@@ -183,11 +215,11 @@ public class ChunkUnit : MonoBehaviour
     #endregion
     #region DeleteBlock
     //Local
-    public void DeleteBlock(Vector3Int pos, Tilemap tilemap)
+    public void DeleteBlock(Vector3Int pos, Tilemap tilemap, BlockLayer layer)
     {
         if (InBounds(pos) && (tilemap.GetTile(pos) != null))
         {
-            BlockUnit blockUnit = controller.GetBlock(pos.x, pos.y);
+            BlockUnit blockUnit = controller.GetBlock(pos.x, pos.y, layer);
             if (blockUnit.data.isBreackable)
             {
                 //Очистка
@@ -214,7 +246,7 @@ public class ChunkUnit : MonoBehaviour
         Tilemap tilemap = GetTileMapOfLayer(layer);//Получение тайлмапа
         Vector3Int blockPos = tilemap.WorldToCell(pos);//Получение расположения
 
-        DeleteBlock(blockPos, tilemap);
+        DeleteBlock(blockPos, tilemap, layer);
     } 
     #endregion
 
@@ -228,7 +260,16 @@ public class ChunkUnit : MonoBehaviour
         //Debug.Log("pos.x: " + pos.x + " ;pos.y: " + pos.y + "chunkSize: " + chunkSize);
         return pos.x >= 0 && pos.x < chunkSize && pos.y >= 0 && pos.y < chunkSize;
     }
-
+    public void Clear()
+    {
+        controller.Clear();
+        tilemap_BackWorld.ClearAllTiles();
+        tilemap_FrontWorld.ClearAllTiles();
+    }
+    public BlockUnit GetBlockUnit(Vector2Int pos, BlockLayer layer)
+    {       
+        return controller.GetBlock(pos, layer);
+    }
     #region HasBlock
     //Global
     public bool HasBlock(Vector3 pos, BlockLayer layer = BlockLayer.front)
@@ -270,5 +311,5 @@ public class ChunkUnit : MonoBehaviour
         Gizmos.DrawLine(pos + new Vector3(size, 0), pos + new Vector3(size, size));
     }
 #endif
-    #endregion
+    #endregion 
 }

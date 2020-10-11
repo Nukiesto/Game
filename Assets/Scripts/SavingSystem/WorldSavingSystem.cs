@@ -12,8 +12,7 @@ namespace SavingSystem
 		private readonly string worldDirName = "Worlds";
 		private readonly int ChunkSize = GameConstants.chunkSize;
 
-		private WorldDataList worldsList;
-		private WorldSaving worldSaving;
+		public WorldDataList worldsList;
 		internal string dirnameWorlds { get => Application.dataPath + "/" + worldDirName; }
 
 		public void Init()
@@ -22,20 +21,20 @@ namespace SavingSystem
 
 			worldsList = new WorldDataList(this);	
 
-			worldSaving = new WorldSaving(this, worldsList);
-			worldSaving.CreateWorld(new WorldDataUnit(this) { name = "TestWorld2", width = 32, height = 8});
+			//worldSaving = new WorldSaving(this, worldsList);
+			//worldSaving.CreateWorld(new WorldDataUnit(this) { name = "TestWorld2", width = 32, height = 8});
 			
-            for (int i = 0; i < 32; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-					ChunkData chunk = new ChunkData(i,j);
+   //         for (int i = 0; i < 32; i++)
+   //         {
+   //             for (int j = 0; j < 8; j++)
+   //             {
+			//		ChunkData chunk = new ChunkData(i,j);
 
-					worldSaving.AddChunk(chunk);
-				}
-            }
+			//		worldSaving.AddChunk(chunk);
+			//	}
+   //         }
 
-			worldSaving.SaveWorld();
+			
 			//worldSaving.LoadWorldName("TestWorld");
 
 			//Debug.Log(worldsList.worlds.Count);
@@ -61,13 +60,6 @@ namespace SavingSystem
             {
                 worlds = new List<string>();
                 this.system = system;
-
-                ////Создаем файл лист с мирами если его нет
-                //string fname = FnameWorldList;
-                //if (!File.Exists(fname))
-                //{
-                //	File.Create(fname);
-                //}
 
                 LoadWorldList();
             }
@@ -137,17 +129,13 @@ namespace SavingSystem
 
                     CreateWorldDir();//Создаем папку с миром	
 
-                    CreateFileInfoWorld();//Создаем файл с информацией о мире
+                    //CreateFileInfoWorld();//Создаем файл с информацией о мире
                     SaveInfo();//Сохранение инфо и мире
                 }
             }
             private void SetDataUnit(WorldDataUnit data)
             {
                 worldDataUnit = data;
-            }
-            private void CreateFileInfoWorld()
-            {
-                string fname = fnameInfo;
             }
             public void SaveWorld()
             {
@@ -166,14 +154,21 @@ namespace SavingSystem
             }
             public void LoadWorld()
             {
-                //if (worldDataUnit != null)
-                //{				
-                //	for (int i = 0; i < worldDataUnit.chunks.Count; i++)
-                //	{
-                //		ChunkSaving chunkSaving = new ChunkSaving(new ChunkData(), system, worldDataUnit);
-                //		chunkSaving.Chunkload();					
-                //	}
-                //}
+                if (worldDataUnit != null)
+                {
+                    worldDataUnit.Clear();
+                    for (int i = 0; i < worldDataUnit.width; i++)
+                    {
+                        for (int j = 0; j < worldDataUnit.height; j++)
+                        {
+                            ChunkSaving chunkSaving = new ChunkSaving(new ChunkData(i, j), system,  worldDataUnit);
+                            chunkSaving.ChunkLoad();
+
+                            //Debug.Log("ChunkData: " + chunkSaving.chunkData.x + " ;" + chunkSaving.chunkData.y);
+                            worldDataUnit.AddChunk(chunkSaving.chunkData);                           
+                        }
+                    }
+                }
             }
 
             public void LoadWorldName(string name)
@@ -238,10 +233,25 @@ namespace SavingSystem
                     Directory.CreateDirectory(dirname);
                 }
             }
-
+            public ChunkData GetChunkData(int n)
+            {
+                if (worldDataUnit != null)
+                {
+                    return worldDataUnit.GetChunk(n);
+                }
+                return null;
+            }
             public void AddChunk(ChunkData data)
             {
                 worldDataUnit?.AddChunk(data);
+            }
+            public void SetChunk(ChunkData data)
+            {
+                worldDataUnit?.SetChunk(data);
+            }
+            public void Clear()
+            {
+                worldDataUnit.Clear();
             }
         }
         [Serializable]
@@ -260,12 +270,31 @@ namespace SavingSystem
             {
                 chunks = new List<ChunkData>();
                 this.system = system;
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                    {
+                        AddChunk(new ChunkData(i, j));
+                    }
+                }
             }
             public void AddChunk(ChunkData data)
             {
                 if (chunks.Count < CountChunks)
                 {
                     chunks.Add(data);
+                }
+            }
+            public void SetChunk(ChunkData data)
+            {
+                for (int i = 0; i < chunks.Count; i++)
+                {
+                    if (chunks[i].x == data.x && chunks[i].y == data.y)
+                    {
+                        chunks[i] = data;
+                        break;
+                    }
                 }
             }
             public ChunkData GetChunk(int i)
@@ -276,6 +305,10 @@ namespace SavingSystem
                 }
                 return null;
             }
+            public void Clear()
+            {
+                chunks.Clear();
+            }
         }
         #endregion
 
@@ -285,14 +318,12 @@ namespace SavingSystem
             public ChunkData chunkData;
             public WorldSavingSystem system;
             public WorldDataUnit dataUnit;
-            private int chunkSize;
+
             public ChunkSaving(ChunkData chunkData, WorldSavingSystem system, WorldDataUnit dataUnit)
             {
                 this.chunkData = chunkData;
                 this.system = system;
                 this.dataUnit = dataUnit;
-
-                chunkSize = system.ChunkSize;
             }
             public void ChunkSave()
             {
@@ -330,6 +361,8 @@ namespace SavingSystem
                         {
                             string[] a = JsonHelper.FromJson<string>(text);
                             chunkData.blocks.Clear();
+                            //chunkData.x = chunkData.x;
+                            //chunkData.y = chunkData.y;
                             for (int i = 0; i < a.Length; i++)
                             {
                                 BlockChunkData data = JsonConvert.DeserializeObject<BlockChunkData>(a[i]);
@@ -352,30 +385,31 @@ namespace SavingSystem
             {
                 this.x = x;
                 this.y = y;
-
-
             }
-            public void AddBlock(int x, int y, BlockData data)
+            public void AddBlock(int x, int y, string name, int blockLayer)
             {
-                blocks.Add(new BlockChunkData(x, y, data));
+                blocks.Add(new BlockChunkData(x, y, name, blockLayer));
             }
             public void AddChunkBlock(BlockChunkData data)
             {
                 blocks.Add(data);
             }
         }
+        [JsonObject(IsReference = true)]
         public class BlockChunkData
         {
             public int x;
             public int y;
+            
+            public string name;
+            public int blockLayer;
 
-            public BlockData data;
-
-            public BlockChunkData(int x, int y, BlockData data)
+            public BlockChunkData(int x, int y, string name, int blockLayer)
             {
                 this.x = x;
                 this.y = y;
-                this.data = data;
+                this.name = name;
+                this.blockLayer = blockLayer;
             }
         }
         #endregion

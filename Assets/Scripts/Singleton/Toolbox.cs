@@ -15,6 +15,7 @@ public class Toolbox : Singleton<Toolbox>
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         //Debug.Log("Awake");
         worldSavingSystem.Init();
         // Поместите сюда код инициализации.

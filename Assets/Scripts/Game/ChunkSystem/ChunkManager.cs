@@ -1,4 +1,5 @@
 ﻿using LeopotamGroup.Math;
+using SavingSystem;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,7 +7,9 @@ using Random = UnityEngine.Random;
 public class ChunkManager : MonoBehaviour
 {
     [SerializeField] private GameObject chunk;
-    
+    [SerializeField] private Toolbox toolbox;
+    [SerializeField] private BlockDataBase dataBase;
+
     private ChunkUnit[,] chunks;
     private Vector3 posObj;
     private Vector2Int posZero;
@@ -15,7 +18,7 @@ public class ChunkManager : MonoBehaviour
 
     private int chunkSize;
     public WorldGenerator generator;
-
+    private WorldSavingSystem.WorldSaving worldSaving;
     private void Awake()
     {
         chunkSize = GameConstants.chunkSize;
@@ -27,8 +30,8 @@ public class ChunkManager : MonoBehaviour
 
         RefreshBounds();
 
-        //generator.Generation();
-        BuildChunks();                    
+        BuildChunks();
+        CreateWorld();
     }
     private void RefreshPos()
     {
@@ -117,7 +120,88 @@ public class ChunkManager : MonoBehaviour
         //return pos.x >= posObj.x && pos.x < chunkSize * generator.worldWidth && pos.y >= posObj.y && pos.y < chunkSize * generator.worldHeight;
         return bounds.Contains(pos);
     }
+    public void CreateWorld()
+    {
+        WorldSavingSystem system = toolbox.GetWorldSaving();
+        if (system.worldsList == null)
+        {
+            //Debug.LogWarning("worldlist is null");
+            system.worldsList = new WorldSavingSystem.WorldDataList(system);
+        }
+        worldSaving = new WorldSavingSystem.WorldSaving(system, system.worldsList);
+        string name = "TestWorldSave" + Random.Range(0, 1000);
+        Debug.Log("World Created" + name);
+        worldSaving.CreateWorld(new WorldSavingSystem.WorldDataUnit(system) { name = name, width = generator.worldWidthInChunks, height = generator.worldHeightInChunks });
+    }
+    public void ClickSaveWorld()
+    {
+        worldSaving.Clear();
+        for (int i = 0; i < generator.worldWidthInChunks; i++)
+        {
+            for (int j = 0; j < generator.worldHeightInChunks; j++)
+            {
+                WorldSavingSystem.ChunkData chunk = new WorldSavingSystem.ChunkData(i, j);
+                ChunkUnit unit = chunks[i, j];
+                //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;"+ j);
+                for (int x = 0; x < chunkSize; x++)
+                {
+                    for (int y = 0; y < chunkSize; y++)
+                    {
+                        BlockUnit blockUnitFront = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.front);
+                        BlockUnit blockUnitBack  = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.back);
 
+                        //Debug.Log("BlockUnitFront: " + blockUnitFront + ";BlockUnitBack: " + blockUnitBack);
+                        if (blockUnitFront != null)
+                        {
+                            chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.data.nameBlock, (int)BlockLayer.front));
+                            
+                        }
+                        if (blockUnitBack != null)
+                        {
+                            chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.data.nameBlock, (int)BlockLayer.back));
+                        }
+                    }
+                }
+                //Debug.Log(chunk.blocks.Count);                
+                worldSaving.AddChunk(chunk);
+            }
+        }
+
+        worldSaving.SaveWorld();
+    }
+    public void ClickLoadWorld()
+    {
+        worldSaving.LoadWorld();
+        int count = generator.CountChunks;
+        for (int i = 0; i < count; i++)
+        {          
+            WorldSavingSystem.ChunkData chunk = worldSaving.GetChunkData(i);
+            //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;" + j);
+            if (chunk != null)
+            {
+                ChunkUnit unit = chunks[chunk.x, chunk.y];
+                unit.Clear();//Полная очистка чанка
+
+                for (int n = 0; n < chunk.blocks.Count; n++)
+                {
+                    WorldSavingSystem.BlockChunkData blockData = chunk.blocks[n];
+                    if (blockData.blockLayer == (int)BlockLayer.front)
+                    {
+                        BlockData blockDataMain = dataBase.GetBlock(blockData.name);
+
+                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.front);
+                            
+                    }
+                    if (blockData.blockLayer == (int)BlockLayer.back)
+                    {
+                        BlockData blockDataMain = dataBase.GetBlock(blockData.name);
+
+                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.back);
+                    }
+                }
+            }                        
+        }       
+    }
     #region Debugging
 #if UNITY_EDITOR
     public void OnDrawGizmos()
@@ -163,6 +247,7 @@ public class WorldGenerator
     private BlockData[,] frontWorld;//Передний мир
     private BlockData[,] backWorld;//Задний мир
 
+    public int CountChunks { get => worldWidthInChunks * worldHeightInChunks; }
     public void InitProps()
     {
         chunkSize = GameConstants.chunkSize;
