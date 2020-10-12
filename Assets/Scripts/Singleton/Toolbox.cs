@@ -1,9 +1,8 @@
-﻿using SavingSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Toolbox : Singleton<Toolbox>
+public class Toolbox : MonoGlobalSingleton<Toolbox>
 {
     // Used to track any global components added at runtime.
     private Dictionary<string, Component> m_Components = new Dictionary<string, Component>();
@@ -15,24 +14,22 @@ public class Toolbox : Singleton<Toolbox>
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        //Debug.Log("Awake");
-        worldSavingSystem.Init();
-        // Поместите сюда код инициализации.
+        // Put initialization code here.
     }
 
 
-    //Определите здесь все необходимые глобальные компоненты.Это жестко запрограммированные компоненты
-    //это всегда будет добавляться.В отличие от дополнительных компонентов, добавляемых во время выполнения.
-    private WorldSavingSystem worldSavingSystem = new WorldSavingSystem();
+    // Define all required global components here. These are hard-codded components
+    // that will always be added. Unlike the optional components added at runtime.
 
-    public WorldSavingSystem GetWorldSaving()
-    {
-        return worldSavingSystem;
-    }
+    //private PlayerData m_PlayerData = new PlayerData();
 
-    // Приведенные ниже методы позволяют нам добавлять глобальные компоненты во время выполнения.
-    // ЗАДАЧА: преобразование идентификаторов строк в типы компонентов.
+    //public PlayerData GetPlayerData()
+    //{
+    //    return m_PlayerData;
+    //}
+
+    // The methods below allow us to add global components at runtime.
+    // TODO: Convert from string IDs to component types.
     public Component AddGlobalComponent(string componentID, Type component)
     {
         if (m_Components.ContainsKey(componentID))
@@ -46,7 +43,8 @@ public class Toolbox : Singleton<Toolbox>
         m_Components.Add(componentID, newComponent);
         return newComponent;
     }
-    
+
+
     public void RemoveGlobalComponent(string componentID)
     {
         Component component;
@@ -62,6 +60,7 @@ public class Toolbox : Singleton<Toolbox>
                 + componentID + "\"! Typo?");
         }
     }
+
 
     public Component GetGlobalComponent(string componentID)
     {

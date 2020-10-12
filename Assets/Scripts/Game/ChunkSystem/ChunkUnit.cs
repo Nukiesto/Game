@@ -31,9 +31,9 @@ public class ChunkUnit : MonoBehaviour
     {
         InitMethods();
 
-        BuildChunk();
+        //BuildChunk();
 
-        //BuildFillChunk();
+        BuildFillChunk();
     }
 
     #region InitMethods

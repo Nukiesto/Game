@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class ChunkManager : MonoBehaviour
 {
     [SerializeField] private GameObject chunk;
-    [SerializeField] private Toolbox toolbox;
+    //[SerializeField] private Toolbox toolbox;
     [SerializeField] private BlockDataBase dataBase;
 
     private ChunkUnit[,] chunks;
@@ -122,16 +122,23 @@ public class ChunkManager : MonoBehaviour
     }
     public void CreateWorld()
     {
-        WorldSavingSystem system = toolbox.GetWorldSaving();
-        if (system.worldsList == null)
+        // Добавьте и получите глобальный компонент.
+        //Toolbox.Instance.
+
+        // получение глобального компонента.
+        //var playerData = Toolbox.Instance.GetGlobalComponent("PlayerData");
+
+        WorldSavingSystem.Init();
+
+        if (WorldSavingSystem.worldsList == null)
         {
             //Debug.LogWarning("worldlist is null");
-            system.worldsList = new WorldSavingSystem.WorldDataList(system);
+            WorldSavingSystem.worldsList = new WorldSavingSystem.WorldDataList();
         }
-        worldSaving = new WorldSavingSystem.WorldSaving(system, system.worldsList);
+        worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.worldsList);
         string name = "TestWorldSave";// + Random.Range(0, 1000);
         //Debug.Log("World Created" + name);
-        WorldSavingSystem.WorldDataUnit world = new WorldSavingSystem.WorldDataUnit(system)
+        WorldSavingSystem.WorldDataUnit world = new WorldSavingSystem.WorldDataUnit()
         {
             name = name,
             width = generator.worldWidthInChunks,

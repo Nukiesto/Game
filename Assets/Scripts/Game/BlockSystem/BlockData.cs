@@ -40,7 +40,7 @@ public class BlockData : ScriptableObject
     }
     public void InitItem()
     {        
-        Item = new Data
+        Item = new Data()
         {
             type = ItemType.block,
             sprite = tile.sprite,
