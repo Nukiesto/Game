@@ -5,7 +5,8 @@ public enum Menu
 {
     Main,
     Pause,
-    Settings
+    Settings,
+    WorldList
 }
 public enum CurrentScene
 {

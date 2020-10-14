@@ -46,7 +46,7 @@ public class MainMenuButton : ButtonUnit
 
     private void ButtonClickActionNewGame()
     {
-        menu.StartDialog(DialogType.NewGame);
+        menu.controller.SetMenu(Menu.WorldList);
     }
 
     private void ButtonClickActionLoadGame()

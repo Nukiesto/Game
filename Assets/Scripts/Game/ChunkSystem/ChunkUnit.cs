@@ -31,9 +31,9 @@ public class ChunkUnit : MonoBehaviour
     {
         InitMethods();
 
-        //BuildChunk();
+        BuildChunk();
 
-        BuildFillChunk();
+        //BuildFillChunk();
     }
 
     #region InitMethods
@@ -269,6 +269,13 @@ public class ChunkUnit : MonoBehaviour
     public BlockUnit GetBlockUnit(Vector2Int pos, BlockLayer layer)
     {       
         return controller.GetBlock(pos, layer);
+    }
+    public BlockUnit GetBlockUnit(Vector3 pos, BlockLayer layer)
+    {
+        Tilemap tilemap = GetTileMapOfLayer(layer);//Получение тайлмапа
+        Vector3Int blockPos = tilemap.WorldToCell(pos);//Получение расположения
+
+        return controller.GetBlock(new Vector2Int(blockPos.x, blockPos.y), layer);
     }
     #region HasBlock
     //Global

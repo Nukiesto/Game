@@ -8,7 +8,8 @@ public class WorldMenuButton : ButtonUnit
         NewGame,
         LoadGame,
         Settings,
-        Exit
+        Exit,
+        BackToMainMenu
     }
 
     public Button buttonType;
@@ -22,20 +23,8 @@ public class WorldMenuButton : ButtonUnit
     {
         switch (buttonType)
         {
-            case Button.NewGame:
-                ButtonClickAction = ButtonClickActionNewGame;
-                break;
-
-            case Button.LoadGame:
-                ButtonClickAction = ButtonClickActionLoadGame;
-                break;
-
-            case Button.Settings:
-                ButtonClickAction = ButtonClickActionSettings;
-                break;
-
-            case Button.Exit:
-                ButtonClickAction = ButtonClickActionExit;
+            case Button.BackToMainMenu:
+                ButtonClickAction = ButtonClickActionBackToMainMenu;
                 break;
 
             default:
@@ -44,25 +33,9 @@ public class WorldMenuButton : ButtonUnit
         }
     }
 
-    private void ButtonClickActionNewGame()
+    private void ButtonClickActionBackToMainMenu()
     {
-        menu.StartDialog(DialogType.NewGame);
-    }
-
-    private void ButtonClickActionLoadGame()
-    {
-        menu.StartDialog(DialogType.LoadGame);
-    }
-
-    private void ButtonClickActionSettings()
-    {
-        menu.controller.SetMenu(Menu.Settings);
-    }
-
-    private void ButtonClickActionExit()
-    {
-        Debug.Log("YES QUIT!");
-        Application.Quit();
+        menu.controller.SetMenu(Menu.Main);
     }
 
     public void ButtonClick()

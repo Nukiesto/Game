@@ -13,6 +13,7 @@ public class TestScript : MonoBehaviour {
 
 	void Start()
 	{
+
 	}
 
 	public void AddNew()

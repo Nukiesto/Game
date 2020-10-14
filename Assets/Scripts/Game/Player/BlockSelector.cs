@@ -1,4 +1,5 @@
 ﻿using LeopotamGroup.Math;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,7 +16,24 @@ public class BlockSelector : MonoBehaviour
 
     [SerializeField] private EventSystem sys;// = GameObject.Find("EventSystem").GetComponent<EventSystem>();
     [SerializeField] private Inventory inventory;
-    private string[] layers;
+
+    //Destroying Block
+    [Header("Уничтожение блока")]
+    [SerializeField] private Sprite[] destroyingStadies;
+    [SerializeField] private SpriteRenderer destroyingProcess;
+
+    private bool isDeleting;
+    private Vector3 posBlockDelete;
+    private float currentTime;
+    private float blockToDeleteTime;
+    private float procent;
+    private ChunkUnit chunkUnitClick;
+    [SerializeField] private float powerDig;
+
+    private float asd;
+
+    private List<string> layers;
+
     //public void OnTriggerStay2D(Collider2D collision)
     //{
     //    canPlaceBlock = false;
@@ -26,24 +44,74 @@ public class BlockSelector : MonoBehaviour
     //}
     private void Start()
     {
-        layers = new string[2];
-        layers[0] = "Entity";
-        layers[1] = "Item";
+        layers = new List<string>();
+        layers.Add("Entity");
+        layers.Add("Item");
     }
-    void Update()
+    private void Update()
     {
-        onWorldPos = GetPoint();
-        AlignPositionGrid(onWorldPos);
-
+        if (!isDeleting)
+        {
+            onWorldPos = GetPoint();
+            AlignPositionGrid(onWorldPos);
+        }
+        else
+        {
+            DeletingUpdate();
+            if (!InBounds(onWorldPos) || Input.GetMouseButtonUp(0))
+            {
+                DeletingReset();
+                //Debug.Log("Deleting Abort");
+            }
+        }
         ClickBlock();
     }
-    
-    private void ClickDeleteBlock()
+
+    #region Deleting Time
+    private void DeletingUpdate()
     {
-        ChunkUnit chunk = chunkManager.GetChunk(onWorldPos);
-        //Debug.Log(chunk);
-        chunk?.DeleteBlock(onWorldPos);
+        currentTime += Time.deltaTime;
+
+        SetSprite();
+        if (currentTime > blockToDeleteTime)
+        {
+            DeletingBlock();
+        }
     }
+    private void SetSprite()
+    {
+        procent = currentTime / blockToDeleteTime * 100;
+        //Debug.Log(procent);
+        float m = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            m += 10f;//12.5f;
+            if (procent <= m)
+            {
+                destroyingProcess.sprite = destroyingStadies[i];
+                return;
+            }        
+        }
+    }
+    private void DeletingReset()
+    {
+        currentTime = 0;
+        blockToDeleteTime = 0;
+        
+        isDeleting = false;
+        procent = 0;
+
+        destroyingProcess.sprite = destroyingStadies[0];
+        destroyingProcess.enabled = false;
+    }
+    private void DeletingBlock()
+    {
+        chunkUnitClick.DeleteBlock(posBlockDelete);    
+        DeletingReset();
+    }
+    #endregion
+
+
     private void ClickPlaceBlock()
     {
         ItemUnit item = inventory.GetSelectedItem();
@@ -85,6 +153,7 @@ public class BlockSelector : MonoBehaviour
                     string layer = LayerMask.LayerToName(hits[i][z].collider.gameObject.layer);
                     //Debug.Log(layer);
                     //Debug.Log(layer);
+                    //return layers.Contains(layer);
                     for (int j = 0; j < 2; j++)
                     {
                         //Debug.Log(layer + "; " + layers[j]);
@@ -101,15 +170,42 @@ public class BlockSelector : MonoBehaviour
     }
     private void ClickBlock()
     {
-        if (sys.IsPointerOverGameObject())
+        if (sys.IsPointerOverGameObject())//Если на UI
         {
             return;
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            ClickDeleteBlock();
-            return;
+        if (Input.GetMouseButton(0))
+        {           
+            if (!isDeleting)
+            {
+                chunkUnitClick = chunkManager.GetChunk(onWorldPos);
+
+                posBlockDelete = onWorldPos;
+
+                float hp = chunkUnitClick?.
+                                    GetBlockUnit(onWorldPos, BlockLayer.front)?
+                                    .data.hp ?? 0;
+                
+                if (hp != 0)
+                {
+                    if (hp < 0)
+                    {
+                        DeletingBlock();
+                    }
+                    else
+                    {
+                        blockToDeleteTime = hp / powerDig;
+                        destroyingProcess.enabled = true;
+                        isDeleting = true;
+                        //Debug.Log("StartDeleting");
+                    }                   
+                }                                              
+            }
         }
+           
+                             
+        
+        
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -144,7 +240,19 @@ public class BlockSelector : MonoBehaviour
 
         transform.position = pos;
     }
+    private bool InBounds(Vector3 pos)
+    {       
+        pos.x = MathFast.Floor(pos.x);
+        pos.y = MathFast.Floor(pos.y);
 
+        Vector3 pos_ = transform.position;
+
+        pos_.x = MathFast.Floor(pos_.x);
+        pos_.y = MathFast.Floor(pos_.y);
+
+
+        return pos_.x == pos.x && pos_.y == pos.y;
+    }
     private Vector3 GetPoint()
     {
         Vector3 pos = cameraMain.ScreenToWorldPoint(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);

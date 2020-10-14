@@ -17,7 +17,8 @@ public class ItemList : MonoBehaviour {
 	private List<RectTransform> buttons;
 	private int size;
 	private float curY, vPos;
-
+	
+	public 
 	void Awake()
 	{
 		buttons = new List<RectTransform>();
