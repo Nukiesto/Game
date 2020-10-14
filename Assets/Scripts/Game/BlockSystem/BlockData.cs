@@ -29,26 +29,28 @@ public class BlockData : ScriptableObject
     [HideInInspector] public Data Item { get; private set; }
 
     private void OnEnable()
-    {
+    { 
         InitItem();
     }
     public void OnValidate()
     {
         InitItem();
-        Debug.Log(nameTranslations);
-        Debug.Log(descriptionTranslations);
+        //Debug.Log(nameTranslations);
+        //Debug.Log(descriptionTranslations);
     }
     public void InitItem()
-    {        
-        Item = new Data()
-        {
-            type = ItemType.block,
-            sprite = tile.sprite,
-            description = descriptionTranslations,
-            name = nameTranslations,
-            block = this,
-            maxCount = 64
-        };
-        Debug.Log(tile.sprite);
+    {
+        //Debug.Log(Item);
+        if (Item == null)
+            Item = new Data();
+
+        Item.type = ItemType.block;
+        Item.sprite = tile?.sprite;
+        Item.description = descriptionTranslations;
+        Item.name = nameTranslations;
+        Item.block = this;
+        Item.maxCount = 64;
+        
+        //Debug.Log(tile.sprite);
     }
 }
