@@ -145,9 +145,9 @@ public class ChunkManager : MonoBehaviour
             height = generator.worldHeightInChunks
         };
         //Debug.Log(worldSaving);
-        if (!worldSaving.CreateWorld(world))
+        if (!worldSaving.LoadWorldName(name))
         {
-            worldSaving.LoadWorldName(name);
+            worldSaving.CreateWorld(world);
         }
     }
     public void ClickSaveWorld()

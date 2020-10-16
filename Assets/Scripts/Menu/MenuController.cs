@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum Menu
 {
@@ -8,11 +7,7 @@ public enum Menu
     Settings,
     WorldList
 }
-public enum CurrentScene
-{
-    Game,
-    MainMenu
-}
+
 public enum ButtonDialog
 {
     Yes,
@@ -25,62 +20,57 @@ public class MenuController : MonoBehaviour
     //Основные параметры
     private bool allowDisableMenu;
 
+    [Header("Меню")]
     [SerializeField] private MenuUnit[] menu;
 
-    [SerializeField] private CurrentScene currentScene;
+    [Header("Параметры")]
+    [SerializeField] private GameScene menuType;
 
-    [Header("Меню")]
     private MenuUnit currentMenu;
     private MenuUnit previousMenu;
     private MenuUnit startMenu;
 
+    private GameSceneManager gameSceneManager;
+    
     public void SetMainMenu()
     {
         allowDisableMenu = false;
 
-        SceneManager.LoadScene("MainMenu");
+        gameSceneManager.SetScene(GameScene.MainMenu);
 
         SetMenu(Menu.Main);
         startMenu = currentMenu;
         SetActiveCurrentMenu(true);
 
-        if (currentScene == CurrentScene.Game)
-        {
-            SceneManager.UnloadSceneAsync("Game");
-        }       
-
-        currentScene = CurrentScene.MainMenu;      
+        gameSceneManager.SetSceneCurrent();
     }
     public void SetGame()
     {
         allowDisableMenu = true;        
 
-        SceneManager.LoadSceneAsync("Game");
-
-        if (currentScene == CurrentScene.MainMenu)
+        gameSceneManager.SetScene(GameScene.Game);
+        if (gameSceneManager.CurrentScene == GameScene.MainMenu)
         {
             CloseCurrentDialog();
-            SceneManager.UnloadSceneAsync("MainMenu");
+            gameSceneManager.SetSceneCurrent();
         }
 
         SetMenu(Menu.Pause);
         startMenu = currentMenu;
 
-        SetActiveCurrentMenu(false);      
-
-        currentScene = CurrentScene.Game;        
+        SetActiveCurrentMenu(false);           
     }
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
-        switch (currentScene)
+        //DontDestroyOnLoad(gameObject);
+        gameSceneManager = Toolbox.instance.GetGameSceneManager();
+        switch (menuType)
         {
-            case CurrentScene.Game:
+            case GameScene.Game:
                 SetGame();
                 break;
-            case CurrentScene.MainMenu:
+            case GameScene.MainMenu:
                 SetMainMenu();
                 break;
             default:

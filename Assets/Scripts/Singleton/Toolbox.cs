@@ -14,19 +14,19 @@ public class Toolbox : MonoGlobalSingleton<Toolbox>
 
     private void Awake()
     {
-        // Put initialization code here.
+        m_gameSceneManager = gameObject.AddComponent<GameSceneManager>();
     }
 
 
     // Define all required global components here. These are hard-codded components
     // that will always be added. Unlike the optional components added at runtime.
 
-    //private PlayerData m_PlayerData = new PlayerData();
+    private GameSceneManager m_gameSceneManager;
 
-    //public PlayerData GetPlayerData()
-    //{
-    //    return m_PlayerData;
-    //}
+    public GameSceneManager GetGameSceneManager()
+    {
+        return m_gameSceneManager;
+    }
 
     // The methods below allow us to add global components at runtime.
     // TODO: Convert from string IDs to component types.

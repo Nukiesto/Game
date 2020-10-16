@@ -178,7 +178,7 @@ namespace SavingSystem
                 }
             }
 
-            public void LoadWorldName(string name)
+            public bool LoadWorldName(string name)
             {
                 if (worldList.WorldIsExists(name))
                 {
@@ -205,10 +205,11 @@ namespace SavingSystem
                     if (!LoadInfo())
                     {
                         SaveInfo();//Сохранение инфо и мире
-                    }
-
+                    }                   
                     LoadWorld();
+                    return true;
                 }
+                return false;
             }
             public void SaveInfo()
             {             

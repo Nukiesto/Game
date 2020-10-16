@@ -14,7 +14,7 @@ public abstract class MonoGlobalSingleton<T> : MonoBehaviour where T : MonoGloba
 
                 if (_instance == null)
                 {
-                    Debug.LogWarning("No instance of " + typeof(T).ToString() + ", a temporary one is created.");
+                    //Debug.LogWarning("No instance of " + typeof(T).ToString() + ", a temporary one is created.");
 
                     GameObject go = new GameObject(typeof(T).ToString(), typeof(T));
                     DontDestroyOnLoad(go);
