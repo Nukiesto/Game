@@ -28,6 +28,8 @@ namespace Krivodeling.UI.Effects.Examples
         private void OnBlurChanged(float value)
         {
             canvasGroup.alpha = value;
+            if (value == 0)
+                canvasGroup.alpha = 0.01f;
         }
         #endregion
     }
