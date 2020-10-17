@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum Menu
 {
@@ -17,102 +18,71 @@ public enum ButtonDialog
 
 public class MenuController : MonoBehaviour
 {
-    //Основные параметры
-    private bool allowDisableMenu;
-
     [Header("Меню")]
     [SerializeField] private MenuUnit[] menu;
+    [SerializeField] private MenuUnit startMenu;
 
     [Header("Параметры")]
-    [SerializeField] private GameScene menuType;
+    [SerializeField] private GameScene sceneType;
+
+    [SerializeField] private bool allowToggleMenu;
+    [SerializeField] private bool setMenuActiveOnStart;
 
     private MenuUnit currentMenu;
     private MenuUnit previousMenu;
-    private MenuUnit startMenu;
 
     private GameSceneManager gameSceneManager;
-    
+
+    [SerializeField] private PauseMenuToggleController pauseMenuToggle;
     public void SetMainMenu()
     {
-        allowDisableMenu = false;
-
         gameSceneManager.SetScene(GameScene.MainMenu);
-
-        SetMenu(Menu.Main);
-        startMenu = currentMenu;
-        SetActiveCurrentMenu(true);
-
-        gameSceneManager.SetSceneCurrent();
     }
     public void SetGame()
     {
-        allowDisableMenu = true;        
-
-        gameSceneManager.SetScene(GameScene.Game);
-        if (gameSceneManager.CurrentScene == GameScene.MainMenu)
-        {
-            CloseCurrentDialog();
-            gameSceneManager.SetSceneCurrent();
-        }
-
-        SetMenu(Menu.Pause);
-        startMenu = currentMenu;
-
-        SetActiveCurrentMenu(false);           
+        gameSceneManager.SetScene(GameScene.Game);        
     }
 
     private void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
         gameSceneManager = Toolbox.instance.GetGameSceneManager();
-        switch (menuType)
-        {
-            case GameScene.Game:
-                SetGame();
-                break;
-            case GameScene.MainMenu:
-                SetMainMenu();
-                break;
-            default:
-                SetMainMenu();
-                break;
-        }
+        Debug.Log(gameSceneManager);
+
+        SetMenu(startMenu.menuType);
+
+        SetActiveCurrentMenu(setMenuActiveOnStart);            
     }
 
     private void Update()
     {
+        CheckExitKey();
+    }
+    private void CheckExitKey()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (currentMenu != null && currentMenu.DialogIsOpen())//Если открыт диалог
+            //Закрываем открытый диалог
+            if (currentMenu != null && currentMenu.DialogIsOpen())
             {
-                CloseCurrentDialog();//Закрываем его
+                CloseCurrentDialog();
+                //Debug.Log("1");
+                return;
             }
-            else
+            //Перемещаемся назад
+            if (currentMenu != startMenu && TrySetPreviosMenu())
             {
-                if (currentMenu != startMenu)//Если текущее меню не явлеется начальным
-                {
-                    TrySetPreviosMenu();//Пытаемся переместиться на предыдущее меню
-                }
-                else//Иначе установить его :\
-                {
-                    if (startMenu == null)
-                    {
-                        Debug.LogWarning("StartMenu null");
-                        //SetMenu();
-                        //startMenu = currentMenu;
-                    }
-                    else
-                    {
-                        if (allowDisableMenu)
-                        {
-                            currentMenu.SetActiveMenu(!currentMenu.ActiveMenu());
-                        }
-                    }
-                }
+                Debug.Log("2");
+                return;                                       
             }
+            //Открываем или закрываем меню
+            if (allowToggleMenu)
+            {
+                bool val = !currentMenu.ActiveMenu();
+                currentMenu.SetActiveMenu(val);
+                pauseMenuToggle?.TogglePauseMenu(val);
+            }                          
         }
     }
-
     public void SetMenu(Menu menu)
     {
         SetActiveCurrentMenu(false);

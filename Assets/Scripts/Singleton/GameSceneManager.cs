@@ -12,8 +12,10 @@ public enum GameScene
 
 public class GameSceneManager : MonoBehaviour
 {
-    private Dictionary<GameScene, string> gameScenes;
-    public GameScene CurrentScene { get; private set; }
+    [SerializeField] private Dictionary<GameScene, string> gameScenes;
+
+    [SerializeField] private GameScene _currentScene;
+    public GameScene CurrentScene { get => _currentScene; private set => _currentScene = value; }
 
     private void Awake()
     {
