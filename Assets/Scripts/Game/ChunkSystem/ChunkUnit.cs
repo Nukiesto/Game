@@ -115,7 +115,6 @@ public class ChunkUnit : MonoBehaviour
 
         //int height_surface = 0;//высота от начала чанка до поверхности земли
 
-
         //Generating Enviroment
         for (int i = 0; i < chunkSize; i++)
         {
@@ -142,16 +141,19 @@ public class ChunkUnit : MonoBehaviour
             surface_level = worldHeight - Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
         }
         //Clearing
-        for (int i = 1; i < chunkSize - 1; i += 1)
+        for (int i = 1; i < chunkSize - 1; i++)
         {
-            for (int j = 1; j < chunkSize - 1; j += 1)
+            for (int j = 1; j < chunkSize - 1; j++)
             {
-                if (chunkFront[i, j] == dirt)
+                //Debug.Log(chunkFront[i, j]);
+                if (chunkFront[i, j] != null)
                 {
+                    //Debug.Log("BlockHas");
                     if ((chunkFront[i - 1, j] == null)
                     && (chunkFront[i + 1, j] == null)
                     && (chunkFront[i, j - 1] == null))
                     {
+                        //Debug.Log("BlockCleared");
                         chunkFront[i, j] = null;
                     }
                 }

@@ -1,8 +1,10 @@
-﻿using static PauseDialog;
+﻿using UnityEngine;
+using static PauseDialog;
 
 public class PauseMenu : MenuUnit
 {
     public string sceneMainMenu;
+    [SerializeField] internal PauseMenuToggleController pauseMenuToggle;
 
     public void StartDialogLocal(DialogType type)
     {

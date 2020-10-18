@@ -121,7 +121,7 @@ public class BlockSelector : MonoBehaviour
             {
                 ChunkUnit chunk = chunkManager.GetChunk(onWorldPos);
 
-                if (chunk.SetBlock(onWorldPos, item.data.block, true))
+                if (chunk?.SetBlock(onWorldPos, item.data.block, true) ?? false)
                 {
                     item.RemoveItem();
                 }               

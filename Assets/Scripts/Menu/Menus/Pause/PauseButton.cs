@@ -41,6 +41,8 @@ public class PauseButton : ButtonUnit
     private void ButtonClickActionContinue()
     {
         menu.controller.SetActiveCurrentMenu(false);
+        PauseMenu menu_ = (PauseMenu)menu;
+        menu_.pauseMenuToggle.TogglePauseMenu(false);
     }
 
     private void ButtonClickActionSettings()
