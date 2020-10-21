@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,200 +13,80 @@ public class ChunkUnit : MonoBehaviour
 {
     //Tilemaps
     [Header("Tilemaps")]
-    [SerializeField] private Tilemap tilemap_BackWorld;
-    [SerializeField] private Tilemap tilemap_FrontWorld;
+    [SerializeField] internal Tilemap tilemap_BackWorld;
+    [SerializeField] internal Tilemap tilemap_FrontWorld;
 
-    private Dictionary<BlockLayer, Tilemap> dic_tile;
+    internal Dictionary<BlockLayer, Tilemap> dic_tile;
+
     //Components
     private ChunkBlockController controller;
 
     //Other
     private static readonly int chunkSize = GameConstants.chunkSize;
     [HideInInspector] public ChunkManager chunkManager;
+    private ChunkBuilder chunkBuilder;
 
     //Position Cash
     private Vector3 posObj;
-    private Vector3Int posObjGlobal;
 
+    private void Awake()
+    {
+        Init();   
+    }
     private void Start()
     {
-        InitMethods();
-
-        BuildChunk();
-
-        //BuildFillChunk();
+        Init();
+        chunkBuilder = new ChunkBuilder(this, chunkManager);
+        chunkBuilder.Build();
+        StartCoroutine(ToBuildGrass());
     }
-
-    #region InitMethods
-    private void InitMethods()
+    IEnumerator ToBuildGrass()
     {
-        InitComponents();
-        InitTilemaps();
-        InitPosition();
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            chunkBuilder.BuildingGrass();
+        }
     }
-    private void InitComponents()
+    private void Init()
     {
+        //Controller
         controller = GetComponent<ChunkBlockController>();
         controller.chunk = this;
-
-    }
-    private void InitTilemaps()
-    {
+        //TileMapDic
         dic_tile = new Dictionary<BlockLayer, Tilemap>
         {
             { BlockLayer.front, tilemap_FrontWorld },
             { BlockLayer.back, tilemap_BackWorld }
         };
-    }
-    private void InitPosition()
-    {
+        //Pos
         posObj = transform.position;
-        posObjGlobal = new Vector3Int(Mathf.FloorToInt(posObj.x), Mathf.FloorToInt(posObj.y), 0);
-    }
-    #endregion
-
-    private void BuildFillChunk()
-    {
-        WorldGenerator generator = chunkManager.generator;
-
-        BlockData dirt = generator.dirt;
-
-        //Building
-        for (int i = 0; i < chunkSize; i++)
-        {
-            for (int j = 0; j < chunkSize; j++)
-            {
-                Vector3Int pos = Vector3Int.zero;
-
-                pos.x = i;
-                pos.y = j;
-                //Debug.Log(tilemap_BackWorld);
-                SetBlock(pos, dirt, true, tilemap_BackWorld, BlockLayer.back);
-
-                SetBlock(pos, dirt, true, tilemap_FrontWorld);
-                
-                //Debug.Log("BlockBack: " + i + "; " + j + "; " + controller.GetBlock(new Vector2Int(i, j), BlockLayer.back));
-                //Debug.Log("BlockFront: " + i + "; " + j + "; " + controller.GetBlock(new Vector2Int(i, j), BlockLayer.front));
-            }
-        }
-    }
-    private void BuildChunk()
-    {
-        Vector3Int pos = Vector3Int.zero;
-        Vector2Int posGlobal = Vector2Int.zero;
-
-        WorldGenerator generator = chunkManager.generator;
-
-        BlockData dirt = generator.dirt;
-        BlockData sand = generator.sand;
-        BlockData stone = generator.stone;
-        BlockData[] ores = generator.ores;
-
-        int terrainDestruct = 2;
-
-        BlockData[,] chunkFront = new BlockData[chunkSize, chunkSize];
-        BlockData[,] chunkBack = new BlockData[chunkSize, chunkSize];
-
-        int worldHeight = generator.worldHeight;
-
-        Vector2Int chunkCoord = chunkManager.ChunkPosInWorld(this);
-        int chunk_level = chunkCoord.y * chunkSize;//Высота от начала мира до начала чанка
-
-        int surface_level = worldHeight - Random.Range(12, 18);//Высота от начала мира до поверхности земли
-
-        //int height_surface = 0;//высота от начала чанка до поверхности земли
-
-        //Generating Enviroment
-        for (int i = 0; i < chunkSize; i++)
-        {
-            for (int j = 0; j < chunkSize; j++)
-            {
-                int height_dirt = Random.Range(4 - 1, 8 + 1);//Толщина земляного покрова
-
-                //height_surface = 0;
-                //Debug.Log("i: " + i + " ;j: " + j);
-
-                if (chunk_level + j < surface_level)
-                {
-                    chunkFront[i, j] = stone;
-                }
-                else
-                {
-                    if (chunk_level + j < surface_level + height_dirt)
-                    {
-                        chunkFront[i, j] = dirt;
-                    }
-                }
-            }
-            //height_surface = 0;
-            surface_level = worldHeight - Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
-        }
-        //Clearing
-        for (int i = 1; i < chunkSize - 1; i++)
-        {
-            for (int j = 1; j < chunkSize - 1; j++)
-            {
-                //Debug.Log(chunkFront[i, j]);
-                if (chunkFront[i, j] != null)
-                {
-                    //Debug.Log("BlockHas");
-                    if ((chunkFront[i - 1, j] == null)
-                    && (chunkFront[i + 1, j] == null)
-                    && (chunkFront[i, j - 1] == null))
-                    {
-                        //Debug.Log("BlockCleared");
-                        chunkFront[i, j] = null;
-                    }
-                }
-            }
-        }
-        chunkBack = chunkFront;
-
-        //Building
-        for (int i = 0; i < chunkSize; i++)
-        {
-            for (int j = 0; j < chunkSize; j++)
-            {
-                pos.x = i;
-                pos.y = j;
-
-                //posGlobal.x = posObjGlobal.x + i;
-                //posGlobal.y = posObjGlobal.y + j;
-
-                //chunkFront[i, j] = dirt;
-                //chunkBack[i, j]  = dirt;
-
-                SetBlock(pos, chunkBack[i, j], true, tilemap_BackWorld, BlockLayer.back);
-
-                SetBlock(pos, chunkFront[i, j], true, tilemap_FrontWorld);
-            }
-        }
+        //posObjGlobal = new Vector3Int(Mathf.FloorToInt(posObj.x), Mathf.FloorToInt(posObj.y), 0);
     }
 
     #region SetBlock
     //Local
     public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap, BlockLayer layer = BlockLayer.front)
     {
-        bool hasBlock = checkCollisions && HasBlock(pos, tilemap);//controller.GetBlock(new Vector2Int(pos.x, pos.y)) != null;
-
+        bool hasBlock = checkCollisions && HasBlock(pos, tilemap);
         if (InBounds(pos) && !hasBlock)
         {
             if (data != null)
             {
                 tilemap.SetTile(pos, data.tile);
-                controller.AddUnit(data, pos, layer);
-                //Debug.Log("True Placed; InBounds:" + InBounds(pos) + " ;Collisions: " + hasBlock);
-                return true;
+                controller.AddUnit(data, pos, layer);               
+                return true;               
             }
         }
         return false;
     }
+
     //Global
     public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.front)
     {
         Tilemap tilemap = GetTileMapOfLayer(layer);
         return SetBlock(pos, data, checkCollisions, tilemap, layer);
-    }   
+    }
 
     public bool SetBlock(Vector3 pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.front)
     {
@@ -236,6 +117,7 @@ public class ChunkUnit : MonoBehaviour
                         x = posObj.x + Mathf.Floor(pos.x) + 0.5f,
                         y = posObj.y + Mathf.Floor(pos.y) + 0.5f
                     };
+                    //Debug.Log("ItemCreated: " + posCreateItem);
                     ItemManager.CreateItem(posCreateItem, blockUnit.GetItem());
                 }
             }            
@@ -256,7 +138,6 @@ public class ChunkUnit : MonoBehaviour
     {
         return dic_tile[layer];
     }
-
     private bool InBounds(Vector3Int pos)
     {
         //Debug.Log("pos.x: " + pos.x + " ;pos.y: " + pos.y + "chunkSize: " + chunkSize);
@@ -268,9 +149,10 @@ public class ChunkUnit : MonoBehaviour
         tilemap_BackWorld.ClearAllTiles();
         tilemap_FrontWorld.ClearAllTiles();
     }
+    #region GetBlockUnit
     public BlockUnit GetBlockUnit(Vector2Int pos, BlockLayer layer)
-    {       
-        return controller.GetBlock(pos, layer);
+    {
+        return controller?.GetBlock(pos, layer);
     }
     public BlockUnit GetBlockUnit(Vector3 pos, BlockLayer layer)
     {
@@ -278,7 +160,8 @@ public class ChunkUnit : MonoBehaviour
         Vector3Int blockPos = tilemap.WorldToCell(pos);//Получение расположения
 
         return controller.GetBlock(new Vector2Int(blockPos.x, blockPos.y), layer);
-    }
+    } 
+    #endregion
     #region HasBlock
     //Global
     public bool HasBlock(Vector3 pos, BlockLayer layer = BlockLayer.front)
@@ -289,7 +172,7 @@ public class ChunkUnit : MonoBehaviour
     //Local 
     public bool HasBlock(Vector3Int pos, Tilemap tilemap)
     {
-        return (tilemap.HasTile(pos));
+        return tilemap.HasTile(pos);
     }
     public bool HasBlock(Vector3Int pos, BlockLayer layer = BlockLayer.front)
     {
@@ -321,4 +204,184 @@ public class ChunkUnit : MonoBehaviour
     }
 #endif
     #endregion 
+
+    internal class ChunkBuilder 
+    {
+        private ChunkManager chunkManager;
+        private ChunkUnit chunkUnit;
+        private WorldGenerator generator;
+
+        private ChunkUnit chunkUpper;
+        private Vector2Int chunkPos;
+        private BlockData[,] chunkFront = new BlockData[chunkSize, chunkSize];
+        private BlockData[,] chunkBack = new BlockData[chunkSize, chunkSize];
+
+        private int worldHeight;
+        private int chunk_level;//Высота от начала мира до начала чанка
+
+        public ChunkBuilder(ChunkUnit chunkUnit, ChunkManager chunkManager)
+        {
+            this.chunkUnit = chunkUnit;
+            this.chunkManager = chunkManager;
+            Init();
+        }
+        private void Init()
+        {
+            generator = chunkManager.generator;
+            worldHeight = generator.worldHeight;
+            chunk_level = chunkPos.y * chunkSize;//Высота от начала мира до начала чанка
+
+            Vector2Int chunkCoord = chunkManager.ChunkPosInWorld(chunkUnit);
+            chunkUpper = chunkManager.GetUpperChunk(chunkCoord);
+
+            chunkPos = chunkManager.ChunkPosInWorld(chunkUnit);
+        }
+        public void GenerateChunk()
+        {          
+            BlockData dirt = generator.dirt;
+            BlockData sand = generator.sand;
+            BlockData stone = generator.stone;
+            BlockData[] ores = generator.ores;
+
+            int terrainDestruct = 2;
+            int surface_level;//Высота от вершины мира до поверхности земли
+            
+            //Generating Enviroment
+            for (int i = 0; i < chunkSize; i++)
+            {
+                surface_level = worldHeight - Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
+                //Debug.Log(surface_level);
+                for (int j = 0; j < chunkSize; j++)
+                {
+                    int height_dirt = Random.Range(3, 9);//Толщина земляного покрова
+
+                    if (chunk_level + j < surface_level)
+                    {
+                        chunkFront[i, j] = stone;
+                    }
+                    else
+                    {
+                        if (chunk_level + j < surface_level + height_dirt)
+                        {
+                            chunkFront[i, j] = dirt;
+                        }
+                    }
+                }
+            }
+            //Clearing
+            for (int i = 1; i < chunkSize - 1; i++)
+            {
+                for (int j = 1; j < chunkSize - 1; j++)
+                {
+                    //Debug.Log(chunkFront[i, j]);
+                    if (chunkFront[i, j] != null)
+                    {
+                        //Debug.Log("BlockHas");
+                        if ((chunkFront[i - 1, j] == null)
+                        && (chunkFront[i + 1, j] == null)
+                        && (chunkFront[i, j - 1] == null))
+                        {
+                            //Debug.Log("BlockCleared");
+                            chunkFront[i, j] = null;
+                        }
+                    }
+                }
+            }
+            chunkBack = chunkFront;                      
+        }
+        private void Rebuild(BlockData[,] chunkFront, BlockData[,] chunkBack)
+        {
+            this.chunkFront = chunkFront;
+            this.chunkBack = chunkBack;
+            Building();
+        }
+        public void Build()
+        {
+            GenerateChunk();
+            Building();
+        }
+        private void Building()
+        {
+            Vector3Int pos = Vector3Int.zero;
+            for (int i = 0; i < chunkSize; i++)
+            {
+                for (int j = 0; j < chunkSize; j++)
+                {
+                    pos.x = i;
+                    pos.y = j;
+                    chunkUnit.SetBlock(pos, chunkFront[i, j], true, chunkUnit.tilemap_FrontWorld);
+                    
+                    chunkUnit.SetBlock(pos, chunkBack[i, j], true, chunkUnit.tilemap_BackWorld, BlockLayer.back);
+                }
+            }
+        }
+        public void BuildFillChunk()
+        {
+            WorldGenerator generator = chunkManager.generator;
+
+            BlockData dirt = generator.dirt;
+
+            Vector3Int pos = Vector3Int.zero;
+            //Building
+            for (int i = 0; i < chunkSize; i++)
+            {
+                for (int j = 0; j < chunkSize; j++)
+                {                    
+                    pos.x = i;
+                    pos.y = j;
+
+                    chunkUnit.SetBlock(pos, dirt, true, chunkUnit.tilemap_BackWorld, BlockLayer.back);
+
+                    chunkUnit.SetBlock(pos, dirt, true, chunkUnit.tilemap_FrontWorld);
+                }
+            }
+        }
+        public void BuildingGrass()
+        {
+            if (chunk_level > worldHeight - 30)//Если уровень чанка идет по уровню земли
+            {
+                Vector3Int pos = Vector3Int.zero;
+                for (int i = 0; i < chunkSize; i++)
+                {
+                    for (int j = 0; j < chunkSize; j++)
+                    {
+                        pos.x = i;
+                        pos.y = j;
+
+                        SetGrass(pos);
+                    }
+                }
+            }            
+        }
+        private void SetGrass(Vector3Int pos)
+        {
+            int i = pos.x, j = pos.y;
+            if (chunkFront[i, j] == generator.dirt)
+            {
+                if (chunk_level + chunkSize == worldHeight && j == chunkSize)//Если блок под вершиной мира
+                {
+                    chunkUnit.tilemap_FrontWorld.SetTile(pos, chunkFront[i, j].tileVariables[0]);
+                    return;
+                }
+            }
+            if ((j + 1) <= chunkSize - 1)//Если над блоком пусто
+            {
+                if (chunkFront[i, j + 1] == null)
+                {
+                    chunkUnit.tilemap_FrontWorld.SetTile(pos, chunkFront[i, j].tileVariables[0]);
+                    return;
+                }
+            }
+            if (j == chunkSize - 1)//Если блок под низом другого чанка
+            {
+                //Debug.Log("Block: " + chunkUpper?.HasBlock(new Vector3Int(i, 0, 0), BlockLayer.front));
+                if (!chunkUpper.HasBlock(new Vector3Int(i, 0, 0), BlockLayer.front))
+                {
+                    chunkUnit.tilemap_FrontWorld.SetTile(pos, chunkFront[i, j].tileVariables[0]);
+                    return;
+                }
+            }              
+        }
+    }
 }
+

@@ -57,6 +57,7 @@ public class PauseButton : ButtonUnit
 
     private void MoveToMainMenu()
     {
+        Toolbox.instance.MFpscounter.enabled = false;
         menu.controller.SetMainMenu();
     }
 

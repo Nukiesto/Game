@@ -60,7 +60,7 @@ namespace SimpleLocalizator {
 				return instance._currentLang;
 			}
 			set {
-                Debug.Log("LanguageManager: language " + value);
+                //Debug.Log("LanguageManager: language " + value);
                 currentGlobalLang = value;
                 initLang = true;
                 instance._currentLang = value;
@@ -129,7 +129,7 @@ namespace SimpleLocalizator {
             }
             else {
                 currentLang = autoDetectLanguage ? GetSystemLanguage() : defaultLanguage;
-                Debug.Log("LanguageManager: initialized. Current language: " + currentLang);
+                //Debug.Log("LanguageManager: initialized. Current language: " + currentLang);
             }
 		}
 		#endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeopotamGroup.EditorHelpers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,20 +15,17 @@ public class Toolbox : MonoGlobalSingleton<Toolbox>
 
     private void Awake()
     {
-        m_gameSceneManager = gameObject.AddComponent<GameSceneManager>();
+        MGameSceneManager = gameObject.AddComponent<GameSceneManager>();
+        MFpscounter = gameObject.AddComponent<FpsCounter>();
+        MFpscounter.enabled = false;
     }
-
 
     // Define all required global components here. These are hard-codded components
     // that will always be added. Unlike the optional components added at runtime.
 
-    private GameSceneManager m_gameSceneManager;
-
-    public GameSceneManager GetGameSceneManager()
-    {
-        return m_gameSceneManager;
-    }
-
+    public MonoBehaviour MFpscounter { get; private set; }
+    public GameSceneManager MGameSceneManager { get; private set; }
+    
     // The methods below allow us to add global components at runtime.
     // TODO: Convert from string IDs to component types.
     public Component AddGlobalComponent(string componentID, Type component)
@@ -43,8 +41,6 @@ public class Toolbox : MonoGlobalSingleton<Toolbox>
         m_Components.Add(componentID, newComponent);
         return newComponent;
     }
-
-
     public void RemoveGlobalComponent(string componentID)
     {
         Component component;
@@ -60,8 +56,6 @@ public class Toolbox : MonoGlobalSingleton<Toolbox>
                 + componentID + "\"! Typo?");
         }
     }
-
-
     public Component GetGlobalComponent(string componentID)
     {
         Component component;

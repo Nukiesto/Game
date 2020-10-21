@@ -53,7 +53,7 @@ public abstract class MonoGlobalSingleton<T> : MonoBehaviour where T : MonoGloba
 
     void OnEnable()
     {
-        Debug.Log(typeof(T).ToString() + "::OnEnable()");
+        //Debug.Log(typeof(T).ToString() + "::OnEnable()");
 
         if (_instance == null)
         {
@@ -63,12 +63,12 @@ public abstract class MonoGlobalSingleton<T> : MonoBehaviour where T : MonoGloba
 
     void OnApplicationQuit()
     {
-        Debug.Log(typeof(T).ToString() + "::OnApplicationQuit()");
+        //Debug.Log(typeof(T).ToString() + "::OnApplicationQuit()");
     }
 
     void OnDestroy()
     {
-        Debug.Log(typeof(T).ToString() + "::OnDestroy()");
+        //Debug.Log(typeof(T).ToString() + "::OnDestroy()");
 
         if (_instance == this)
         {

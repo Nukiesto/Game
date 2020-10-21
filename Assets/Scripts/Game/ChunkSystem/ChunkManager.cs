@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 public class ChunkManager : MonoBehaviour
 {
     [SerializeField] private GameObject chunk;
-    //[SerializeField] private Toolbox toolbox;
     [SerializeField] private BlockDataBase dataBase;
+    [SerializeField] private PlayerController player;
+    [SerializeField] private Camera cameraMain;
 
     private ChunkUnit[,] chunks;
     private Vector3 posObj;
@@ -19,6 +20,7 @@ public class ChunkManager : MonoBehaviour
     private int chunkSize;
     public WorldGenerator generator;
     private WorldSavingSystem.WorldSaving worldSaving;
+
     private void Awake()
     {
         chunkSize = GameConstants.chunkSize;
@@ -32,6 +34,19 @@ public class ChunkManager : MonoBehaviour
 
         BuildChunks();
         CreateWorld();
+    }
+    private void Start()
+    {
+        MovePlayerToSpawnPoint();
+    }
+    public void MovePlayerToSpawnPoint()
+    {
+        Vector3 pos = Vector3.zero;
+        pos.x = posZero.x + generator.worldWidth / 2;
+        pos.y = posZero.y + generator.worldHeight - 4;
+        player.transform.position = pos;
+        pos.z = -10;
+        cameraMain.transform.position = pos;
     }
     private void RefreshPos()
     {
@@ -122,12 +137,6 @@ public class ChunkManager : MonoBehaviour
     }
     public void CreateWorld()
     {
-        // Добавьте и получите глобальный компонент.
-        //Toolbox.Instance.
-
-        // получение глобального компонента.
-        //var playerData = Toolbox.Instance.GetGlobalComponent("PlayerData");
-
         WorldSavingSystem.Init();
 
         if (WorldSavingSystem.worldsList == null)
@@ -217,6 +226,16 @@ public class ChunkManager : MonoBehaviour
                 }
             }
         }       
+    }
+
+    public ChunkUnit GetUpperChunk(Vector2Int pos)
+    {
+        //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
+        if ((pos.y + 1) <= generator.worldHeightInChunks - 1)//Если чанк не на вершине
+        {           
+            return chunks[pos.x, pos.y + 1];
+        }
+        return null;
     }
     #region Debugging
 #if UNITY_EDITOR

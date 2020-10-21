@@ -48,7 +48,6 @@ namespace LeopotamGroup.EditorHelpers
 
         protected override void OnCreateService()
         {
-            DontDestroyOnLoad(gameObject);
             useGUILayout = false;
             _style = new GUIStyle();
             _style.normal.textColor = Color.white;
@@ -74,7 +73,7 @@ namespace LeopotamGroup.EditorHelpers
             {
                 return;
             }
-            var fpsString = _stringCache.Get(CurrentFps);
+            var fpsString = "FPS: " + _stringCache.Get(CurrentFps);
 #if UNITY_EDITOR
             CalculateRect();
 #endif

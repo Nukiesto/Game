@@ -33,10 +33,8 @@ public class TakeThumbnail : MonoBehaviour
 			for (int i = 0; i < ignoreCanvas.Length; i++) ignoreCanvas[i].enabled = false;
 
 		yield return new WaitForEndOfFrame();
-
-		Texture2D result = null;
-		Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-		tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
 		tex.Apply();
 
 		if (ignoreCanvas != null)
@@ -45,30 +43,32 @@ public class TakeThumbnail : MonoBehaviour
 		int width = (int)(Screen.width * scale);
 		int height = (int)(Screen.height * scale);
 
-		if (scale < 1)
-		{
-			result = new Texture2D(width, height, tex.format, true);
-			Color[] pixels = result.GetPixels(0);
 
-			float x = ((float)1 / tex.width) * ((float)tex.width / width);
-			float y = ((float)1 / tex.height) * ((float)tex.height / height);
+        Texture2D result;
+        if (scale < 1)
+        {
+            result = new Texture2D(width, height, tex.format, true);
+            Color[] pixels = result.GetPixels(0);
 
-			for (int i = 0; i < pixels.Length; i++)
-			{
-				pixels[i] = tex.GetPixelBilinear(x * ((float)i % width), y * ((float)Mathf.Floor(i / width)));
-			}
+            float x = ((float)1 / tex.width) * ((float)tex.width / width);
+            float y = ((float)1 / tex.height) * ((float)tex.height / height);
 
-			result.SetPixels(pixels, 0);
-			result.Apply();
-		}
-		else
-		{
-			result = tex;
-		}
+            for (int i = 0; i < pixels.Length; i++)
+            {
+                pixels[i] = tex.GetPixelBilinear(x * ((float)i % width), y * ((float)Mathf.Floor(i / width)));
+            }
+
+            result.SetPixels(pixels, 0);
+            result.Apply();
+        }
+        else
+        {
+            result = tex;
+        }
 
 
 
-		byte[] bytes = result.EncodeToPNG();
+        byte[] bytes = result.EncodeToPNG();
 		File.WriteAllBytes(path, bytes);
 
 		Debug.Log(this + " --> Создано изображение (" + width + "x" + height + ") по адресу: " + path);

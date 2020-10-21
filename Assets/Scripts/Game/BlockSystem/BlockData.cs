@@ -22,6 +22,7 @@ public class BlockData : ScriptableObject
 
     [Header("Ресурсы")]
     public Tile tile;
+    public Tile[] tileVariables;
 
     [Header("Предмет")]
     public TranslateString nameTranslations;
@@ -35,12 +36,9 @@ public class BlockData : ScriptableObject
     public void OnValidate()
     {
         InitItem();
-        //Debug.Log(nameTranslations);
-        //Debug.Log(descriptionTranslations);
     }
     public void InitItem()
     {
-        //Debug.Log(Item);
         if (Item == null)
             Item = new Data();
 
@@ -50,7 +48,5 @@ public class BlockData : ScriptableObject
         Item.name = nameTranslations;
         Item.block = this;
         Item.maxCount = 64;
-        
-        //Debug.Log(tile.sprite);
     }
 }

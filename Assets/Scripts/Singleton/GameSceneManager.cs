@@ -27,7 +27,7 @@ public class GameSceneManager : MonoBehaviour
     }
     private void Init()
     {
-        Debug.Log("Initiatialized");    
+        //Debug.Log("Initiatialized");    
         gameScenes = new Dictionary<GameScene, string>
         {
             { GameScene.MainMenu, "MainMenu" },

@@ -13,7 +13,6 @@ public class PoolManagerLocal : MonoBehaviour
 		public int count;
 		public ObjectPooling ferula;
 	}
-
 	public void Initialize(PoolPart[] newPools)
 	{
 		pools = newPools;
@@ -28,8 +27,6 @@ public class PoolManagerLocal : MonoBehaviour
 			}
 		}
 	}
-
-
 	public GameObject GetObject(string name, Vector3 position, Quaternion rotation)
 	{
 		GameObject result = null;

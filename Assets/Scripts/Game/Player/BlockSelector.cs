@@ -1,5 +1,4 @@
 ﻿using LeopotamGroup.Math;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +13,7 @@ public class BlockSelector : MonoBehaviour
     [SerializeField] private BlockData blockToSet;
     [SerializeField, HideInInspector] private Vector3 onWorldPos;
 
-    [SerializeField] private EventSystem sys;// = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+    [SerializeField] private EventSystem sys;
     [SerializeField] private Inventory inventory;
 
     //Destroying Block
@@ -26,9 +25,9 @@ public class BlockSelector : MonoBehaviour
     private Vector3 posBlockDelete;
     private float currentTime;
     private float blockToDeleteTime;
-    private float procent;
-    private ChunkUnit chunkUnitClick;
-    [SerializeField] private float powerDig;
+    private float procent;//
+    private ChunkUnit chunkUnitClick;//Чанк на который нажали
+    [SerializeField] private float powerDig;//Мощность всапывания
 
     private float asd;
 
@@ -42,6 +41,25 @@ public class BlockSelector : MonoBehaviour
     //{
     //    canPlaceBlock = true;
     //}
+    //public void OnCollisionEnter2D(Collider2D collision)
+    //{
+    //    Debug.Log("Enter");
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Debug.Log("Cannot");
+    //        canPlaceBlock = false;
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    Debug.Log("Exit");
+    //    //    if (collision.gameObject.CompareTag("Player"))
+    //    //    {
+    //    //        Debug.Log("Can");
+    //    //        canPlaceBlock = true;
+    //    //    }
+    //}
+
     private void Start()
     {
         layers = new List<string>();
@@ -111,7 +129,6 @@ public class BlockSelector : MonoBehaviour
     }
     #endregion
 
-
     private void ClickPlaceBlock()
     {
         ItemUnit item = inventory.GetSelectedItem();
@@ -119,9 +136,7 @@ public class BlockSelector : MonoBehaviour
         {
             if (!CheckCollisions())
             {
-                ChunkUnit chunk = chunkManager.GetChunk(onWorldPos);
-
-                if (chunk?.SetBlock(onWorldPos, item.data.block, true) ?? false)
+                if (chunkManager.GetChunk(onWorldPos).SetBlock(onWorldPos, item.data.block, true))
                 {
                     item.RemoveItem();
                 }               
@@ -211,26 +226,7 @@ public class BlockSelector : MonoBehaviour
         {
             ClickPlaceBlock();
         }       
-    }
-    
-    //public void OnCollisionEnter2D(Collider2D collision)
-    //{
-    //    Debug.Log("Enter");
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.Log("Cannot");
-    //        canPlaceBlock = false;
-    //    }
-    //}
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    Debug.Log("Exit");
-    //    //    if (collision.gameObject.CompareTag("Player"))
-    //    //    {
-    //    //        Debug.Log("Can");
-    //    //        canPlaceBlock = true;
-    //    //    }
-    //}
+    }    
 
     private void AlignPositionGrid(Vector3 pos)
     {
@@ -249,7 +245,6 @@ public class BlockSelector : MonoBehaviour
 
         pos_.x = MathFast.Floor(pos_.x);
         pos_.y = MathFast.Floor(pos_.y);
-
 
         return pos_.x == pos.x && pos_.y == pos.y;
     }

@@ -1,5 +1,4 @@
-﻿using LeopotamGroup.EditorHelpers;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FunctionalKeys : MonoBehaviour
 {
@@ -9,9 +8,12 @@ public class FunctionalKeys : MonoBehaviour
     [Header("F1-Toggle UI")]
     private bool enableUI = true;
     [SerializeField] private Canvas[] canvases;
-    [SerializeField] private FpsCounter fpsCounter;
-    [SerializeField] private SpriteRenderer blockSelector;
+    [SerializeField] private SpriteRenderer[] spritesToToggle;
+    [SerializeField] private GameObject[] objectsToToggle;
 
+    [Header("F3-Toggle UI")]
+    private bool enableUIFunc = false;
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -20,10 +22,20 @@ public class FunctionalKeys : MonoBehaviour
             for (int i = 0; i < canvases.Length; i++)
             {
                 canvases[i].enabled = enableUI;
-
+            }            
+            for (int i = 0; i < spritesToToggle.Length; i++)
+            {
+                spritesToToggle[i].enabled = enableUI;
             }
-            fpsCounter.enabled = enableUI;
-            blockSelector.enabled = enableUI;
+            for (int i = 0; i < objectsToToggle.Length; i++)
+            {
+                objectsToToggle[i].SetActive(enableUI);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            enableUIFunc = !enableUIFunc;
+            Toolbox.instance.MFpscounter.enabled = enableUIFunc;
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {

@@ -45,8 +45,8 @@ public class MenuController : MonoBehaviour
 
     private void Awake()
     {
-        gameSceneManager = Toolbox.instance.GetGameSceneManager();
-        Debug.Log(gameSceneManager);
+        gameSceneManager = Toolbox.instance.MGameSceneManager;
+        //Debug.Log(gameSceneManager);
 
         SetMenu(startMenu.menuType);
 
