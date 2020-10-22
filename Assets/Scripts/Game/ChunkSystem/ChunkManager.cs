@@ -173,18 +173,18 @@ public class ChunkManager : MonoBehaviour
                 {
                     for (int y = 0; y < chunkSize; y++)
                     {
-                        BlockUnit blockUnitFront = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.front);
-                        BlockUnit blockUnitBack  = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.back);
+                        BlockUnit blockUnitFront = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Front);
+                        BlockUnit blockUnitBack  = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Back);
 
                         //Debug.Log("BlockUnitFront: " + blockUnitFront + ";BlockUnitBack: " + blockUnitBack);
                         if (blockUnitFront != null)
                         {
-                            chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.data.nameBlock, (int)BlockLayer.front));
+                            chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.data.nameBlock, (int)BlockLayer.Front));
                             
                         }
                         if (blockUnitBack != null)
                         {
-                            chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.data.nameBlock, (int)BlockLayer.back));
+                            chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.data.nameBlock, (int)BlockLayer.Back));
                         }
                     }
                 }
@@ -210,20 +210,21 @@ public class ChunkManager : MonoBehaviour
                 for (int n = 0; n < chunk.blocks.Count; n++)
                 {
                     WorldSavingSystem.BlockChunkData blockData = chunk.blocks[n];
-                    if (blockData.blockLayer == (int)BlockLayer.front)
+                    if (blockData.blockLayer == (int)BlockLayer.Front)
                     {
                         BlockData blockDataMain = dataBase.GetBlock(blockData.name);
 
-                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.front);
+                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.Front);
 
                     }
-                    if (blockData.blockLayer == (int)BlockLayer.back)
+                    if (blockData.blockLayer == (int)BlockLayer.Back)
                     {
                         BlockData blockDataMain = dataBase.GetBlock(blockData.name);
 
-                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.back);
+                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.Back);
                     }
-                }
+                    unit.StartCoroutine(unit.ToBuildGrass());
+                }                
             }
         }       
     }

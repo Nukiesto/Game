@@ -27,8 +27,9 @@ public class BlockSelector : MonoBehaviour
     private float blockToDeleteTime;
     private float procent;//
     private ChunkUnit chunkUnitClick;//Чанк на который нажали
-    [SerializeField] private float powerDig;//Мощность всапывания
-
+    private float powerDig;//Мощность всапывания
+    
+    [SerializeField] private float powerDigDefault;
     private float asd;
 
     private List<string> layers;
@@ -65,6 +66,8 @@ public class BlockSelector : MonoBehaviour
         layers = new List<string>();
         layers.Add("Entity");
         layers.Add("Item");
+
+        powerDig = powerDigDefault;
     }
     private void Update()
     {
@@ -198,7 +201,7 @@ public class BlockSelector : MonoBehaviour
                 posBlockDelete = onWorldPos;
 
                 float hp = chunkUnitClick?.
-                                    GetBlockUnit(onWorldPos, BlockLayer.front)?
+                                    GetBlockUnit(onWorldPos, BlockLayer.Front)?
                                     .data.hp ?? 0;
                 
                 if (hp != 0)
@@ -255,5 +258,16 @@ public class BlockSelector : MonoBehaviour
         pos.z = 0;
 
         return pos;
+    }
+
+    public void CheatPowerDick(float power)
+    {
+        if (powerDig == power)
+        {
+            powerDig = powerDigDefault;
+            return;
+        }
+
+        powerDig = power;
     }
 }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/AmbientLight.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/AmbientLight.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/BlockSelector.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/BlockSelector.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Chunk.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Chunk.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Item.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Item.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/OcclusionChunk.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/OcclusionChunk.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Region.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Game/Region.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIEW_PUSH_ON_COMMIT_AND_PUSH" value="false" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///AmbientLightController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/RocketEngine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/EditorHelpers/Editor/CreateAssetsBundle.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Runtime/Scripts/Controls/ComboBox/AutoCompleteComboBox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Clipboard.txt" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" />
+        <option value="$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jF2IPuzeLgvRFsYd9xhSLgpbvt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.build.unityPlugin" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="" />
+      <created>1603385443333</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603385443333</updated>
+      <workItem from="1603385450145" duration="4281000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="504" y="360" width="590" height="429" key="#Notifications" timestamp="1603385790850">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="504" y="360" width="590" height="429" key="#Notifications/0.0.1280.994@0.0.1280.994" timestamp="1603385790850" />
+    <state x="92" y="92" width="1096" height="810" key="DiffContextDialog" timestamp="1603388274624">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="92" y="92" width="1096" height="810" key="DiffContextDialog/0.0.1280.994@0.0.1280.994" timestamp="1603388274624" />
+    <state x="407" y="221" key="RiderGenerateDialog" timestamp="1603386162470">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="407" y="221" key="RiderGenerateDialog/0.0.1280.994@0.0.1280.994" timestamp="1603386162470" />
+    <state x="141" y="142" key="SettingsEditor" timestamp="1603387549763">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="141" y="142" key="SettingsEditor/0.0.1280.994@0.0.1280.994" timestamp="1603387549763" />
+    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog" timestamp="1603387959048">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1603387959048" />
+    <state x="449" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603387676833">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="449" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.994@0.0.1280.994" timestamp="1603387676833" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs</url>
+          <line>150</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" initialLine="147">
+            <startOffsets>
+              <option value="3953" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3954" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

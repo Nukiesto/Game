@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class PlayerController : MonoBehaviour
@@ -8,9 +9,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject itemCreatePos;
     [SerializeField] private Inventory inventory;
     [SerializeField] private ChunkManager chunkManager;
+    [SerializeField] private GameObject flashLight;
+
+    private bool _flashLightActive;
     void Start()
     {
         itemMagnet.radius = itemPickRadius;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _flashLightActive = !_flashLightActive;
+            flashLight.SetActive(_flashLightActive);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D col)

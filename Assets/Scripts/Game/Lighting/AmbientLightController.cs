@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AmbientLightController : MonoBehaviour
 {
     [Header("Параметры")]
     [Range(0, 100)] public float lightLevel = 20;
 
-    private SpriteRenderer spr;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private Color color;
-    private void Awake()
+    private Color _color;
+    private void Start()
     {
-        spr = GetComponent<SpriteRenderer>();
-        color = spr.color;
+        _color = Color.white;
         UpdateLight();
     }
     public void UpdateLight()
     {
-        color.a = lightLevel / 100;
-        spr.color = color;
+        _color.a = lightLevel / 100;
+        spriteRenderer.color = _color;
     }
     public void OnValidate()
     {

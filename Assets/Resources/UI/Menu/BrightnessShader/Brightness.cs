@@ -15,13 +15,6 @@ public class Brightness : MonoBehaviour
 
     private void Start()
     {
-        // Disable if we don't support image effects
-        if (!SystemInfo.supportsImageEffects)
-        {
-            enabled = false;
-            return;
-        }
-
         // Disable the image effect if the shader can't
         // run on the users graphics card
         if (!shaderDerp || !shaderDerp.isSupported)
