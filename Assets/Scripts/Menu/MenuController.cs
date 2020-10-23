@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public enum Menu
 {
     Main,
+    Multiplayer,
     Pause,
     Settings,
     WorldList

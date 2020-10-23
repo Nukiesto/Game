@@ -3,23 +3,25 @@ using UnityEngine;
 
 public class ChunkBlockController : MonoBehaviour
 {
-    private List<BlockUnit> blocks;
-    [HideInInspector] public ChunkUnit chunk;
-
+    private ChunkUnit _chunkUnit;
+    private List<BlockUnit> _blocks;
+    
     private void Awake()
     {
-        blocks = new List<BlockUnit>();
+        _blocks = new List<BlockUnit>();
+    }
+
+    public void SetChunk(ChunkUnit chunkUnit)
+    {
+        _chunkUnit = chunkUnit;
     }
     public BlockUnit AddUnit(BlockData data, Vector2Int posLocal, BlockLayer layer)
     {
-        //Debug.Log("Data: " + data + " ;posLocal: " + posLocal);
         if (data != null)
         {
-            BlockUnit block = new BlockUnit(data, posLocal, layer);
-
-            //Debug.Log("BlockUnit: " + block);
-            //Debug.Log(blocks);
-            blocks.Add(block);
+            var block = new BlockUnit(data, posLocal, layer);
+            
+            _blocks.Add(block);
             return block;
         }
         return null;
@@ -35,10 +37,10 @@ public class ChunkBlockController : MonoBehaviour
 
     public BlockUnit GetBlock(Vector2Int posBlock, BlockLayer layer)
     {
-        for (int i = 0; i < blocks.Count; i++)
+        for (var i = 0; i < _blocks.Count; i++)
         {
-            BlockUnit block = blocks[i];
-            if (block.posChunk == posBlock && block.layer == layer)
+            var block = _blocks[i];
+            if (block.PosChunk == posBlock && block.layer == layer)
             {
                 return block;
             }
@@ -50,38 +52,38 @@ public class ChunkBlockController : MonoBehaviour
         return GetBlock(new Vector2Int(x, y), layer);
     }
 
-    public void DeleteUnit(BlockUnit block)
+    public void DeleteBlock(BlockUnit block)
     {
         //Debug.Log("Unit Removed: " + block.data.name);
-        blocks.Remove(block);
+        _blocks.Remove(block);
     }
     public void DeleteBlock(Vector2Int posBlock, BlockLayer layer)
     {
-        DeleteUnit(GetBlock(posBlock, layer));
+        DeleteBlock(GetBlock(posBlock, layer));
     }
     public void DeleteBlock(int x, int y, BlockLayer layer)
     {
-        DeleteUnit(GetBlock(x, y, layer));
+        DeleteBlock(GetBlock(x, y, layer));
     }
 
     public void Clear()
     {
-        blocks.Clear();
+        _blocks.Clear();
     }
 }
 public class BlockUnit
 {
-    public BaseBlockMemory memory;
-    public BaseBlockScript script;
-    public Vector2Int posChunk;//Расположение относительно чанка
+    public BaseBlockMemory Memory;
+    public BaseBlockScript Script;
+    public Vector2Int PosChunk;//Расположение относительно чанка
     public BlockData data;
     public BlockLayer layer;
 
     public BlockUnit(BlockData data, Vector2Int posChunk, BlockLayer layer)
     {
-        memory = data.memory;
-        script = data.script;
-        this.posChunk = posChunk;
+        Memory = data.memory;
+        Script = data.script;
+        PosChunk = posChunk;
         this.data = data;
         this.layer = layer;
     }

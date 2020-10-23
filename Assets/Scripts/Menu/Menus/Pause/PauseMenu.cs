@@ -5,7 +5,7 @@ public class PauseMenu : MenuUnit
 {
     public string sceneMainMenu;
     [SerializeField] internal PauseMenuToggleController pauseMenuToggle;
-
+    public bool isMultiplayer;
     public void StartDialogLocal(DialogType type)
     {
         foreach (var dialog in dialogs)

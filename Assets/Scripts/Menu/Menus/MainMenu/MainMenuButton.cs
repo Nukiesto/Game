@@ -7,6 +7,7 @@ public class MainMenuButton : ButtonUnit
     {
         NewGame,
         LoadGame,
+        Multiplayer,
         Settings,
         Exit
     }
@@ -29,15 +30,15 @@ public class MainMenuButton : ButtonUnit
             case Button.LoadGame:
                 ButtonClickAction = ButtonClickActionLoadGame;
                 break;
-
+            case Button.Multiplayer:
+                ButtonClickAction = ButtonClickActionMultiplayer;
+                break;
             case Button.Settings:
                 ButtonClickAction = ButtonClickActionSettings;
                 break;
-
             case Button.Exit:
                 ButtonClickAction = ButtonClickActionExit;
                 break;
-
             default:
                 ButtonClickAction = ButtonClickActionNone;
                 break;
@@ -53,7 +54,10 @@ public class MainMenuButton : ButtonUnit
     {
         menu.StartDialog(DialogType.LoadGame);
     }
-
+    private void ButtonClickActionMultiplayer()
+    {
+        menu.controller.SetMenu(Menu.Multiplayer);
+    }
     private void ButtonClickActionSettings()
     {
         menu.controller.SetMenu(Menu.Settings);
@@ -61,7 +65,7 @@ public class MainMenuButton : ButtonUnit
 
     private void ButtonClickActionExit()
     {
-        Debug.Log("YES QUIT!");
+        //Debug.Log("YES QUIT!");
         Application.Quit();
     }
 

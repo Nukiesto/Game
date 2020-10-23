@@ -150,10 +150,10 @@ public class BlockSelector : MonoBehaviour
     private bool CheckCollisions()
     {
         Physics2D.queriesStartInColliders = false;
-        Vector3 pos = transform.position;
+        var pos = transform.position;
         pos.x -= 0.5f;
         pos.y -= 0.5f;
-        List<RaycastHit2D[]> hits = new List<RaycastHit2D[]>();
+        var hits = new List<RaycastHit2D[]>();
         hits.Add(Physics2D.RaycastAll(pos, Vector2.right, 1));
         hits.Add(Physics2D.RaycastAll(new Vector3(pos.x + 1, pos.y), Vector2.up, 1));
         hits.Add(Physics2D.RaycastAll(pos, Vector2.up, 1));

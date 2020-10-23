@@ -455,7 +455,7 @@ namespace SavingSystem
 
             public List<BlockChunkData> blocks = new List<BlockChunkData>();
             public List<ItemChunkData> items = new List<ItemChunkData>();
-            public int chunkSize = GameConstants.chunkSize;
+            public int chunkSize = GameConstants.ChunkSize;
             public ChunkData(int x, int y)
             {
                 this.x = x;
