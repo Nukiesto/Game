@@ -140,12 +140,12 @@ public class ChunkManager : MonoBehaviour
     {
         WorldSavingSystem.Init();
 
-        if (WorldSavingSystem.worldsList == null)
+        if (WorldSavingSystem.WorldsList == null)
         {
-            WorldSavingSystem.worldsList = new WorldSavingSystem.WorldDataList();
+            WorldSavingSystem.WorldsList = new WorldSavingSystem.WorldDataList();
         }
         
-        worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.worldsList);
+        worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
         var name = "TestWorldSave";
         var world = new WorldSavingSystem.WorldDataUnit
         {

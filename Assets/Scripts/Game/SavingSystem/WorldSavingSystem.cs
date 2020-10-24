@@ -10,33 +10,15 @@ namespace SavingSystem
 	public static class WorldSavingSystem
 	{
 		private static readonly string worldDirName = "Worlds";
-        public static WorldDataList worldsList;
-		internal static string DirnameWorlds { get => Application.persistentDataPath + "/" + worldDirName; }
-        
+        public static WorldDataList WorldsList;
+		internal static string DirnameWorlds => Application.persistentDataPath + "/" + worldDirName;
+
         public static void Init()
 		{
 			InitDirectoryWorlds();
 
-			worldsList = new WorldDataList();	
-
-			//worldSaving = new WorldSaving(this, worldsList);
-			//worldSaving.CreateWorld(new WorldDataUnit(this) { name = "TestWorld2", width = 32, height = 8});
-			
-   //         for (int i = 0; i < 32; i++)
-   //         {
-   //             for (int j = 0; j < 8; j++)
-   //             {
-			//		ChunkData chunk = new ChunkData(i,j);
-
-			//		worldSaving.AddChunk(chunk);
-			//	}
-   //         }
-
-			
-			//worldSaving.LoadWorldName("TestWorld");
-
-			//Debug.Log(worldsList.worlds.Count);
-		}
+			WorldsList = new WorldDataList();
+        }
 		public static void InitDirectoryWorlds()
 		{
 			if (!Directory.Exists(DirnameWorlds))
@@ -49,13 +31,14 @@ namespace SavingSystem
         #region WorldList
         public class WorldDataList
         {
-            internal List<string> worlds;
+            internal List<string> Worlds;
             private readonly string fileNameListWorld = "WorldList.worldlist";
 
-            private string FnameWorldList { get => DirnameWorlds + "/" + fileNameListWorld; }
+            private string FnameWorldList => DirnameWorlds + "/" + fileNameListWorld;
+
             public WorldDataList()
             {
-                worlds = new List<string>();
+                Worlds = new List<string>();
 
                 LoadWorldList();
             }
@@ -63,16 +46,16 @@ namespace SavingSystem
             //Methods
             public void LoadWorldList()
             {
-                string pathFile = FnameWorldList;
+                var pathFile = FnameWorldList;
                 using (var fs = new FileStream(pathFile, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
                 {
                     using (var reader = new StreamReader(fs))
                     {
-                        string text = reader.ReadToEnd();
+                        var text = reader.ReadToEnd();
 
                         if (text != "")
                         {
-                            worlds = JsonHelper.FromJson<string>(text).ToList();
+                            Worlds = JsonHelper.FromJson<string>(text).ToList();
                         }
                     }
                 }
@@ -82,10 +65,10 @@ namespace SavingSystem
                 if (name != null)
                 {
                     LoadWorldList();
-                    worlds.Add(name);
+                    Worlds.Add(name);
 
                     // Конвертируем в json
-                    string jsonString = JsonHelper.ToJson(worlds.ToArray(), true);
+                    string jsonString = JsonHelper.ToJson(Worlds.ToArray(), true);
 
                     using (var fs = new FileStream(FnameWorldList, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                     {
@@ -98,7 +81,7 @@ namespace SavingSystem
             }
             public bool WorldIsExists(string name)
             {
-                return worlds.Contains(name);
+                return Worlds.Contains(name);
             }
         } 
         #endregion
@@ -109,7 +92,8 @@ namespace SavingSystem
             private WorldDataUnit worldDataUnit;
             public PlayerData playerData;
 
-            public string fnameInfo { get => worldDataUnit.Dirname + "/" + worldDataUnit.name + ".info"; }
+            public string fnameInfo => worldDataUnit.Dirname + "/" + worldDataUnit.name + ".info";
+
             public WorldSaving( WorldDataList worldList)
             {
                 this.worldList = worldList;
@@ -315,8 +299,8 @@ namespace SavingSystem
             public int height;
 
             public string name;
-            public int CountChunks { get => width * height; }
-            public string Dirname { get => DirnameWorlds + "/" + name; }
+            public int CountChunks => width * height;
+            public string Dirname => DirnameWorlds + "/" + name;
             public List<ChunkData> chunks;
             public WorldDataUnit()
             {
@@ -447,6 +431,9 @@ namespace SavingSystem
             }
         }
         #endregion
+
+        #region Data
+
         [Serializable]
         public class ChunkData
         {
@@ -470,7 +457,6 @@ namespace SavingSystem
                 items.Add(data);
             }
         }
-        //[JsonObject(IsReference = true)]
         public class BlockChunkData
         {
             public int x;
@@ -487,13 +473,11 @@ namespace SavingSystem
                 this.blockLayer = blockLayer;
             }
         }
-        //[JsonObject(IsReference = true)]
         public class EntityChunkData
         {
             public int x;
             public int y;
         }
-        //[JsonObject(IsReference = true)]
         public class ItemChunkData
         {
             public EntityChunkData entity;
@@ -504,6 +488,8 @@ namespace SavingSystem
         {           
             public int x;
             public int y;           
-        }       
+        }  
+
+        #endregion     
     }
 }

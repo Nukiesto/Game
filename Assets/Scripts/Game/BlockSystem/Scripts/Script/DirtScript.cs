@@ -20,9 +20,9 @@ public class DirtScript : BaseBlockScript
         while (true)
         {
             float n = Random.Range(0, 4);
-            Debug.Log(_pos);
-            Debug.Log("Coroutine Started");
-            yield return new WaitForSeconds(n);
+            //Debug.Log(_pos);
+            //Debug.Log("Coroutine Started");
+            //yield return new WaitForSeconds(n);
             //Debug.Log("Tile: " + GetTile() + "/" + blockUnit.Data.tileVariables[0]);
             //Debug.Log("CanSet Grass: " + blockUnit.ChunkUnit.chunkBuilder.CanSetGrass(_pos));
             if (blockUnit.ChunkUnit.chunkBuilder.CanSetGrass(_pos, blockUnit.Data))

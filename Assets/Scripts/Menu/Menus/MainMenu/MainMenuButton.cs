@@ -5,7 +5,7 @@ public class MainMenuButton : ButtonUnit
 {
     public enum Button
     {
-        NewGame,
+        SoloGame,
         LoadGame,
         Multiplayer,
         Settings,
@@ -23,10 +23,9 @@ public class MainMenuButton : ButtonUnit
     {
         switch (buttonType)
         {
-            case Button.NewGame:
-                ButtonClickAction = ButtonClickActionNewGame;
+            case Button.SoloGame:
+                ButtonClickAction = ButtonClickActionSoloGame;
                 break;
-
             case Button.LoadGame:
                 ButtonClickAction = ButtonClickActionLoadGame;
                 break;
@@ -45,7 +44,7 @@ public class MainMenuButton : ButtonUnit
         }
     }
 
-    private void ButtonClickActionNewGame()
+    private void ButtonClickActionSoloGame()
     {
         menu.controller.SetMenu(Menu.WorldList);
     }

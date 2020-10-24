@@ -988,7 +988,7 @@
             <e p="Scrips" t="Include">
               <e p="ItemButton.cs" t="Include" />
               <e p="ItemList.cs" t="Include" />
-              <e p="TestScript.cs" t="Include" />
+              <e p="WorldList.cs" t="Include" />
             </e>
           </e>
           <e p="LeopotamGroupLibrary" t="Include">

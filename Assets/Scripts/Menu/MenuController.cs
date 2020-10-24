@@ -29,24 +29,24 @@ public class MenuController : MonoBehaviour
     [SerializeField] private bool allowToggleMenu;
     [SerializeField] private bool setMenuActiveOnStart;
 
-    private MenuUnit currentMenu;
-    private MenuUnit previousMenu;
+    [SerializeField] private MenuUnit currentMenu;
+    private MenuUnit _previousMenu;
 
-    private GameSceneManager gameSceneManager;
+    private GameSceneManager _gameSceneManager;
 
     [SerializeField] private PauseMenuToggleController pauseMenuToggle;
     public void SetMainMenu()
     {
-        gameSceneManager.SetScene(GameScene.MainMenu);
+        _gameSceneManager.SetScene(GameScene.MainMenu);
     }
     public void SetGame()
     {
-        gameSceneManager.SetScene(GameScene.Game);        
+        _gameSceneManager.SetScene(GameScene.Game);        
     }
 
     private void Awake()
     {
-        gameSceneManager = Toolbox.instance.MGameSceneManager;
+        _gameSceneManager = Toolbox.instance.MGameSceneManager;
         //Debug.Log(gameSceneManager);
 
         SetMenu(startMenu.menuType);
@@ -55,10 +55,6 @@ public class MenuController : MonoBehaviour
     }
 
     private void Update()
-    {
-        CheckExitKey();
-    }
-    private void CheckExitKey()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -70,7 +66,7 @@ public class MenuController : MonoBehaviour
                 return;
             }
             //Перемещаемся назад
-            if (currentMenu != startMenu && TrySetPreviosMenu())
+            if (currentMenu != startMenu && TrySetPreviousMenu())
             {
                 Debug.Log("2");
                 return;                                       
@@ -88,7 +84,7 @@ public class MenuController : MonoBehaviour
     {
         SetActiveCurrentMenu(false);
 
-        previousMenu = currentMenu;
+        _previousMenu = currentMenu;
         foreach (var item in this.menu)
         {
             if (item.menuType == menu)
@@ -99,14 +95,14 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    public bool TrySetPreviosMenu()
+    public bool TrySetPreviousMenu()
     {
-        if (previousMenu != null)
+        if (_previousMenu != null)
         {
             var a = currentMenu;
             currentMenu.SetActiveMenu(false);
-            currentMenu = previousMenu;
-            previousMenu = a;
+            currentMenu = _previousMenu;
+            _previousMenu = a;
 
             currentMenu.SetActiveMenu(true);
             return true;

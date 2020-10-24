@@ -17,8 +17,8 @@ public class ItemList : MonoBehaviour {
 	private List<RectTransform> buttons;
 	private int size;
 	private float curY, vPos;
-	
-	public 
+
+	public WorldList WorldList;
 	void Awake()
 	{
 		buttons = new List<RectTransform>();
@@ -29,7 +29,7 @@ public class ItemList : MonoBehaviour {
 
 	void ButtonPressed(int id, string title)
 	{
-		Debug.Log(this + " Выбран элемент списка -> '" + title + "'. Идентификатор объекта: " + id);
+		WorldList.SetSelect(id);
 	}
 
 	void ButtonRemoved(int id, string title)
@@ -60,7 +60,7 @@ public class ItemList : MonoBehaviour {
 		ButtonPressed(item.id, item.mainButtonText.text);
 	}
 
-	void UpdateList(int id) // функция удаления элемента
+	public void UpdateList(int id) // функция удаления элемента
 	{
 		vPos = scroll.verticalNormalizedPosition; // запоминаем позицию скролла
 		int j = 0;
@@ -94,7 +94,7 @@ public class ItemList : MonoBehaviour {
 
 	void SetRemoveButton(Button button, int value) // настройка функций при нажатии на кнопку удаления
 	{
-		button.onClick.AddListener(() => UpdateList(value));
+		//button.onClick.AddListener(() => UpdateList(value));
 	}
 
 	// добавление нового элемента в список
