@@ -931,7 +931,7 @@
                   <e p="DirtMemory.cs" t="Include" />
                   <e p="NullScript.cs" t="Include" />
                 </e>
-                <e p="Updater" t="Include">
+                <e p="Script" t="Include">
                   <e p="DirtScript.cs" t="Include" />
                   <e p="NullScript.cs" t="Include" />
                 </e>

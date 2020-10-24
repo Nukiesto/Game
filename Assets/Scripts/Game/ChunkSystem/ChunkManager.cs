@@ -173,10 +173,10 @@ public class ChunkManager : MonoBehaviour
 
                 //Debug.Log("BlockUnitFront: " + blockUnitFront + ";BlockUnitBack: " + blockUnitBack);
                 if (blockUnitFront != null)
-                    chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.data.nameBlock,
+                    chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.Data.nameBlock,
                         (int) BlockLayer.Front));
                 if (blockUnitBack != null)
-                    chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.data.nameBlock,
+                    chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.Data.nameBlock,
                         (int) BlockLayer.Back));
             }
 
@@ -207,7 +207,7 @@ public class ChunkManager : MonoBehaviour
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
 
-                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false);
+                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.Back, false);
                     }
 
                     if (blockData.blockLayer == (int) BlockLayer.Back)

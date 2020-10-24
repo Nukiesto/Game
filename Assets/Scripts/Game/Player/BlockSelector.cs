@@ -139,7 +139,7 @@ public class BlockSelector : MonoBehaviour
         {
             if (!CheckCollisions())
             {
-                if (chunkManager.GetChunk(onWorldPos).SetBlock(onWorldPos, item.data.block, true))
+                if (chunkManager.GetChunk(onWorldPos).SetBlock(onWorldPos, item.data.block, true, BlockLayer.Front, true))
                 {
                     item.RemoveItem();
                 }               
@@ -202,7 +202,7 @@ public class BlockSelector : MonoBehaviour
 
                 float hp = chunkUnitClick?.
                                     GetBlockUnit(onWorldPos, BlockLayer.Front)?
-                                    .data.hp ?? 0;
+                                    .Data.hp ?? 0;
                 
                 if (hp != 0)
                 {

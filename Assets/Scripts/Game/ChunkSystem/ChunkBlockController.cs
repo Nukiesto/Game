@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ChunkBlockController : MonoBehaviour
 {
@@ -15,32 +16,50 @@ public class ChunkBlockController : MonoBehaviour
     {
         _chunkUnit = chunkUnit;
     }
-    public BlockUnit AddUnit(BlockData data, Vector2Int posLocal, BlockLayer layer)
+
+    #region AddUnit
+
+    public BlockUnit AddUnit(BlockData data, Vector2Int posLocal, BlockLayer layer, Tilemap tilemap, bool toStartCor = false)
     {
         if (data != null)
         {
-            var block = new BlockUnit(data, posLocal, layer);
+            var block = new BlockUnit(data, posLocal, layer, tilemap, _chunkUnit);
             
             _blocks.Add(block);
+            if (block.Script != null)
+            {
+                block.Script.StartScript();
+                if (toStartCor)
+                {
+                    var rot = block.Script.CoroutineToInit();
+                    if (rot != null)
+                    {
+                        StartCoroutine(rot);
+                    } 
+                }
+            }
             return block;
         }
         return null;
     }
-    public BlockUnit AddUnit(BlockData data, Vector3Int posLocal, BlockLayer layer)
+    public BlockUnit AddUnit(BlockData data, Vector3Int posLocal, BlockLayer layer, Tilemap tilemap, bool toStartCor = false)
     {
-        return AddUnit(data, new Vector2Int(posLocal.x, posLocal.y), layer);
+        return AddUnit(data, new Vector2Int(posLocal.x, posLocal.y), layer, tilemap, toStartCor);
     }
-    public BlockUnit AddUnit(BlockData data, int x, int y, BlockLayer layer)
+    public BlockUnit AddUnit(BlockData data, int x, int y, BlockLayer layer, Tilemap tilemap, bool toStartCor = false)
     {
-        return AddUnit(data, new Vector2Int(x, y), layer);
-    }  
+        return AddUnit(data, new Vector2Int(x, y), layer, tilemap, toStartCor);
+    } 
+
+    #endregion
+    #region GetBlock
 
     public BlockUnit GetBlock(Vector2Int posBlock, BlockLayer layer)
     {
         for (var i = 0; i < _blocks.Count; i++)
         {
             var block = _blocks[i];
-            if (block.PosChunk == posBlock && block.layer == layer)
+            if (block.PosChunk == posBlock && block.Layer == layer)
             {
                 return block;
             }
@@ -52,45 +71,66 @@ public class ChunkBlockController : MonoBehaviour
         return GetBlock(new Vector2Int(x, y), layer);
     }
 
-    public void DeleteBlock(BlockUnit block)
-    {
-        //Debug.Log("Unit Removed: " + block.data.name);
-        _blocks.Remove(block);
-    }
+    #endregion
+    #region DeleteBlock
+
     public void DeleteBlock(Vector2Int posBlock, BlockLayer layer)
     {
-        DeleteBlock(GetBlock(posBlock, layer));
+        DeleteUnit(GetBlock(posBlock, layer));
     }
     public void DeleteBlock(int x, int y, BlockLayer layer)
     {
-        DeleteBlock(GetBlock(x, y, layer));
+        DeleteUnit(GetBlock(x, y, layer));
     }
 
+    #endregion
+    #region Misc
+
+    public void DeleteUnit(BlockUnit block)
+    {
+        //Debug.Log("Unit Removed: " + block.data.name);
+        var rot = block.Script.CoroutineToInit();
+        if (rot != null)
+        {
+            StopCoroutine(rot);
+        } 
+        _blocks.Remove(block);
+    }
     public void Clear()
     {
         _blocks.Clear();
     }
+
+    #endregion
 }
 public class BlockUnit
 {
     public BaseBlockMemory Memory;
     public BaseBlockScript Script;
     public Vector2Int PosChunk;//Расположение относительно чанка
-    public BlockData data;
-    public BlockLayer layer;
-
-    public BlockUnit(BlockData data, Vector2Int posChunk, BlockLayer layer)
+    public BlockData Data;
+    public BlockLayer Layer;
+    public Tilemap Tilemap;
+    public ChunkUnit ChunkUnit;
+    
+    public BlockUnit(BlockData data, Vector2Int posChunk, BlockLayer layer, Tilemap tilemap, ChunkUnit chunkUnit)
     {
         Memory = data.memory;
         Script = data.script;
         PosChunk = posChunk;
-        this.data = data;
-        this.layer = layer;
+        Data = data;
+        Layer = layer;
+        Tilemap = tilemap;
+        ChunkUnit = chunkUnit;
+        if (Script != null)
+        {
+            Script.blockUnit = this;
+        }
+
     }
 
     public ItemData.Data GetItem()
     {
-        //Debug.Log(data.Item.sprite);
-        return data.Item;
+        return Data.Item;
     }
 }

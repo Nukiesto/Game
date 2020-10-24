@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public enum BlockLayer
 {
@@ -26,7 +29,7 @@ public class ChunkUnit : MonoBehaviour
     #region Components
 
     private ChunkBlockController _controller;
-    private ChunkBuilder _chunkBuilder;
+    [HideInInspector]public ChunkBuilder chunkBuilder;
 
     #endregion
 
@@ -50,8 +53,8 @@ public class ChunkUnit : MonoBehaviour
     private void Start()
     {
         Init();
-        _chunkBuilder = new ChunkBuilder(this, chunkManager);
-        _chunkBuilder.GenerateBuild();
+        chunkBuilder = new ChunkBuilder(this, chunkManager);
+        chunkBuilder.GenerateBuild();
         StartCoroutine(ToBuildGrass());
     }
 
@@ -62,7 +65,7 @@ public class ChunkUnit : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            _chunkBuilder.BuildingGrass();
+            chunkBuilder.BuildingGrass();
             yield break;
         }
     }
@@ -87,7 +90,7 @@ public class ChunkUnit : MonoBehaviour
 
     //Local
     public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap,
-        BlockLayer layer = BlockLayer.Front)
+        BlockLayer layer = BlockLayer.Front, bool toStartCor = false)
     {
         var hasBlock = checkCollisions && HasBlock(pos, tilemap);
         if (InBounds(pos) && !hasBlock)
@@ -95,7 +98,7 @@ public class ChunkUnit : MonoBehaviour
             {
                 tilemap.SetTile(pos, data.tile);
                 tilemapFrontWorldLightObstacle.SetTile(pos, data.tile);
-                _controller.AddUnit(data, pos, layer);
+                _controller.AddUnit(data, pos, layer, tilemap, toStartCor);
                 return true;
             }
 
@@ -103,18 +106,18 @@ public class ChunkUnit : MonoBehaviour
     }
 
     //Global
-    public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.Front)
+    public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.Front, bool toStartCor = false)
     {
         var tilemap = GetTileMapOfLayer(layer);
-        return SetBlock(pos, data, checkCollisions, tilemap, layer);
+        return SetBlock(pos, data, checkCollisions, tilemap, layer, toStartCor);
     }
 
-    public bool SetBlock(Vector3 pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.Front)
+    public bool SetBlock(Vector3 pos, BlockData data, bool checkCollisions, BlockLayer layer = BlockLayer.Front, bool toStartCor = false)
     {
         var tilemap = GetTileMapOfLayer(layer);
         var posInt = tilemap.WorldToCell(pos);
 
-        return SetBlock(posInt, data, checkCollisions, tilemap);
+        return SetBlock(posInt, data, checkCollisions, tilemap, layer, toStartCor);
     }
 
     #endregion
@@ -127,16 +130,16 @@ public class ChunkUnit : MonoBehaviour
         if (InBounds(pos) && tilemap.GetTile(pos) != null)
         {
             var blockUnit = _controller.GetBlock(pos.x, pos.y, layer);
-            if (blockUnit.data.isBreackable)
+            if (blockUnit.Data.isBreackable)
             {
-                //Очистка
-                _controller.DeleteBlock(blockUnit);
+                //Clear
+                _controller.DeleteUnit(blockUnit);
                 tilemap.SetTile(pos, null);
                 tilemapFrontWorldLightObstacle.SetTile(pos, null);
 
                 #region CreateItem
 
-                if (blockUnit.data.toCreateItem)
+                if (blockUnit.Data.toCreateItem)
                 {
                     var posCreateItem = new Vector3 //Создание предмета в центре блока
                     {
@@ -252,7 +255,7 @@ public class ChunkUnit : MonoBehaviour
 
     #endregion
 
-    internal class ChunkBuilder
+    public class ChunkBuilder
     {
         #region Fields
 
@@ -386,7 +389,7 @@ public class ChunkUnit : MonoBehaviour
 
         public void BuildingGrass()
         {
-            if (chunk_level > worldHeight - 30) //Если уровень чанка идет по уровню земли
+            if (_chunkLevel > _worldHeight - 30) //Если уровень чанка идет по уровню земли
             {
                 var pos = Vector3Int.zero;
                 for (var i = 0; i < chunkSize; i++)
@@ -400,28 +403,40 @@ public class ChunkUnit : MonoBehaviour
             }
         }
 
-        private void SetGrass(Vector3Int pos)
+        public bool CanSetGrass(Vector3Int pos, BlockData data = null)
         {
             int i = pos.x, j = pos.y;
-            if (_chunkFront[i, j] == _generator.dirt)
+            //Debug.Log("i: " + i + " ;j: " + j);
+            //Debug.Log(_chunkFront[i, j] + ";" + _generator.dirt);
+            if (data ?? _chunkFront[i, j] == _generator.dirt)
             {
                 if (_chunkLevel + chunkSize == _worldHeight && j == chunkSize) //Если блок под вершиной мира
                 {
-                    _chunkUnit.tilemapFrontWorld.SetTile(pos, _chunkFront[i, j].tileVariables[0]);
-                    return;
+                    return true;
                 }
 
                 if (j + 1 <= chunkSize - 1 && _chunkFront[i, j + 1] == null) //Если над блоком пусто
                 {
-                    _chunkUnit.tilemapFrontWorld.SetTile(pos, _chunkFront[i, j].tileVariables[0]);
-                    return;
+                    return true;
                 }
 
                 if (j == chunkSize - 1 && _chunkUpper != null) //Если блок под низом другого чанка
+                {
                     if (!_chunkUpper.HasBlock(new Vector3Int(i, 0, 0)))
                     {
-                        _chunkUnit.tilemapFrontWorld.SetTile(pos, _chunkFront[i, j].tileVariables[0]);
+                        return true;
                     }
+                }
+            }
+
+            return false;
+        }
+
+        private void SetGrass(Vector3Int pos)
+        {
+            if (CanSetGrass(pos)) 
+            {
+                _chunkUnit.tilemapFrontWorld.SetTile(pos, _chunkFront[pos.x, pos.y].tileVariables[0]);
             }
         }
 
