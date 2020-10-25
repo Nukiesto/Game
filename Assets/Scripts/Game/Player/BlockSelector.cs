@@ -141,9 +141,9 @@ public class BlockSelector : MonoBehaviour
             _layerBlockToDelete = layer;
             float hp = _chunkUnitClick?.
                 GetBlockUnit(onWorldPos, layer)?
-                .Data.hp ?? 0;
+                .Data.hp ?? -1;
                 
-            if (hp != 0)
+            if (hp != -1)
             {
                 if (hp < 0)
                 {

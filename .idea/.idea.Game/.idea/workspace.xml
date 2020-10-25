@@ -20,20 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="WorldList">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Inventory.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Inventory.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/BlockDataBase.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/BlockDataBase.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,13 +119,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
       </list>
     </option>
   </component>
@@ -188,7 +174,7 @@
       <workItem from="1603530221908" duration="9414000" />
       <workItem from="1603553063728" duration="4879000" />
       <workItem from="1603605738513" duration="9545000" />
-      <workItem from="1603629181718" duration="18847000" />
+      <workItem from="1603629181718" duration="19680000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>
