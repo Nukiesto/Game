@@ -12,6 +12,8 @@ public class BlockData : ScriptableObject
     public bool isBreackable = true;
     public bool toPlaceBack = true;
     public bool isInteractable = false;
+    public bool mustHaveDownerBlock = false;
+    
     public string nameBlock;
     [HideInInspector] public int id { get; private set; }
     [Header("")]
@@ -43,7 +45,7 @@ public class BlockData : ScriptableObject
     {
         Item = new Data()
         {
-            type = ItemType.block,
+            type = ItemType.Block,
             sprite = tile?.sprite,
             description = descriptionTranslations,
             Name = nameBlock,

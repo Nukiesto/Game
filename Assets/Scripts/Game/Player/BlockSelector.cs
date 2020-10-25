@@ -136,41 +136,62 @@ public class BlockSelector : MonoBehaviour
         if (!_isDeleting)
         {
             _chunkUnitClick = chunkManager.GetChunk(onWorldPos);
-
-            _posBlockDelete = onWorldPos;
-            _layerBlockToDelete = layer;
-            float hp = _chunkUnitClick?.
-                GetBlockUnit(onWorldPos, layer)?
-                .Data.hp ?? -1;
-                
-            if (hp != -1)
+            if (_chunkUnitClick.CanBreakBlock(onWorldPos, layer))
             {
-                if (hp < 0)
+                _posBlockDelete = onWorldPos;
+                _layerBlockToDelete = layer;
+                float hp = _chunkUnitClick?.
+                    GetBlockUnit(onWorldPos, layer)?
+                    .Data.hp ?? -1;
+                
+                if (hp != -1)
                 {
-                    DeletingBlock();
-                }
-                else
-                {
-                    _blockToDeleteTime = hp / _powerDig;
-                    destroyingProcess.enabled = true;
-                    _isDeleting = true;
-                    //Debug.Log("StartDeleting");
-                }                   
-            }                                              
+                    if (hp < 0)
+                    {
+                        DeletingBlock();
+                    }
+                    else
+                    {
+                        _blockToDeleteTime = hp / _powerDig;
+                        destroyingProcess.enabled = true;
+                        _isDeleting = true;
+                        //Debug.Log("StartDeleting");
+                    }                   
+                }           
+            }
         }
     }
     #endregion
 
     private void ClickPlaceBlock(bool isBack = false)
     {
+        var chunk = chunkManager.GetChunk(onWorldPos);
+        
+        var layer = isBack ? BlockLayer.Back : BlockLayer.Front;
+        var blockInteractable = chunk.GetBlockUnit(onWorldPos, layer);
+        if (blockInteractable != null && blockInteractable.Data.isInteractable)
+        {
+            //Debug.Log();
+            if (blockInteractable.Data.memory is ChestMemory)
+            {
+                OpenChest(blockInteractable.Data.memory as ChestMemory);
+            }
+            
+            //Debug.Log("Interactable Block Clicked");
+            return;
+        }
         var item = inventory.GetSelectedItem();
-        if (item.data != null && item.data.type == ItemType.block)
+        if (item.data != null && item.data.type == ItemType.Block)
         {
             if (!CheckCollisions() || isBack)
             {
-                var chunk = chunkManager.GetChunk(onWorldPos);
                 var pos = chunk.tilemapFrontWorld.WorldToCell(onWorldPos);
-                if (chunk.SetBlock(pos , item.data.block, true, isBack ? BlockLayer.Back : BlockLayer.Front, !isBack))
+                
+                
+                if (item.data.block.mustHaveDownerBlock && chunk.GetDownerBlockUnit(new Vector2Int(pos.x, pos.y), layer)==null)
+                    return;
+                
+                if (chunk.SetBlock(pos , item.data.block, true, layer, !isBack))
                 {
                     //Debug.Log(_pos);
                     if (!isBack)
@@ -303,5 +324,10 @@ public class BlockSelector : MonoBehaviour
         }
 
         _powerDig = power;
+    }
+
+    private void OpenChest(ChestMemory chestMemory)
+    {
+        inventory.OpenChest(chestMemory.items);
     }
 }

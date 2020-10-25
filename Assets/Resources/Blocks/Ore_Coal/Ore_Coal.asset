@@ -18,10 +18,10 @@ MonoBehaviour:
   toPlaceBack: 0
   isInteractable: 0
   nameBlock: Ore_Coal
-  hp: 0
+  hp: 350
   script: {fileID: 0}
   memory: {fileID: 0}
-  tile: {fileID: 0}
+  tile: {fileID: 11400000, guid: 8768e82873662604aa9b0d33ae85007f, type: 2}
   tileVariables: []
   nameTranslations:
     translations:

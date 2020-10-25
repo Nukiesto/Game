@@ -10,24 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8be0877e357842498bd41309bfdaec1, type: 3}
-  m_Name: Ore_Iron
+  m_Name: Chest
   m_EditorClassIdentifier: 
   isSolid: 1
   toCreateItem: 1
   isBreackable: 1
   toPlaceBack: 0
-  isInteractable: 0
-  nameBlock: Ore_Iron
-  hp: 480
+  isInteractable: 1
+  mustHaveDownerBlock: 1
+  nameBlock: Chest
+  hp: 200
   script: {fileID: 0}
-  memory: {fileID: 0}
-  tile: {fileID: 11400000, guid: 79a76aea4c526dd40b650c37eecfd6f4, type: 2}
-  tileVariables: []
+  memory: {fileID: 11400000, guid: 994c4ecaa48942e4e895580627a451bd, type: 2}
+  tile: {fileID: 11400000, guid: 4a28c53dd4f0ba64bb11384ffe30a677, type: 2}
+  tileVariables:
+  - {fileID: 11400000, guid: 5f53a0754a0b89f4dacc0d224dd26084, type: 2}
   nameTranslations:
     translations:
-    - lang: 2
-      text: "\u0416\u0435\u043B\u0435\u0437\u043D\u0430\u044F \u0440\u0443\u0434\u0430"
     - lang: 1
-      text: Iron Ore
+      text: Chest
+    - lang: 2
+      text: "\u0421\u0443\u043D\u0434\u0443\u043A"
   descriptionTranslations:
     translations: []

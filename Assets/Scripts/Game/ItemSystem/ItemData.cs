@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum ItemType
 { 
-    tool,
-    block,
+    Tool,
+    Block,
 }
 
 [CreateAssetMenu(menuName = "Items/Data", fileName = "ItemData")]

@@ -22,6 +22,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 47438586f7b97ae4a987131806b58909, type: 2}
     - {fileID: 11400000, guid: ea3f46e777002664c8bfcd9ca3ea87de, type: 2}
     - {fileID: 11400000, guid: 1d9af7fbd70129e4d98d7a4c9c56bd74, type: 2}
+    - {fileID: 11400000, guid: cb6e637032b5781489c21e223b9e9f68, type: 2}
     items: []
     itemsBlocks:
     - type: 1
@@ -40,25 +41,43 @@ MonoBehaviour:
         - lang: 2
           text: 
       block: {fileID: 11400000, guid: 99447b62bd393524fae8dbf0af32675c, type: 2}
-      sprite: {fileID: 0}
-    - type: 0
-      maxCount: 0
-      Name: 
+      sprite: {fileID: 21300000, guid: 55518a05314268d45a9e073238c1d63a, type: 3}
+    - type: 1
+      maxCount: 64
+      Name: Dirt
       name:
-        translations: []
+        translations:
+        - lang: 1
+          text: DIrt
+        - lang: 2
+          text: "\u0417\u0435\u043C\u043B\u044F"
       description:
-        translations: []
-      block: {fileID: 0}
-      sprite: {fileID: 0}
-    - type: 0
-      maxCount: 0
-      Name: 
+        translations:
+        - lang: 1
+          text: Usually dirt
+        - lang: 2
+          text: "\u041E\u0431\u044B\u043A\u043D\u043E\u0432\u0435\u043D\u043D\u0430\u044F
+            \u0437\u0435\u043C\u043B\u044F"
+      block: {fileID: 11400000, guid: c86498ad90036ab46877f865e4aa8aab, type: 2}
+      sprite: {fileID: -8275502208090371910, guid: 0f9b90914cd7421449dd1a9ee8005d07,
+        type: 3}
+    - type: 1
+      maxCount: 64
+      Name: Furnace
       name:
-        translations: []
+        translations:
+        - lang: 1
+          text: Furnace
+        - lang: 2
+          text: "\u041F\u0435\u0447\u044C"
       description:
-        translations: []
-      block: {fileID: 0}
-      sprite: {fileID: 0}
+        translations:
+        - lang: 1
+          text: 
+        - lang: 2
+          text: 
+      block: {fileID: 11400000, guid: 0133190303522b947926377618ee8bf3, type: 2}
+      sprite: {fileID: 21300000, guid: f79dbff67e8f878439092eac4e3bc3ec, type: 3}
     - type: 1
       maxCount: 64
       Name: Null
@@ -69,16 +88,20 @@ MonoBehaviour:
       description:
         translations: []
       block: {fileID: 11400000, guid: 0c375def88a36ac49a5d31811d49fe3e, type: 2}
-      sprite: {fileID: 0}
-    - type: 0
-      maxCount: 0
-      Name: 
+      sprite: {fileID: 21300000, guid: 9807e2b6fe8cc3e4387071971a6641f5, type: 3}
+    - type: 1
+      maxCount: 64
+      Name: Ore_Coal
       name:
-        translations: []
+        translations:
+        - lang: 1
+          text: Coal
+        - lang: 2
+          text: "\u0423\u0433\u043E\u043B\u044C"
       description:
         translations: []
-      block: {fileID: 0}
-      sprite: {fileID: 0}
+      block: {fileID: 11400000, guid: cab8b78dddfc0f0448ac76f07058efcc, type: 2}
+      sprite: {fileID: 21300000, guid: fb8ffa5e7f3dfd847a83ef1395769fba, type: 3}
     - type: 1
       maxCount: 64
       Name: Ore_Iron
@@ -92,21 +115,43 @@ MonoBehaviour:
         translations: []
       block: {fileID: 11400000, guid: 47438586f7b97ae4a987131806b58909, type: 2}
       sprite: {fileID: 21300000, guid: c3af5104573a5c2458f5abaac6da1b88, type: 3}
-    - type: 0
-      maxCount: 0
-      Name: 
+    - type: 1
+      maxCount: 64
+      Name: Sand
       name:
-        translations: []
+        translations:
+        - lang: 1
+          text: Sand
+        - lang: 2
+          text: "\u041F\u0435\u0441\u043E\u043A"
       description:
         translations: []
-      block: {fileID: 0}
-      sprite: {fileID: 0}
-    - type: 0
-      maxCount: 0
-      Name: 
+      block: {fileID: 11400000, guid: ea3f46e777002664c8bfcd9ca3ea87de, type: 2}
+      sprite: {fileID: 21300000, guid: 9bb6ad74316fdb64d9e46c4952481f19, type: 3}
+    - type: 1
+      maxCount: 64
+      Name: Stone
       name:
-        translations: []
+        translations:
+        - lang: 1
+          text: Stone
+        - lang: 2
+          text: "\u041A\u0430\u043C\u0435\u043D\u044C"
       description:
         translations: []
-      block: {fileID: 0}
-      sprite: {fileID: 0}
+      block: {fileID: 11400000, guid: 1d9af7fbd70129e4d98d7a4c9c56bd74, type: 2}
+      sprite: {fileID: 21300000, guid: 1a37f1b3c84f4884f9c72ec31e56f152, type: 3}
+    - type: 1
+      maxCount: 64
+      Name: Chest
+      name:
+        translations:
+        - lang: 1
+          text: Chest
+        - lang: 2
+          text: "\u0421\u0443\u043D\u0434\u0443\u043A"
+      description:
+        translations: []
+      block: {fileID: 11400000, guid: cb6e637032b5781489c21e223b9e9f68, type: 2}
+      sprite: {fileID: -5281422124547630143, guid: e0011c1526abe7d44b1d630075d08b13,
+        type: 3}

@@ -407,7 +407,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			// we only need to adjust the deltaMovement if we are not jumping
 			// TODO: this uses a magic number which isn't ideal! The alternative is to have the user pass in if there is a jump this frame
-			if( deltaMovement.y < jumpingThreshold )
+			if( deltaMovement.y < jumpingThreshold)
 			{
 				// apply the slopeModifier to slow our movement up the slope
 				var slopeModifier = slopeSpeedMultiplier.Evaluate( angle );

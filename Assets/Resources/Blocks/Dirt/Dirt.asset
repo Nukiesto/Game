@@ -18,7 +18,7 @@ MonoBehaviour:
   toPlaceBack: 1
   isInteractable: 0
   nameBlock: Dirt
-  hp: 100
+  hp: 50
   script: {fileID: 11400000, guid: 203fd3afe5a1a194fbf960005e38aa50, type: 2}
   memory: {fileID: 11400000, guid: efea6f8c33c9f3641ba77e3de2acb87a, type: 2}
   tile: {fileID: 11400000, guid: c3e61241cf216394b93c5419612ab548, type: 2}

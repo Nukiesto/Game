@@ -12,6 +12,7 @@ public enum BlockLayer
     Back = 1
 }
 
+[RequireComponent(typeof(ChunkUnit))]
 [RequireComponent(typeof(ChunkBlockController))]
 public class ChunkUnit : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class ChunkUnit : MonoBehaviour
     private static readonly int chunkSize = GameConstants.ChunkSize;
     [HideInInspector] public ChunkManager chunkManager;
     private Vector3 _posObj;
+    private ChunkUnit _chunkDowner;
+    private ChunkUnit _chunkUpper;
     public bool ToGenerate { private get; set; }
 
     #endregion
@@ -66,6 +69,10 @@ public class ChunkUnit : MonoBehaviour
             chunkBuilder.GenerateBuild();
         }     
         StartCoroutine(ToBuildGrass());
+        
+        var chunkCoord = chunkManager.ChunkPosInWorld(this);
+        _chunkDowner = chunkManager.GetDownerChunk(chunkCoord);
+        _chunkUpper = chunkManager.GetUpperChunk(chunkCoord);
     }
 
     private void Update()
@@ -102,7 +109,6 @@ public class ChunkUnit : MonoBehaviour
         };
         //Pos
         _posObj = transform.position;
-        //posObjGlobal = new Vector3Int(Mathf.FloorToInt(posObj.x), Mathf.FloorToInt(posObj.y), 0);
     }
 
     #region SetBlock
@@ -151,18 +157,41 @@ public class ChunkUnit : MonoBehaviour
 
     #region DeleteBlock
 
+    public bool CanBreakBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front)
+    {
+        var tilemap = GetTileMapOfLayer(layer);
+        var blockPos = tilemap.WorldToCell(pos);
+        
+        if (InBounds(blockPos) && tilemap.GetTile(blockPos) != null)
+        {
+            var blockUnit = _controller.GetBlock(blockPos.x, blockPos.y, layer);
+            var blockUpper = GetUpperBlockUnit(blockPos, layer);
+
+            if (blockUnit.Data.isBreackable && blockUpper != null ? !blockUpper.Data.mustHaveDownerBlock : true)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     //Local
     public void DeleteBlock(Vector3Int pos, Tilemap tilemap, BlockLayer layer)
     {
         if (InBounds(pos) && tilemap.GetTile(pos) != null)
         {
             var blockUnit = _controller.GetBlock(pos.x, pos.y, layer);
-            if (blockUnit.Data.isBreackable)
+            var blockUpper = GetUpperBlockUnit(pos, layer);
+           
+            if (blockUnit.Data.isBreackable && blockUpper != null ? !blockUpper.Data.mustHaveDownerBlock : true )
             {
                 //Clear
                 _controller.DeleteUnit(blockUnit);
                 tilemap.SetTile(pos, null);
-                tilemapFrontWorldLightObstacle.SetTile(pos, null);
+                if (layer == BlockLayer.Front)
+                {
+                    tilemapFrontWorldLightObstacle.SetTile(pos, null);
+                }
 
                 #region CreateItem
 
@@ -176,9 +205,9 @@ public class ChunkUnit : MonoBehaviour
                     //Debug.Log("ItemCreated: " + posCreateItem);
                     ItemManager.CreateItem(posCreateItem, blockUnit.GetItem());
                 }
+                
+                #endregion
             }
-
-            #endregion
         }
     }
 
@@ -232,6 +261,35 @@ public class ChunkUnit : MonoBehaviour
         return _controller.GetBlock(new Vector2Int(blockPos.x, blockPos.y), layer);
     }
 
+    public BlockUnit GetDownerBlockUnit(Vector2Int pos, BlockLayer layer)
+    {
+        var posBlock = new Vector2Int(pos.x, chunkSize - 1);
+        
+        if (pos.y == 0)
+        {
+            return _chunkDowner.GetBlockUnit(posBlock, layer);
+        }
+        posBlock = new Vector2Int(pos.x, pos.y - 1);
+        return _controller.GetBlock(posBlock, layer);
+    }
+    public BlockUnit GetUpperBlockUnit(Vector3Int pos, BlockLayer layer)
+    {
+        var posBlock = new Vector2Int(pos.x, 0);
+        
+        if (chunkBuilder.ChunkLevel + chunkSize == chunkBuilder.WorldHeight && pos.y == chunkSize) //Если блок под вершиной мира
+        {
+            return null;
+            
+        }
+
+        if (pos.y == chunkSize - 1 && _chunkUpper != null )//Если блок под низом другого чанка
+        {
+            return _chunkUpper.GetBlockUnit(posBlock, layer);
+        }
+        
+        posBlock = new Vector2Int(pos.x, pos.y + 1);
+        return _controller.GetBlock(posBlock, layer);
+    }
     #endregion
 
     #region HasBlock
@@ -297,9 +355,9 @@ public class ChunkUnit : MonoBehaviour
         private BlockData[,] _chunkFront;// = new BlockData[chunkSize, chunkSize];
         private BlockData[,] _chunkBack;// = new BlockData[chunkSize, chunkSize];
 
-        private int _worldHeight;
+        public int WorldHeight { get; private set; }
 
-        private int _chunkLevel; //Высота от начала мира до начала чанка
+        public int ChunkLevel { get; private set; } //Высота от начала мира до начала чанка
 
         #endregion
 
@@ -309,10 +367,10 @@ public class ChunkUnit : MonoBehaviour
             _chunkManager = chunkManager;
             
             _generator = _chunkManager.generator;
-            _worldHeight = _generator.worldHeight;
+            WorldHeight = _generator.worldHeight;
             _chunkPos = _chunkManager.ChunkPosInWorld(_chunkUnit);
 
-            _chunkLevel = _chunkPos.y * chunkSize; //Высота от начала мира до начала чанка
+            ChunkLevel = _chunkPos.y * chunkSize; //Высота от начала мира до начала чанка
 
             var chunkCoord = _chunkManager.ChunkPosInWorld(_chunkUnit);
             _chunkUpper = _chunkManager.GetUpperChunk(chunkCoord);
@@ -337,19 +395,19 @@ public class ChunkUnit : MonoBehaviour
             //Generating Enviroment
             for (var i = 0; i < chunkSize; i++)
             {
-                surface_level = _worldHeight - Random.Range(12, 18) +
+                surface_level = WorldHeight - Random.Range(12, 18) +
                                 Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
                 for (var j = 0; j < chunkSize; j++)
                 {
                     var heightDirt = Random.Range(3, 9); //Толщина земляного покрова
 
-                    if (_chunkLevel + j < surface_level)
+                    if (ChunkLevel + j < surface_level)
                     {
                         _chunkFront[i, j] = stone;
                     }
                     else
                     {
-                        if (_chunkLevel + j < surface_level + heightDirt) _chunkFront[i, j] = dirt;
+                        if (ChunkLevel + j < surface_level + heightDirt) _chunkFront[i, j] = dirt;
                     }
                 }
             }
@@ -439,7 +497,7 @@ public class ChunkUnit : MonoBehaviour
 
         public void BuildingGrass()
         {
-            if (_chunkLevel > _worldHeight - 30) //Если уровень чанка идет по уровню земли
+            if (ChunkLevel > WorldHeight - 30) //Если уровень чанка идет по уровню земли
             {
                 var pos = Vector3Int.zero;
                 //Debug.Log("Start Building Grass");
@@ -468,7 +526,7 @@ public class ChunkUnit : MonoBehaviour
             //}
             if ((data ?? _chunkFront[i, j]) == _generator.dirt)
             {
-                if (_chunkLevel + chunkSize == _worldHeight && j == chunkSize) //Если блок под вершиной мира
+                if (ChunkLevel + chunkSize == WorldHeight && j == chunkSize) //Если блок под вершиной мира
                 {
                     return true;
                 }

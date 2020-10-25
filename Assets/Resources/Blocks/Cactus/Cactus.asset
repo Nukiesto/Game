@@ -18,10 +18,10 @@ MonoBehaviour:
   toPlaceBack: 0
   isInteractable: 0
   nameBlock: Cactus
-  hp: 0
+  hp: 40
   script: {fileID: 0}
   memory: {fileID: 0}
-  tile: {fileID: 0}
+  tile: {fileID: 11400000, guid: af2b22874fd35d748b3d656d2dc32610, type: 2}
   tileVariables: []
   nameTranslations:
     translations:

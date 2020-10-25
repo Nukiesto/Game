@@ -16,12 +16,13 @@ MonoBehaviour:
   toCreateItem: 1
   isBreackable: 1
   toPlaceBack: 0
-  isInteractable: 0
+  isInteractable: 1
+  mustHaveDownerBlock: 1
   nameBlock: Furnace
-  hp: 0
+  hp: 470
   script: {fileID: 0}
   memory: {fileID: 0}
-  tile: {fileID: 0}
+  tile: {fileID: 11400000, guid: 81b5df7b88bbd564c95f3a89de919724, type: 2}
   tileVariables: []
   nameTranslations:
     translations:

@@ -17,6 +17,8 @@ public class Inventory : MonoBehaviour
     private bool _isOpenMain = false;
     private bool _isOpenThirdMenu = false;
     private InventoryType _typeCurrentThirdMenu;
+
+    public bool IsOpen => _isOpenMain;
     
     [SerializeField] internal DataBase dataBase;
     //Fast Panel
@@ -244,9 +246,17 @@ public class Inventory : MonoBehaviour
             //Debug.Log("inv: " + this + "unit: " + unit + ";" + InventoryType);
             unit.type = InventoryType;
         }
+
+        public void WriteItems(List<ItemData.Data> items)
+        {
+            for (var i = 0; i < items.Count; i++)
+            {
+                Items[i].data = items[i];
+            }
+        }
     }
     [Serializable]
-    public class ItemSelect 
+    public class ItemSelect
     {
         public PanelItemsBase panel;
 
@@ -302,7 +312,7 @@ public class Inventory : MonoBehaviour
             if (player.CanToCreateItem())
             {
                 player.CreateItemKick(itemSelect.unit.data, 1);
-                ItemUnit unit = itemSelect.unit;
+                var unit = itemSelect.unit;
 
                 unit.RemoveItem();
             }
@@ -371,22 +381,31 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
         {
-            if (itemSelect != null && itemSelect.unit.type == InventoryType.Fast & itemSelect.unit.data != null)
+            MoveItemsSpec(InventoryType.Fast, InventoryType.Main);
+            if (_isOpenThirdMenu)
             {
-                MoveItems(itemSelect.unit, InventoryType.Fast, InventoryType.Main);
+                MoveItemsSpec(InventoryType.Main, _typeCurrentThirdMenu);
             }
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.W))
         {
-            if (itemSelect != null && itemSelect.unit.type == InventoryType.Main & itemSelect.unit.data != null)
+            MoveItemsSpec(InventoryType.Main, InventoryType.Fast);
+            if (_isOpenThirdMenu)
             {
-                MoveItems(itemSelect.unit, InventoryType.Main, InventoryType.Fast);
+                MoveItemsSpec(_typeCurrentThirdMenu,InventoryType.Main);
             }
         }
 
         SetControlSelect();
     }
 
+    private void MoveItemsSpec(InventoryType from, InventoryType to)
+    {
+        if (to != InventoryType.Sandbox && itemSelect != null && itemSelect.unit.type == from & itemSelect.unit.data != null)
+        {
+            MoveItems(itemSelect.unit, from, to);
+        }
+    }
     #region Control
     public void SetItemSelect(UIItemPanelSlot item)
     {
@@ -486,10 +505,10 @@ public class Inventory : MonoBehaviour
     }
     public void AddItemCount(ItemData.Data data, int count)
     {
-        int tempCount = count;
+        var tempCount = count;
         for (InventoryType i = 0; (int)i < count; i++)
         {
-            int mod = panels[i].AddItemCount(data, tempCount);
+            var mod = panels[i].AddItemCount(data, tempCount);
             if (mod == 0)
             {
                 break;
@@ -502,21 +521,36 @@ public class Inventory : MonoBehaviour
     }
     public void MoveItems(ItemUnit unit, InventoryType from, InventoryType to)
     {
-        var a = panels[to].AddItemCount(unit.data, unit.Count);
-        if (a > 0)
+        var a = panels[to].AddItemCount(unit.data, unit.IsInfinity ? 64 : unit.Count);
+        if (!unit.IsInfinity)
         {
-            panels[from].AddItemCount(unit.data, a);
+            if (a > 0)
+            {
+                panels[from].AddItemCount(unit.data, a);
+            }
+            else
+            {
+                unit.Clear();
+                unit.Reset();
+            }
         }
-
-        unit.Clear();
-        unit.Reset();
     }
     public ItemUnit GetSelectedItem()
     {
         return itemSelect.unit;
     }
 
-      
+    public void OpenChest(List<ItemData.Data> items)
+    {
+        SetThirdMenu(InventoryType.Chest);
+        //Debug.Log(_typeCurrentThirdMenu);
+        ToggleOpenMain(true);
+
+        ToggleOpenThirdMenu(true);
+        
+        chestItems.WriteItems(items);
+        Debug.Log(_typeCurrentThirdMenu);
+    }
 }
 
 [Serializable]
@@ -552,26 +586,18 @@ public class ItemUnit
         MaxCount = data.maxCount;
         uislot.SetSprite(data.sprite);
         
-        if (!IsInfinity)
-        {
-            Count++;
-            uislot.SetCount(Count);
-        }
+        Count++;
+        uislot.SetCount(Count);
     }
     public bool AddItem()
     {
-        if (!IsInfinity)
+        if (Count < MaxCount)
         {
-            if (Count < MaxCount)
-            {
-                Count++;
-                uislot.SetCount(Count);
-                return true;
-            }
-
-            return false;
+            Count++;
+            uislot.SetCount(Count);
+            return true;
         }
-        return true;
+        return false;
     }
     public bool HasData()
     {
