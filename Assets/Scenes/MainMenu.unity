@@ -5880,6 +5880,21 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MainMenuButton, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 919145325225177397, guid: 9fdc163977f17aa4aa9ea825801dc5aa,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 872694493}
+    - target: {fileID: 919145325225177397, guid: 9fdc163977f17aa4aa9ea825801dc5aa,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 919145325225177397, guid: 9fdc163977f17aa4aa9ea825801dc5aa,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenuButton, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 919290498328761483, guid: 9fdc163977f17aa4aa9ea825801dc5aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -5929,6 +5944,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 961271618817977858, guid: 9fdc163977f17aa4aa9ea825801dc5aa,
+        type: 3}
+      propertyPath: buttonType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 961271618817977859, guid: 9fdc163977f17aa4aa9ea825801dc5aa,
         type: 3}

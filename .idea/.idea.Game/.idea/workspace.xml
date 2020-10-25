@@ -20,34 +20,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="WorldList">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/ButtonAttribute.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/ButtonAttribute.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/ButtonsExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/ButtonsExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/CustomEditorButtonsExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/CustomEditorButtonsExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor/ButtonEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor/ButtonEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor/CustomEditorButtonsExampleEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor/CustomEditorButtonsExampleEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor/EasyButtonsEditorExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/Editor/EasyButtonsEditorExtensions.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/ScriptableObjectExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EasyButtons/ScriptableObjectExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/WorldListMenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/WorldListMenu.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Inventory.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Inventory.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/Cone.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/Cone.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/DirectionalLight.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/DirectionalLight.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLight.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLight.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLightBlurred.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLightBlurred.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLightSingle.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLightSingle.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLightSingleBlurred.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/LineLightSingleBlurred.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight1.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight1.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight2.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight3.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight3.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight4.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight4.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight5.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight5.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight6.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/PointLight6.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/WhiteTexture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Lights/WhiteTexture.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Materials/AmbientLightComputer.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Materials/AmbientLightComputer.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Materials/Light90Points.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Materials/Light90Points.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Coal/Ore_Coal.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Coal/Ore_Coal.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Iron/Ore_Iron.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Iron/Ore_Iron.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.sln.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/Game.sln.DotSettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +92,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Lobby/PlayerListEntry.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/MenuController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/MenuUnit.cs" root0="FORCE_HIGHLIGHTING" />
@@ -79,6 +104,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" root0="FORCE_HIGHLIGHTING" />
@@ -88,6 +114,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/0b/e1867340/Resources.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -107,6 +134,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Runtime/Scripts/Controls/ComboBox/AutoCompleteComboBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonRealtime/Code/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Lobby/LobbyMainPanel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -128,18 +156,22 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Updater/DirtScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/MenuController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
       </list>
     </option>
   </component>
@@ -187,6 +219,7 @@
       <workItem from="1603530221908" duration="9414000" />
       <workItem from="1603553063728" duration="4879000" />
       <workItem from="1603605738513" duration="9545000" />
+      <workItem from="1603629181718" duration="13343000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>
@@ -341,14 +374,14 @@
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state x="141" y="142" key="SettingsEditor/0.0.1280.994@0.0.1280.994" timestamp="1603472605610" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1603620925053">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1603640183837">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603620925053" />
-    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog" timestamp="1603555382769">
+    <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603640183837" />
+    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog" timestamp="1603632565828">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1603555382769" />
+    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1603632565828" />
     <state x="245" y="108" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603623234970">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
@@ -361,9 +394,9 @@
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state x="232" y="60" width="815" height="873" key="find.popup/0.0.1280.994@0.0.1280.994" timestamp="1603555236450" />
-    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup" timestamp="1603623248498">
+    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup" timestamp="1603633559500">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup/0.0.1280.994@0.0.1280.994" timestamp="1603623248498" />
+    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup/0.0.1280.994@0.0.1280.994" timestamp="1603633559500" />
   </component>
 </project>

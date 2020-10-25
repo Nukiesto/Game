@@ -103,7 +103,7 @@ public class WorldList : MonoBehaviour {
 	}
 	public void DestroyWorld()
 	{
-		WorldSavingSystem.WorldsList.RemoveWorldFromList(name: _itemListUnits[index: _currentWorldId].Title);
+		WorldSavingSystem.WorldsList.RemoveWorld(name: _itemListUnits[index: _currentWorldId].Title);
 		_itemListUnits.RemoveAt(index: _currentWorldId);
 		itemList.UpdateList(id: _currentWorldId);
 		

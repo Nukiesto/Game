@@ -10,12 +10,14 @@ public class BlockData : ScriptableObject
     public bool isSolid = true;
     public bool toCreateItem = true;
     public bool isBreackable = true;
+    public bool toPlaceBack = true;
+    public bool isInteractable = false;
     public string nameBlock;
     [HideInInspector] public int id { get; private set; }
     [Header("")]
     [Range(0, 1000)]
     public int hp;
-
+    
     [Header("Компоненты")]
     public BaseBlockScript script;
     public BaseBlockMemory memory;

@@ -928,6 +928,7 @@
                 <e p="BaseBlockMemory.cs" t="Include" />
                 <e p="BaseBlockScript.cs" t="Include" />
                 <e p="Memory" t="Include">
+                  <e p="ChestMemory.cs" t="Include" />
                   <e p="DirtMemory.cs" t="Include" />
                   <e p="NullScript.cs" t="Include" />
                 </e>

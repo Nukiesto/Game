@@ -38,7 +38,8 @@ public class ChunkUnit : MonoBehaviour
     private static readonly int chunkSize = GameConstants.ChunkSize;
     [HideInInspector] public ChunkManager chunkManager;
     private Vector3 _posObj;
-    public bool toGenerate;
+    public bool ToGenerate { private get; set; }
+
     #endregion
 
     #endregion
@@ -53,21 +54,36 @@ public class ChunkUnit : MonoBehaviour
     private void Start()
     {
         Init();
-        chunkBuilder = new ChunkBuilder(this, chunkManager);
-        if (toGenerate)
+        if (chunkBuilder == null)
         {
-            chunkBuilder.GenerateBuild(); 
+            chunkBuilder = new ChunkBuilder(this, chunkManager);
         }
+        
+        //Debug.Log(ToGenerate);
+        if (ToGenerate)
+        {
+            
+            chunkBuilder.GenerateBuild();
+        }     
         StartCoroutine(ToBuildGrass());
     }
-    
-    #endregion
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            chunkBuilder.BuildingGrass();
+        }
+    }
+
+    #endregion
+    
     public IEnumerator ToBuildGrass()
     {
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
+            //Debug.Log("BuildingGrass");
             chunkBuilder.BuildingGrass();
             yield break;
         }
@@ -96,11 +112,19 @@ public class ChunkUnit : MonoBehaviour
         BlockLayer layer = BlockLayer.Front, bool toStartCor = false)
     {
         var hasBlock = checkCollisions && HasBlock(pos, tilemap);
+        if (layer == BlockLayer.Back && !(data?.toPlaceBack ?? false))
+        {
+            return false;
+        }
         if (InBounds(pos) && !hasBlock)
             if (data != null)
             {
+                //Debug.Log(layer);
                 tilemap.SetTile(pos, data.tile);
-                tilemapFrontWorldLightObstacle.SetTile(pos, data.tile);
+                if (layer == BlockLayer.Front)
+                {
+                    tilemapFrontWorldLightObstacle.SetTile(pos, data.tile);
+                }
                 _controller.AddUnit(data, pos, layer, tilemap, toStartCor);
                 return true;
             }
@@ -184,7 +208,7 @@ public class ChunkUnit : MonoBehaviour
 
     public void Clear()
     {
-        Debug.Log("Cleared");
+        //Debug.Log("Cleared");
         _controller.Clear();
         tilemapBackWorld.ClearAllTiles();
         tilemapFrontWorld.ClearAllTiles();
@@ -267,10 +291,11 @@ public class ChunkUnit : MonoBehaviour
         private readonly ChunkUnit _chunkUnit;
         private WorldGenerator _generator;
 
-        private ChunkUnit _chunkUpper;
+        private ChunkUnit _chunkUpper;//Чанк сверху
+        private ChunkUnit _chunkDowner;//Чанк снизу
         private Vector2Int _chunkPos;
-        private BlockData[,] _chunkFront = new BlockData[chunkSize, chunkSize];
-        private BlockData[,] _chunkBack = new BlockData[chunkSize, chunkSize];
+        private BlockData[,] _chunkFront;// = new BlockData[chunkSize, chunkSize];
+        private BlockData[,] _chunkBack;// = new BlockData[chunkSize, chunkSize];
 
         private int _worldHeight;
 
@@ -291,12 +316,15 @@ public class ChunkUnit : MonoBehaviour
 
             var chunkCoord = _chunkManager.ChunkPosInWorld(_chunkUnit);
             _chunkUpper = _chunkManager.GetUpperChunk(chunkCoord);
+            _chunkDowner = _chunkManager.GetDownerChunk(chunkCoord);
         }
 
         #region Main
 
         public void GenerateChunk()
         {
+            _chunkFront = new BlockData[chunkSize, chunkSize];
+            _chunkBack = new BlockData[chunkSize, chunkSize];
             var dirt = _generator.dirt;
             var sand = _generator.sand;
             var stone = _generator.stone;
@@ -337,7 +365,7 @@ public class ChunkUnit : MonoBehaviour
             _chunkBack = _chunkFront;
         }
         
-        private void Building()
+        public void Building()
         {
             var pos = Vector3Int.zero;
             for (var i = 0; i < chunkSize; i++)
@@ -350,11 +378,29 @@ public class ChunkUnit : MonoBehaviour
                 _chunkUnit.SetBlock(pos, _chunkBack[i, j], true, _chunkUnit.tilemapBackWorld, BlockLayer.Back);
             }
         }
-        
-        private void Rebuild(BlockData[,] chunkFront, BlockData[,] chunkBack)
+
+        public void Rebuild(BlockData[,] chunkFront, BlockData[,] chunkBack)
         {
+            //Debug.Log("front: " + chunkFront + " ;back" + chunkBack);
+            //_chunkFront = new BlockData[chunkSize, chunkSize];
+            //_chunkBack  = new BlockData[chunkSize, chunkSize];
+            
+            //for (var i = 0; i < chunkSize; i++)
+            //{
+            //    for (var j = 0; j < chunkSize; j++)
+            //    {
+            //        _chunkFront[i,j] = chunkFront[i,j];
+            //        _chunkBack [i,j] = chunkBack[i,j];
+            //    }
+            //}
+            
             _chunkFront = chunkFront;
             _chunkBack = chunkBack;
+            //_chunkFront = new BlockData[chunkSize, chunkSize];
+            //_chunkBack  = new BlockData[chunkSize, chunkSize];
+            //if (chunkFront != null && chunkBack != null)
+            //Array.Copy(chunkFront, _chunkFront, 64);
+            //Array.Copy(chunkBack, _chunkBack, 64);
             Building();
         }
         
@@ -396,23 +442,31 @@ public class ChunkUnit : MonoBehaviour
             if (_chunkLevel > _worldHeight - 30) //Если уровень чанка идет по уровню земли
             {
                 var pos = Vector3Int.zero;
+                //Debug.Log("Start Building Grass");
                 for (var i = 0; i < chunkSize; i++)
                 for (var j = 0; j < chunkSize; j++)
                 {
                     pos.x = i;
                     pos.y = j;
-
+                    
                     SetGrass(pos);
                 }
             }
         }
-
+        
         public bool CanSetGrass(Vector3Int pos, BlockData data = null)
         {
             int i = pos.x, j = pos.y;
             //Debug.Log("i: " + i + " ;j: " + j);
             //Debug.Log(_chunkFront[i, j] + ";" + _generator.dirt);
-            if (data ?? _chunkFront[i, j] == _generator.dirt)
+            
+            
+            //Debug.Log(_chunkFront);
+            //if (_chunkFront == null)
+            //{
+            //    return false;
+            //}
+            if ((data ?? _chunkFront[i, j]) == _generator.dirt)
             {
                 if (_chunkLevel + chunkSize == _worldHeight && j == chunkSize) //Если блок под вершиной мира
                 {
@@ -424,22 +478,45 @@ public class ChunkUnit : MonoBehaviour
                     return true;
                 }
 
-                if (j == chunkSize - 1 && _chunkUpper != null) //Если блок под низом другого чанка
+                if (j == chunkSize - 1 && 
+                    _chunkUpper != null && 
+                    !_chunkUpper.HasBlock(new Vector3Int(i, 0, 0))) //Если блок под низом другого чанка
                 {
-                    if (!_chunkUpper.HasBlock(new Vector3Int(i, 0, 0)))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
-
+            
             return false;
         }
 
+        public void RefreshDownerGrassBlock(int i, int j)
+        {
+            var posBlock = new Vector3Int(i, j-1, 0);
+            //Debug.Log("BlockDowner: " + _chunkFront[i, j - 1]);
+            var grassTile = _generator.dirt.tileVariables[0];
+            if (j - 1 >= 0 && _chunkUnit.tilemapFrontWorld.GetTile(posBlock) == grassTile ) //Если над блоком пусто
+            {
+                //Debug.Log("Refreshed");
+                _chunkUnit.tilemapFrontWorld.SetTile(posBlock, _generator.dirt.tile);
+            }
+            else
+            {
+                posBlock = new Vector3Int(i, chunkSize - 1, 0);
+                //Debug.Log("BlockDowner: " + _chunkDowner.tilemapFrontWorld.GetTile(posBlock));
+                if (j == 0 && _chunkDowner.tilemapFrontWorld.GetTile(posBlock) == grassTile)
+                {
+                    
+                    //Debug.Log("Refreshed");
+                    _chunkDowner.tilemapFrontWorld.SetTile(posBlock, _generator.dirt.tile);
+                }
+            }
+        }
+        
         private void SetGrass(Vector3Int pos)
         {
             if (CanSetGrass(pos)) 
             {
+                //Debug.Log("Grass Seted");
                 _chunkUnit.tilemapFrontWorld.SetTile(pos, _chunkFront[pos.x, pos.y].tileVariables[0]);
             }
         }

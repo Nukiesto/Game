@@ -16,11 +16,11 @@ public class BlockDataBase : ScriptableObject
     public void InitBlocks()
     {
         Debug.Log("Refreshed");
-        string[] folders = Directory.GetDirectories(dirPath);
+        var folders = Directory.GetDirectories(dirPath);
         BlockData block;
         string path;
         blocks = new Dictionary<string, BlockData>();
-        for (int i = 0; i < folders.Length; i++)
+        for (var i = 0; i < folders.Length; i++)
         {
             //folders[i].Replace(V, "/");
             //Debug.Log(folders[i]);

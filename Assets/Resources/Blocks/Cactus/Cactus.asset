@@ -15,11 +15,14 @@ MonoBehaviour:
   isSolid: 1
   toCreateItem: 1
   isBreackable: 1
+  toPlaceBack: 0
+  isInteractable: 0
   nameBlock: Cactus
   hp: 0
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 0}
+  tileVariables: []
   nameTranslations:
     translations:
     - lang: 1

@@ -25,9 +25,10 @@ public class DirtScript : BaseBlockScript
             //yield return new WaitForSeconds(n);
             //Debug.Log("Tile: " + GetTile() + "/" + blockUnit.Data.tileVariables[0]);
             //Debug.Log("CanSet Grass: " + blockUnit.ChunkUnit.chunkBuilder.CanSetGrass(_pos));
-            if (blockUnit.ChunkUnit.chunkBuilder.CanSetGrass(_pos, blockUnit.Data))
+            var builder = blockUnit.ChunkUnit.chunkBuilder;
+            if (builder.CanSetGrass(_pos, blockUnit.Data))
             {
-                Debug.Log("Grass Seted: " + _pos);
+                //Debug.Log("Grass Seted: " + _pos);
                 SetTile(blockUnit.Data.tileVariables[0]);
             }
             yield break;

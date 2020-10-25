@@ -5,33 +5,42 @@ using UnityEngine;
 [Serializable]
 public enum InventoryType
 {
-    fast,
-    main
+    Fast,
+    Main,
+    Sandbox,
+    Chest
 }
 
 public class Inventory : MonoBehaviour
 {
-    private bool isOpenMain = false;
-
+    private bool _isOpenMain = false;
+    private bool _isOpenThirdMenu = false;
+    
     //Fast Panel
     [SerializeField] private FastItems fastItems;
 
     //Main Panel
     [SerializeField] private MainItems mainItems;
-
+    
+    //SandBox Panel
+    [SerializeField] private SandboxItems sandboxItems;
+    
+    //Chest Panel
+    [SerializeField] private ChestItems chestItems;
+    
     //Item select
     [SerializeField] internal ItemSelect itemSelect;
     [SerializeField] internal GameObject selector;
 
     //Dragging
     private bool dragging;
-    private ItemUnit dragging_item;
+    private ItemUnit _draggingItem;
     private Texture2D dragging_texture;
-    private Vector3 curPos;
+    private Vector3 _curPos;
 
     //Control
-    private int rollSelect;
-    private List<KeyCode> inventoryKeyCodes;
+    private int _rollSelect;
+    private List<KeyCode> _inventoryKeyCodes;
 
     //Player
     [SerializeField] private PlayerController player;
@@ -40,8 +49,8 @@ public class Inventory : MonoBehaviour
     public abstract class PanelItemsBase
     {
         [SerializeField] private UIItemPanel uipanel;
-        internal int maxCount;
-        internal List<ItemUnit> items;//Основная панель предметов
+        internal int MaxCount;
+        internal List<ItemUnit> Items;//Основная панель предметов
         public Inventory inventory;
         public abstract InventoryType InventoryType { get; }
 
@@ -51,28 +60,28 @@ public class Inventory : MonoBehaviour
         }
         public void Init()
         {
-            maxCount = uipanel.slots.slots.Length;
-            items = new List<ItemUnit>();
-            for (int i = 0; i < maxCount; i++)
+            MaxCount = uipanel.slots.slots.Length;
+            Items = new List<ItemUnit>();
+            for (var i = 0; i < MaxCount; i++)
             {
-                ItemUnit unit = new ItemUnit() { uislot = uipanel.slots.slots[i] };
+                var unit = new ItemUnit() { uislot = uipanel.slots.slots[i] };
                 unit.inventory = inventory;
                 unit.uislot.inventory = inventory;
                 SetTypeItem(unit);
                 unit.Reset();
-                items.Add(unit);
+                Items.Add(unit);
             }
         }
         public ItemData.Data GetItemData(int n)
         {
-            return items[n].data;
+            return Items[n].data;
         }
 
         public ItemUnit GetItemUnit(UIItemPanelSlot itemSelectUI)
         {
-            for (int i = 0; i < maxCount; i++)
+            for (var i = 0; i < MaxCount; i++)
             {
-                ItemUnit unit = items[i];
+                var unit = Items[i];
                 if (unit.uislot == itemSelectUI)
                 {                  
                     return unit;
@@ -82,7 +91,7 @@ public class Inventory : MonoBehaviour
         }
         public int AddItemCount(ItemData.Data data, int count)
         {
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 if (!AddItem(data))
                 {
@@ -95,10 +104,10 @@ public class Inventory : MonoBehaviour
         {
             //Debug.Log("StartFinding Had");
             ItemUnit unit;
-            for (int i = 0; i < maxCount; i++)
+            for (var i = 0; i < MaxCount; i++)
             {
                 //Debug.Log("i:" + i + " " + fastPanel[i].data?.name.translations[0].text + "; " + data.name.translations[0].text);
-                unit = items[i];
+                unit = Items[i];
                 if (unit.data == data)
                 {
                     if (unit.AddItem())
@@ -110,9 +119,9 @@ public class Inventory : MonoBehaviour
                 }
             }
             //Debug.Log("StartFinding Null");
-            for (int i = 0; i < maxCount; i++)
+            for (var i = 0; i < MaxCount; i++)
             {
-                unit = items[i];
+                unit = Items[i];
                 //Debug.Log("i:" + i + " "+ fastPanel[i].data);
                 if (!unit.HasData())
                 {
@@ -141,7 +150,7 @@ public class Inventory : MonoBehaviour
     [Serializable]
     public class MainItems : PanelItemsBase
     {
-        public override InventoryType InventoryType => InventoryType.main;
+        public override InventoryType InventoryType => InventoryType.Main;
 
         protected override void SetTypeItem(ItemUnit unit)
         {
@@ -152,7 +161,28 @@ public class Inventory : MonoBehaviour
     [Serializable]
     public class FastItems : PanelItemsBase
     {
-        public override InventoryType InventoryType => InventoryType.fast;
+        public override InventoryType InventoryType => InventoryType.Fast;
+
+        protected override void SetTypeItem(ItemUnit unit)
+        {
+            //Debug.Log("inv: " + this + "unit: " + unit + ";" + InventoryType);
+            unit.type = InventoryType;
+        }
+    }
+    [Serializable]
+    public class SandboxItems : PanelItemsBase
+    {
+        public override InventoryType InventoryType => InventoryType.Fast;
+
+        protected override void SetTypeItem(ItemUnit unit)
+        {
+            //Debug.Log("inv: " + this + "unit: " + unit + ";" + InventoryType);
+            unit.type = InventoryType;
+        }
+    }
+    public class ChestItems : PanelItemsBase
+    {
+        public override InventoryType InventoryType => InventoryType.Fast;
 
         protected override void SetTypeItem(ItemUnit unit)
         {
@@ -169,12 +199,17 @@ public class Inventory : MonoBehaviour
         public UIItemPanelSlot itemSelectUI;
     }
 
-    void Start()
+    private void Start()
     {
-        mainItems.SetActive(isOpenMain);
+        mainItems.SetActive(_isOpenMain);
+        sandboxItems.SetActive(_isOpenThirdMenu);
+        chestItems.SetActive(_isOpenThirdMenu);
+        
         panels = new Dictionary<InventoryType, PanelItemsBase>() {
-            { InventoryType.fast, fastItems },
-            { InventoryType.main, mainItems },
+            { InventoryType.Fast, fastItems },
+            { InventoryType.Main, mainItems },
+            { InventoryType.Sandbox, sandboxItems },
+            { InventoryType.Chest, chestItems },
         };
         
         for (InventoryType i = 0; (int)i < panels.Count; i++)
@@ -221,10 +256,10 @@ public class Inventory : MonoBehaviour
     }
     private void ToggleOpenMain()
     {
-        isOpenMain = !isOpenMain;
-        mainItems.SetActive(isOpenMain);
+        _isOpenMain = !_isOpenMain;
+        mainItems.SetActive(_isOpenMain);
         //Debug.Log("Type: " + itemSelect.unit.type);
-        if (itemSelect != null && itemSelect.itemSelectUI != null && itemSelect.unit.type == InventoryType.main)
+        if (itemSelect != null && itemSelect.itemSelectUI != null && itemSelect.unit.type == InventoryType.Main)
         {
             selector.SetActive(false);
         }
@@ -245,16 +280,16 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
         {
-            if (itemSelect != null && itemSelect.unit.type == InventoryType.fast & itemSelect.unit.data != null)
+            if (itemSelect != null && itemSelect.unit.type == InventoryType.Fast & itemSelect.unit.data != null)
             {
-                MoveItems(itemSelect.unit, InventoryType.fast, InventoryType.main);
+                MoveItems(itemSelect.unit, InventoryType.Fast, InventoryType.Main);
             }
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.W))
         {
-            if (itemSelect != null && itemSelect.unit.type == InventoryType.main & itemSelect.unit.data != null)
+            if (itemSelect != null && itemSelect.unit.type == InventoryType.Main & itemSelect.unit.data != null)
             {
-                MoveItems(itemSelect.unit, InventoryType.main, InventoryType.fast);
+                MoveItems(itemSelect.unit, InventoryType.Main, InventoryType.Fast);
             }
         }
 
@@ -288,15 +323,15 @@ public class Inventory : MonoBehaviour
 
     private void InitKeys()
     {
-        inventoryKeyCodes = new List<KeyCode>();
-        inventoryKeyCodes.Add(KeyCode.Alpha0);
-        inventoryKeyCodes.Add(KeyCode.Alpha1);
-        inventoryKeyCodes.Add(KeyCode.Alpha2);
-        inventoryKeyCodes.Add(KeyCode.Alpha3);
-        inventoryKeyCodes.Add(KeyCode.Alpha4);
-        inventoryKeyCodes.Add(KeyCode.Alpha5);
-        inventoryKeyCodes.Add(KeyCode.Alpha6);
-        inventoryKeyCodes.Add(KeyCode.Alpha7);
+        _inventoryKeyCodes = new List<KeyCode>();
+        _inventoryKeyCodes.Add(KeyCode.Alpha0);
+        _inventoryKeyCodes.Add(KeyCode.Alpha1);
+        _inventoryKeyCodes.Add(KeyCode.Alpha2);
+        _inventoryKeyCodes.Add(KeyCode.Alpha3);
+        _inventoryKeyCodes.Add(KeyCode.Alpha4);
+        _inventoryKeyCodes.Add(KeyCode.Alpha5);
+        _inventoryKeyCodes.Add(KeyCode.Alpha6);
+        _inventoryKeyCodes.Add(KeyCode.Alpha7);
     }
     private void InitItemSelect()
     {
@@ -313,30 +348,30 @@ public class Inventory : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         { // вправо
 
-            if (rollSelect < fastItems.maxCount - 1)
+            if (_rollSelect < fastItems.MaxCount - 1)
             {
-                rollSelect++;
-                SetItemSelect(fastItems.items[rollSelect]);
+                _rollSelect++;
+                SetItemSelect(fastItems.Items[_rollSelect]);
             }
 
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         { // влево
-            if (rollSelect > 0)
+            if (_rollSelect > 0)
             {
-                rollSelect--;
-                SetItemSelect(fastItems.items[rollSelect]);
+                _rollSelect--;
+                SetItemSelect(fastItems.Items[_rollSelect]);
             }
         }
 
     }
     private void KeyDownFast()
     {
-        for (int i = 0; i < fastItems.maxCount; i++)
+        for (int i = 0; i < fastItems.MaxCount; i++)
         {
-            if (Input.GetKeyDown(inventoryKeyCodes[i]))
+            if (Input.GetKeyDown(_inventoryKeyCodes[i]))
             {
-                SetItemSelect(fastItems.items[i]);
+                SetItemSelect(fastItems.Items[i]);
             }
         }
     }

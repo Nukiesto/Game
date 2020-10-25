@@ -74,13 +74,13 @@ namespace SavingSystem
                 }
             }
 
-            public void RemoveWorldFromList(string name)
+            public void RemoveWorld(string name)
             {
                 if (name != null)
                 {
+                    Directory.Delete(DirnameWorlds + "/" + name, true);
                     LoadWorldList();
                     Worlds.Remove(name);
-
                     SaveList();
                 }
             }
@@ -179,7 +179,7 @@ namespace SavingSystem
             {
                 if (_worldList.WorldIsExists(name))
                 {
-                    Debug.Log("WorldLoading");
+                    //Debug.Log("WorldLoading");
                     var dirname = DirnameWorlds + "/" + name;
                     if (!Directory.Exists(dirname))
                     {

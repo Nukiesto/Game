@@ -15,11 +15,14 @@ MonoBehaviour:
   isSolid: 1
   toCreateItem: 1
   isBreackable: 1
+  toPlaceBack: 0
+  isInteractable: 0
   nameBlock: Ore_Iron
   hp: 0
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 11400000, guid: 79a76aea4c526dd40b650c37eecfd6f4, type: 2}
+  tileVariables: []
   nameTranslations:
     translations:
     - lang: 2

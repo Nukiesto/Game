@@ -93,7 +93,7 @@ public class ChunkManager : MonoBehaviour
 
             chunkUnit = chunkObj.GetComponent<ChunkUnit>();
             chunkUnit.chunkManager = this;
-            chunkUnit.toGenerate = true;
+            chunkUnit.ToGenerate = true;
             _chunks[i, j] = chunkUnit;
             n++;
             //progress.text = n / N * 100 + "%";
@@ -139,9 +139,13 @@ public class ChunkManager : MonoBehaviour
     public void InitWorld()
     {
         _worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
-        if (_worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld) && !_worldSaving.WorldDataUnit.toGenerateWorld)
+        if (_worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld))
         {
-            ClickLoadWorld();
+            if (!_worldSaving.WorldDataUnit.toGenerateWorld)
+            {
+                Debug.Log("WorldLoading");
+                ClickLoadWorld();
+            }
         }
     }
 
@@ -208,27 +212,31 @@ public class ChunkManager : MonoBehaviour
             {
                 var unit = _chunks[chunk.x, chunk.y];
                 //unit.Clear(); //Полная очистка чанка
-                unit.toGenerate = false;
+                unit.ToGenerate = false;
+                
+                var chunkFront = new BlockData[_chunkSize,_chunkSize];
+                var chunkBack  = new BlockData[_chunkSize,_chunkSize];
                 for (var n = 0; n < chunk.blocks.Count; n++)
                 {
                     var blockData = chunk.blocks[n];
                     if (blockData.blockLayer == (int) BlockLayer.Front)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
-
-                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.Front, false);
+                        chunkFront[blockData.x, blockData.y] = blockDataMain;
+                        //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Front, false);
                     }
 
                     if (blockData.blockLayer == (int) BlockLayer.Back)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
-
-                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,
-                            BlockLayer.Back);
+                        chunkBack[blockData.x, blockData.y] = blockDataMain;
+                        //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Back);
                     }
-
-                    unit.StartCoroutine(unit.ToBuildGrass());
                 }
+                unit.chunkBuilder = new ChunkUnit.ChunkBuilder(unit, this);
+                unit.chunkBuilder.Rebuild(chunkFront, chunkBack);
+                //unit.chunkBuilder.Building();
+                //unit.StartCoroutine(unit.ToBuildGrass());
             }
         }
     }
@@ -240,7 +248,13 @@ public class ChunkManager : MonoBehaviour
             return _chunks[pos.x, pos.y + 1];
         return null;
     }
-
+    public ChunkUnit GetDownerChunk(Vector2Int pos)
+    {
+        //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
+        if (pos.y - 1 > 0) //Если чанк не самый низкий
+            return _chunks[pos.x, pos.y - 1];
+        return null;
+    }
     #region Debugging
 
 #if UNITY_EDITOR

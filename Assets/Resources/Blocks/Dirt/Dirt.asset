@@ -15,6 +15,8 @@ MonoBehaviour:
   isSolid: 0
   toCreateItem: 1
   isBreackable: 1
+  toPlaceBack: 1
+  isInteractable: 0
   nameBlock: Dirt
   hp: 100
   script: {fileID: 11400000, guid: 203fd3afe5a1a194fbf960005e38aa50, type: 2}

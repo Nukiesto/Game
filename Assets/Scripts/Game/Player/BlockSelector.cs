@@ -8,7 +8,7 @@ public class BlockSelector : MonoBehaviour
     [Header("Компоненты")]
     [SerializeField] private Camera cameraMain;
     [SerializeField] private ChunkManager chunkManager;
-
+    [SerializeField] private SpriteRenderer selectorSprite;
     [Header("Другое")]
     [SerializeField] private BlockData blockToSet;
     [SerializeField, HideInInspector] private Vector3 onWorldPos;
@@ -21,18 +21,18 @@ public class BlockSelector : MonoBehaviour
     [SerializeField] private Sprite[] destroyingStadies;
     [SerializeField] private SpriteRenderer destroyingProcess;
 
-    private bool isDeleting;
-    private Vector3 posBlockDelete;
-    private float currentTime;
-    private float blockToDeleteTime;
-    private float procent;//
-    private ChunkUnit chunkUnitClick;//Чанк на который нажали
-    private float powerDig;//Мощность всапывания
+    private bool _isDeleting;
+    private Vector3 _posBlockDelete;
+    private float _currentTime;
+    private float _blockToDeleteTime;
+    private float _procent;//
+    private ChunkUnit _chunkUnitClick;//Чанк на который нажали
+    private float _powerDig;//Мощность всапывания
     
     [SerializeField] private float powerDigDefault;
-    private float asd;
-
-    private List<string> layers;
+    private BlockLayer _layerBlockToDelete;
+    
+    private List<string> _layers;
 
     //public void OnTriggerStay2D(Collider2D collision)
     //{
@@ -63,15 +63,15 @@ public class BlockSelector : MonoBehaviour
 
     private void Start()
     {
-        layers = new List<string>();
-        layers.Add("Entity");
-        layers.Add("Item");
+        _layers = new List<string>();
+        _layers.Add("Entity");
+        _layers.Add("Item");
 
-        powerDig = powerDigDefault;
+        _powerDig = powerDigDefault;
     }
     private void Update()
     {
-        if (!isDeleting)
+        if (!_isDeleting)
         {
             onWorldPos = GetPoint();
             AlignPositionGrid(onWorldPos);
@@ -91,23 +91,23 @@ public class BlockSelector : MonoBehaviour
     #region Deleting Time
     private void DeletingUpdate()
     {
-        currentTime += Time.deltaTime;
+        _currentTime += Time.deltaTime;
 
         SetSprite();
-        if (currentTime > blockToDeleteTime)
+        if (_currentTime > _blockToDeleteTime)
         {
             DeletingBlock();
         }
     }
     private void SetSprite()
     {
-        procent = currentTime / blockToDeleteTime * 100;
+        _procent = _currentTime / _blockToDeleteTime * 100;
         //Debug.Log(procent);
         float m = 0;
         for (int i = 0; i < 10; i++)
         {
             m += 10f;//12.5f;
-            if (procent <= m)
+            if (_procent <= m)
             {
                 destroyingProcess.sprite = destroyingStadies[i];
                 return;
@@ -116,31 +116,67 @@ public class BlockSelector : MonoBehaviour
     }
     private void DeletingReset()
     {
-        currentTime = 0;
-        blockToDeleteTime = 0;
+        _currentTime = 0;
+        _blockToDeleteTime = 0;
         
-        isDeleting = false;
-        procent = 0;
+        _isDeleting = false;
+        _procent = 0;
 
         destroyingProcess.sprite = destroyingStadies[0];
         destroyingProcess.enabled = false;
     }
     private void DeletingBlock()
     {
-        chunkUnitClick.DeleteBlock(posBlockDelete);    
+        _chunkUnitClick.DeleteBlock(_posBlockDelete, _layerBlockToDelete);    
         DeletingReset();
+    }
+
+    private void StartDeleting(BlockLayer layer = BlockLayer.Front)
+    {
+        if (!_isDeleting)
+        {
+            _chunkUnitClick = chunkManager.GetChunk(onWorldPos);
+
+            _posBlockDelete = onWorldPos;
+            _layerBlockToDelete = layer;
+            float hp = _chunkUnitClick?.
+                GetBlockUnit(onWorldPos, layer)?
+                .Data.hp ?? 0;
+                
+            if (hp != 0)
+            {
+                if (hp < 0)
+                {
+                    DeletingBlock();
+                }
+                else
+                {
+                    _blockToDeleteTime = hp / _powerDig;
+                    destroyingProcess.enabled = true;
+                    _isDeleting = true;
+                    //Debug.Log("StartDeleting");
+                }                   
+            }                                              
+        }
     }
     #endregion
 
-    private void ClickPlaceBlock()
+    private void ClickPlaceBlock(bool isBack = false)
     {
-        ItemUnit item = inventory.GetSelectedItem();
+        var item = inventory.GetSelectedItem();
         if (item.data != null && item.data.type == ItemType.block)
         {
-            if (!CheckCollisions())
+            if (!CheckCollisions() || isBack)
             {
-                if (chunkManager.GetChunk(onWorldPos).SetBlock(onWorldPos, item.data.block, true, BlockLayer.Front, true))
+                var chunk = chunkManager.GetChunk(onWorldPos);
+                var pos = chunk.tilemapFrontWorld.WorldToCell(onWorldPos);
+                if (chunk.SetBlock(pos , item.data.block, true, isBack ? BlockLayer.Back : BlockLayer.Front, !isBack))
                 {
+                    //Debug.Log(_pos);
+                    if (!isBack)
+                    {
+                        chunk.chunkBuilder.RefreshDownerGrassBlock(pos.x, pos.y);
+                    }
                     item.RemoveItem();
                 }               
             }          
@@ -175,7 +211,7 @@ public class BlockSelector : MonoBehaviour
                     for (int j = 0; j < 2; j++)
                     {
                         //Debug.Log(layer + "; " + layers[j]);
-                        if (layer == layers[j])
+                        if (layer == _layers[j])
                         {
                             //Debug.Log("Has solid" + i);
                             return true;
@@ -192,43 +228,30 @@ public class BlockSelector : MonoBehaviour
         {
             return;
         }
-        if (Input.GetMouseButton(0))
-        {           
-            if (!isDeleting)
-            {
-                chunkUnitClick = chunkManager.GetChunk(onWorldPos);
-
-                posBlockDelete = onWorldPos;
-
-                float hp = chunkUnitClick?.
-                                    GetBlockUnit(onWorldPos, BlockLayer.Front)?
-                                    .Data.hp ?? 0;
-                
-                if (hp != 0)
-                {
-                    if (hp < 0)
-                    {
-                        DeletingBlock();
-                    }
-                    else
-                    {
-                        blockToDeleteTime = hp / powerDig;
-                        destroyingProcess.enabled = true;
-                        isDeleting = true;
-                        //Debug.Log("StartDeleting");
-                    }                   
-                }                                              
-            }
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButton(0))
+        {
+            StartDeleting(BlockLayer.Back);
+            return;
         }
-           
-                             
+
+        if (Input.GetMouseButton(0))
+        {
+            StartDeleting();
+            return;
+        }
         
-        
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(1))
+        {
+            ClickPlaceBlock(true);
+            return;
+        }
 
         if (Input.GetMouseButtonDown(1))
         {
             ClickPlaceBlock();
-        }       
+            return;
+        }
     }    
 
     private void AlignPositionGrid(Vector3 pos)
@@ -238,13 +261,24 @@ public class BlockSelector : MonoBehaviour
         pos.z = 0;
 
         transform.position = pos;
+        
+        var block = chunkManager.GetChunk(onWorldPos).GetBlockUnit(onWorldPos, BlockLayer.Front);
+        if (block != null && block.Data != null && block.Data.isInteractable)
+        {
+            selectorSprite.color = Color.yellow;
+        }
+        else
+        {
+            selectorSprite.color = Color.white;
+        }
+        
     }
     private bool InBounds(Vector3 pos)
     {       
         pos.x = MathFast.Floor(pos.x);
         pos.y = MathFast.Floor(pos.y);
 
-        Vector3 pos_ = transform.position;
+        var pos_ = transform.position;
 
         pos_.x = MathFast.Floor(pos_.x);
         pos_.y = MathFast.Floor(pos_.y);
@@ -253,7 +287,7 @@ public class BlockSelector : MonoBehaviour
     }
     private Vector3 GetPoint()
     {
-        Vector3 pos = cameraMain.ScreenToWorldPoint(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
+        var pos = cameraMain.ScreenToWorldPoint(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
 
         pos.z = 0;
 
@@ -262,12 +296,12 @@ public class BlockSelector : MonoBehaviour
 
     public void CheatPowerDick(float power)
     {
-        if (powerDig == power)
+        if (_powerDig == power)
         {
-            powerDig = powerDigDefault;
+            _powerDig = powerDigDefault;
             return;
         }
 
-        powerDig = power;
+        _powerDig = power;
     }
 }
