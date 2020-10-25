@@ -11,29 +11,29 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private Camera cameraMain;
 
-    private ChunkUnit[,] chunks;
-    private Vector3 posObj;
-    private Vector2Int posZero;
+    private ChunkUnit[,] _chunks;
+    private Vector3 _posObj;
+    private Vector2Int _posZero;
 
-    private Bounds bounds;
+    private Bounds _bounds;
 
-    private int chunkSize;
+    private int _chunkSize;
     public WorldGenerator generator;
-    private WorldSavingSystem.WorldSaving worldSaving;
-
+    private WorldSavingSystem.WorldSaving _worldSaving;
+    
     private void Awake()
     {
-        chunkSize = GameConstants.ChunkSize;
+        _chunkSize = GameConstants.ChunkSize;
 
         RefreshPos();
 
-        generator.posZeroWorld = posZero;
+        generator.posZeroWorld = _posZero;
         generator.InitProps();
 
         RefreshBounds();
-
+        
         BuildChunks();
-        CreateWorld();
+        InitWorld();
     }
 
     private void Start()
@@ -44,8 +44,8 @@ public class ChunkManager : MonoBehaviour
     public void MovePlayerToSpawnPoint()
     {
         var pos = Vector3.zero;
-        pos.x = posZero.x + generator.worldWidth / 2;
-        pos.y = posZero.y + generator.worldHeight - 4;
+        pos.x = _posZero.x + generator.worldWidth / 2;
+        pos.y = _posZero.y + generator.worldHeight - 4;
         player.transform.position = pos;
         pos.z = -10;
         cameraMain.transform.position = pos;
@@ -53,8 +53,8 @@ public class ChunkManager : MonoBehaviour
 
     private void RefreshPos()
     {
-        posObj = transform.position;
-        posZero = new Vector2Int(Mathf.FloorToInt(posObj.x), Mathf.FloorToInt(posObj.y));
+        _posObj = transform.position;
+        _posZero = new Vector2Int(Mathf.FloorToInt(_posObj.x), Mathf.FloorToInt(_posObj.y));
     }
 
     private void RefreshBounds()
@@ -62,10 +62,10 @@ public class ChunkManager : MonoBehaviour
         var a = (float) generator.worldWidth / 2;
         var b = (float) generator.worldHeight / 2;
 
-        var center = new Vector3(posObj.x + a, posObj.y + b);
+        var center = new Vector3(_posObj.x + a, _posObj.y + b);
         var size = new Vector3(a * 2, b * 2);
 
-        bounds = new Bounds(center, size);
+        _bounds = new Bounds(center, size);
         //Debug.Log(posObj);
         //Debug.Log(bounds + " ;Center: " + center + " ;size: " + size);
         //Debug.Log(a + ";" + b);
@@ -75,7 +75,7 @@ public class ChunkManager : MonoBehaviour
 
     private void BuildChunks()
     {
-        chunks = new ChunkUnit[generator.worldWidthInChunks, generator.worldHeightInChunks];
+        _chunks = new ChunkUnit[generator.worldWidthInChunks, generator.worldHeightInChunks];
         var posZero = transform.position;
         GameObject chunkObj;
         ChunkUnit chunkUnit;
@@ -87,14 +87,14 @@ public class ChunkManager : MonoBehaviour
         {
             chunkObj = Instantiate(chunk);
             chunkObj.transform.parent = transform;
-            chunkObj.transform.position = posZero + new Vector3(i * chunkSize, j * chunkSize);
+            chunkObj.transform.position = posZero + new Vector3(i * _chunkSize, j * _chunkSize);
             chunkObj.name = "Chunk(" + i + ", " + j + ")";
             //Debug.Log(new Vector3(i * chunkSize, j * chunkSize));
 
             chunkUnit = chunkObj.GetComponent<ChunkUnit>();
             chunkUnit.chunkManager = this;
-            chunks[i, j] = chunkUnit;
-
+            chunkUnit.toGenerate = true;
+            _chunks[i, j] = chunkUnit;
             n++;
             //progress.text = n / N * 100 + "%";
             //Debug.Log("World Generated: " + n / N * 100 + "%; " + n);
@@ -107,13 +107,13 @@ public class ChunkManager : MonoBehaviour
         {
             var posInt = new Vector2Int(MathFast.FloorToInt(pos.x), MathFast.FloorToInt(pos.y));
 
-            var pointPos = posZero - posInt;
-            int i = Mathf.Abs(Mathf.FloorToInt(pointPos.x / chunkSize)),
-                j = Mathf.Abs(Mathf.FloorToInt(pointPos.y / chunkSize));
+            var pointPos = _posZero - posInt;
+            int i = Mathf.Abs(Mathf.FloorToInt(pointPos.x / _chunkSize)),
+                j = Mathf.Abs(Mathf.FloorToInt(pointPos.y / _chunkSize));
 
             //Debug.Log("GetChunk Array Pos: " + i + ", " + j + " ;GetChunk Pos: " + posInt);
 
-            return chunks[i, j];
+            return _chunks[i, j];
         }
 
         return null;
@@ -123,7 +123,7 @@ public class ChunkManager : MonoBehaviour
     {
         for (var i = 0; i < generator.worldWidthInChunks; i++)
         for (var j = 0; j < generator.worldHeightInChunks; j++)
-            if (chunks[i, j] == unit)
+            if (_chunks[i, j] == unit)
                 return new Vector2Int(i, j);
         return new Vector2Int(-1, -1);
     }
@@ -133,40 +133,38 @@ public class ChunkManager : MonoBehaviour
         //Vector3 point = new Vector3(pos.x, pos.y);
         //Debug.Log("Point: " + point + " ;InBounds: " + bounds.Contains(point));
         //return pos.x >= posObj.x && pos.x < chunkSize * generator.worldWidth && pos.y >= posObj.y && pos.y < chunkSize * generator.worldHeight;
-        return bounds.Contains(pos);
+        return _bounds.Contains(pos);
     }
 
-    public void CreateWorld()
+    public void InitWorld()
     {
-        WorldSavingSystem.Init();
-
-        if (WorldSavingSystem.WorldsList == null)
+        _worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
+        if (_worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld) && !_worldSaving.WorldDataUnit.toGenerateWorld)
         {
-            WorldSavingSystem.WorldsList = new WorldSavingSystem.WorldDataList();
+            ClickLoadWorld();
         }
-        
-        worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
-        var name = "TestWorldSave";
-        var world = new WorldSavingSystem.WorldDataUnit
-        {
-            name = name,
-            width = generator.worldWidthInChunks,
-            height = generator.worldHeightInChunks
-        };
-        if (!worldSaving.LoadWorldName(name)) worldSaving.CreateWorld(world);
     }
 
     public void ClickSaveWorld()
     {
-        worldSaving.Clear();
+        _worldSaving.Clear();
+        _worldSaving.WorldDataUnit.toGenerateWorld = false;
+        var savePos = player.transform.position;
+        var playerData = new WorldSavingSystem.PlayerData();
+        playerData.x = savePos.x;
+        playerData.y = savePos.y;
+        
+        _worldSaving.PlayerData = playerData;
+        _worldSaving.SavePlayerData();
+        
         for (var i = 0; i < generator.worldWidthInChunks; i++)
         for (var j = 0; j < generator.worldHeightInChunks; j++)
         {
             var chunk = new WorldSavingSystem.ChunkData(i, j);
-            var unit = chunks[i, j];
+            var unit = _chunks[i, j];
             //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;"+ j);
-            for (var x = 0; x < chunkSize; x++)
-            for (var y = 0; y < chunkSize; y++)
+            for (var x = 0; x < _chunkSize; x++)
+            for (var y = 0; y < _chunkSize; y++)
             {
                 var blockUnitFront = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Front);
                 var blockUnitBack = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Back);
@@ -181,25 +179,36 @@ public class ChunkManager : MonoBehaviour
             }
 
             //Debug.Log(chunk.blocks.Count);                
-            worldSaving.AddChunk(chunk);
+            _worldSaving.AddChunk(chunk);
         }
 
-        worldSaving.SaveWorld();
+        _worldSaving.SaveWorld();
     }
-
     public void ClickLoadWorld()
     {
-        worldSaving.LoadWorld();
+        _worldSaving.LoadWorld();
+        _worldSaving.LoadPlayerData();
+        
+        var playerData = _worldSaving.PlayerData;
+        if (playerData != null)
+        {
+            var newPos = new Vector3();
+            newPos.x = playerData.x;
+            newPos.y = playerData.y;
+            player.transform.position = newPos;
+            cameraMain.transform.position = newPos;
+        }
+
         var count = generator.CountChunks;
         for (var i = 0; i < count; i++)
         {
-            var chunk = worldSaving.GetChunkData(i);
+            var chunk = _worldSaving.GetChunkData(i);
             //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;" + j);
             if (chunk != null)
             {
-                var unit = chunks[chunk.x, chunk.y];
-                unit.Clear(); //Полная очистка чанка
-
+                var unit = _chunks[chunk.x, chunk.y];
+                //unit.Clear(); //Полная очистка чанка
+                unit.toGenerate = false;
                 for (var n = 0; n < chunk.blocks.Count; n++)
                 {
                     var blockData = chunk.blocks[n];
@@ -207,7 +216,7 @@ public class ChunkManager : MonoBehaviour
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
 
-                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.Back, false);
+                        unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false, BlockLayer.Front, false);
                     }
 
                     if (blockData.blockLayer == (int) BlockLayer.Back)
@@ -228,7 +237,7 @@ public class ChunkManager : MonoBehaviour
     {
         //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
         if (pos.y + 1 <= generator.worldHeightInChunks - 1) //Если чанк не на вершине
-            return chunks[pos.x, pos.y + 1];
+            return _chunks[pos.x, pos.y + 1];
         return null;
     }
 

@@ -11,7 +11,8 @@ namespace SavingSystem
 	{
 		private static readonly string worldDirName = "Worlds";
         public static WorldDataList WorldsList;
-		internal static string DirnameWorlds => Application.persistentDataPath + "/" + worldDirName;
+        public static string CurrentWorld;
+        internal static string DirnameWorlds => Application.persistentDataPath + "/" + worldDirName;
 
         public static void Init()
 		{
@@ -29,6 +30,7 @@ namespace SavingSystem
 		}
 
         #region WorldList
+
         public class WorldDataList
         {
             internal List<string> Worlds;
@@ -60,6 +62,7 @@ namespace SavingSystem
                     }
                 }
             }
+
             public void AddWorldToList(string name)
             {
                 if (name != null)
@@ -67,18 +70,36 @@ namespace SavingSystem
                     LoadWorldList();
                     Worlds.Add(name);
 
-                    // Конвертируем в json
-                    string jsonString = JsonHelper.ToJson(Worlds.ToArray(), true);
+                    SaveList();
+                }
+            }
 
-                    using (var fs = new FileStream(FnameWorldList, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+            public void RemoveWorldFromList(string name)
+            {
+                if (name != null)
+                {
+                    LoadWorldList();
+                    Worlds.Remove(name);
+
+                    SaveList();
+                }
+            }
+
+            private void SaveList()
+            {
+                // Конвертируем в json
+                var jsonString = JsonHelper.ToJson(Worlds.ToArray(), true);
+
+                using (var fs = new FileStream(FnameWorldList, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                {
+                    fs.SetLength(0);//Очистка файла
+                    using (var writer = new StreamWriter(fs))
                     {
-                        using (var writer = new StreamWriter(fs))
-                        {
-                            writer.Write(jsonString);
-                        }
+                        writer.Write(jsonString);
                     }
                 }
             }
+        
             public bool WorldIsExists(string name)
             {
                 return Worlds.Contains(name);
@@ -88,25 +109,26 @@ namespace SavingSystem
         #region WorldSaving
         public class WorldSaving
         {
-            private WorldDataList worldList;
-            private WorldDataUnit worldDataUnit;
-            public PlayerData playerData;
+            private WorldDataList _worldList;
+            public WorldDataUnit WorldDataUnit;
+            public PlayerData PlayerData;
 
-            public string fnameInfo => worldDataUnit.Dirname + "/" + worldDataUnit.name + ".info";
-
+            public string FnameInfo => WorldDataUnit.Dirname + "/" + WorldDataUnit.name + ".info";
+            public string FnamePlayerData => WorldDataUnit.Dirname + "/" + "PlayerData" + ".info";
+            
             public WorldSaving( WorldDataList worldList)
             {
-                this.worldList = worldList;
+                this._worldList = worldList;
             }
             public bool CreateWorld(WorldDataUnit data)
             {
-                if (!worldList.WorldIsExists(data.name))
+                if (!_worldList.WorldIsExists(data.name))
                 {
                     SetDataUnit(data);
 
-                    worldList.AddWorldToList(data.name);//Добавляем мир в список миров
+                    _worldList.AddWorldToList(data.name);//Добавляем мир в список миров
 
-                    CreateWorldDir(worldDataUnit.Dirname);//Создаем папку с миром	
+                    CreateWorldDir(WorldDataUnit.Dirname);//Создаем папку с миром	
 
                     //CreateFileInfoWorld();//Создаем файл с информацией о мире
                     SaveInfo();//Сохранение инфо и мире
@@ -116,26 +138,19 @@ namespace SavingSystem
             }
             private void SetDataUnit(WorldDataUnit data)
             {
-                worldDataUnit = data;
+                WorldDataUnit = data;
             }
             public void SaveWorld()
             {
-                if (worldDataUnit != null)
+                if (WorldDataUnit != null)
                 {
-                    if (!Directory.Exists(worldDataUnit.Dirname))
+                    SaveInfo();
+                    for (var i = 0; i < WorldDataUnit.chunks.Count; i++)
                     {
-                        if (!LoadInfo())
-                        {
-                            SaveInfo();//Сохранение инфо и мире
-                        }
-                    }
-
-                    for (int i = 0; i < worldDataUnit.chunks.Count; i++)
-                    {
-                        ChunkData chunk = worldDataUnit.GetChunk(i);
+                        var chunk = WorldDataUnit.GetChunk(i);
                         if (chunk != null)
                         {
-                            ChunkSaving chunkSaving = new ChunkSaving(chunk, worldDataUnit);
+                            var chunkSaving = new ChunkSaving(chunk, WorldDataUnit);
                             chunkSaving.ChunkSave();
                         }
                     }
@@ -143,18 +158,18 @@ namespace SavingSystem
             }
             public void LoadWorld()
             {
-                if (worldDataUnit != null)
+                if (WorldDataUnit != null)
                 {
-                    worldDataUnit.Clear();
-                    for (int i = 0; i < worldDataUnit.width; i++)
+                    WorldDataUnit.Clear();
+                    for (var i = 0; i < WorldDataUnit.width; i++)
                     {
-                        for (int j = 0; j < worldDataUnit.height; j++)
+                        for (var j = 0; j < WorldDataUnit.height; j++)
                         {
-                            ChunkSaving chunkSaving = new ChunkSaving(new ChunkData(i, j), worldDataUnit);
+                            var chunkSaving = new ChunkSaving(new ChunkData(i, j), WorldDataUnit);
                             chunkSaving.ChunkLoad();
 
                             //Debug.Log("ChunkData: " + chunkSaving.chunkData.x + " ;" + chunkSaving.chunkData.y);
-                            worldDataUnit.AddChunk(chunkSaving.chunkData);                                   
+                            WorldDataUnit.AddChunk(chunkSaving.chunkData);                                   
                         }
                     }
                 }
@@ -162,18 +177,18 @@ namespace SavingSystem
 
             public bool LoadWorldName(string name)
             {
-                if (worldList.WorldIsExists(name))
+                if (_worldList.WorldIsExists(name))
                 {
-                    //Debug.Log("WorldLoading");
-                    string dirname = DirnameWorlds + "/" + name;
+                    Debug.Log("WorldLoading");
+                    var dirname = DirnameWorlds + "/" + name;
                     if (!Directory.Exists(dirname))
                     {
                         CreateWorldDir(dirname);
                     }
 
-                    if (worldDataUnit == null)
+                    if (WorldDataUnit == null)
                     {
-                        worldDataUnit = new WorldDataUnit()
+                        WorldDataUnit = new WorldDataUnit()
                         {
                             name = name
                         };
@@ -181,55 +196,56 @@ namespace SavingSystem
                     }
                     else
                     {
-                        worldDataUnit.name = name;
-                    }        
-                        
-                    if (!LoadInfo())
-                    {
-                        SaveInfo();//Сохранение инфо и мире
-                    }                   
+                        WorldDataUnit.name = name;
+                    }
+
+                    LoadInfo();
                     LoadWorld();
+                    
                     return true;
                 }
                 return false;
             }
             public void SaveInfo()
             {             
-                using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+                using (var fs = new FileStream(FnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
                     using (var writer = new StreamWriter(fs))
                     {
-                        string[] data = new string[2];
+                        var data = new string[3];
 
-                        data[0] = worldDataUnit.width.ToString();
-                        data[1] = worldDataUnit.height.ToString();
-
+                        data[0] = WorldDataUnit.width.ToString();
+                        data[1] = WorldDataUnit.height.ToString();
+                        data[2] = WorldDataUnit.toGenerateWorld.ToString();
+                        
                         //Debug.Log(fnameInfo);
                         // Конвертируем в json
-                        string jsonString = JsonHelper.ToJson(data, true);
-                        //Записываем
+                        var jsonString = JsonHelper.ToJson(data, true);
+                        //Writing
                         writer.Write(jsonString);
                     }
                 }
             }
             public bool LoadInfo()
             {
-                using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
+                using (var fs = new FileStream(FnameInfo, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
                 {
                     using (var writer = new StreamReader(fs))
                     {
-                        string text = writer.ReadToEnd();
+                        var text = writer.ReadToEnd();
 
                         if (text != "")
                         {
-                            string[] a = JsonHelper.FromJson<string>(text);
+                            var a = JsonHelper.FromJson<string>(text);
 
-                            int w = int.Parse(a[0]);
-                            int h = int.Parse(a[1]);
-
+                            var w = int.Parse(a[0]);
+                            var h = int.Parse(a[1]);
+                            var toGenerateWorld = bool.Parse(a[2]);
+                            
                             if (w > 0 &&  h > 0) {
-                                worldDataUnit.width = w;
-                                worldDataUnit.height = h;
+                                WorldDataUnit.width = w;
+                                WorldDataUnit.height = h;
+                                WorldDataUnit.toGenerateWorld = toGenerateWorld;
                                 return true;
                             }
                             //Debug.Log("x: " + worldDataUnit.width + " ;y: " + worldDataUnit.height);       
@@ -240,11 +256,11 @@ namespace SavingSystem
             }
             public void SavePlayerData()
             {
-                using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+                using (var fs = new FileStream(FnamePlayerData, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
                     using (var writer = new StreamWriter(fs))
                     {
-                        string jsonString = JsonConvert.SerializeObject(playerData);
+                        var jsonString = JsonConvert.SerializeObject(PlayerData);
 
                         writer.Write(jsonString);
                     }
@@ -252,17 +268,16 @@ namespace SavingSystem
             }
             public void LoadPlayerData()
             {
-                string pathFile = fnameInfo;
-
-                using (var fs = new FileStream(fnameInfo, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
+                using (var fs = new FileStream(FnamePlayerData, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
                 {
                     using (var writer = new StreamReader(fs))
                     {
-                        string jsonString = writer.ReadToEnd();
+                        var jsonString = writer.ReadToEnd();
 
                         if (jsonString != "")
                         {
-                            playerData = JsonConvert.DeserializeObject<PlayerData>(jsonString);
+                            //PlayerData = JsonConvert.DeserializeObject<PlayerData>(jsonString);
+                            //Debug.Log(PlayerData);
                         }
                     }
                 }
@@ -277,19 +292,19 @@ namespace SavingSystem
             }
             public ChunkData GetChunkData(int n)
             {
-                return worldDataUnit?.GetChunk(n);
+                return WorldDataUnit?.GetChunk(n);
             }
             public void AddChunk(ChunkData data)
             {
-                worldDataUnit?.AddChunk(data);
+                WorldDataUnit?.AddChunk(data);
             }
             public void SetChunk(ChunkData data)
             {
-                worldDataUnit?.SetChunk(data);
+                WorldDataUnit?.SetChunk(data);
             }
             public void Clear()
             {
-                worldDataUnit?.Clear();
+                WorldDataUnit?.Clear();
             }
         }
         [Serializable]
@@ -297,7 +312,8 @@ namespace SavingSystem
         {
             public int width;//chunks
             public int height;
-
+            public bool toGenerateWorld;
+            
             public string name;
             public int CountChunks => width * height;
             public string Dirname => DirnameWorlds + "/" + name;
@@ -306,9 +322,9 @@ namespace SavingSystem
             {
                 chunks = new List<ChunkData>();
 
-                for (int i = 0; i < width; i++)
+                for (var i = 0; i < width; i++)
                 {
-                    for (int j = 0; j < height; j++)
+                    for (var j = 0; j < height; j++)
                     {
                         AddChunk(new ChunkData(i, j));
                     }
@@ -323,7 +339,7 @@ namespace SavingSystem
             }
             public void SetChunk(ChunkData data)
             {
-                for (int i = 0; i < chunks.Count; i++)
+                for (var i = 0; i < chunks.Count; i++)
                 {
                     if (chunks[i].x == data.x && chunks[i].y == data.y)
                     {
@@ -475,19 +491,19 @@ namespace SavingSystem
         }
         public class EntityChunkData
         {
-            public int x;
-            public int y;
+            public int X;
+            public int Y;
         }
         public class ItemChunkData
         {
-            public EntityChunkData entity;
+            public EntityChunkData Entity;
         }
         [JsonObject(IsReference = true)]
         [Serializable]
         public class PlayerData
         {           
-            public int x;
-            public int y;           
+            public float x;
+            public float y;           
         }  
 
         #endregion     

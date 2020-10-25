@@ -38,7 +38,7 @@ public class ChunkUnit : MonoBehaviour
     private static readonly int chunkSize = GameConstants.ChunkSize;
     [HideInInspector] public ChunkManager chunkManager;
     private Vector3 _posObj;
-
+    public bool toGenerate;
     #endregion
 
     #endregion
@@ -54,10 +54,13 @@ public class ChunkUnit : MonoBehaviour
     {
         Init();
         chunkBuilder = new ChunkBuilder(this, chunkManager);
-        chunkBuilder.GenerateBuild();
+        if (toGenerate)
+        {
+            chunkBuilder.GenerateBuild(); 
+        }
         StartCoroutine(ToBuildGrass());
     }
-
+    
     #endregion
 
     public IEnumerator ToBuildGrass()
@@ -181,6 +184,7 @@ public class ChunkUnit : MonoBehaviour
 
     public void Clear()
     {
+        Debug.Log("Cleared");
         _controller.Clear();
         tilemapBackWorld.ClearAllTiles();
         tilemapFrontWorld.ClearAllTiles();

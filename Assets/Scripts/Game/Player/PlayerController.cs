@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject flashLight;
 
     private bool _flashLightActive;
-    void Start()
+
+    private void Start()
     {
         itemMagnet.radius = itemPickRadius;
     }
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(col.gameObject.name);
         if (col.gameObject.name == "Item(Clone)")
         {
-            GameObject obj = col.gameObject;
+            var obj = col.gameObject;
             //Debug.Log(obj.GetComponent<Item>().data);
             inventory.AddItem(obj.GetComponent<Item>().data);
             obj.SetActive(false);
@@ -39,12 +40,12 @@ public class PlayerController : MonoBehaviour
     }
     public bool CanToCreateItem()
     {
-        Vector3 pos = itemCreatePos.transform.position;
+        var pos = itemCreatePos.transform.position;
         return !chunkManager.GetChunk(pos).HasBlock(pos);
     }
     public void CreateItemKick(ItemData.Data data, int count)
     {
-        Vector3 pos = itemCreatePos.transform.position;
+        var pos = itemCreatePos.transform.position;
 
         for (int i = 0; i < count; i++)
         {

@@ -17,18 +17,18 @@
             <e p="RapidBlurEffect.shader" t="Include" />
           </e>
         </e>
-        <e p="EasyButtons" t="Include">
-          <e p="ButtonAttribute.cs" t="Include" />
-          <e p="ButtonsExample.cs" t="Include" />
-          <e p="CustomEditorButtonsExample.cs" t="Include" />
-          <e p="Editor" t="Include">
-            <e p="ButtonEditor.cs" t="Include" />
-            <e p="CustomEditorButtonsExampleEditor.cs" t="Include" />
-            <e p="EasyButtonsEditorExtensions.cs" t="Include" />
-          </e>
-          <e p="ScriptableObjectExample.cs" t="Include" />
-        </e>
         <e p="GameStructures" t="Include">
+          <e p="EasyButtons" t="Include">
+            <e p="ButtonAttribute.cs" t="Include" />
+            <e p="ButtonsExample.cs" t="Include" />
+            <e p="CustomEditorButtonsExample.cs" t="Include" />
+            <e p="Editor" t="Include">
+              <e p="ButtonEditor.cs" t="Include" />
+              <e p="CustomEditorButtonsExampleEditor.cs" t="Include" />
+              <e p="EasyButtonsEditorExtensions.cs" t="Include" />
+            </e>
+            <e p="ScriptableObjectExample.cs" t="Include" />
+          </e>
           <e p="UI" t="Include">
             <e p="Effects" t="Include">
               <e p="Blur" t="Include">

@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &672326486944088188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5366786404934176658}
+  - component: {fileID: 3327356416018231505}
+  - component: {fileID: 2177978531722785893}
+  m_Layer: 5
+  m_Name: Title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5366786404934176658
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672326486944088188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480098659566410603}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 130.7}
+  m_SizeDelta: {x: 300, y: 84.52167}
+  m_Pivot: {x: 0.5, y: 0.7185427}
+--- !u!222 &3327356416018231505
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672326486944088188}
+  m_CullTransparentMesh: 0
+--- !u!114 &2177978531722785893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672326486944088188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 087cf8daa173782409fbefcbba113919, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Title
 --- !u!1 &1277756124736951644
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +208,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 56
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -153,8 +232,6 @@ MonoBehaviour:
     text: Back
   - lang: 2
     text: "\u041D\u0430\u0437\u0430\u0434"
-  - lang: 3
-    text: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
   _currentLanguage: 2
 --- !u!1 &1814730236803781450
 GameObject:
@@ -384,14 +461,26 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3238600787210913559}
+        m_TargetAssemblyTypeName: WorldList, Assembly-CSharp
+        m_MethodName: EndFieldName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: Name World
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1289,6 +1378,8 @@ MonoBehaviour:
   itemList: {fileID: 3238600787210913558}
   selectedWorldMenu: {fileID: 8669644385340144626}
   createWorldMenu: {fileID: 7823346970284969509}
+  title: {fileID: 2177978531722785893}
+  inputFieldNameWorld: {fileID: 2882021198516346714}
 --- !u!1 &3238600787282173488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1592,6 @@ GameObject:
   - component: {fileID: 8132102688580497312}
   - component: {fileID: 2073926898188397529}
   - component: {fileID: 3500512913330082735}
-  - component: {fileID: 7362648025721992481}
   m_Layer: 5
   m_Name: CreateWorld
   m_TagString: Untagged
@@ -1578,19 +1668,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2073926898188397529}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7362648025721992481}
-        m_TargetAssemblyTypeName: WorldMenuButton, Assembly-CSharp
-        m_MethodName: ButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2073926898188397529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1645,20 +1723,6 @@ MonoBehaviour:
   - lang: 3
     text: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
   _currentLanguage: 2
---- !u!114 &7362648025721992481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4276516441968885056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3829dfcedf55e44b579e10fd899029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  buttonType: 4
 --- !u!1 &5293658054122170049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,7 +1775,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5293658054122170049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1751,7 +1815,6 @@ GameObject:
   - component: {fileID: 7316434254342221645}
   - component: {fileID: 5765058409708605163}
   - component: {fileID: 1205807913699581365}
-  - component: {fileID: 8639843583842096119}
   m_Layer: 5
   m_Name: DestroyWorld
   m_TagString: Untagged
@@ -1831,7 +1894,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3238600787210913559}
         m_TargetAssemblyTypeName: WorldList, Assembly-CSharp
-        m_MethodName: DeleteWorld
+        m_MethodName: DestroyWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1868,7 +1931,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 56
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1895,20 +1958,6 @@ MonoBehaviour:
   - lang: 3
     text: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
   _currentLanguage: 2
---- !u!114 &8639843583842096119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7007544641416724598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3829dfcedf55e44b579e10fd899029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  buttonType: 4
 --- !u!1 &7336356457127130764
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +2148,7 @@ RectTransform:
   - {fileID: 284279302813060288}
   - {fileID: 5584187890030440511}
   - {fileID: 3594816276062704817}
+  - {fileID: 5366786404934176658}
   m_Father: {fileID: 7965349663115637895}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2408,7 +2458,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 56
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

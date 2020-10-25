@@ -89,11 +89,14 @@ public class ChunkBlockController : MonoBehaviour
     public void DeleteUnit(BlockUnit block)
     {
         //Debug.Log("Unit Removed: " + block.data.name);
-        var rot = block.Script.CoroutineToInit();
-        if (rot != null)
+        if (block.Script != null)
         {
-            StopCoroutine(rot);
-        } 
+            var rot = block.Script.CoroutineToInit();
+            if (rot != null)
+            {
+                StopCoroutine(rot);
+            }
+        }
         _blocks.Remove(block);
     }
     public void Clear()
