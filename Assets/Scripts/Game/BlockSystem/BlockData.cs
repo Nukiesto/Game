@@ -41,14 +41,15 @@ public class BlockData : ScriptableObject
     }
     public void InitItem()
     {
-        if (Item == null)
-            Item = new Data();
-
-        Item.type = ItemType.block;
-        Item.sprite = tile?.sprite;
-        Item.description = descriptionTranslations;
-        Item.name = nameTranslations;
-        Item.block = this;
-        Item.maxCount = 64;
+        Item = new Data()
+        {
+            type = ItemType.block,
+            sprite = tile?.sprite,
+            description = descriptionTranslations,
+            Name = nameBlock,
+            name = nameTranslations,
+            block = this,
+            maxCount = 64
+        };
     }
 }

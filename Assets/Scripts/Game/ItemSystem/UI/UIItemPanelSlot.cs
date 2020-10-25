@@ -39,4 +39,9 @@ public class UIItemPanelSlot : MonoBehaviour
     {
         Debug.Log("Up");
     }
+
+    public void SetCountTextDisabled()
+    {
+        count.enabled = false;
+    }
 }

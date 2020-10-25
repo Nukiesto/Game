@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class ChunkManager : MonoBehaviour
 {
     [SerializeField] private GameObject chunk;
-    [SerializeField] private BlockDataBase dataBase;
+    [SerializeField] private DataBase dataBase;
     [SerializeField] private PlayerController player;
     [SerializeField] private Camera cameraMain;
 
@@ -143,7 +143,7 @@ public class ChunkManager : MonoBehaviour
         {
             if (!_worldSaving.WorldDataUnit.toGenerateWorld)
             {
-                Debug.Log("WorldLoading");
+                //Debug.Log("WorldLoading");
                 ClickLoadWorld();
             }
         }

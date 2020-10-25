@@ -21,6 +21,7 @@ public class ItemData : ScriptableObject
         public int maxCount;
 
         [Header("Наименование")]
+        public string Name;
         public TranslateString name;
         public TranslateString description;
         public BlockData block;

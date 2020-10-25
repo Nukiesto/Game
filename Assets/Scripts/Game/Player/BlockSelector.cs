@@ -262,7 +262,7 @@ public class BlockSelector : MonoBehaviour
 
         transform.position = pos;
         
-        var block = chunkManager.GetChunk(onWorldPos).GetBlockUnit(onWorldPos, BlockLayer.Front);
+        var block = chunkManager.GetChunk(onWorldPos)?.GetBlockUnit(onWorldPos, BlockLayer.Front);
         if (block != null && block.Data != null && block.Data.isInteractable)
         {
             selectorSprite.color = Color.yellow;
