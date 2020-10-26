@@ -172,16 +172,16 @@ public class BlockSelector : MonoBehaviour
         if (blockInteractable != null && blockInteractable.Data.isInteractable)
         {
             //Debug.Log();
-            if (blockInteractable.Data.memory is ChestMemory)
+            if (blockInteractable.Data.nameBlock == "Chest")
             {
-                OpenChest(blockInteractable.Data.memory as ChestMemory);
+                OpenChest(blockInteractable.Memory as ChestMemory);
             }
             
             //Debug.Log("Interactable Block Clicked");
             return;
         }
         var item = inventory.GetSelectedItem();
-        if (item.data != null && item.data.type == ItemType.Block)
+        if (item != null && item.data != null && item.data.type == ItemType.Block)
         {
             if (!CheckCollisions() || isBack)
             {
@@ -328,6 +328,6 @@ public class BlockSelector : MonoBehaviour
 
     private void OpenChest(ChestMemory chestMemory)
     {
-        inventory.OpenChest(chestMemory.items);
+        inventory.OpenChest(chestMemory);
     }
 }

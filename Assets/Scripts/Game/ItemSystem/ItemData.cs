@@ -19,7 +19,8 @@ public class ItemData : ScriptableObject
         [Header("Основные параметры")]
         public ItemType type;
         public int maxCount;
-
+        public bool showInSandboxPanel = true;
+        
         [Header("Наименование")]
         public string Name;
         public TranslateString name;

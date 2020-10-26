@@ -17,6 +17,7 @@ MonoBehaviour:
   isBreackable: 1
   toPlaceBack: 0
   isInteractable: 0
+  mustHaveDownerBlock: 0
   nameBlock: Cactus
   hp: 40
   script: {fileID: 0}

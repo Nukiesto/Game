@@ -376,23 +376,23 @@ namespace SavingSystem
             }
             public void ChunkSave()
             {
-                string fname = dataUnit.Dirname + "/" + "Chunk " + chunkData.x + ";" + chunkData.y + ".chunkData";
+                var fname = dataUnit.Dirname + "/" + "Chunk " + chunkData.x + ";" + chunkData.y + ".chunkData";
 
                 using (var fs = new FileStream(fname, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
                     fs.SetLength(0);//Очистка файла
                     using (var writer = new StreamWriter(fs))
                     {                       
-                        string[] data = new string[2 + chunkData.blocks.Count + chunkData.items.Count];
+                        var data = new string[2 + chunkData.blocks.Count + chunkData.items.Count];
 
                         data[0] = chunkData.blocks.Count.ToString();
                         data[1] = chunkData.items.Count.ToString();
 
-                        int start = 2; int end = 2 + chunkData.blocks.Count;
+                        var start = 2;var end = 2 + chunkData.blocks.Count;
                         //Debug.Log("Count: " + chunkData.blocks.Count);
                         //Debug.Log("Start: " + start);
                         //Debug.Log("End: " + end);
-                        for (int i = start; i < end; i++)
+                        for (var i = start; i < end; i++)
                         {
                             //Debug.Log("i: " + (i - start));
                             data[i] = JsonConvert.SerializeObject(chunkData.blocks[i - start]);
@@ -407,7 +407,7 @@ namespace SavingSystem
                         }
                         
                         // Конвертируем в json
-                        string jsonString = JsonHelper.ToJson(data, true);
+                        var jsonString = JsonHelper.ToJson(data, true);
 
                         writer.Write(jsonString);
                     }
@@ -415,28 +415,28 @@ namespace SavingSystem
             }
             public void ChunkLoad()
             {
-                string fname = dataUnit.Dirname + "/" + "Chunk " + chunkData.x + ";" + chunkData.y + ".chunkData";
+                var fname = dataUnit.Dirname + "/" + "Chunk " + chunkData.x + ";" + chunkData.y + ".chunkData";
 
                 using (var fs = new FileStream(fname, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
                 {
                     using (var reader = new StreamReader(fs))
                     {
-                        string text = reader.ReadToEnd();
+                        var text = reader.ReadToEnd();
 
                         if (text != "")
                         {
-                            string[] data = JsonHelper.FromJson<string>(text);
+                            var data = JsonHelper.FromJson<string>(text);
                             chunkData.blocks.Clear();
 
-                            int start = 2; int end = 2 + int.Parse(data[0]);
-                            for (int i = start; i < end; i++)
+                            var start = 2; int end = 2 + int.Parse(data[0]);
+                            for (var i = start; i < end; i++)
                             {
                                 //Debug.Log("i: " + i + " ;data: " + data[i - start]);
-                                BlockChunkData blockData = JsonConvert.DeserializeObject<BlockChunkData>(data[i]);
+                                var blockData = JsonConvert.DeserializeObject<BlockChunkData>(data[i]);
                                 chunkData.AddChunkBlock(blockData);
                             }
                             start = end + 1; end = start + int.Parse(data[1]);
-                            for (int i = start; i < end; i++)
+                            for (var i = start; i < end; i++)
                             {
                                 ItemChunkData entityData = JsonConvert.DeserializeObject<ItemChunkData>(data[i - start]);
                                 chunkData.AddChunkItem(entityData);
@@ -473,6 +473,7 @@ namespace SavingSystem
                 items.Add(data);
             }
         }
+        [Serializable]
         public class BlockChunkData
         {
             public int x;
@@ -480,13 +481,16 @@ namespace SavingSystem
             
             public string name;
             public int blockLayer;
+            
+            public BaseBlockMemory.MemoryUnit Memory;
 
-            public BlockChunkData(int x, int y, string name, int blockLayer)
+            public BlockChunkData(int x, int y, string name, int blockLayer, BaseBlockMemory.MemoryUnit memory)
             {
                 this.x = x;
                 this.y = y;
                 this.name = name;
                 this.blockLayer = blockLayer;
+                Memory = memory;
             }
         }
         public class EntityChunkData

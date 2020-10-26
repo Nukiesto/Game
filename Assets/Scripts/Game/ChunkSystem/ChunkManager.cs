@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class ChunkManager : MonoBehaviour
 {
     [SerializeField] private GameObject chunk;
-    [SerializeField] private DataBase dataBase;
+    [SerializeField] public DataBase dataBase;
     [SerializeField] private PlayerController player;
     [SerializeField] private Camera cameraMain;
 
@@ -175,11 +175,28 @@ public class ChunkManager : MonoBehaviour
 
                 //Debug.Log("BlockUnitFront: " + blockUnitFront + ";BlockUnitBack: " + blockUnitBack);
                 if (blockUnitFront != null)
+                {
+                    BaseBlockMemory.MemoryUnit memUnit = null;
+                    if (blockUnitFront.Memory != null)
+                    {
+                        blockUnitFront.Memory.SavingMemoryUnit();
+                        memUnit = blockUnitFront.Memory.memoryUnit;
+                    }
                     chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.Data.nameBlock,
-                        (int) BlockLayer.Front));
+                        (int) BlockLayer.Front, memUnit));
+                }
+
                 if (blockUnitBack != null)
-                    chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.Data.nameBlock,
-                        (int) BlockLayer.Back));
+                {
+                    BaseBlockMemory.MemoryUnit memUnit1 = null;
+                    if (blockUnitBack.Memory != null)
+                    {
+                        blockUnitBack.Memory.SavingMemoryUnit();
+                        memUnit1 = blockUnitBack.Memory.memoryUnit;
+                    }
+                    chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.Data.nameBlock, 
+                        (int) BlockLayer.Back, memUnit1));
+                }
             }
 
             //Debug.Log(chunk.blocks.Count);                
@@ -206,30 +223,30 @@ public class ChunkManager : MonoBehaviour
         var count = generator.CountChunks;
         for (var i = 0; i < count; i++)
         {
-            var chunk = _worldSaving.GetChunkData(i);
+            var chunkLoaded = _worldSaving.GetChunkData(i);
             //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;" + j);
-            if (chunk != null)
+            if (chunkLoaded != null)
             {
-                var unit = _chunks[chunk.x, chunk.y];
+                var unit = _chunks[chunkLoaded.x, chunkLoaded.y];
                 //unit.Clear(); //Полная очистка чанка
                 unit.ToGenerate = false;
                 
-                var chunkFront = new BlockData[_chunkSize,_chunkSize];
-                var chunkBack  = new BlockData[_chunkSize,_chunkSize];
-                for (var n = 0; n < chunk.blocks.Count; n++)
+                var chunkFront = new ChunkUnit.ChunkBuilder.BlockUnitChunk[_chunkSize,_chunkSize];
+                var chunkBack  = new ChunkUnit.ChunkBuilder.BlockUnitChunk[_chunkSize,_chunkSize];
+                for (var n = 0; n < chunkLoaded.blocks.Count; n++)
                 {
-                    var blockData = chunk.blocks[n];
+                    var blockData = chunkLoaded.blocks[n];
                     if (blockData.blockLayer == (int) BlockLayer.Front)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
-                        chunkFront[blockData.x, blockData.y] = blockDataMain;
+                        chunkFront[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.Memory);
                         //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Front, false);
                     }
 
                     if (blockData.blockLayer == (int) BlockLayer.Back)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
-                        chunkBack[blockData.x, blockData.y] = blockDataMain;
+                        chunkBack[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.Memory);
                         //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Back);
                     }
                 }

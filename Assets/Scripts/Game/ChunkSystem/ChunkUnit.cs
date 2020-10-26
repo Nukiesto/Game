@@ -154,7 +154,21 @@ public class ChunkUnit : MonoBehaviour
     }
 
     #endregion
-
+    public void SetMemory(Vector3Int pos, BaseBlockMemory.MemoryUnit memory, BlockLayer layer = BlockLayer.Front)
+    {
+        var block = _controller.GetBlock(pos.x, pos.y, layer);
+        if (block != null)
+        {
+            var mem = (BaseBlockMemory)ScriptableObject.CreateInstance(typeof(BaseBlockMemory));;
+            Debug.Log(mem);
+            if (mem != null)
+            {
+                mem.SetMemoryUnit(memory, this);
+                block.Memory = mem; 
+            }
+        }
+    }
+    
     #region DeleteBlock
 
     public bool CanBreakBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front)
@@ -437,29 +451,32 @@ public class ChunkUnit : MonoBehaviour
             }
         }
 
-        public void Rebuild(BlockData[,] chunkFront, BlockData[,] chunkBack)
+        public void Rebuild(BlockUnitChunk[,] chunkFront, BlockUnitChunk[,] chunkBack)
         {
-            //Debug.Log("front: " + chunkFront + " ;back" + chunkBack);
-            //_chunkFront = new BlockData[chunkSize, chunkSize];
-            //_chunkBack  = new BlockData[chunkSize, chunkSize];
-            
-            //for (var i = 0; i < chunkSize; i++)
-            //{
-            //    for (var j = 0; j < chunkSize; j++)
-            //    {
-            //        _chunkFront[i,j] = chunkFront[i,j];
-            //        _chunkBack [i,j] = chunkBack[i,j];
-            //    }
-            //}
-            
-            _chunkFront = chunkFront;
-            _chunkBack = chunkBack;
-            //_chunkFront = new BlockData[chunkSize, chunkSize];
-            //_chunkBack  = new BlockData[chunkSize, chunkSize];
-            //if (chunkFront != null && chunkBack != null)
-            //Array.Copy(chunkFront, _chunkFront, 64);
-            //Array.Copy(chunkBack, _chunkBack, 64);
-            Building();
+            _chunkFront = new BlockData[chunkSize,chunkSize];
+            _chunkBack  = new BlockData[chunkSize,chunkSize];
+            var pos = Vector3Int.zero;
+            for (var i = 0; i < chunkSize; i++)
+            for (var j = 0; j < chunkSize; j++)
+            {
+                pos.x = i;
+                pos.y = j;
+                var front = chunkFront[i, j];
+                var back = chunkBack[i, j];
+                if (front != null)
+                {
+                    _chunkFront[i, j] = front.Data;
+                    _chunkUnit.SetBlock(pos, front.Data, true, _chunkUnit.tilemapFrontWorld);
+                    _chunkUnit.SetMemory(pos, front.Memory);
+                }
+
+                if (back != null)
+                {
+                    _chunkBack[i, j] = back.Data;
+                    _chunkUnit.SetBlock(pos, back.Data, true, _chunkUnit.tilemapBackWorld, BlockLayer.Back);
+                    _chunkUnit.SetMemory(pos, back.Memory, BlockLayer.Back);
+                }
+            }
         }
         
         #endregion
@@ -580,5 +597,18 @@ public class ChunkUnit : MonoBehaviour
         }
 
         #endregion
+
+        public class BlockUnitChunk
+        {
+            public BlockData Data;
+
+            public BaseBlockMemory.MemoryUnit Memory;
+            
+            public BlockUnitChunk(BlockData data, BaseBlockMemory.MemoryUnit memory)
+            {
+                Data = data;
+                Memory = memory;
+            }
+        }
     }
 }

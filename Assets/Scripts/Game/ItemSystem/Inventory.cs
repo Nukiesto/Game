@@ -95,7 +95,7 @@ public class Inventory : MonoBehaviour
             {
                 var item = Items[i];
                 item.SetInfinity();
-                item.uislot.SetCountTextDisabled();
+                item.uislot.SetActiveCountText(false);
                 //Debug.Log(item.uislot.type);
             }
         }
@@ -180,7 +180,36 @@ public class Inventory : MonoBehaviour
             
         }
         
+        public virtual void WriteItems(List<ItemData.Data> items)
+        {
+            var count = items.Count > MaxCount ? MaxCount : items.Count;
+            ItemUnit unit;
+            for (var i = 0; i < items.Count; i++)
+            {
+                unit = Items[i];
+                UpdateItemSelect(unit);
+                unit.SetData(items[i]);
+                Debug.Log(items[i].Name);
+            }
+        }
+
+        public void DisableUISlots()
+        {
+            for (var i = 0; i < MaxCount; i++)
+            {
+                Items[i].uislot.SetIconDisabled();
+            }
+        }
+
+        public void UpdateUISlots()
+        {
+            for (var i = 0; i < MaxCount; i++)
+            {
+                Items[i].UpdateSprite();
+            }
+        }
         
+        public virtual void ActionOnOpen() {}
     }
     [Serializable]
     public class MainItems : PanelItemsBase
@@ -219,20 +248,44 @@ public class Inventory : MonoBehaviour
         {
             InfinityItems = true;
             SetInfinity();
-            var itemsArray = inventory.dataBase.ItemsArray;
-            var count = 0;
-            if (itemsArray.Length > MaxCount)
+            inventory.dataBase.Refresh();
+
+            var itemsList = DataBase.Instance.ItemsList;//inventory.dataBase.ItemsList;
+            // var count = itemsList.Count > MaxCount ? MaxCount : itemsList.Count;
+            // for (var i = 0; i < count; i++)
+            // {
+            //     AddItem(itemsList[i]);
+            // }
+
+            WriteItems(itemsList);
+        }
+        
+        public override void WriteItems(List<ItemData.Data> items)
+        {
+            ItemUnit unit;
+            //Debug.Log(items.Count);
+            for (var i = 0; i < items.Count; i++)
             {
-                count = MaxCount;
+                if (!items[i].showInSandboxPanel)
+                {
+                    items.RemoveAt(i);
+                }
             }
-            else
+            //Debug.Log(items.Count);
+            var count = items.Count > MaxCount ? MaxCount : items.Count;
+            for (var i = 0; i < items.Count; i++)
             {
-                count = itemsArray.Length;
+                unit = Items[i];
+                UpdateItemSelect(unit);
+                unit.SetData(items[i]);
             }
-            
-            for (var i = 0; i < count; i++)
+        }
+        
+        public override void ActionOnOpen()
+        {
+            for (var i = 0; i < MaxCount; i++)
             {
-                AddItem(itemsArray[i]);
+                Items[i].uislot.SetActiveCountText(false);
             }
         }
     }
@@ -240,19 +293,36 @@ public class Inventory : MonoBehaviour
     public class ChestItems : PanelItemsBase
     {
         public override InventoryType InventoryType => InventoryType.Chest;
-
+        public ChestMemory chestMemory;
         protected override void SetTypeItem(ItemUnit unit)
         {
             //Debug.Log("inv: " + this + "unit: " + unit + ";" + InventoryType);
             unit.type = InventoryType;
         }
-
-        public void WriteItems(List<ItemData.Data> items)
+        public override void ActionOnOpen()
         {
+            for (var i = 0; i < MaxCount; i++)
+            {
+                Items[i].uislot.SetActiveCountText(true);
+                //Items[i].uislot.SetCount(0);
+            }
+        }
+
+        public void WriteChestItems(List<ChestSlotUnit> items)
+        {
+            ItemUnit unit;
             for (var i = 0; i < items.Count; i++)
             {
-                Items[i].data = items[i];
+                unit = Items[i];
+                UpdateItemSelect(unit);
+                unit.SetData(items[i].Data);
+                unit.SetCount(items[i].Count);
+                unit.uislot.SetActiveCountText(true);
             }
+        }
+        public void ToSaveBlock()
+        {
+            chestMemory.WriteItems(Items);
         }
     }
     [Serializable]
@@ -261,6 +331,7 @@ public class Inventory : MonoBehaviour
         public PanelItemsBase panel;
 
         public ItemUnit unit;
+        // ReSharper disable once InconsistentNaming
         public UIItemPanelSlot itemSelectUI;
     }
 
@@ -269,6 +340,9 @@ public class Inventory : MonoBehaviour
         mainItems.SetActive(_isOpenMain);
         sandboxItems.SetActive(false);
         chestItems.SetActive(false);
+        
+        InitKeys();
+        InitItemSelect();      
         
         panels = new Dictionary<InventoryType, PanelItemsBase>() {
             { InventoryType.Fast, fastItems },
@@ -282,9 +356,6 @@ public class Inventory : MonoBehaviour
             panels[i].Init();
         }
 
-        InitKeys();
-        InitItemSelect();      
-        
         SetThirdMenu(InventoryType.Sandbox);
     }
 
@@ -324,12 +395,18 @@ public class Inventory : MonoBehaviour
         {
             if (player.CanToCreateItem())
             {
-                player.CreateItemKick(itemSelect.unit.data, itemSelect.unit.Count);
-                ItemUnit unit = itemSelect.unit;
-
-                unit.Clear();
-                unit.Reset();
-                return;
+                var unit = itemSelect.unit;
+                if (!unit.IsInfinity)
+                {
+                    player.CreateItemKick(unit.data, unit.Count);
+                    
+                    unit.Clear();
+                    unit.Reset();
+                }
+                else
+                {
+                    player.CreateItemKick(unit.data, 64);
+                }
             }                     
         }        
     }
@@ -347,8 +424,14 @@ public class Inventory : MonoBehaviour
     private void ToggleOpenThirdMenu(bool v)
     {
         _isOpenThirdMenu = v;
+        var menu = panels[_typeCurrentThirdMenu];
+        menu.SetActive(_isOpenThirdMenu);
+        menu.UpdateUISlots();
+        if (v)
+        {
+            menu.ActionOnOpen();
+        }
         
-        panels[_typeCurrentThirdMenu].SetActive(_isOpenThirdMenu);
         //Debug.Log("Type: " + itemSelect.unit.type);
         if (itemSelect != null && itemSelect.itemSelectUI != null && itemSelect.unit.type == _typeCurrentThirdMenu)
         {
@@ -359,6 +442,7 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.E))
         {
+            CloseChest();
             ToggleOpenMain(true);
             ToggleOpenThirdMenu(!_isOpenThirdMenu);
         }
@@ -366,6 +450,7 @@ public class Inventory : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                CloseChest();
                 ToggleOpenMain(!_isOpenMain);
                 ToggleOpenThirdMenu(false);
             }
@@ -540,7 +625,7 @@ public class Inventory : MonoBehaviour
         return itemSelect.unit;
     }
 
-    public void OpenChest(List<ItemData.Data> items)
+    public void OpenChest(ChestMemory chestMemory)
     {
         SetThirdMenu(InventoryType.Chest);
         //Debug.Log(_typeCurrentThirdMenu);
@@ -548,8 +633,24 @@ public class Inventory : MonoBehaviour
 
         ToggleOpenThirdMenu(true);
         
-        chestItems.WriteItems(items);
-        Debug.Log(_typeCurrentThirdMenu);
+        //chestItems.DisableUISlots();
+        chestItems.WriteChestItems(chestMemory.items);
+        //chestItems.UpdateUISlots();
+        chestItems.chestMemory = chestMemory;
+        //chestMemory.Debugging();
+        //chestItems.DisableUISlots();
+        //Debug.Log(_typeCurrentThirdMenu);
+    }
+
+    public void CloseChest()
+    {
+        if (_typeCurrentThirdMenu == InventoryType.Chest)
+        {
+            ToggleOpenThirdMenu(false);
+            SetThirdMenu(InventoryType.Sandbox);
+            chestItems.ToSaveBlock();
+            //chestItems.chestMemory.Debugging();
+        }
     }
 }
 
@@ -575,19 +676,21 @@ public class ItemUnit
         if (!IsInfinity)
         {
             Count = n;
-            uislot.SetCount(0);
+            uislot.SetCount(n);
         }
     }
     public void SetData(ItemData.Data data)
     {
         Reset();
-
-        this.data = data;
-        MaxCount = data.maxCount;
-        uislot.SetSprite(data.sprite);
+        if (data != null)
+        {
+            this.data = data;
+            MaxCount = data.maxCount;
+            uislot.SetSprite(data.sprite);
         
-        Count++;
-        uislot.SetCount(Count);
+            Count++;
+            uislot.SetCount(Count);
+        }
     }
     public bool AddItem()
     {
@@ -633,5 +736,11 @@ public class ItemUnit
     {
         IsInfinity = true;
     }
+
+    public void UpdateSprite()
+    {
+        uislot.SetSprite(data?.sprite);
+    }
+    
 }
 

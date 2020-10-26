@@ -34,7 +34,7 @@ public class ItemList : MonoBehaviour {
 
 	void ButtonRemoved(int id, string title)
 	{
-		Debug.Log(this + " Удален элемент списка -> '" + title + "'. Идентификатор объекта: " + id);
+		//Debug.Log(this + " Удален элемент списка -> '" + title + "'. Идентификатор объекта: " + id);
 	}
 
 	public void ClearItemList()

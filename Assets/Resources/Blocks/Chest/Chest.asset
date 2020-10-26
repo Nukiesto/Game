@@ -18,6 +18,7 @@ MonoBehaviour:
   toPlaceBack: 0
   isInteractable: 1
   mustHaveDownerBlock: 1
+  showInSandboxPanel: 1
   nameBlock: Chest
   hp: 200
   script: {fileID: 0}

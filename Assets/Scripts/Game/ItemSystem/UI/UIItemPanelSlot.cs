@@ -4,13 +4,22 @@ using UnityEngine.UI;
 public class UIItemPanelSlot : MonoBehaviour
 {
     [SerializeField] private Image icon;
-    [SerializeField] private Text count;
+    [SerializeField] public Text count;
     public InventoryType type;
     public Inventory inventory;
     public void SetSprite(Sprite sprite)
     {
-        icon.enabled = true;
-        icon.sprite = sprite;        
+        if (sprite != null)
+        {
+            icon.enabled = true;
+            icon.sprite = sprite; 
+        }
+        else
+        {
+            icon.enabled = false;
+        }
+        
+               
     }
     public void SetIconDisabled()
     {
@@ -40,8 +49,8 @@ public class UIItemPanelSlot : MonoBehaviour
         Debug.Log("Up");
     }
 
-    public void SetCountTextDisabled()
+    public void SetActiveCountText(bool value)
     {
-        count.enabled = false;
+        count.enabled = value;
     }
 }

@@ -21,24 +21,32 @@
   <component name="ChangeListManager">
     <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="WorldList">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials/UIBlurMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials/UIBlurMaterial.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/NullBlock/Null.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/NullBlock/Null.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Coal/Ore_Coal.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Coal/Ore_Coal.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Iron/Ore_Iron.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Ore_Iron/Ore_Iron.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DataBase.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DataBase.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/DirtMemory.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/DirtMemory.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/NullBlock/NullMemory.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/NullBlock/NullMemory.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/NullBlock/NullScript.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/NullBlock/NullScript.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.sln.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/Game.sln.DotSettings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,17 +78,20 @@
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Editor/CUIBezierCurveEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonChat/Code/ChatChannel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/a6/bb35b66d/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/0b/e1867340/Resources.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/NullScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -100,6 +111,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/78/7ac75c54/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/d6/d597ebb7/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TranslationSystem/ComponentsToUse/LabelsData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/EditorHelpers/Editor/CreateAssetsBundle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -126,27 +138,31 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Updater/DirtScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemButton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/MenuController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockDataBase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/DemoScene.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/GetMemScr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
       </list>
     </option>
@@ -180,6 +196,9 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -197,6 +216,7 @@
       <workItem from="1603553063728" duration="4879000" />
       <workItem from="1603605738513" duration="9545000" />
       <workItem from="1603629181718" duration="26514000" />
+      <workItem from="1603708440933" duration="16341000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>
@@ -343,22 +363,22 @@
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state width="1237" height="356" key="GridCell.Tab.3.right/0.0.1280.994@0.0.1280.994" timestamp="1603472672580" />
-    <state x="570" y="193" width="579" height="551" key="RiderGenerateDialog" timestamp="1603618074331">
+    <state x="570" y="193" width="579" height="551" key="RiderGenerateDialog" timestamp="1603719373147">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="570" y="193" width="579" height="551" key="RiderGenerateDialog/0.0.1280.994@0.0.1280.994" timestamp="1603618074331" />
+    <state x="570" y="193" width="579" height="551" key="RiderGenerateDialog/0.0.1280.994@0.0.1280.994" timestamp="1603719373147" />
     <state x="141" y="142" key="SettingsEditor" timestamp="1603656067932">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state x="141" y="142" key="SettingsEditor/0.0.1280.994@0.0.1280.994" timestamp="1603656067932" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1603640183837">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1603717325110">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603640183837" />
-    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog" timestamp="1603645135076">
+    <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603717325110" />
+    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog" timestamp="1603721299564">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1603645135076" />
+    <state x="92" y="92" width="1096" height="810" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1603721299564" />
     <state x="245" y="108" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603623234970">
       <screen x="0" y="0" width="1280" height="994" />
     </state>

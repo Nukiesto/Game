@@ -10,12 +10,33 @@ public class DataBase : ScriptableObject
 {
     private Dictionary<string, BlockData> _blocks = new Dictionary<string, BlockData>();
     private Dictionary<string, ItemData.Data> _items = new Dictionary<string, ItemData.Data>();
-    private ItemData.Data[] _itemsArray;
+    private List<ItemData.Data> _itemsList;
     
     public Dictionary<string, BlockData> Blocks => _blocks;
     public Dictionary<string, ItemData.Data> Items  => _items;
-    public ItemData.Data[] ItemsArray => _itemsArray;
+    public List<ItemData.Data> ItemsList => _itemsList;
     
+    private static DataBase _instance;
+    public static DataBase Instance {
+        get {
+            InitInstance();
+            return _instance;
+        }
+    }
+
+    private static void InitInstance() {
+        if (_instance==null) {
+            _instance = (DataBase)Resources.Load ("DataBase");
+            //if (_instance == null) {
+            //    _instance = CreateInstance<DataBase>();
+            //    #if UNITY_EDITOR
+			//		Extensions.WriteAsset(_instance);
+			//		CreateDefaultLabels();
+            //   #endif
+            //   //Debug.Log ("DataBase: loaded instance from resources is null, created instance");
+            //}
+        }
+    }
     [SerializeField] private Data data;
     private void RefreshBlocks()
     {
@@ -32,23 +53,26 @@ public class DataBase : ScriptableObject
     private void RefreshItems()
     {
         _items.Clear();
-        _itemsArray = new ItemData.Data[data.items.Length + data.itemsBlocks.Count];
-        var a = 0;
+        _itemsList = new List<ItemData.Data>();
         var items = data.items;
         for (var i = 0; i < items.Length; i++)
         {
             var item = items[i];
-            _items.Add(item.Name, item);
-            _itemsArray[a] = item;
-            a++;
+            if (item != null)
+            {
+                _items.Add(item.Name, item);
+                _itemsList.Add(item);
+            }
         }
         var items1 = data.itemsBlocks;
         for (var i = 0; i < items1.Count; i++)
         {
             var item = items1[i];
-            _items.Add(item.Name, item);
-            _itemsArray[a] = item;
-            a++;
+            if (item != null)
+            {
+                _items.Add(item.Name, item);
+                _itemsList.Add(item);
+            }
         }
     }
 
@@ -58,11 +82,15 @@ public class DataBase : ScriptableObject
     }
 
     public BlockData GetBlock(string name)
-    {  
+    {
+        if (name == "")
+            return null;
         return _blocks[name];
     }
     public ItemData.Data GetItem(string name)
-    {  
+    {
+        if (name == "")
+            return null;
         return _items[name];
     }
     public void Refresh()

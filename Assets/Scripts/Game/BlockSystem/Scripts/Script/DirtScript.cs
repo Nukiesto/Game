@@ -19,7 +19,7 @@ public class DirtScript : BaseBlockScript
     {
         while (true)
         {
-            float n = Random.Range(0, 4);
+            float n = Random.Range(0, 8);
             //Debug.Log(_pos);
             //Debug.Log("Coroutine Started");
             //yield return new WaitForSeconds(n);

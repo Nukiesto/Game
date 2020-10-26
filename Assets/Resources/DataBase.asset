@@ -27,6 +27,7 @@ MonoBehaviour:
     itemsBlocks:
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Cactus
       name:
         translations:
@@ -44,6 +45,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 55518a05314268d45a9e073238c1d63a, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Dirt
       name:
         translations:
@@ -63,6 +65,7 @@ MonoBehaviour:
         type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Furnace
       name:
         translations:
@@ -80,6 +83,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: f79dbff67e8f878439092eac4e3bc3ec, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Null
       name:
         translations:
@@ -91,6 +95,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 9807e2b6fe8cc3e4387071971a6641f5, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Ore_Coal
       name:
         translations:
@@ -104,6 +109,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: fb8ffa5e7f3dfd847a83ef1395769fba, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Ore_Iron
       name:
         translations:
@@ -117,6 +123,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: c3af5104573a5c2458f5abaac6da1b88, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Sand
       name:
         translations:
@@ -130,6 +137,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 9bb6ad74316fdb64d9e46c4952481f19, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Stone
       name:
         translations:
@@ -143,6 +151,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 1a37f1b3c84f4884f9c72ec31e56f152, type: 3}
     - type: 1
       maxCount: 64
+      showInSandboxPanel: 1
       Name: Chest
       name:
         translations:

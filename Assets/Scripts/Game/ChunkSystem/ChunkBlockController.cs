@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -118,8 +119,22 @@ public class BlockUnit
     
     public BlockUnit(BlockData data, Vector2Int posChunk, BlockLayer layer, Tilemap tilemap, ChunkUnit chunkUnit)
     {
-        Memory = data.memory;
-        Script = data.script;
+        Memory = null;
+        Script = null;
+        var type = data.memory?.GetType();
+        if (type != null)
+        {
+            Memory = (BaseBlockMemory)ScriptableObject.CreateInstance(type);
+                //(BaseBlockMemory)Activator.CreateInstance(type);
+        }
+        var type1 = data.script?.GetType();
+        if (type1 != null)
+        {
+            Script = (BaseBlockScript)ScriptableObject.CreateInstance(type1);
+                //(BaseBlockScript)Activator.CreateInstance(type1);
+        }
+        //Memory = newObj;//GetMemScr.GetMemory(data.nameBlock);//data.memory.GetMemory;
+        //Script = data.script;//GetMemScr.GetScript(data.nameBlock);//data.script.GetScript;
         PosChunk = posChunk;
         Data = data;
         Layer = layer;
@@ -129,7 +144,6 @@ public class BlockUnit
         {
             Script.blockUnit = this;
         }
-
     }
 
     public ItemData.Data GetItem()

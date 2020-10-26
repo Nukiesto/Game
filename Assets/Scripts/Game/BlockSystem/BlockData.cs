@@ -13,6 +13,7 @@ public class BlockData : ScriptableObject
     public bool toPlaceBack = true;
     public bool isInteractable = false;
     public bool mustHaveDownerBlock = false;
+    public bool showInSandboxPanel = true;
     
     public string nameBlock;
     [HideInInspector] public int id { get; private set; }
@@ -45,6 +46,7 @@ public class BlockData : ScriptableObject
     {
         Item = new Data()
         {
+            showInSandboxPanel = showInSandboxPanel,
             type = ItemType.Block,
             sprite = tile?.sprite,
             description = descriptionTranslations,
