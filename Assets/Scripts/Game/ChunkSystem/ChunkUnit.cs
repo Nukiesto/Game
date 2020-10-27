@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Lighting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
@@ -12,6 +13,15 @@ public enum BlockLayer
     Back = 1
 }
 
+public enum ChunkTilemap
+{
+    Back,
+    BackLightSource,
+    Front,
+    FrontUnSolid,
+    FrontLightObstacle,
+    FrontLightSource
+}
 [RequireComponent(typeof(ChunkUnit))]
 [RequireComponent(typeof(ChunkBlockController))]
 public class ChunkUnit : MonoBehaviour
@@ -19,12 +29,16 @@ public class ChunkUnit : MonoBehaviour
     #region Fields
 
     #region Tilemaps
-
     [Header("Tilemaps")] [SerializeField] internal Tilemap tilemapBackWorld;
+    [SerializeField] internal Tilemap tilemapBackWorldLightSources;
     [SerializeField] internal Tilemap tilemapFrontWorld;
+    [SerializeField] internal Tilemap tilemapFrontWorldUnSolid;
     [SerializeField] internal Tilemap tilemapFrontWorldLightObstacle;
-    internal Dictionary<BlockLayer, Tilemap> DicTile;
+    [SerializeField] internal Tilemap tilemapFrontWorldLightSources;
 
+    internal Dictionary<ChunkTilemap, Tilemap> Tilemaps;
+    internal Dictionary<BlockLayer, Tilemap> DicTile;
+    
     #endregion
 
     #region Components
@@ -41,6 +55,7 @@ public class ChunkUnit : MonoBehaviour
     private Vector3 _posObj;
     private ChunkUnit _chunkDowner;
     private ChunkUnit _chunkUpper;
+    private Dictionary<Vector3Int, LightBlock> _lightBlocks;
     public bool ToGenerate { private get; set; }
 
     #endregion
@@ -98,26 +113,66 @@ public class ChunkUnit : MonoBehaviour
 
     private void Init()
     {
+        _lightBlocks = new Dictionary<Vector3Int, LightBlock>();
         //Controller
         _controller = GetComponent<ChunkBlockController>();
         _controller.SetChunk(this);
-        //TileMapDic
+        //TilemapDic block layer
         DicTile = new Dictionary<BlockLayer, Tilemap>
         {
             {BlockLayer.Front, tilemapFrontWorld},
             {BlockLayer.Back, tilemapBackWorld}
         };
+        //Tilemaps
+        Tilemaps = new Dictionary<ChunkTilemap, Tilemap>
+        {
+            {ChunkTilemap.Back, tilemapBackWorld},
+            {ChunkTilemap.BackLightSource, tilemapBackWorldLightSources},
+            {ChunkTilemap.Front, tilemapFrontWorld},
+            {ChunkTilemap.FrontUnSolid, tilemapFrontWorldUnSolid},
+            {ChunkTilemap.FrontLightObstacle, tilemapFrontWorldLightObstacle},
+            {ChunkTilemap.FrontLightSource, tilemapFrontWorldLightSources},
+        };
         //Pos
         _posObj = transform.position;
     }
 
+    private void CreateLightBlock(Vector3Int pos, Color color, float size = 10)
+    {
+        if (!_lightBlocks.ContainsKey(pos))
+        {
+            var pos3 = new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0);
+            var obj = PoolManager.GetObject("LightBlock", transform.position + pos3, Quaternion.identity);
+            if (obj != null)
+            {
+                var light = obj.GetComponent<LightBlock>();
+                light.SetSize(size);
+                light.SetColor(color);
+                _lightBlocks.Add(pos, light);
+            }
+        }
+    }
+
+    private void DestroyLightBlock(Vector3Int pos)
+    {
+        if (_lightBlocks.ContainsKey(pos))
+        {
+            var lightBlock = _lightBlocks[pos];
+        
+            if (lightBlock != null)
+            {
+                _lightBlocks[pos]?.DestroyLight();
+                _lightBlocks.Remove(pos);
+            }
+        }
+    }
     #region SetBlock
 
     //Local
     public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap,
         BlockLayer layer = BlockLayer.Front, bool toStartCor = false)
     {
-        var hasBlock = checkCollisions && HasBlock(pos, tilemap);
+        var hasBlock = checkCollisions && HasBlock(pos, layer);
         if (layer == BlockLayer.Back && !(data?.toPlaceBack ?? false))
         {
             return false;
@@ -125,12 +180,35 @@ public class ChunkUnit : MonoBehaviour
         if (InBounds(pos) && !hasBlock)
             if (data != null)
             {
-                //Debug.Log(layer);
-                tilemap.SetTile(pos, data.tile);
-                if (layer == BlockLayer.Front)
+                if (data.isSolid)
                 {
-                    tilemapFrontWorldLightObstacle.SetTile(pos, data.tile);
+                    tilemap.SetTile(pos, data.tile);
                 }
+                else
+                {
+                    GetTileMap(ChunkTilemap.FrontUnSolid).SetTile(pos, data.tile);
+                }
+                if (!data.isLightSource)
+                {
+                    if (layer == BlockLayer.Front && data.isLightObstacle)
+                    {
+                        GetTileMap(ChunkTilemap.FrontLightObstacle).SetTile(pos, data.tile);
+                    }
+                }
+                else
+                {
+                    if (layer == BlockLayer.Front)
+                    {
+                        GetTileMap(ChunkTilemap.FrontLightSource).SetTile(pos, data.tileLightSource);
+                        CreateLightBlock(pos, new Color(1f, 0.75f, 0.13f, 150f / 255f));
+                    }
+                    else
+                    {
+                        GetTileMap(ChunkTilemap.BackLightSource).SetTile(pos, data.tileLightSource);
+                        CreateLightBlock(pos, new Color(1f, 0.75f, 0.13f, 150f / 255f));
+                    }
+                }
+
                 _controller.AddUnit(data, pos, layer, tilemap, toStartCor);
                 return true;
             }
@@ -177,14 +255,16 @@ public class ChunkUnit : MonoBehaviour
 
     public bool CanBreakBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front)
     {
-        var tilemap = GetTileMapOfLayer(layer);
-        var blockPos = tilemap.WorldToCell(pos);
-        
-        if (InBounds(blockPos) && tilemap.GetTile(blockPos) != null)
+        var blockPos = tilemapFrontWorld.WorldToCell(pos);
+        if (layer == BlockLayer.Back && HasBlock(pos, BlockLayer.Front))
+        {
+            return false;
+        }
+        if (InBounds(blockPos) && HasBlock(blockPos, layer))
         {
             var blockUnit = _controller.GetBlock(blockPos.x, blockPos.y, layer);
             var blockUpper = GetUpperBlockUnit(blockPos, layer);
-
+            
             if (blockUnit.Data.isBreackable && blockUpper != null ? !blockUpper.Data.mustHaveDownerBlock : true)
             {
                 return true;
@@ -194,9 +274,13 @@ public class ChunkUnit : MonoBehaviour
         return false;
     }
     //Local
-    public void DeleteBlock(Vector3Int pos, Tilemap tilemap, BlockLayer layer)
+    public void DeleteBlock(Vector3Int pos, BlockLayer layer)
     {
-        if (InBounds(pos) && tilemap.GetTile(pos) != null)
+        if (layer == BlockLayer.Back && HasBlock(pos, BlockLayer.Front))
+        {
+            return;
+        }
+        if (InBounds(pos) && HasBlock(pos, layer))
         {
             var blockUnit = _controller.GetBlock(pos.x, pos.y, layer);
             var blockUpper = GetUpperBlockUnit(pos, layer);
@@ -205,10 +289,18 @@ public class ChunkUnit : MonoBehaviour
             {
                 //Clear
                 _controller.DeleteUnit(blockUnit);
-                tilemap.SetTile(pos, null);
+                DestroyLightBlock(pos);
                 if (layer == BlockLayer.Front)
                 {
+                    tilemapFrontWorld.SetTile(pos, null);
+                    tilemapFrontWorldUnSolid.SetTile(pos, null);
+                    tilemapFrontWorldLightSources.SetTile(pos, null);
                     tilemapFrontWorldLightObstacle.SetTile(pos, null);
+                }
+                else
+                {
+                    tilemapBackWorld.SetTile(pos, null);
+                    tilemapBackWorldLightSources.SetTile(pos, null);
                 }
 
                 #region CreateItem
@@ -232,16 +324,19 @@ public class ChunkUnit : MonoBehaviour
     //Global
     public void DeleteBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front)
     {
-        var tilemap = GetTileMapOfLayer(layer); //Получение тайлмапа
-        var blockPos = tilemap.WorldToCell(pos); //Получение расположения
+        var blockPos = tilemapFrontWorld.WorldToCell(pos); //Получение расположения
 
-        DeleteBlock(blockPos, tilemap, layer);
+        DeleteBlock(blockPos, layer);
     }
 
     #endregion
 
     #region Other
     
+    private Tilemap GetTileMap(ChunkTilemap chunkTilemapType)
+    {
+        return Tilemaps[chunkTilemapType];
+    }
     private Tilemap GetTileMapOfLayer(BlockLayer layer)
     {
         return DicTile[layer];
@@ -258,8 +353,11 @@ public class ChunkUnit : MonoBehaviour
         //Debug.Log("Cleared");
         _controller.Clear();
         tilemapBackWorld.ClearAllTiles();
+        tilemapBackWorldLightSources.ClearAllTiles();
         tilemapFrontWorld.ClearAllTiles();
+        tilemapFrontWorldUnSolid.ClearAllTiles();
         tilemapFrontWorldLightObstacle.ClearAllTiles();
+        tilemapFrontWorldLightSources.ClearAllTiles();
     }
 
     #endregion
@@ -312,23 +410,24 @@ public class ChunkUnit : MonoBehaviour
 
     #region HasBlock
 
+    public bool HasBlockUnit(Vector3 pos, BlockLayer layer = BlockLayer.Front)
+    {
+        return _controller.GetBlock(new Vector2(pos.x, pos.y), layer) != null;
+    }
+    public bool HasBlockUnit(Vector3Int pos, BlockLayer layer = BlockLayer.Front)
+    {
+        return _controller.GetBlock(new Vector2Int(pos.x, pos.y), layer) != null;
+    }
     //Global
     public bool HasBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front)
     {
-        var tilemap = GetTileMapOfLayer(layer);
-        return HasBlock(tilemap.WorldToCell(pos), layer);
+        return HasBlockUnit(pos, layer);
     }
 
     //Local 
-    public bool HasBlock(Vector3Int pos, Tilemap tilemap)
-    {
-        return tilemap.HasTile(pos);
-    }
-
     public bool HasBlock(Vector3Int pos, BlockLayer layer = BlockLayer.Front)
     {
-        var tilemap = GetTileMapOfLayer(layer);
-        return tilemap.HasTile(pos);
+        return HasBlockUnit(pos, layer);
     }
 
     #endregion

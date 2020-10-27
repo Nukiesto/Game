@@ -292,7 +292,7 @@ namespace Light2D
         }
 
         /// <param name="forceUpdate">Force update even if no changes found.</param>
-        protected virtual void UpdateMeshData(bool forceUpdate = false)// Checking public fields and mesh data, then rebuilding internal state if changes found.
+        public virtual void UpdateMeshData(bool forceUpdate = false)// Checking public fields and mesh data, then rebuilding internal state if changes found.
         {
             if (_meshRenderer == null || _meshFilter == null || IsPartOfStaticBatch)
                 return;

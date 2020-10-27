@@ -7,17 +7,19 @@ using static ItemData;
 public class BlockData : ScriptableObject
 {
     [Header("Основные параметры")]
-    public bool isSolid = true;
-    public bool toCreateItem = true;
-    public bool isBreackable = true;
-    public bool toPlaceBack = true;
-    public bool isInteractable = false;
-    public bool mustHaveDownerBlock = false;
-    public bool showInSandboxPanel = true;
-    public bool isLightObstacle = true;
+    [Tooltip("Твёрдый?")]public bool isSolid = true;
+    [Tooltip("Создавать предмет при уничтожении?")]public bool toCreateItem = true;
+    [Tooltip("Ломаемый?")]public bool isBreackable = true;
+    [Tooltip("Размещаем на фоне?")]public bool toPlaceBack = true;
+    [Tooltip("Функциональный?")]public bool isInteractable = false;
+    [Tooltip("Должен иметь опору?")]public bool mustHaveDownerBlock = false;
+    [Tooltip("Показывать в панели песочницы")]public bool showInSandboxPanel = true;
+    [Tooltip("Препятствие света?")]public bool isLightObstacle = true;
+    [Tooltip("Источник света?")]public bool isLightSource = false;
+    [Tooltip("Включать свет в старте?")]public bool isLightOnStart = true;
     
     public string nameBlock;
-    [HideInInspector] public int id { get; private set; }
+    [HideInInspector] public int Id { get; private set; }
     [Header("")]
     [Range(0, 1000)]
     public int hp;
@@ -29,7 +31,9 @@ public class BlockData : ScriptableObject
     [Header("Ресурсы")]
     public Tile tile;
     public Tile[] tileVariables;
-
+    public Tile tileLightSource;
+    public Tile[] tileLightSourceVariables;
+    
     [Header("Предмет")]
     public TranslateString nameTranslations;
     public TranslateString descriptionTranslations;

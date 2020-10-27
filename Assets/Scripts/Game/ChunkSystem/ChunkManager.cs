@@ -182,10 +182,10 @@ public class ChunkManager : MonoBehaviour
                         memUnit = blockUnitFront.Memory.GetMemoryUnit();
                     }
 
-                    if (memUnit != null)
-                    {
-                        Debug.Log("MemUnitSave: " + memUnit);
-                    }
+                    //if (memUnit != null)
+                    //{
+                        //Debug.Log("MemUnitSave: " + memUnit);
+                    //}
                     chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.Data.nameBlock,
                         (int) BlockLayer.Front, memUnit));
                 }

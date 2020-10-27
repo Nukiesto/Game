@@ -307,7 +307,7 @@ public class Inventory : MonoBehaviour
                 //Items[i].uislot.SetCount(0);
             }
         }
-
+        
         public void WriteChestItems(List<ChestSlotUnit> items)
         {
             ItemUnit unit;
@@ -319,10 +319,12 @@ public class Inventory : MonoBehaviour
                 unit.SetCount(items[i].Count);
                 unit.uislot.SetActiveCountText(true);
             }
+
+            ToSaveBlock();
         }
         public void ToSaveBlock()
         {
-            chestMemory.WriteItems(Items);
+            chestMemory?.WriteItems(Items);
         }
     }
     [Serializable]

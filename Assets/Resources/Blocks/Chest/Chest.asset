@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8be0877e357842498bd41309bfdaec1, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  isSolid: 1
+  isSolid: 0
   toCreateItem: 1
   isBreackable: 1
   toPlaceBack: 0
   isInteractable: 1
   mustHaveDownerBlock: 1
   showInSandboxPanel: 1
+  isLightObstacle: 1
+  isLightSource: 0
+  isLightOnStart: 1
   nameBlock: Chest
   hp: 200
   script: {fileID: 0}
@@ -26,6 +29,8 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: 4a28c53dd4f0ba64bb11384ffe30a677, type: 2}
   tileVariables:
   - {fileID: 11400000, guid: 5f53a0754a0b89f4dacc0d224dd26084, type: 2}
+  tileLightSource: {fileID: 0}
+  tileLightSourceVariables: []
   nameTranslations:
     translations:
     - lang: 1

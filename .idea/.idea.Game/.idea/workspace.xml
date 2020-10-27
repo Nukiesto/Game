@@ -20,18 +20,354 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="WorldList">
+      <change afterPath="$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AlphaBlended.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AlphaBlended.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/LampScript.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/LampScript.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/LightBlock.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/LightBlock.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations/Bat.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations/Bat.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations/BatFly.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations/BatFly.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations/BatSleep.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Animations/BatSleep.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/BlockTilingInfoDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/BlockTilingInfoDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/EditorCameraWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/EditorCameraWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/HingeAutoRotatorEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/HingeAutoRotatorEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/HingeJointUtil.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/HingeJointUtil.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/LandingLegEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/LandingLegEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/Point2Drawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/Point2Drawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/ReadOnlyDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/ReadOnlyDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/ScriptableObjectCreatorWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Editor/ScriptableObjectCreatorWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BackgroundWall.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BackgroundWall.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BackgroundWall_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BackgroundWall_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BatAnimationFrames.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BatAnimationFrames.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BatSleeping.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BatSleeping.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BatSource.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/BatSource.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/Wall.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/Wall.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallBot.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallBot.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallBotLeft.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallBotLeft.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallBotRight.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallBotRight.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallLeft.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallLeft.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallRight.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallRight.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallTop.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallTop.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallTopLeft.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallTopLeft.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallTopRight.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WallTopRight.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/Wall_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/Wall_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/Water.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/Water.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WoodPlank.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Castle/WoodPlank.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Block1.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Block1.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Block2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Block2.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Block3.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Block3.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockB.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockB.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockBL.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockBL.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockBR.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockBR.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockBackground.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockBackground.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockL.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockL.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockR.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockR.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockT.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/BlockT.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Empty.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Empty.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Fire.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Fire.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Flare.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Flare.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/LightingCrystals.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/LightingCrystals.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Sky.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Sky.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftHull.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftHull.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegLowerLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegLowerLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegLowerRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegLowerRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegUpperLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegUpperLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegUpperRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftLegUpperRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleReversedLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleReversedLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleReversedRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleReversedRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleSideLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleSideLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleSideRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Spacecraft/SpacecraftNozzleSideRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Sparkles.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/Sparkles.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/TileColliding.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/TileColliding.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/TileNonColliding.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/Rocket/TileNonColliding.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/UI/Slider.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/UI/Slider.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/UI/SliderCircle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Images/UI/SliderCircle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/BackgroundWall.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/BackgroundWall.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/Castle.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/Castle.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/LightObstacle.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/LightObstacle.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/ParticleLight.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/ParticleLight.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/PlatformerAmbientLightComputer.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/PlatformerAmbientLightComputer.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketAmbientLight.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketAmbientLight.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketFlame.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketFlame.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketLightOverlay.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketLightOverlay.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketParticleLight.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketParticleLight.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketSparkles.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/RocketSparkles.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/SimpleExamplesBlur.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/SimpleExamplesBlur.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/SimpleExamplesLightComputer.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/SimpleExamplesLightComputer.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/Skybox.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/Skybox.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/StoneBlock.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/StoneBlock.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/TilesGame.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/TilesGame.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/TilesLighting.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/TilesLighting.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/UnlitMesh.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/UnlitMesh.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/WaterLights.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Materials/WaterLights.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/AmbientLightMeshPrefab.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/AmbientLightMeshPrefab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/BlockMeshPrefab.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/BlockMeshPrefab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/BlockSetProfile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/BlockSetProfile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Flare.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Flare.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/LightObstaclesMeshPrefab.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/LightObstaclesMeshPrefab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/LightingCrystals.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/LightingCrystals.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Lights.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Lights.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/PointLight.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/PointLight.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders/AlphaBlended.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders/AlphaBlended.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders/Noise.cginc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders/Noise.cginc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders/TransparentVertexColor.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/Shaders/TransparentVertexColor.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/ThrusterMain.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/ThrusterMain.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/ThrusterSide.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Resources/ThrusterSide.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Bat.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Bat.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/BlockSetProfile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/BlockSetProfile.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/ButtonHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/ButtonHelper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/CameraFollower.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/CameraFollower.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/ColorTweener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/ColorTweener.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Flare.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Flare.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/HingeAutoRotator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/HingeAutoRotator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/InputManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/InputManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/LandingLeg.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/LandingLeg.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/LightRandomizer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/LightRandomizer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/MapGenerator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/MapGenerator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/MeshCombiner.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/MeshCombiner.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/MouseFollower.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/MouseFollower.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Noise.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Noise.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/RocketEngine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/RocketEngine.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/RotationTweener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/RotationTweener.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SimpleExamplesController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SimpleExamplesController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SimpleRNG.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SimpleRNG.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SortingOrderSetter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SortingOrderSetter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Spacecraft.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Spacecraft.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SpiderLeg.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/SpiderLeg.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/UICustomSlider.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/UICustomSlider.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Wisp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/Wisp.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Scripts/CustomSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Scripts/CustomSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Scripts/LightObstacleSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Scripts/LightObstacleSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/changelog.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/changelog.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/readme.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Light2D/readme.rtf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/CactusTile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/CactusTile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Chest/Chest.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Chest/Chest.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Glass/Glass.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Glass/Glass.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Glass/Tile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Glass/Tile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DataBase.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DataBase.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Chunk.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Chunk.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Background.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Background.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/New Scene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/New Scene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestCLSV.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestCLSV.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/LiberationSans.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Drop Shadow.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Drop Shadow.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Outline.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Outline.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Sprite Assets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Style Sheets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/TMP Settings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/TMP Settings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_SDF.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro.cginc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro.cginc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites/EmojiOne.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites/EmojiOne.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites/EmojiOne.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Sprites/EmojiOne.png.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,13 +396,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UnityToolbox/Controllers/Six Degrees Of Freedom/SixDOFController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/RocketEngine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Editor/CUIBezierCurveEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonChat/Code/ChatChannel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Lighting/LightBlock.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Examples/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" root0="FORCE_HIGHLIGHTING" />
@@ -79,6 +414,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/0b/e1867340/Resources.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/NullScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AlphaBlended.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" root0="FORCE_HIGHLIGHTING" />
@@ -91,9 +427,21 @@
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Runtime/Scripts/Controls/ComboBox/AutoCompleteComboBox.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightingSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/Light90.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AmbientLightComputer.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightObstacleSprite.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/LightBase.cginc" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/CustomSprite.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/EditorCameraWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/BlockTilingInfoDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/ScriptableObjectCreatorWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/Point2Drawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/ReadOnlyDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/78/7ac75c54/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/d6/d597ebb7/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -106,7 +454,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonRealtime/Code/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Lobby/LobbyMainPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/LampScript.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -135,21 +485,28 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/GetMemScr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/LampScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AlphaBlend.shader" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light2D/Scripts/CustomSprite.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" />
+        <option value="$PROJECT_DIR$/Assets/Light2D/Scripts/LightObstacleSprite.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/LightBlock.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
       </list>
     </option>
   </component>
@@ -203,7 +560,7 @@
       <workItem from="1603605738513" duration="9545000" />
       <workItem from="1603629181718" duration="26514000" />
       <workItem from="1603708440933" duration="16341000" />
-      <workItem from="1603770181321" duration="26536000" />
+      <workItem from="1603770181321" duration="37114000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>
@@ -358,10 +715,10 @@
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state x="141" y="142" key="SettingsEditor/0.0.1280.994@0.0.1280.994" timestamp="1603656067932" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1603782529167">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1603815387913">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603782529167" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603815387913" />
     <state x="92" y="92" width="1096" height="810" maximized="true" key="VCS.FileHistoryDialog" timestamp="1603788543833">
       <screen x="0" y="0" width="1280" height="994" />
     </state>

@@ -3,19 +3,23 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(menuName = "BlockScripts/Dirt", fileName = nameof(DirtScript))]
-public class DirtScript : BaseBlockScript
+[CreateAssetMenu(menuName = "BlockScripts/Lamp", fileName = nameof(LampScript))]
+public class LampScript : BaseBlockScript
 {
     public override void StartScript()
     {
         Init();
         //Debug.Log(_pos);
-        CoroutineToInit = SetGrass;
+        //CoroutineToInit = SetGrass;
         //coroutineToInit = SetGrass();
         //StartCoroutine(SetGrass());
     }
 
-    public IEnumerator SetGrass()
+    public void ToggleLight()
+    {
+        
+    }
+    /*public IEnumerator SetGrass()
     {
         while (true)
         {
@@ -26,12 +30,12 @@ public class DirtScript : BaseBlockScript
             //Debug.Log("Tile: " + GetTile() + "/" + blockUnit.Data.tileVariables[0]);
             //Debug.Log("CanSet Grass: " + blockUnit.ChunkUnit.chunkBuilder.CanSetGrass(_pos));
             var builder = blockUnit.ChunkUnit.chunkBuilder;
-            if (builder.CanSetGrass(Pos, blockUnit.Data))
+            if (builder.CanSetGrass(_pos, blockUnit.Data))
             {
                 //Debug.Log("Grass Seted: " + _pos);
                 SetTile(blockUnit.Data.tileVariables[0]);
             }
             yield break;
         }
-    }
+    }*/
 }

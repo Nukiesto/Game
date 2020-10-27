@@ -15,15 +15,19 @@ MonoBehaviour:
   isSolid: 1
   toCreateItem: 1
   isBreackable: 1
-  toPlaceBack: 0
+  toPlaceBack: 1
   isInteractable: 0
   mustHaveDownerBlock: 0
+  showInSandboxPanel: 1
+  isLightObstacle: 1
   nameBlock: Cactus
   hp: 40
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 11400000, guid: af2b22874fd35d748b3d656d2dc32610, type: 2}
   tileVariables: []
+  tileLightSource: {fileID: 0}
+  tileLightSourceVariables: []
   nameTranslations:
     translations:
     - lang: 1

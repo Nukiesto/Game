@@ -15,14 +15,16 @@ MonoBehaviour:
   data:
     blocks:
     - {fileID: 11400000, guid: 99447b62bd393524fae8dbf0af32675c, type: 2}
+    - {fileID: 11400000, guid: cb6e637032b5781489c21e223b9e9f68, type: 2}
     - {fileID: 11400000, guid: c86498ad90036ab46877f865e4aa8aab, type: 2}
     - {fileID: 11400000, guid: 0133190303522b947926377618ee8bf3, type: 2}
+    - {fileID: 11400000, guid: 9e0b3b2e121886e4c8910b435a3e7a0b, type: 2}
+    - {fileID: 11400000, guid: e709060e18e1f4543aabc5701e545e1b, type: 2}
     - {fileID: 11400000, guid: 0c375def88a36ac49a5d31811d49fe3e, type: 2}
     - {fileID: 11400000, guid: cab8b78dddfc0f0448ac76f07058efcc, type: 2}
     - {fileID: 11400000, guid: 47438586f7b97ae4a987131806b58909, type: 2}
     - {fileID: 11400000, guid: ea3f46e777002664c8bfcd9ca3ea87de, type: 2}
     - {fileID: 11400000, guid: 1d9af7fbd70129e4d98d7a4c9c56bd74, type: 2}
-    - {fileID: 11400000, guid: cb6e637032b5781489c21e223b9e9f68, type: 2}
     items: []
     itemsBlocks:
     - type: 1
@@ -42,7 +44,22 @@ MonoBehaviour:
         - lang: 2
           text: 
       block: {fileID: 11400000, guid: 99447b62bd393524fae8dbf0af32675c, type: 2}
-      sprite: {fileID: 21300000, guid: 55518a05314268d45a9e073238c1d63a, type: 3}
+      sprite: {fileID: 21300000, guid: d2d0f4d25e58745478cb9096b2fcbd4e, type: 3}
+    - type: 1
+      maxCount: 64
+      showInSandboxPanel: 1
+      Name: Chest
+      name:
+        translations:
+        - lang: 1
+          text: Chest
+        - lang: 2
+          text: "\u0421\u0443\u043D\u0434\u0443\u043A"
+      description:
+        translations: []
+      block: {fileID: 11400000, guid: cb6e637032b5781489c21e223b9e9f68, type: 2}
+      sprite: {fileID: -5281422124547630143, guid: e0011c1526abe7d44b1d630075d08b13,
+        type: 3}
     - type: 1
       maxCount: 64
       showInSandboxPanel: 1
@@ -81,6 +98,39 @@ MonoBehaviour:
           text: 
       block: {fileID: 11400000, guid: 0133190303522b947926377618ee8bf3, type: 2}
       sprite: {fileID: 21300000, guid: f79dbff67e8f878439092eac4e3bc3ec, type: 3}
+    - type: 1
+      maxCount: 64
+      showInSandboxPanel: 1
+      Name: Glass
+      name:
+        translations:
+        - lang: 1
+          text: Chest
+        - lang: 2
+          text: "\u0421\u0443\u043D\u0434\u0443\u043A"
+      description:
+        translations: []
+      block: {fileID: 11400000, guid: 9e0b3b2e121886e4c8910b435a3e7a0b, type: 2}
+      sprite: {fileID: 21300000, guid: 5d30c6af94ea31e43a17e485c18826ed, type: 3}
+    - type: 1
+      maxCount: 64
+      showInSandboxPanel: 1
+      Name: Lamp
+      name:
+        translations:
+        - lang: 1
+          text: Lamp
+        - lang: 2
+          text: "\u041B\u0430\u043C\u043F\u0430"
+      description:
+        translations:
+        - lang: 1
+          text: 
+        - lang: 2
+          text: 
+      block: {fileID: 11400000, guid: e709060e18e1f4543aabc5701e545e1b, type: 2}
+      sprite: {fileID: -3535221090349844623, guid: e4bffd316764af4499e4b04290fde2d7,
+        type: 3}
     - type: 1
       maxCount: 64
       showInSandboxPanel: 1
@@ -149,18 +199,3 @@ MonoBehaviour:
         translations: []
       block: {fileID: 11400000, guid: 1d9af7fbd70129e4d98d7a4c9c56bd74, type: 2}
       sprite: {fileID: 21300000, guid: 1a37f1b3c84f4884f9c72ec31e56f152, type: 3}
-    - type: 1
-      maxCount: 64
-      showInSandboxPanel: 1
-      Name: Chest
-      name:
-        translations:
-        - lang: 1
-          text: Chest
-        - lang: 2
-          text: "\u0421\u0443\u043D\u0434\u0443\u043A"
-      description:
-        translations: []
-      block: {fileID: 11400000, guid: cb6e637032b5781489c21e223b9e9f68, type: 2}
-      sprite: {fileID: -5281422124547630143, guid: e0011c1526abe7d44b1d630075d08b13,
-        type: 3}

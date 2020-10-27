@@ -12,18 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8be0877e357842498bd41309bfdaec1, type: 3}
   m_Name: Furnace
   m_EditorClassIdentifier: 
-  isSolid: 1
+  isSolid: 0
   toCreateItem: 1
   isBreackable: 1
   toPlaceBack: 0
   isInteractable: 1
   mustHaveDownerBlock: 1
+  showInSandboxPanel: 1
+  isLightObstacle: 1
+  isLightSource: 0
+  isLightOnStart: 1
   nameBlock: Furnace
   hp: 470
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 11400000, guid: 81b5df7b88bbd564c95f3a89de919724, type: 2}
   tileVariables: []
+  tileLightSource: {fileID: 0}
+  tileLightSourceVariables: []
   nameTranslations:
     translations:
     - lang: 1

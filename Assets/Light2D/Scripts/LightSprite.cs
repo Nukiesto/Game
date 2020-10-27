@@ -17,10 +17,7 @@ namespace Light2D
         private Vector3 _oldLightOrigin;
         private LightShape _oldLightShape;
 
-        public MeshRenderer Renderer
-        {
-            get { return _meshRenderer; }
-        }
+        public MeshRenderer Renderer => _meshRenderer;
 
         protected override void OnEnable()
         {
@@ -28,7 +25,7 @@ namespace Light2D
             AllLightSprites.Add(this);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             AllLightSprites.Remove(this);
         }
@@ -84,7 +81,7 @@ namespace Light2D
             }
         }
 
-        protected override void UpdateMeshData(bool forceUpdate = false)
+        public override void UpdateMeshData(bool forceUpdate = false)
         {
             if (IsPartOfStaticBatch)
                 return;

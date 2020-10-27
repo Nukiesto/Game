@@ -55,7 +55,7 @@ namespace Light2D
             }
         }
 
-        protected override void UpdateMeshData(bool forceUpdate = false)
+        public override void UpdateMeshData(bool forceUpdate = false)
         {
             if (_meshRenderer == null || _meshFilter == null || IsPartOfStaticBatch)
                 return;

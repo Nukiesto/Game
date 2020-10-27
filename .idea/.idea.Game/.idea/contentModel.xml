@@ -324,58 +324,19 @@
           </e>
         </e>
         <e p="Light2D" t="Include">
-          <e p="changelog.txt" t="Include" />
           <e p="Editor" t="Include">
+            <e p="BlockTilingInfoDrawer.cs" t="Include" />
+            <e p="EditorCameraWindow.cs" t="Include" />
             <e p="Light2DMenu.cs" t="Include" />
             <e p="LightingSystemCreationWindow.cs" t="Include" />
             <e p="LightingSystemEditor.cs" t="Include" />
-          </e>
-          <e p="Examples" t="Include">
-            <e p="Editor" t="Include">
-              <e p="BlockTilingInfoDrawer.cs" t="Include" />
-              <e p="EditorCameraWindow.cs" t="Include" />
-              <e p="HingeAutoRotatorEditor.cs" t="Include" />
-              <e p="HingeJointUtil.cs" t="Include" />
-              <e p="LandingLegEditor.cs" t="Include" />
-              <e p="Point2Drawer.cs" t="Include" />
-              <e p="ReadOnlyDrawer.cs" t="Include" />
-              <e p="ScriptableObjectCreatorWindow.cs" t="Include" />
-            </e>
-            <e p="Resources" t="Include">
-              <e p="Shaders" t="Include">
-                <e p="AlphaBlended.shader" t="Include" />
-                <e p="Noise.cginc" t="Include" />
-                <e p="TransparentVertexColor.shader" t="Include" />
-              </e>
-            </e>
-            <e p="Scripts" t="Include">
-              <e p="Bat.cs" t="Include" />
-              <e p="BlockSetProfile.cs" t="Include" />
-              <e p="ButtonHelper.cs" t="Include" />
-              <e p="CameraFollower.cs" t="Include" />
-              <e p="ColorTweener.cs" t="Include" />
-              <e p="Flare.cs" t="Include" />
-              <e p="HingeAutoRotator.cs" t="Include" />
-              <e p="InputManager.cs" t="Include" />
-              <e p="LandingLeg.cs" t="Include" />
-              <e p="LightRandomizer.cs" t="Include" />
-              <e p="MapGenerator.cs" t="Include" />
-              <e p="MeshCombiner.cs" t="Include" />
-              <e p="MouseFollower.cs" t="Include" />
-              <e p="Noise.cs" t="Include" />
-              <e p="RocketEngine.cs" t="Include" />
-              <e p="RotationTweener.cs" t="Include" />
-              <e p="SimpleExamplesController.cs" t="Include" />
-              <e p="SimpleRNG.cs" t="Include" />
-              <e p="SortingOrderSetter.cs" t="Include" />
-              <e p="Spacecraft.cs" t="Include" />
-              <e p="SpiderLeg.cs" t="Include" />
-              <e p="UICustomSlider.cs" t="Include" />
-              <e p="Wisp.cs" t="Include" />
-            </e>
+            <e p="Point2Drawer.cs" t="Include" />
+            <e p="ReadOnlyDrawer.cs" t="Include" />
+            <e p="ScriptableObjectCreatorWindow.cs" t="Include" />
           </e>
           <e p="Resources" t="Include">
             <e p="Shaders" t="Include">
+              <e p="AlphaBlended.shader" t="Include" />
               <e p="AlphaReplace.shader" t="Include" />
               <e p="AmbientLightComputer.shader" t="Include" />
               <e p="FastBlur.shader" t="Include" />
@@ -934,6 +895,7 @@
                 </e>
                 <e p="Script" t="Include">
                   <e p="DirtScript.cs" t="Include" />
+                  <e p="LampScript.cs" t="Include" />
                   <e p="NullScript.cs" t="Include" />
                 </e>
               </e>
@@ -958,6 +920,7 @@
             </e>
             <e p="Lighting" t="Include">
               <e p="AmbientLightController.cs" t="Include" />
+              <e p="LightBlock.cs" t="Include" />
             </e>
             <e p="Player" t="Include">
               <e p="BlockSelector.cs" t="Include" />
@@ -1400,37 +1363,6 @@
               <e p="UnitInertia.cs" t="Include" />
               <e p="UVScroller.cs" t="Include" />
             </e>
-          </e>
-        </e>
-        <e p="TextMesh Pro" t="Include">
-          <e p="Fonts" t="Include">
-            <e p="LiberationSans - OFL.txt" t="Include" />
-          </e>
-          <e p="Resources" t="Include">
-            <e p="LineBreaking Following Characters.txt" t="Include" />
-            <e p="LineBreaking Leading Characters.txt" t="Include" />
-          </e>
-          <e p="Shaders" t="Include">
-            <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
-            <e p="TMP_Bitmap-Mobile.shader" t="Include" />
-            <e p="TMP_Bitmap.shader" t="Include" />
-            <e p="TMP_SDF Overlay.shader" t="Include" />
-            <e p="TMP_SDF SSD.shader" t="Include" />
-            <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
-            <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
-            <e p="TMP_SDF-Mobile SSD.shader" t="Include" />
-            <e p="TMP_SDF-Mobile.shader" t="Include" />
-            <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
-            <e p="TMP_SDF-Surface.shader" t="Include" />
-            <e p="TMP_SDF.shader" t="Include" />
-            <e p="TMP_Sprite.shader" t="Include" />
-            <e p="TMPro.cginc" t="Include" />
-            <e p="TMPro_Mobile.cginc" t="Include" />
-            <e p="TMPro_Properties.cginc" t="Include" />
-            <e p="TMPro_Surface.cginc" t="Include" />
-          </e>
-          <e p="Sprites" t="Include">
-            <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
       </e>

@@ -55,6 +55,10 @@ public class ChunkBlockController : MonoBehaviour
     #endregion
     #region GetBlock
 
+    public BlockUnit GetBlock(Vector2 posBlock, BlockLayer layer)
+    {
+        return GetBlock(new Vector2Int(Mathf.FloorToInt(posBlock.x), Mathf.FloorToInt(posBlock.y)), layer);
+    }
     public BlockUnit GetBlock(Vector2Int posBlock, BlockLayer layer)
     {
         for (var i = 0; i < _blocks.Count; i++)
