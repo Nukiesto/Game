@@ -14,6 +14,7 @@ public class BlockData : ScriptableObject
     public bool isInteractable = false;
     public bool mustHaveDownerBlock = false;
     public bool showInSandboxPanel = true;
+    public bool isLightObstacle = true;
     
     public string nameBlock;
     [HideInInspector] public int id { get; private set; }

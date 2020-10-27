@@ -154,18 +154,22 @@ public class ChunkUnit : MonoBehaviour
     }
 
     #endregion
-    public void SetMemory(Vector3Int pos, BaseBlockMemory.MemoryUnit memory, BlockLayer layer = BlockLayer.Front)
+    public void SetMemory(Vector3Int pos, string memory, BlockLayer layer = BlockLayer.Front)
     {
         var block = _controller.GetBlock(pos.x, pos.y, layer);
-        if (block != null)
+        if (block != null && memory != null)
         {
-            var mem = (BaseBlockMemory)ScriptableObject.CreateInstance(typeof(BaseBlockMemory));;
-            Debug.Log(mem);
-            if (mem != null)
-            {
-                mem.SetMemoryUnit(memory, this);
-                block.Memory = mem; 
-            }
+            //var mem = (BaseBlockMemory)ScriptableObject.CreateInstance(typeof(BaseBlockMemory));
+            //var m = mem as ChestMemory;
+            //Debug.Log("MemCreated: " + mem);
+            //Debug.Log(block.Memory);
+            block.Memory?.SetMemoryUnit(memory);
+            
+            //if (mem != null)
+            //{
+            //    mem.SetMemoryUnit(memory, this);
+            //    block.Memory = mem;
+            //}
         }
     }
     
@@ -462,19 +466,29 @@ public class ChunkUnit : MonoBehaviour
                 pos.x = i;
                 pos.y = j;
                 var front = chunkFront[i, j];
-                var back = chunkBack[i, j];
+                var back  = chunkBack [i, j];
                 if (front != null)
                 {
                     _chunkFront[i, j] = front.Data;
+                    //if (front.Memory != null)
+                    //{
+                    //    var m = front.Memory as ChestMemory;
+                        //Debug.Log("frontMemChest: " + front.memStr);  
+                    //}
+                    
                     _chunkUnit.SetBlock(pos, front.Data, true, _chunkUnit.tilemapFrontWorld);
-                    _chunkUnit.SetMemory(pos, front.Memory);
+                    _chunkUnit.SetMemory(pos, front.memStr);
                 }
 
                 if (back != null)
                 {
                     _chunkBack[i, j] = back.Data;
                     _chunkUnit.SetBlock(pos, back.Data, true, _chunkUnit.tilemapBackWorld, BlockLayer.Back);
-                    _chunkUnit.SetMemory(pos, back.Memory, BlockLayer.Back);
+                    //if (back.Memory != null)
+                    //{
+                        
+                    //}
+                    _chunkUnit.SetMemory(pos, back.memStr, BlockLayer.Back);
                 }
             }
         }
@@ -602,12 +616,14 @@ public class ChunkUnit : MonoBehaviour
         {
             public BlockData Data;
 
-            public BaseBlockMemory.MemoryUnit Memory;
+            public BaseBlockMemory Memory;
+            public string memStr;
             
-            public BlockUnitChunk(BlockData data, BaseBlockMemory.MemoryUnit memory)
+            public BlockUnitChunk(BlockData data, BaseBlockMemory memory, string memStr)
             {
                 Data = data;
                 Memory = memory;
+                this.memStr = memStr;
             }
         }
     }

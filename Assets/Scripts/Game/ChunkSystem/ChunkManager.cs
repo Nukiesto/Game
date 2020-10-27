@@ -171,16 +171,20 @@ public class ChunkManager : MonoBehaviour
             for (var y = 0; y < _chunkSize; y++)
             {
                 var blockUnitFront = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Front);
-                var blockUnitBack = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Back);
+                var blockUnitBack  = unit.GetBlockUnit(new Vector2Int(x, y), BlockLayer.Back);
 
                 //Debug.Log("BlockUnitFront: " + blockUnitFront + ";BlockUnitBack: " + blockUnitBack);
                 if (blockUnitFront != null)
                 {
-                    BaseBlockMemory.MemoryUnit memUnit = null;
+                    BaseBlockMemory memUnit = null;
                     if (blockUnitFront.Memory != null)
                     {
-                        blockUnitFront.Memory.SavingMemoryUnit();
-                        memUnit = blockUnitFront.Memory.memoryUnit;
+                        memUnit = blockUnitFront.Memory.GetMemoryUnit();
+                    }
+
+                    if (memUnit != null)
+                    {
+                        Debug.Log("MemUnitSave: " + memUnit);
                     }
                     chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.Data.nameBlock,
                         (int) BlockLayer.Front, memUnit));
@@ -188,11 +192,10 @@ public class ChunkManager : MonoBehaviour
 
                 if (blockUnitBack != null)
                 {
-                    BaseBlockMemory.MemoryUnit memUnit1 = null;
+                    BaseBlockMemory memUnit1 = null;
                     if (blockUnitBack.Memory != null)
                     {
-                        blockUnitBack.Memory.SavingMemoryUnit();
-                        memUnit1 = blockUnitBack.Memory.memoryUnit;
+                        memUnit1 = blockUnitBack.Memory.GetMemoryUnit();
                     }
                     chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.Data.nameBlock, 
                         (int) BlockLayer.Back, memUnit1));
@@ -239,14 +242,19 @@ public class ChunkManager : MonoBehaviour
                     if (blockData.blockLayer == (int) BlockLayer.Front)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
-                        chunkFront[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.Memory);
+                        if (blockData.memory != null)
+                        {
+                            var mem = blockData.memory as ChestMemory;
+                            //Debug.Log("ChestMem: " + mem);
+                        }
+                        chunkFront[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.memory, blockData.memStr);
                         //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Front, false);
                     }
 
                     if (blockData.blockLayer == (int) BlockLayer.Back)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
-                        chunkBack[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.Memory);
+                        chunkBack[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.memory, blockData.memStr);
                         //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Back);
                     }
                 }

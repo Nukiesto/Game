@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class BaseBlockMemory : ScriptableObject
 {
-    public virtual MemoryUnit memoryUnit { get; set; }
-    public class MemoryUnit
+    public virtual BaseBlockMemory GetMemoryUnit()
     {
-        
+        return null;
     }
 
-    public virtual void SavingMemoryUnit(){}
-
-    public virtual void SetMemoryUnit(MemoryUnit unit, ChunkUnit chunkUnit)
+    public virtual void SetMemoryUnit(string memory)
     {
         
     }

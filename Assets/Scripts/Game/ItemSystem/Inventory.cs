@@ -627,19 +627,26 @@ public class Inventory : MonoBehaviour
 
     public void OpenChest(ChestMemory chestMemory)
     {
-        SetThirdMenu(InventoryType.Chest);
-        //Debug.Log(_typeCurrentThirdMenu);
-        ToggleOpenMain(true);
+        if (chestMemory != null)
+        {
+            SetThirdMenu(InventoryType.Chest);
+            //Debug.Log(_typeCurrentThirdMenu);
+            ToggleOpenMain(true);
 
-        ToggleOpenThirdMenu(true);
+            ToggleOpenThirdMenu(true);
         
-        //chestItems.DisableUISlots();
-        chestItems.WriteChestItems(chestMemory.items);
-        //chestItems.UpdateUISlots();
-        chestItems.chestMemory = chestMemory;
-        //chestMemory.Debugging();
-        //chestItems.DisableUISlots();
-        //Debug.Log(_typeCurrentThirdMenu);
+            //chestItems.DisableUISlots();
+            chestItems.WriteChestItems(chestMemory.items);
+            //chestItems.UpdateUISlots();
+            chestItems.chestMemory = chestMemory;
+            //chestMemory.Debugging();
+            //chestItems.DisableUISlots();
+            //Debug.Log(_typeCurrentThirdMenu);
+        }
+        else
+        {
+            Debug.LogWarning("ChestMemoryNull");
+        }
     }
 
     public void CloseChest()

@@ -124,17 +124,14 @@ public class BlockUnit
         var type = data.memory?.GetType();
         if (type != null)
         {
+            //Debug.Log(type);
             Memory = (BaseBlockMemory)ScriptableObject.CreateInstance(type);
-                //(BaseBlockMemory)Activator.CreateInstance(type);
         }
         var type1 = data.script?.GetType();
         if (type1 != null)
         {
             Script = (BaseBlockScript)ScriptableObject.CreateInstance(type1);
-                //(BaseBlockScript)Activator.CreateInstance(type1);
         }
-        //Memory = newObj;//GetMemScr.GetMemory(data.nameBlock);//data.memory.GetMemory;
-        //Script = data.script;//GetMemScr.GetScript(data.nameBlock);//data.script.GetScript;
         PosChunk = posChunk;
         Data = data;
         Layer = layer;

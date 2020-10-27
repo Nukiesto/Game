@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-
+using System.Text.RegularExpressions;
+    
 namespace SavingSystem
 {
 	public static class WorldSavingSystem
@@ -394,14 +395,39 @@ namespace SavingSystem
                         //Debug.Log("End: " + end);
                         for (var i = start; i < end; i++)
                         {
+                            var item = chunkData.blocks[i - start];
                             //Debug.Log("i: " + (i - start));
-                            data[i] = JsonConvert.SerializeObject(chunkData.blocks[i - start]);
+                            if (item.memory != null)
+                            {
+                                //item.memory.ItemConverterType = item.memory.GetType();
+                                
+                                
+                                /*var m = item.memory as ChestMemory;
+                                if (m != null && m.itemsToSave != null)
+                                {
+                                    //item.memory.ItemConverterParameters = new object[] {"Items"};
+                                    //Debug.Log("ChestMemSavedParameters: " + item.memory.ItemConverterParameters[0]);
+                                    //item.memory.ItemConverterType = typeof(ChestMemory.ChestMemoryUnit);
+                                    Debug.Log("ChestMemSavedItemsCount: " + m.itemsToSave?.Count);
+                                }
+                                else
+                                {
+                                    Debug.Log("ChestMemSavedItemsCount: -1");
+                                }*/
+                            }
+                            //item.memory.ItemConverterType = 
+                            data[i] = JsonConvert.SerializeObject(item);
+                            if (item.memory != null)
+                            {
+                                //Debug.Log("Save: " + data[i]);
+                            }
                         }
                         start = end + 1; end = start + chunkData.items.Count;
                         if (chunkData.items.Count > 0)
                         {
-                            for (int i = start; i < end; i++)
+                            for (var i = start; i < end; i++)
                             {
+                                
                                 data[i] = JsonConvert.SerializeObject(chunkData.items[i - start]);
                             }
                         }
@@ -428,17 +454,42 @@ namespace SavingSystem
                             var data = JsonHelper.FromJson<string>(text);
                             chunkData.blocks.Clear();
 
-                            var start = 2; int end = 2 + int.Parse(data[0]);
+                            var start = 2; var end = 2 + int.Parse(data[0]);
                             for (var i = start; i < end; i++)
                             {
                                 //Debug.Log("i: " + i + " ;data: " + data[i - start]);
                                 var blockData = JsonConvert.DeserializeObject<BlockChunkData>(data[i]);
+                                //DeserializeObject<BlockChunkData>(data[i]);
+                                var l = "'".ToCharArray()[0];
+                                var str = JsonConvert.ToString(data[i], l, StringEscapeHandling.Default);
+                                
+                                var rg = new Regex(@"memory.:(.*?)}'");
+                                var result = rg.Match(str).Groups[1].Value;
+                                
+                                blockData.memStr = result;
+                                
+                                //if (blockData.memory != null)
+                                //{
+                                    //Debug.Log(data[i]);
+                                    //Debug.Log("BlockLoadTypeConvert: " + blockData.memory.ItemConverterType);
+                                    //Debug.Log("BlockLoadTypeConvertParameters: " + blockData.memory.ItemConverterParameters[0]);
+                                    //Debug.Log(data[i]);
+                                    //Debug.Log(blockData.memory.Description);
+                                    //var m = blockData.memory as ChestMemory;
+                                    //Debug.Log(m?.itemsToSave?.Count);
+                                    //var t = m.Items.GetType();
+                                    //var t = (List<ChestSlotUnitSave>)blockData.memory.ItemConverterParameters[0];
+                                    //Debug.Log(t);
+                                    //m.Items = t;
+                                    //blockData.memory = m;
+                                //}
+                                
                                 chunkData.AddChunkBlock(blockData);
                             }
                             start = end + 1; end = start + int.Parse(data[1]);
                             for (var i = start; i < end; i++)
                             {
-                                ItemChunkData entityData = JsonConvert.DeserializeObject<ItemChunkData>(data[i - start]);
+                                var entityData = JsonConvert.DeserializeObject<ItemChunkData>(data[i - start]);
                                 chunkData.AddChunkItem(entityData);
                             }
                          }
@@ -465,7 +516,19 @@ namespace SavingSystem
                 this.y = y;
             }
             public void AddChunkBlock(BlockChunkData data)
-            {
+            { 
+                 /*if (data.memory != null)
+                 {
+                     var m = data.memory as ChestMemory;
+                     if (m != null && m.itemsToSave != null)
+                     {
+                         Debug.Log("AddChestMemLoadedItemsCount: " + m.itemsToSave.Count );
+                     }
+                     else
+                     {
+                         Debug.Log("AddChestMemLoadedItemsCount: -1");
+                     }
+                 }*/
                 blocks.Add(data);
             }
             public void AddChunkItem(ItemChunkData data)
@@ -481,16 +544,31 @@ namespace SavingSystem
             
             public string name;
             public int blockLayer;
-            
-            public BaseBlockMemory.MemoryUnit Memory;
 
-            public BlockChunkData(int x, int y, string name, int blockLayer, BaseBlockMemory.MemoryUnit memory)
+            //[JsonPropertyAttribute("Memory", ItemConverterType = typeof(BaseBlockMemory))]
+            public BaseBlockMemory memory;
+            [JsonIgnore]
+            public string memStr;
+            
+            public BlockChunkData(int x, int y, string name, int blockLayer, BaseBlockMemory memory)
             {
                 this.x = x;
                 this.y = y;
                 this.name = name;
                 this.blockLayer = blockLayer;
-                Memory = memory;
+                this.memory = memory;
+                /*if (this.memory != null)
+                {
+                    var m = this.memory as ChestMemory.ChestMemoryUnit;
+                    if (m != null && m.Items != null)
+                    {
+                        Debug.Log("ChestMemAdd1ItemsCount: " + m.Items?.Count );
+                    }
+                    else
+                    {
+                        Debug.Log("ChestMemAdd1ItemsCount: -1");
+                    }
+                }*/
             }
         }
         public class EntityChunkData

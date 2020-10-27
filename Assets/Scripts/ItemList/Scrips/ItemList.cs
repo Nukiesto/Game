@@ -19,7 +19,8 @@ public class ItemList : MonoBehaviour {
 	private float curY, vPos;
 
 	public WorldList WorldList;
-	void Awake()
+
+	public void Awake()
 	{
 		buttons = new List<RectTransform>();
 		delta = element.sizeDelta;
