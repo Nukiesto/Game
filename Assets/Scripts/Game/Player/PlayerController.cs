@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject flashLight;
 
     private bool _flashLightActive;
-
+    public static PlayerController Instance;
+    
     private void Start()
     {
+        Instance = this;
         itemMagnet.radius = itemPickRadius;
     }
 

@@ -910,6 +910,7 @@
               <e p="EntityMovement.cs" t="Include" />
             </e>
             <e p="FunctionalKeys.cs" t="Include" />
+            <e p="GameManager.cs" t="Include" />
             <e p="ItemSystem" t="Include">
               <e p="Inventory.cs" t="Include" />
               <e p="Item.cs" t="Include" />
@@ -948,6 +949,7 @@
             <e p="TakeThumbnail.cs" t="Include" />
             <e p="TimeController.cs" t="Include" />
             <e p="TImerToDelete.cs" t="Include" />
+            <e p="WorldSaver.cs" t="Include" />
           </e>
           <e p="GameConstants.cs" t="Include" />
           <e p="ItemList" t="Include">

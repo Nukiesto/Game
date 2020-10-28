@@ -7,12 +7,11 @@
 using LeopotamGroup.Common;
 using UnityEngine;
 
-namespace LeopotamGroup.EditorHelpers
-{
+
     /// <summary>
     /// Fps counter service.
     /// </summary>
-    internal sealed class FpsCounter : MonoBehaviourService<FpsCounter>
+    public sealed class FpsCounter : MonoBehaviourService<FpsCounter>
     {
         private const int UpdateFrequency = 2;
 
@@ -138,4 +137,3 @@ namespace LeopotamGroup.EditorHelpers
         /// </summary>
         public int CurrentFps { get; private set; }
     }
-}

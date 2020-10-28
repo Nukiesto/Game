@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 3502329410718346550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2793760838365773840}
   - {fileID: 469700221229464451}
@@ -456,6 +456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreOneWayPlatformsThisFrame: 0
   _skinWidth: 0.02
+  entityMask:
+    serializedVersion: 2
+    m_Bits: 0
   platformMask:
     serializedVersion: 2
     m_Bits: 1

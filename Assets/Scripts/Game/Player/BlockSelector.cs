@@ -221,9 +221,9 @@ public class BlockSelector : MonoBehaviour
         hits.Add(Physics2D.RaycastAll(new Vector3(pos.x, pos.y + 0.1f), Vector2.right, 1));
         hits.Add(Physics2D.RaycastAll(new Vector3(pos.x, pos.y + 1), Vector2.right, 1));
 
-        for (int i = 0; i < hits.Count; i++)
+        for (var i = 0; i < hits.Count; i++)
         {
-            for (int z = 0; z < hits[i].Length; z++)
+            for (var z = 0; z < hits[i].Length; z++)
             {
                 if (hits[i][z].collider != null)
                 {

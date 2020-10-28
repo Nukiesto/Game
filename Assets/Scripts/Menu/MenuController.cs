@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Singleton;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum Menu
@@ -46,7 +47,7 @@ public class MenuController : MonoBehaviour
 
     private void Awake()
     {
-        _gameSceneManager = Toolbox.instance.MGameSceneManager;
+        _gameSceneManager = Toolbox.Instance.mGameSceneManager;
         //Debug.Log(gameSceneManager);
 
         SetMenu(startMenu.menuType);

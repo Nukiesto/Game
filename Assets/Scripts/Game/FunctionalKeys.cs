@@ -1,47 +1,49 @@
-﻿using UnityEngine;
+﻿using Singleton;
+using UnityEngine;
 
 public class FunctionalKeys : MonoBehaviour
 {
     
-    private int counter;
+    private int _counter;
 
     [Header("F1-Toggle UI")]
-    private bool enableUI = true;
+    private bool _enableUi = true;
     [SerializeField] private Canvas[] canvases;
     [SerializeField] private SpriteRenderer[] spritesToToggle;
     [SerializeField] private GameObject[] objectsToToggle;
 
     [Header("F3-Toggle UI")]
-    private bool enableUIFunc = false;
-    
-    void Update()
+    private bool _enableUiFunc = false;
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            enableUI = !enableUI;
-            for (int i = 0; i < canvases.Length; i++)
+            _enableUi = !_enableUi;
+            for (var i = 0; i < canvases.Length; i++)
             {
-                canvases[i].enabled = enableUI;
+                canvases[i].enabled = _enableUi;
             }            
-            for (int i = 0; i < spritesToToggle.Length; i++)
+            for (var i = 0; i < spritesToToggle.Length; i++)
             {
-                spritesToToggle[i].enabled = enableUI;
+                spritesToToggle[i].enabled = _enableUi;
             }
-            for (int i = 0; i < objectsToToggle.Length; i++)
+            for (var i = 0; i < objectsToToggle.Length; i++)
             {
-                objectsToToggle[i].SetActive(enableUI);
+                objectsToToggle[i].SetActive(_enableUi);
             }
+            return;
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            enableUIFunc = !enableUIFunc;
-            Toolbox.instance.MFpscounter.enabled = enableUIFunc;
+            _enableUiFunc = !_enableUiFunc;
+            Toolbox.Instance.mFpscounter.enabled = _enableUiFunc;
+            return;
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            TakeThumbnail.Generate(Application.persistentDataPath + "/img " + counter + ".png", null, 0.5f);
-            counter++;
-            return;
+            TakeThumbnail.Generate(Application.persistentDataPath + "/img " + _counter + ".png", null, 0.5f);
+            _counter++;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using Singleton;
+using UnityEngine.SceneManagement;
 
 public class PauseButton : ButtonUnit
 {
@@ -41,7 +42,7 @@ public class PauseButton : ButtonUnit
     private void ButtonClickActionContinue()
     {
         menu.controller.SetActiveCurrentMenu(false);
-        PauseMenu menu_ = (PauseMenu)menu;
+        var menu_ = (PauseMenu)menu;
         menu_.pauseMenuToggle.TogglePauseMenu(false);
     }
 
@@ -57,7 +58,7 @@ public class PauseButton : ButtonUnit
 
     private void MoveToMainMenu()
     {
-        Toolbox.instance.MFpscounter.enabled = false;
+        Toolbox.Instance.mFpscounter.enabled = false;
         menu.controller.SetMainMenu();
     }
 

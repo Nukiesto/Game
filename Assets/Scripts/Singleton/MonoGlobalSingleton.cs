@@ -1,80 +1,85 @@
 ﻿using UnityEngine;
 
-public abstract class MonoGlobalSingleton<T> : MonoBehaviour where T : MonoGlobalSingleton<T>
+namespace Singleton
 {
-    private static T _instance = null;
-
-    public static T instance
+    public abstract class MonoGlobalSingleton<T> : MonoBehaviour where T : MonoGlobalSingleton<T>
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType(typeof(T)) as T;
+        private static T _instance = null;
 
+        public static T Instance
+        {
+            get
+            {
                 if (_instance == null)
                 {
-                    //Debug.LogWarning("No instance of " + typeof(T).ToString() + ", a temporary one is created.");
-
-                    GameObject go = new GameObject(typeof(T).ToString(), typeof(T));
-                    DontDestroyOnLoad(go);
-
-                    _instance = go.GetComponent<T>();
+                    _instance = FindObjectOfType(typeof(T)) as T;
 
                     if (_instance == null)
                     {
-                        Debug.LogError("Problem during the creation of " + typeof(T).ToString());
+                        //Debug.LogWarning("No instance of " + typeof(T).ToString() + ", a temporary one is created.");
+
+                        GameObject go = new GameObject(typeof(T).ToString(), typeof(T));
+                        DontDestroyOnLoad(go);
+
+                        _instance = go.GetComponent<T>();
+
+                        if (_instance == null)
+                        {
+                            Debug.LogError("Problem during the creation of " + typeof(T).ToString());
+                        }
                     }
+
+                    _instance.Init();
                 }
 
-                _instance.Init();
+                return _instance;
             }
-
-            return _instance;
         }
-    }
 
-    void Awake()
-    {
-        Debug.Log(typeof(T).ToString() + "::Awake()");
-
-        if (_instance == null)
+        void Awake()
         {
-            _instance = this as T;
-            _instance.Init();
+            Debug.Log(typeof(T).ToString() + "::Awake()");
 
-            DontDestroyOnLoad(gameObject);
+            if (_instance == null)
+            {
+                _instance = this as T;
+                _instance.Init();
+
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        void OnEnable()
         {
-            Destroy(gameObject);
+            //Debug.Log(typeof(T).ToString() + "::OnEnable()");
+
+            if (_instance == null)
+            {
+                _instance = this as T;
+            }
         }
-    }
 
-    void OnEnable()
-    {
-        //Debug.Log(typeof(T).ToString() + "::OnEnable()");
-
-        if (_instance == null)
+        void OnApplicationQuit()
         {
-            _instance = this as T;
+            //Debug.Log(typeof(T).ToString() + "::OnApplicationQuit()");
         }
-    }
 
-    void OnApplicationQuit()
-    {
-        //Debug.Log(typeof(T).ToString() + "::OnApplicationQuit()");
-    }
-
-    void OnDestroy()
-    {
-        //Debug.Log(typeof(T).ToString() + "::OnDestroy()");
-
-        if (_instance == this)
+        void OnDestroy()
         {
-            _instance = null;
+            //Debug.Log(typeof(T).ToString() + "::OnDestroy()");
+
+            if (_instance == this)
+            {
+                _instance = null;
+            }
+        }
+
+        public virtual void Init()
+        {
         }
     }
-
-    public virtual void Init() { }
 }

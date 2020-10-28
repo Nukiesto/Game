@@ -11,7 +11,7 @@ public class EntityMovement : MonoBehaviour
 {
 	#region internal types
 
-	struct CharacterRaycastOrigins
+	public struct CharacterRaycastOrigins
 	{
 		public Vector3 topLeft;
 		public Vector3 bottomRight;
@@ -84,7 +84,7 @@ public class EntityMovement : MonoBehaviour
 		}
 	}
 
-
+	public LayerMask entityMask = 0;
 	/// <summary>
 	/// mask with all layers that the player should interact with
 	/// </summary>
@@ -155,7 +155,7 @@ public class EntityMovement : MonoBehaviour
 	/// <summary>
 	/// holder for our raycast origin corners (TR, TL, BR, BL)
 	/// </summary>
-	CharacterRaycastOrigins _raycastOrigins;
+	public CharacterRaycastOrigins _raycastOrigins;
 
 	/// <summary>
 	/// stores our raycast hit during movement

@@ -1,73 +1,77 @@
-﻿using LeopotamGroup.EditorHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Toolbox : MonoGlobalSingleton<Toolbox>
+namespace Singleton
 {
-    // Used to track any global components added at runtime.
-    private Dictionary<string, Component> m_Components = new Dictionary<string, Component>();
-
-
-    // Prevent constructor use.
-    protected Toolbox() { }
-
-
-    private void Awake()
+    public enum Component
     {
-        MGameSceneManager = gameObject.AddComponent<GameSceneManager>();
-        MFpscounter = gameObject.AddComponent<FpsCounter>();
-        MFpscounter.enabled = false;
+        
     }
-
-    // Define all required global components here. These are hard-codded components
-    // that will always be added. Unlike the optional components added at runtime.
-
-    public MonoBehaviour MFpscounter { get; private set; }
-    public GameSceneManager MGameSceneManager { get; private set; }
-    
-    // The methods below allow us to add global components at runtime.
-    // TODO: Convert from string IDs to component types.
-    public Component AddGlobalComponent(string componentID, Type component)
+    public class Toolbox : MonoGlobalSingleton<Toolbox>
     {
-        if (m_Components.ContainsKey(componentID))
+        // Used to track any global components added at runtime.
+        private Dictionary<Component, UnityEngine.Component> m_Components = new Dictionary<Component, UnityEngine.Component>();
+        
+        // Prevent constructor use.
+        protected Toolbox() { }
+        
+        private void Awake()
         {
+            AddCompon(ref mGameSceneManager);
+            AddCompon(ref mFpscounter).enabled = false;
+            AddCompon(ref mGameSceneManager);
+        }
+
+        private T AddCompon<T>(ref T m) where T : UnityEngine.Component
+        {
+            m = gameObject.AddComponent<T>();
+            return m;
+        }
+
+        public FpsCounter mFpscounter;
+        public GameManager mGameManager;
+        public GameSceneManager mGameSceneManager;
+        
+        // The methods below allow us to add global components at runtime.
+        // TODO: Convert from string IDs to component types.
+        public UnityEngine.Component AddGlobalComponent(Component componentId, Type component)
+        {
+            if (m_Components.ContainsKey(componentId))
+            {
+                Debug.LogWarning("[Toolbox] Global component ID \""
+                    + componentId + "\" already exist! Returning that.");
+                return GetGlobalComponent(componentId);
+            }
+
+            var newComponent = gameObject.AddComponent(component);
+            m_Components.Add(componentId, newComponent);
+            return newComponent;
+        }
+        public void RemoveGlobalComponent(Component componentId)
+        {
+            if (m_Components.TryGetValue(componentId, out var component))
+            {
+                Destroy(component);
+                m_Components.Remove(componentId);
+            }
+            else
+            {
+                Debug.LogWarning("[Toolbox] Trying to remove nonexistent component ID \""
+                    + componentId + "\"! Typo?");
+            }
+        }
+        public UnityEngine.Component GetGlobalComponent(Component componentId)
+        {
+            if (m_Components.TryGetValue(componentId, out var component))
+            {
+                return component;
+            }
+
             Debug.LogWarning("[Toolbox] Global component ID \""
-                + componentID + "\" already exist! Returning that.");
-            return GetGlobalComponent(componentID);
+        + componentId + "\" doesn't exist! Typo?");
+            return null;
         }
-
-        var newComponent = gameObject.AddComponent(component);
-        m_Components.Add(componentID, newComponent);
-        return newComponent;
-    }
-    public void RemoveGlobalComponent(string componentID)
-    {
-        Component component;
-
-        if (m_Components.TryGetValue(componentID, out component))
-        {
-            Destroy(component);
-            m_Components.Remove(componentID);
-        }
-        else
-        {
-            Debug.LogWarning("[Toolbox] Trying to remove nonexistent component ID \""
-                + componentID + "\"! Typo?");
-        }
-    }
-    public Component GetGlobalComponent(string componentID)
-    {
-        Component component;
-
-        if (m_Components.TryGetValue(componentID, out component))
-        {
-            return component;
-        }
-
-        Debug.LogWarning("[Toolbox] Global component ID \""
-    + componentID + "\" doesn't exist! Typo?");
-        return null;
     }
 }
 /*

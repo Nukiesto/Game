@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Prime31;
-
+using static UnityEngine.Physics2D;
 
 public class BotMovement : MonoBehaviour
 {
+	public enum DirMove
+	{
+		Left,
+		Idle,
+		Right
+	}
+	#region Init
+
 	// movement config
 	public float gravity = -25f;
 	public float runSpeed = 8f;
@@ -12,99 +20,338 @@ public class BotMovement : MonoBehaviour
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
 
-	[HideInInspector]
-	private float normalizedHorizontalSpeed = 0;
+	[HideInInspector] private float normalizedHorizontalSpeed = 0;
 
 	private EntityMovement _controller;
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
+	
+	private LayerMask _entityMask;
+	private LayerMask _platformMask;
+	#endregion
 
-
+	[SerializeField] private bool mustMovingToPlayer;
+	private bool _isGoingRight;
+	private bool _playerDir;
+	private bool _isMovingToPlayer;
+	private bool _canToInvoke = true;
+	private bool _randomMoving = true;
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
 		_controller = GetComponent<EntityMovement>();
-
+		_platformMask = _controller.platformMask;
+		_entityMask = _controller.entityMask;
+		
 		// listen to some events for illustration purposes
-		_controller.onControllerCollidedEvent += onControllerCollider;
+		_controller.onControllerCollidedEvent += OnControllerCollider;
 	}
 
-
+	private void Start()
+	{
+		_isGoingRight = RandomBool();
+		StartCoroutine(RanDomMoving());
+	}
 	#region Event Listeners
 
-	private void onControllerCollider(RaycastHit2D hit)
+	private void OnControllerCollider(RaycastHit2D hit)
 	{
-		// bail out on plain old ground hits cause they arent very interesting
-		if( hit.normal.y == 1f )
+		if (hit.normal.y == 1f)
 			return;
+	}
 
-		// logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
-		//Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
+	#endregion
+	
+	private void Update()
+	{
+		if (_controller.isGrounded)
+			_velocity.y = 0;
+
+		Movement();
+
+		EndUpdate();
+	}
+
+	#region Internal
+
+	private bool RandomBool()
+	{
+		return Random.Range(0, 2) == 0;
+	}
+
+	private bool GetBoolChance(int n)
+	{
+		return Random.Range(0, n) == 0;
 	}
 	#endregion
 
-
-	// the Update loop contains a very simple example of moving the character around and controlling the animation
-	private void Update()
+	private bool CheckSolidForDir(bool dir)
 	{
-        if (_controller.isGrounded)
-			_velocity.y = 0;
+		//Проверка коллизии на пути движения
+		queriesStartInColliders = false;
+		var direction = new Vector2(dir ? 0.2f : -0.2f, 0);
+		var pos = dir ? _controller._raycastOrigins.bottomRight : _controller._raycastOrigins.bottomLeft;
+		Debug.DrawRay(pos, new Vector3(direction.x, direction.y, 0), Color.blue);
+		return Raycast( pos, direction, 0.2f, _platformMask);
+	}
 
-		if(Input.GetButton("Right"))//Input.GetKey( KeyCode.RightArrow ) )
-		{
-			normalizedHorizontalSpeed = 1;
-			if( transform.localScale.x < 0f )
-				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
-
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Run" ) );
-		}
-		else if(Input.GetButton("Left"))//Input.GetKey( KeyCode.LeftArrow ) )
-		{
-			normalizedHorizontalSpeed = -1;
-			if( transform.localScale.x > 0f )
-				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
-
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Run" ) );
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0;
-
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Idle" ) );
-		}
-
+	private bool CheckForCleft(bool dir, bool check1)
+	{
+		queriesStartInColliders = false;
+		var pos0 = transform.position;
+		var pos = new Vector2(pos0.x, pos0.y);
 		
-		// we can only jump whilst grounded
-		if( _controller.isGrounded && Input.GetButton("Jump")) //Input.GetKeyDown( KeyCode.UpArrow ) )
+		var ray1 = true;
+		var ray2 = CheckRay(pos, dir, 2, -1);
+		//Debug.Log(check1);
+		if (check1)
 		{
-			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-			_animator.Play( Animator.StringToHash( "Jump" ) );
+			ray1 = CheckRay(pos, dir, 1, -1);
 		}
 
+		return !ray1 || !ray2;
+	}
+	private bool CheckForJumpSolid(bool dir, bool check2 = true)
+	{
+		queriesStartInColliders = false;
+		var pos0 = transform.position;
+		var pos = new Vector2(pos0.x, pos0.y) {y = pos0.y + 1};
 
+		var ray1 = CheckRay(pos, dir, 1);
+		var ray2 = true;
+		if (check2)
+		{
+			pos.y = pos0.y + 1.8f;
+			ray2 = CheckRay(pos, dir, 1);
+		}
+
+		return !ray1 || !ray2;
+	}
+
+	private bool CheckRay(Vector2 pos, bool dir, float distance, float yy = 0)
+	{
+		var posCheck = Vector2.zero;
+		posCheck.x = pos.x + (dir ? distance : -distance);
+		posCheck.y = pos.y + yy;
+		var distance1 = Vector2.Distance(pos, posCheck);
+		var direction = posCheck - pos;
+		Debug.DrawRay(pos, direction, Color.blue);
+		var ray = Raycast(pos, direction, distance1, _platformMask);
+		if (ray)
+		{
+			Debug.DrawRay(pos, direction, Color.white);
+		}
+
+		return ray;
+	}
+	private bool CheckPlayerForView(float viewDistance)
+	{
+		queriesStartInColliders = false;
+		var pos = transform.position;
+		var pos2D = new Vector2(pos.x, pos.y);
+		
+		var posPlayer = PlayerController.Instance.transform.position;
+		var posPlayer2D = new Vector2(posPlayer.x, posPlayer.y);
+		var playerDistance = Vector2.Distance(pos2D, posPlayer2D);
+		var direction = posPlayer2D - pos2D;
+			
+		if (playerDistance <= viewDistance)
+		{
+			var solid = Raycast( pos, direction, playerDistance,_platformMask);
+			Debug.DrawRay(pos, direction, Color.blue);
+			if (!solid)
+			{
+				Debug.DrawRay(pos, direction, Color.white);
+				_playerDir = direction.x > 0;
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	private RaycastHit2D GetHitForDir(bool dir, float distance, LayerMask mask)
+	{
+		queriesStartInColliders = false;
+		var direction = new Vector2(dir ? 1 : -1, 0);
+		var pos = transform.position;
+		
+		return Raycast( pos, direction, distance, mask);
+	}
+	private void EndUpdate()
+	{
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
+		var smoothedMovementFactor =
+			_controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+		_velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed,
+			Time.deltaTime * smoothedMovementFactor);
 
 		// apply gravity before moving
 		_velocity.y += gravity * Time.deltaTime;
-
-		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
-		// this lets us jump down through one way platforms
-		if( _controller.isGrounded && Input.GetButton("Down"))//Input.GetKey( KeyCode.DownArrow ) )
-		{
-			_velocity.y *= 3f;
-			_controller.ignoreOneWayPlatformsThisFrame = true;
-		}
-
-		_controller.move( _velocity * Time.deltaTime );
+		
+		_controller.move(_velocity * Time.deltaTime);
 
 		// grab our current _velocity to use as a base for all calculations
 		_velocity = _controller.velocity;
 	}
 
+	private void Movement()
+	{
+		if (CheckPlayerForView(8))
+		{
+			_isMovingToPlayer = true;
+			
+			//StopCoroutine(TimerToStopMovingToPlayer());
+			if (_canToInvoke)
+			{
+				_canToInvoke = false;
+				StartCoroutine(ContinueMovingToPlayer());
+			}
+		}
+		if (_isMovingToPlayer && mustMovingToPlayer)
+			ToPlayerMovement();
+		else if (_randomMoving)
+		{
+			RandomMovement();
+		}
+		else
+			MoveNone();
+	}
+
+	private IEnumerator ContinueMovingToPlayer()
+	{
+		while(true)
+		{
+			yield return new WaitForSeconds(4f);
+			//Debug.Log("End");
+			_isMovingToPlayer = CheckPlayerForView(8);
+			_canToInvoke = true;
+			yield break;
+		}
+	}
+
+	private IEnumerator RanDomMoving()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(_randomMoving ? Random.Range(35f, 55f) : Random.Range(8f, 14f));
+			_randomMoving = !_randomMoving;
+		}
+	}
+
+	private void ToPlayerMovement()
+	{
+		if (!IsFall())
+		{
+			//Debug.Log(CheckSolidForDir());
+
+			if (CheckSolidForDir(_playerDir) && CheckForJumpSolid(_playerDir)) // && GetBoolChance(50)) // ChangeDirection
+			{
+				Jump();
+			}
+
+			MoveToDir(_playerDir);
+		}
+	}
+	private void RandomMovement()
+	{
+		if (!IsFall())
+		{
+			if (CheckSolidForDir(_isGoingRight) && CheckForJumpSolid(_isGoingRight)) // && CheckForJumpSolid(_isGoingRight)) // ChangeDirection
+			{
+				Jump(); 
+				return;
+			}
+			//else
+			//{
+				//_isGoingRight = !_isGoingRight;
+			//}
+
+			//if (!CheckForJumpSolid(_isGoingRight))
+			//{
+			//	_isGoingRight = !_isGoingRight;
+			//}
+
+			if (CheckSolidForDir(_isGoingRight) && _controller.isGrounded)
+			{
+				_isGoingRight = !_isGoingRight;
+			}
+
+			//if (GetBoolChance(850))
+			//{
+			//	_isGoingRight = !_isGoingRight;
+			//}
+
+			if (CheckForCleft(_isGoingRight, true) && _controller.isGrounded)
+			{ 
+				if (GetBoolChance(250))
+					Jump();
+				else
+				{
+					if (GetBoolChance(150))
+						_isGoingRight = !_isGoingRight;
+				}
+					
+			}
+
+			//if (GetBoolChance(250))
+			//{
+				MoveToDir(_isGoingRight);
+			//}
+		}
+		
+	}
+
+	private bool IsFall()
+	{
+		queriesStartInColliders = false;
+		var direction = new Vector2(0, -1);
+		var pos = transform.position;
+		
+		return !Raycast( pos, direction, 5, _platformMask);
+	}
+	private void MoveToDir(bool isRightMove)
+	{
+		if (isRightMove)
+		{
+			MoveRight();
+		}
+		else
+		{
+			MoveLeft();
+		}
+	}
+	private void MoveLeft()
+	{
+		normalizedHorizontalSpeed = -1;
+		if (transform.localScale.x > 0f)
+			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+		if (_controller.isGrounded)
+			_animator.Play(Animator.StringToHash("Run"));
+	}
+	private void MoveRight()
+	{
+		normalizedHorizontalSpeed = 1;
+		if (transform.localScale.x < 0f)
+			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+		if (_controller.isGrounded)
+			_animator.Play(Animator.StringToHash("Run"));
+	}
+	private void MoveNone()
+	{
+		normalizedHorizontalSpeed = 0;
+
+		if (_controller.isGrounded)
+			_animator.Play(Animator.StringToHash("Idle"));
+	}
+	private void Jump()
+	{
+		if (_controller.isGrounded)
+		{
+			_velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+			_animator.Play(Animator.StringToHash("Jump"));
+		}
+	}
 }
