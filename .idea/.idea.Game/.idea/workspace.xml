@@ -26,7 +26,6 @@
       <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/TimerToDelete.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials/UIBlurMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials/UIBlurMaterial.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Furnace/Furnace.asset" afterDir="false" />
@@ -253,7 +252,7 @@
       <workItem from="1603629181718" duration="26514000" />
       <workItem from="1603708440933" duration="16341000" />
       <workItem from="1603770181321" duration="37149000" />
-      <workItem from="1603864085110" duration="4696000" />
+      <workItem from="1603864085110" duration="5108000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>
