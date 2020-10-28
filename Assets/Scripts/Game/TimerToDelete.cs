@@ -1,20 +1,48 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections;
 
-namespace Game
+public class TimerToDelete : MonoBehaviour
 {
-    public class TimerToDelete : MonoBehaviour
+    public enum Mode
     {
-        public enum Mode
+        Destroy,
+        Disable
+    }
+    [SerializeField] private float time;
+    [SerializeField] private Mode mode;
+    [SerializeField] private bool repeatOnEnable;
+
+    private bool _canOnEnable;
+
+    private void Start()
+    {
+        _canOnEnable = true;
+        StartCoroutine(StartDelete());
+    }
+
+    private void OnEnable()
+    {
+        if (repeatOnEnable && _canOnEnable)
         {
-            Destroy,
-            Disable
+            StartCoroutine(StartDelete());
         }
-        [SerializeField] private float time;
-        [SerializeField] private Mode mode;
-        
-        private IEnumerator StartDeleteting()
+    }
+    
+    private IEnumerator StartDelete()
+    {
+        while (true)
         {
-        
+            yield return new WaitForSeconds(time);
+            if (mode == Mode.Disable)
+            {
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            yield break;
         }
     }
 }

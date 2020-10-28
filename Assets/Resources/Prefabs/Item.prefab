@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: -660361534388770002}
   - component: {fileID: -237142476325215684}
   - component: {fileID: 95084818130463544}
+  - component: {fileID: 9093249134010611974}
   m_Layer: 11
   m_Name: Item
   m_TagString: Untagged
@@ -210,6 +211,8 @@ MonoBehaviour:
   data:
     type: 0
     maxCount: 0
+    showInSandboxPanel: 1
+    Name: 
     name:
       translations: []
     description:
@@ -217,3 +220,18 @@ MonoBehaviour:
     block: {fileID: 0}
     sprite: {fileID: 0}
   sprite: {fileID: 0}
+--- !u!114 &9093249134010611974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086271139510038258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01254ed5ae04d278d68bed6e075bc51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 120
+  mode: 1
+  repeatOnEnable: 1
