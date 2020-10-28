@@ -34,6 +34,7 @@ public class BlockSelector : MonoBehaviour
     
     private List<string> _layers;
 
+    private bool updateBlockPos;
     //public void OnTriggerStay2D(Collider2D collision)
     //{
     //    canPlaceBlock = false;
@@ -133,8 +134,9 @@ public class BlockSelector : MonoBehaviour
 
     private void StartDeleting(BlockLayer layer = BlockLayer.Front)
     {
-        if (!_isDeleting)
+        if (!_isDeleting)// && updateBlockPos)
         {
+            //updateBlockPos = false;
             _chunkUnitClick = chunkManager.GetChunk(onWorldPos);
             if (_chunkUnitClick.CanBreakBlock(onWorldPos, layer))
             {
@@ -249,26 +251,27 @@ public class BlockSelector : MonoBehaviour
         {
             return;
         }
+        if (Input.GetMouseButtonUp(0))
+        {
+            updateBlockPos = true;
+        }
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButton(0))
         {
             StartDeleting(BlockLayer.Back);
             return;
         }
-
         if (Input.GetMouseButton(0))
         {
             StartDeleting();
             return;
         }
-        
-
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(1))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButton(1))
         {
             ClickPlaceBlock(true);
             return;
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
             ClickPlaceBlock();
             return;
@@ -292,7 +295,6 @@ public class BlockSelector : MonoBehaviour
         {
             selectorSprite.color = Color.white;
         }
-        
     }
     private bool InBounds(Vector3 pos)
     {       

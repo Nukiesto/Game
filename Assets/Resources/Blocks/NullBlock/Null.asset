@@ -17,12 +17,21 @@ MonoBehaviour:
   isBreackable: 1
   toPlaceBack: 1
   isInteractable: 0
+  mustHaveDownerBlock: 0
+  showInSandboxPanel: 0
+  isLightObstacle: 1
+  isLightSource: 0
+  isLightOnStart: 1
   nameBlock: Null
   hp: 0
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 11400000, guid: 99fb7d7a38342ec44ada94c3a82ebc04, type: 2}
   tileVariables: []
+  tileLightSource: {fileID: 0}
+  tileLightSourceVariables: []
+  tileAnimation: {fileID: 0}
+  tileAnimationVariables: []
   nameTranslations:
     translations:
     - lang: 1

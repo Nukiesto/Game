@@ -3,7 +3,7 @@ using System.Collections;
 using Prime31;
 
 
-public class DemoScene : MonoBehaviour
+public class BotMovement : MonoBehaviour
 {
 	// movement config
 	public float gravity = -25f;
@@ -15,16 +15,16 @@ public class DemoScene : MonoBehaviour
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 
-	private PlayerMovement _controller;
+	private EntityMovement _controller;
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
 
 
-	void Awake()
+	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
-		_controller = GetComponent<PlayerMovement>();
+		_controller = GetComponent<EntityMovement>();
 
 		// listen to some events for illustration purposes
 		_controller.onControllerCollidedEvent += onControllerCollider;
@@ -33,7 +33,7 @@ public class DemoScene : MonoBehaviour
 
 	#region Event Listeners
 
-	void onControllerCollider(RaycastHit2D hit)
+	private void onControllerCollider(RaycastHit2D hit)
 	{
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
@@ -46,7 +46,7 @@ public class DemoScene : MonoBehaviour
 
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
-	void Update()
+	private void Update()
 	{
         if (_controller.isGrounded)
 			_velocity.y = 0;

@@ -29,8 +29,13 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: c3e61241cf216394b93c5419612ab548, type: 2}
   tileVariables:
   - {fileID: 11400000, guid: 3db2f1f749560ce428c187d536f902b5, type: 2}
+  - {fileID: 11400000, guid: 33fbf0950737d69478a16f8130400580, type: 2}
+  - {fileID: 11400000, guid: 1cee59cae48989e41adaa0cb1a38da15, type: 2}
+  - {fileID: 11400000, guid: 300f80188cad3b14a8a2469038985e64, type: 2}
   tileLightSource: {fileID: 0}
   tileLightSourceVariables: []
+  tileAnimation: {fileID: 0}
+  tileAnimationVariables: []
   nameTranslations:
     translations:
     - lang: 1

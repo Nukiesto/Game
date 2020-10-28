@@ -26,10 +26,13 @@ MonoBehaviour:
   hp: 470
   script: {fileID: 0}
   memory: {fileID: 0}
-  tile: {fileID: 11400000, guid: 81b5df7b88bbd564c95f3a89de919724, type: 2}
-  tileVariables: []
+  tile: {fileID: 11400000, guid: bff0ea33e741dc6408345fbbd6477c7e, type: 2}
+  tileVariables:
+  - {fileID: 0}
   tileLightSource: {fileID: 0}
   tileLightSourceVariables: []
+  tileAnimation: {fileID: 11400000, guid: 4570092d337bd0d4dbaeb8233502d1ba, type: 2}
+  tileAnimationVariables: []
   nameTranslations:
     translations:
     - lang: 1

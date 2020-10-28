@@ -7,22 +7,14 @@ namespace Game.Lighting
     public class LightBlock : MonoBehaviour
     {
         [SerializeField] private LightSprite lightSprite;
-        private float _alpha;
+
         public void SetPos(Vector3Int pos, ChunkUnit chunk)
         {
             transform.position = chunk.transform.position + pos;
         }
 
-        private void OnEnable()
-        {
-            var color = lightSprite.Color;
-            color.a = _alpha;
-            lightSprite.Color = color;
-        }
-
         public void SetColor(Color color)
         {
-            _alpha = color.a;
             lightSprite.Color = color;
             //lightSprite.UpdateMeshData();
         }

@@ -28,11 +28,15 @@ public class BlockData : ScriptableObject
     public BaseBlockScript script;
     public BaseBlockMemory memory;
 
-    [Header("Ресурсы")]
+    [Header("Основной тайл")]
     public Tile tile;
     public Tile[] tileVariables;
+    [Header("Световой тайл")]
     public Tile tileLightSource;
     public Tile[] tileLightSourceVariables;
+    [Header("Тайл с анимацией")]
+    public AnimatedTile tileAnimation;
+    public AnimatedTile[] tileAnimationVariables;
     
     [Header("Предмет")]
     public TranslateString nameTranslations;

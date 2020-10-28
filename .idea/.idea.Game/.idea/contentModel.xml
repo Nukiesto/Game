@@ -906,6 +906,9 @@
               <e p="ChunkUnit.cs" t="Include" />
             </e>
             <e p="ComponentToggleVisible.cs" t="Include" />
+            <e p="Entity" t="Include">
+              <e p="EntityMovement.cs" t="Include" />
+            </e>
             <e p="FunctionalKeys.cs" t="Include" />
             <e p="ItemSystem" t="Include">
               <e p="Inventory.cs" t="Include" />
@@ -924,8 +927,7 @@
             </e>
             <e p="Player" t="Include">
               <e p="BlockSelector.cs" t="Include" />
-              <e p="CharacterController2D.cs" t="Include" />
-              <e p="DemoScene.cs" t="Include" />
+              <e p="BotMovement.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />
               <e p="PlayerMovement.cs" t="Include" />
             </e>
@@ -945,6 +947,7 @@
             </e>
             <e p="TakeThumbnail.cs" t="Include" />
             <e p="TimeController.cs" t="Include" />
+            <e p="TImerToDelete.cs" t="Include" />
           </e>
           <e p="GameConstants.cs" t="Include" />
           <e p="ItemList" t="Include">

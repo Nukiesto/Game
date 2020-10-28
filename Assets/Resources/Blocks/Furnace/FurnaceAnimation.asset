@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: Furnace_BlastTile
+  m_Name: FurnaceAnimation
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 7136287060537079379, guid: a05d06b349471a94fae6ba0ad89ee337, type: 3}
-  - {fileID: -799948642715079098, guid: a05d06b349471a94fae6ba0ad89ee337, type: 3}
-  m_MinSpeed: 2
-  m_MaxSpeed: 4
+  - {fileID: 4383769277095485993, guid: 82b5dc89a489ca048bb3e201b3bcc30a, type: 3}
+  - {fileID: 4706705888250507809, guid: 82b5dc89a489ca048bb3e201b3bcc30a, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
   m_AnimationStartTime: 0
-  m_TileColliderType: 1
+  m_TileColliderType: 0

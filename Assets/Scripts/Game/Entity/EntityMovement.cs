@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Prime31 {
 
 [RequireComponent( typeof( BoxCollider2D ), typeof( Rigidbody2D ) )]
-public class CharacterController2D : MonoBehaviour
+public class EntityMovement : MonoBehaviour
 {
 	#region internal types
 
@@ -199,29 +199,7 @@ public class CharacterController2D : MonoBehaviour
 			if( ( triggerMask.value & 1 << i ) == 0 )
 				Physics2D.IgnoreLayerCollision( gameObject.layer, i );
 		}
-	}
-
-
-	public void OnTriggerEnter2D( Collider2D col )
-	{
-		if( onTriggerEnterEvent != null )
-			onTriggerEnterEvent( col );
-	}
-
-
-	public void OnTriggerStay2D( Collider2D col )
-	{
-		if( onTriggerStayEvent != null )
-			onTriggerStayEvent( col );
-	}
-
-
-	public void OnTriggerExit2D( Collider2D col )
-	{
-		if( onTriggerExitEvent != null )
-			onTriggerExitEvent( col );
-	}
-
+	}	
 	#endregion
 
 
@@ -429,7 +407,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// we only need to adjust the deltaMovement if we are not jumping
 			// TODO: this uses a magic number which isn't ideal! The alternative is to have the user pass in if there is a jump this frame
-			if( deltaMovement.y < jumpingThreshold )
+			if( deltaMovement.y < jumpingThreshold)
 			{
 				// apply the slopeModifier to slow our movement up the slope
 				var slopeModifier = slopeSpeedMultiplier.Evaluate( angle );
