@@ -1,14 +1,46 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Game.Bot;
+using UnityEngine;
 
-public static class ItemManager
-{
-    public static Item CreateItem(Vector3 pos, ItemData.Data data)
+public class ItemManager : MonoBehaviour
+{ 
+    private List<Item> _items = new List<Item>();
+    
+    public void AddItem(Item item)
+    {
+        _items.Add(item);
+    }
+    public List<WorldSaver.ItemUnitData> GetItemsData()
+    {
+        var list = new List<WorldSaver.ItemUnitData>();
+        
+        foreach (var item in _items)
+        {
+            var pos = item.gameObject.transform.position;
+            var data = new WorldSaver.ItemUnitData()
+            {
+                Name = item.data.Name,
+                X = pos.x,
+                Y = pos.y
+            };
+            list.Add(data);
+        }
+
+        return list;
+    }
+    public void RemoveItem(Item entity)
+    {
+        _items.Remove(entity);
+    }
+    public Item CreateItem(Vector3 pos, ItemData.Data data)
     {
         var item = PoolManager.GetObject("Item", pos, Quaternion.identity).GetComponent<Item>();
 
         item.data = data;
         item.InitSprite();
-
+        
+        AddItem(item);
+        
         return item;
     }        
 }

@@ -173,13 +173,11 @@ public class BlockSelector : MonoBehaviour
         var blockInteractable = chunk.GetBlockUnit(onWorldPos, layer);
         if (blockInteractable != null && blockInteractable.Data.isInteractable)
         {
-            //Debug.Log();
             if (blockInteractable.Data.nameBlock == "Chest")
             {
                 OpenChest(blockInteractable.Memory as ChestMemory);
             }
             
-            //Debug.Log("Interactable Block Clicked");
             return;
         }
         var item = inventory.GetSelectedItem();
@@ -188,8 +186,7 @@ public class BlockSelector : MonoBehaviour
             if (!CheckCollisions() || isBack)
             {
                 var pos = chunk.tilemapFrontWorld.WorldToCell(onWorldPos);
-                
-                
+
                 if (item.data.block.mustHaveDownerBlock && chunk.GetDownerBlockUnit(new Vector2Int(pos.x, pos.y), layer)==null)
                     return;
                 
@@ -227,11 +224,11 @@ public class BlockSelector : MonoBehaviour
             {
                 if (hits[i][z].collider != null)
                 {
-                    string layer = LayerMask.LayerToName(hits[i][z].collider.gameObject.layer);
+                    var layer = LayerMask.LayerToName(hits[i][z].collider.gameObject.layer);
                     //Debug.Log(layer);
                     //Debug.Log(layer);
                     //return layers.Contains(layer);
-                    for (int j = 0; j < 2; j++)
+                    for (var j = 0; j < 2; j++)
                     {
                         //Debug.Log(layer + "; " + layers[j]);
                         if (layer == _layers[j])

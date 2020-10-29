@@ -1,4 +1,5 @@
 ﻿using System;
+using Singleton;
 using UnityEngine;
 
 
@@ -49,9 +50,9 @@ public class PlayerController : MonoBehaviour
     {
         var pos = itemCreatePos.transform.position;
 
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
-            ItemManager.CreateItem(pos, data);
+            Toolbox.Instance.mItemManager.CreateItem(pos, data);
         }       
     }
 }

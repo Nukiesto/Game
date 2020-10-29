@@ -15,7 +15,7 @@ using UnityEngine.UI;
 namespace LeopotamGroup.EditorHelpers
 {
     /// <summary>
-    /// Базовый класс для консоли пользовательского интерфейса разработчика.
+    /// Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РєРѕРЅСЃРѕР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°.
     /// </summary>
     [DefaultExecutionOrder(-32768)]
     internal abstract class DeveloperConsoleBase<T> : MonoBehaviourService<T> where T : class

@@ -31,12 +31,20 @@ public class BotMovement : MonoBehaviour
 	private LayerMask _platformMask;
 	#endregion
 
+	[Header("PlayerMoving")] 
+	[SerializeField] private float viewDistance = 12;
 	[SerializeField] private bool mustMovingToPlayer;
+	[SerializeField] private float stopDistanceFindedPlayer = 1f;
+	[SerializeField] private bool findPlayerOverSolid = false;
+	[SerializeField] private bool canBreackBlock = false;
+	
 	private bool _isGoingRight;
 	private bool _playerDir;
 	private bool _isMovingToPlayer;
 	private bool _canToInvoke = true;
 	private bool _randomMoving = true;
+	private bool _toJumpCliff;
+	private bool _stopFindedPlayer;
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
@@ -52,6 +60,8 @@ public class BotMovement : MonoBehaviour
 	{
 		_isGoingRight = RandomBool();
 		StartCoroutine(RanDomMoving());
+		if (canBreackBlock)
+			StartCoroutine(RandomBreakBlock());
 	}
 	#region Event Listeners
 
@@ -114,9 +124,9 @@ public class BotMovement : MonoBehaviour
 	}
 	private bool CheckForJumpSolid(bool dir, bool check2 = true)
 	{
-		queriesStartInColliders = false;
+		queriesStartInColliders = true;
 		var pos0 = transform.position;
-		var pos = new Vector2(pos0.x, pos0.y) {y = pos0.y + 1};
+		var pos = new Vector2(pos0.x, pos0.y) {y = pos0.y + 0.8f};
 
 		var ray1 = CheckRay(pos, dir, 1);
 		var ray2 = true;
@@ -155,12 +165,13 @@ public class BotMovement : MonoBehaviour
 		var posPlayer2D = new Vector2(posPlayer.x, posPlayer.y);
 		var playerDistance = Vector2.Distance(pos2D, posPlayer2D);
 		var direction = posPlayer2D - pos2D;
-			
-		if (playerDistance <= viewDistance)
+		_toJumpCliff = playerDistance >= stopDistanceFindedPlayer;
+		_stopFindedPlayer = playerDistance <= stopDistanceFindedPlayer;
+		if (playerDistance <= viewDistance && playerDistance >= stopDistanceFindedPlayer)
 		{
 			var solid = Raycast( pos, direction, playerDistance,_platformMask);
 			Debug.DrawRay(pos, direction, Color.blue);
-			if (!solid)
+			if (!solid || findPlayerOverSolid)
 			{
 				Debug.DrawRay(pos, direction, Color.white);
 				_playerDir = direction.x > 0;
@@ -197,7 +208,7 @@ public class BotMovement : MonoBehaviour
 
 	private void Movement()
 	{
-		if (CheckPlayerForView(8))
+		if (CheckPlayerForView(viewDistance))
 		{
 			_isMovingToPlayer = true;
 			
@@ -208,7 +219,7 @@ public class BotMovement : MonoBehaviour
 				StartCoroutine(ContinueMovingToPlayer());
 			}
 		}
-		if (_isMovingToPlayer && mustMovingToPlayer)
+		if ((_isMovingToPlayer || _stopFindedPlayer) && mustMovingToPlayer )
 			ToPlayerMovement();
 		else if (_randomMoving)
 		{
@@ -224,7 +235,7 @@ public class BotMovement : MonoBehaviour
 		{
 			yield return new WaitForSeconds(4f);
 			//Debug.Log("End");
-			_isMovingToPlayer = CheckPlayerForView(8);
+			_isMovingToPlayer = CheckPlayerForView(viewDistance);
 			_canToInvoke = true;
 			yield break;
 		}
@@ -234,23 +245,38 @@ public class BotMovement : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(_randomMoving ? Random.Range(35f, 55f) : Random.Range(8f, 14f));
+			yield return new WaitForSeconds(_randomMoving ? Random.Range(35f, 55f) : Random.Range(4f, 14f));
 			_randomMoving = !_randomMoving;
 		}
 	}
-
+	private IEnumerator RandomBreakBlock()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(Random.Range(0f, 2f));
+			BreakBlock();
+		}
+	}
 	private void ToPlayerMovement()
 	{
 		if (!IsFall())
 		{
-			//Debug.Log(CheckSolidForDir());
-
-			if (CheckSolidForDir(_playerDir) && CheckForJumpSolid(_playerDir)) // && GetBoolChance(50)) // ChangeDirection
+			if (_stopFindedPlayer)
 			{
-				Jump();
+				MoveNone();
 			}
-
-			MoveToDir(_playerDir);
+			else
+			{
+				if (CheckSolidForDir(_playerDir) && CheckForJumpSolid(_playerDir)) // && GetBoolChance(50)) // ChangeDirection
+				{
+					Jump();
+				}
+				if (_toJumpCliff && CheckForCleft(_playerDir, true) && _controller.isGrounded)
+				{
+					Jump();
+				}
+				MoveToDir(_playerDir);
+			}
 		}
 	}
 	private void RandomMovement()
@@ -293,15 +319,31 @@ public class BotMovement : MonoBehaviour
 				}
 					
 			}
-
-			//if (GetBoolChance(250))
-			//{
-				MoveToDir(_isGoingRight);
-			//}
+			
+			MoveToDir(_isGoingRight);
 		}
 		
 	}
 
+	private void BreakBlock()
+	{
+		var pos = transform.position;
+		var layer = BlockLayer.Front;
+		if (RandomBool())
+		{
+			pos.x += _isGoingRight ? 1 : -1;
+		}
+		else
+		{
+			pos.y--;
+		}
+		
+		var chunkUnitClick = ChunkManager.Instance.GetChunk(pos);
+		if (chunkUnitClick.CanBreakBlock(pos, layer))
+		{
+			chunkUnitClick.DeleteBlock(pos, layer);
+		}
+	}
 	private bool IsFall()
 	{
 		queriesStartInColliders = false;

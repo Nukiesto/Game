@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using Game.Bot;
+using JetBrains.Annotations;
 using LeopotamGroup.Math;
 using SavingSystem;
+using Singleton;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,11 +24,13 @@ public class ChunkManager : MonoBehaviour
     private int _chunkSize;
     public WorldGenerator generator;
     private WorldSavingSystem.WorldSaving _worldSaving;
+    public static ChunkManager Instance;
     
     private void Awake()
     {
+        Instance = this;
         _chunkSize = GameConstants.ChunkSize;
-
+        
         RefreshPos();
 
         generator.posZeroWorld = _posZero;
@@ -41,6 +47,11 @@ public class ChunkManager : MonoBehaviour
         MovePlayerToSpawnPoint();
     }
 
+    public void CreateTestEntity()
+    {
+        var pos = player.transform.position;
+        Toolbox.Instance.mEntityManager.Create(pos, EntityType.TestBot);
+    }
     public void MovePlayerToSpawnPoint()
     {
         var pos = Vector3.zero;
@@ -322,19 +333,19 @@ public class WorldGenerator
     [HideInInspector] public int worldHeight;
 
     [HideInInspector] public Vector2Int posZeroWorld;
-    private int chunkSize;
+    private int _chunkSize;
 
-    private BlockData[,] frontWorld; //Передний мир
-    private BlockData[,] backWorld; //Задний мир
+    private BlockData[,] _frontWorld; //Передний мир
+    private BlockData[,] _backWorld; //Задний мир
 
     public int CountChunks => worldWidthInChunks * worldHeightInChunks;
 
     public void InitProps()
     {
-        chunkSize = GameConstants.ChunkSize;
+        _chunkSize = GameConstants.ChunkSize;
 
-        worldWidth = worldWidthInChunks * chunkSize;
-        worldHeight = worldHeightInChunks * chunkSize;
+        worldWidth = worldWidthInChunks * _chunkSize;
+        worldHeight = worldHeightInChunks * _chunkSize;
         endSurface = worldHeight - heightSurface;
     }
 
@@ -342,8 +353,8 @@ public class WorldGenerator
     {
         var terrainDestruct = 2;
 
-        frontWorld = new BlockData[worldWidth, worldHeight]; //Передний мир
-        backWorld = new BlockData[worldWidth, worldHeight]; //Задний мир
+        _frontWorld = new BlockData[worldWidth, worldHeight]; //Передний мир
+        _backWorld = new BlockData[worldWidth, worldHeight]; //Задний мир
 
         int meter;
         var a = Random.Range(12, 18);
@@ -351,23 +362,23 @@ public class WorldGenerator
         {
             for (meter = a; meter < worldHeight; meter++)
                 if (meter < Random.Range(19, 26))
-                    frontWorld[i, meter] = dirt;
+                    _frontWorld[i, meter] = dirt;
                 else
-                    frontWorld[i, meter] = stone;
+                    _frontWorld[i, meter] = stone;
             a = Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
         }
 
         for (var i = 1; i < worldWidth - 1; i += 1)
         for (var j = 1; j < worldHeight - 1; j += 1)
-            if (frontWorld[i, j] == dirt)
-                if (frontWorld[i - 1, j] == null
-                    && frontWorld[i + 1, j] == null
-                    && frontWorld[i, j - 1] == null)
-                    frontWorld[i, j] = null;
+            if (_frontWorld[i, j] == dirt)
+                if (_frontWorld[i - 1, j] == null
+                    && _frontWorld[i + 1, j] == null
+                    && _frontWorld[i, j - 1] == null)
+                    _frontWorld[i, j] = null;
 
-        GenerateDungeon(20, 30, Random.Range(10, 30), frontWorld);
-        GenerateOre(90, 25, Random.Range(2, 9), frontWorld, ores[0]); //coal
-        GenerateOre(60, 30, Random.Range(2, 9), frontWorld, ores[1]); //iron
+        GenerateDungeon(20, 30, Random.Range(10, 30), _frontWorld);
+        GenerateOre(90, 25, Random.Range(2, 9), _frontWorld, ores[0]); //coal
+        GenerateOre(60, 30, Random.Range(2, 9), _frontWorld, ores[1]); //iron
 
         MirrorWorld();
     }
@@ -378,8 +389,8 @@ public class WorldGenerator
         for (var i = 1; i < worldHeight - 1; i += 1)
         for (var j = 1; j < worldWidth - 1; j += 1)
             if (worldHeight - j > 0)
-                mirrored[i, j] = frontWorld[i, worldHeight - j];
-        frontWorld = mirrored;
+                mirrored[i, j] = _frontWorld[i, worldHeight - j];
+        _frontWorld = mirrored;
     }
 
     private void GenerateDungeon(int n, int startHeight, int size, BlockData[,] world)
@@ -438,7 +449,7 @@ public class WorldGenerator
     {
         pos -= posZeroWorld;
         //Debug.Log(pos);
-        var data = frontWorld[pos.x, pos.y];
+        var data = _frontWorld[pos.x, pos.y];
 
         return data;
     }

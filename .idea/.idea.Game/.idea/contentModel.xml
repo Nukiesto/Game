@@ -900,6 +900,10 @@
                 </e>
               </e>
             </e>
+            <e p="Bot" t="Include">
+              <e p="BotController.cs" t="Include" />
+              <e p="BotMovement.cs" t="Include" />
+            </e>
             <e p="ChunkSystem" t="Include">
               <e p="ChunkBlockController.cs" t="Include" />
               <e p="ChunkManager.cs" t="Include" />
@@ -907,6 +911,7 @@
             </e>
             <e p="ComponentToggleVisible.cs" t="Include" />
             <e p="Entity" t="Include">
+              <e p="EntityManager.cs" t="Include" />
               <e p="EntityMovement.cs" t="Include" />
             </e>
             <e p="FunctionalKeys.cs" t="Include" />
@@ -928,7 +933,6 @@
             </e>
             <e p="Player" t="Include">
               <e p="BlockSelector.cs" t="Include" />
-              <e p="BotMovement.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />
               <e p="PlayerMovement.cs" t="Include" />
             </e>

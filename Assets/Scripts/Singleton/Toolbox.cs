@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace Singleton
 {
-    public enum Component
+    public enum ComponentType
     {
-        
     }
     public class Toolbox : MonoGlobalSingleton<Toolbox>
     {
         // Used to track any global components added at runtime.
-        private Dictionary<Component, UnityEngine.Component> m_Components = new Dictionary<Component, UnityEngine.Component>();
+        private Dictionary<ComponentType, UnityEngine.Component> m_Components = new Dictionary<ComponentType, UnityEngine.Component>();
         
         // Prevent constructor use.
         protected Toolbox() { }
@@ -20,7 +19,10 @@ namespace Singleton
         {
             AddCompon(ref mGameSceneManager);
             AddCompon(ref mFpscounter).enabled = false;
-            AddCompon(ref mGameSceneManager);
+            AddCompon(ref mGameManager);
+            AddCompon(ref mWorldSaver);
+            AddCompon(ref mEntityManager);
+            AddCompon(ref mItemManager);
         }
 
         private T AddCompon<T>(ref T m) where T : UnityEngine.Component
@@ -32,44 +34,45 @@ namespace Singleton
         public FpsCounter mFpscounter;
         public GameManager mGameManager;
         public GameSceneManager mGameSceneManager;
+        public WorldSaver mWorldSaver;
+        public ItemManager mItemManager;
+        public EntityManager mEntityManager;
         
-        // The methods below allow us to add global components at runtime.
-        // TODO: Convert from string IDs to component types.
-        public UnityEngine.Component AddGlobalComponent(Component componentId, Type component)
+        public Component AddGlobalComponent(ComponentType componentTypeId, Type component)
         {
-            if (m_Components.ContainsKey(componentId))
+            if (m_Components.ContainsKey(componentTypeId))
             {
                 Debug.LogWarning("[Toolbox] Global component ID \""
-                    + componentId + "\" already exist! Returning that.");
-                return GetGlobalComponent(componentId);
+                    + componentTypeId + "\" already exist! Returning that.");
+                return GetGlobalComponent(componentTypeId);
             }
 
             var newComponent = gameObject.AddComponent(component);
-            m_Components.Add(componentId, newComponent);
+            m_Components.Add(componentTypeId, newComponent);
             return newComponent;
         }
-        public void RemoveGlobalComponent(Component componentId)
+        public void RemoveGlobalComponent(ComponentType componentTypeId)
         {
-            if (m_Components.TryGetValue(componentId, out var component))
+            if (m_Components.TryGetValue(componentTypeId, out var component))
             {
                 Destroy(component);
-                m_Components.Remove(componentId);
+                m_Components.Remove(componentTypeId);
             }
             else
             {
                 Debug.LogWarning("[Toolbox] Trying to remove nonexistent component ID \""
-                    + componentId + "\"! Typo?");
+                    + componentTypeId + "\"! Typo?");
             }
         }
-        public UnityEngine.Component GetGlobalComponent(Component componentId)
+        public Component GetGlobalComponent(ComponentType componentTypeId)
         {
-            if (m_Components.TryGetValue(componentId, out var component))
+            if (m_Components.TryGetValue(componentTypeId, out var component))
             {
                 return component;
             }
 
             Debug.LogWarning("[Toolbox] Global component ID \""
-        + componentId + "\" doesn't exist! Typo?");
+                + componentTypeId + "\" doesn't exist! Typo?");
             return null;
         }
     }
