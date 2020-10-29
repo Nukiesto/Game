@@ -17,11 +17,15 @@ public static class PoolManager
 	public static void Initialize(PoolPart[] newPools)
 	{
 		pools = newPools;
-        objectsParent = new GameObject
-        {
-            name = "Pool"
-        };
-        for (int i = 0; i < pools.Length; i++)
+		if (objectsParent == null)
+		{
+			objectsParent = new GameObject
+			{
+				name = "Pool"
+			};	
+		}
+        
+        for (var i = 0; i < pools.Length; i++)
 		{
 			if (pools[i].prefab != null)
 			{

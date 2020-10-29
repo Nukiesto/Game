@@ -7,6 +7,8 @@ namespace Game.Bot
     public class BotController : MonoBehaviour
     {
         [SerializeField] private EntityType type;
+        [HideInInspector] public EntityManager EntityManager;
+        
         public EntityType Type { get; private set; }
 
         private void Awake()
@@ -18,15 +20,10 @@ namespace Game.Bot
         {
             Type = entityType;
         }
-
-        private void OnEnable()
-        {
-            Toolbox.Instance.mEntityManager.AddEntity(this);
-        }
-
+        
         private void OnDisable()
         {
-            Toolbox.Instance.mEntityManager.RemoveEntity(this);
+            EntityManager?.RemoveEntity(this);
         }
     }
    

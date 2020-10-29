@@ -13,17 +13,27 @@ public class ItemManager : MonoBehaviour
     public List<WorldSaver.ItemUnitData> GetItemsData()
     {
         var list = new List<WorldSaver.ItemUnitData>();
-        
+        var chunkManager = ChunkManager.Instance;
         foreach (var item in _items)
         {
-            var pos = item.gameObject.transform.position;
-            var data = new WorldSaver.ItemUnitData()
+            if (item != null)
             {
-                Name = item.data.Name,
-                X = pos.x,
-                Y = pos.y
-            };
-            list.Add(data);
+                var pos = item.gameObject.transform.position;
+                var chunk = chunkManager.GetChunk(pos);
+                if (chunk != null)
+                {
+                    var posChunk = chunk.posChunk;
+                    var data = new WorldSaver.ItemUnitData()
+                    {
+                        Name = item.data.Name,
+                        X = pos.x,
+                        Y = pos.y,
+                        ChunkX = posChunk.x,
+                        ChunkY = posChunk.y
+                    };
+                    list.Add(data); 
+                }
+            }
         }
 
         return list;
@@ -36,6 +46,7 @@ public class ItemManager : MonoBehaviour
     {
         var item = PoolManager.GetObject("Item", pos, Quaternion.identity).GetComponent<Item>();
 
+        item.itemManager = this;
         item.data = data;
         item.InitSprite();
         

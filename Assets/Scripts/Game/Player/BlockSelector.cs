@@ -138,7 +138,7 @@ public class BlockSelector : MonoBehaviour
         {
             //updateBlockPos = false;
             _chunkUnitClick = chunkManager.GetChunk(onWorldPos);
-            if (_chunkUnitClick.CanBreakBlock(onWorldPos, layer))
+            if (_chunkUnitClick && _chunkUnitClick.CanBreakBlock(onWorldPos, layer))
             {
                 _posBlockDelete = onWorldPos;
                 _layerBlockToDelete = layer;
@@ -168,39 +168,41 @@ public class BlockSelector : MonoBehaviour
     private void ClickPlaceBlock(bool isBack = false)
     {
         var chunk = chunkManager.GetChunk(onWorldPos);
-        
-        var layer = isBack ? BlockLayer.Back : BlockLayer.Front;
-        var blockInteractable = chunk.GetBlockUnit(onWorldPos, layer);
-        if (blockInteractable != null && blockInteractable.Data.isInteractable)
+        if (chunk != null)
         {
-            if (blockInteractable.Data.nameBlock == "Chest")
+            var layer = isBack ? BlockLayer.Back : BlockLayer.Front;
+            var blockInteractable = chunk.GetBlockUnit(onWorldPos, layer);
+            if (blockInteractable != null && blockInteractable.Data.isInteractable)
             {
-                OpenChest(blockInteractable.Memory as ChestMemory);
-            }
-            
-            return;
-        }
-        var item = inventory.GetSelectedItem();
-        if (item != null && item.data != null && item.data.type == ItemType.Block)
-        {
-            if (!CheckCollisions() || isBack)
-            {
-                var pos = chunk.tilemapFrontWorld.WorldToCell(onWorldPos);
-
-                if (item.data.block.mustHaveDownerBlock && chunk.GetDownerBlockUnit(new Vector2Int(pos.x, pos.y), layer)==null)
-                    return;
-                
-                if (chunk.SetBlock(pos , item.data.block, true, layer, !isBack))
+                if (blockInteractable.Data.nameBlock == "Chest")
                 {
-                    //Debug.Log(_pos);
-                    if (!isBack)
+                    OpenChest(blockInteractable.Memory as ChestMemory);
+                }
+            
+                return;
+            }
+            var item = inventory.GetSelectedItem();
+            if (item != null && item.data != null && item.data.type == ItemType.Block)
+            {
+                if (!CheckCollisions() || isBack)
+                {
+                    var pos = chunk.tilemapFrontWorld.WorldToCell(onWorldPos);
+
+                    if (item.data.block.mustHaveDownerBlock && chunk.GetDownerBlockUnit(new Vector2Int(pos.x, pos.y), layer)==null)
+                        return;
+                
+                    if (chunk.SetBlock(pos , item.data.block, true, layer, !isBack))
                     {
-                        chunk.chunkBuilder.RefreshDownerGrassBlock(pos.x, pos.y);
-                    }
-                    item.RemoveItem();
-                }               
-            }          
-        }       
+                        //Debug.Log(_pos);
+                        if (!isBack)
+                        {
+                            chunk.chunkBuilder.RefreshDownerGrassBlock(pos.x, pos.y);
+                        }
+                        item.RemoveItem();
+                    }               
+                }          
+            }       
+        }
     }
 
     private bool CheckCollisions()

@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using Prime31;
 using static UnityEngine.Physics2D;
+using Random = UnityEngine.Random;
 
 public class BotMovement : MonoBehaviour
 {
@@ -56,13 +58,30 @@ public class BotMovement : MonoBehaviour
 		_controller.onControllerCollidedEvent += OnControllerCollider;
 	}
 
-	private void Start()
+	private void OnEnable()
 	{
+		//Debug.Log("Enabled");
 		_isGoingRight = RandomBool();
 		StartCoroutine(RanDomMoving());
 		if (canBreackBlock)
 			StartCoroutine(RandomBreakBlock());
 	}
+
+	private void OnDisable()
+	{
+		StopAllCoroutines();
+	}
+
+	private void OnValidate()
+	{
+		if (gameObject.activeInHierarchy)
+		{
+			StopCoroutine(RandomBreakBlock());
+			if (canBreackBlock)
+				StartCoroutine(RandomBreakBlock());
+		}
+	}
+
 	#region Event Listeners
 
 	private void OnControllerCollider(RaycastHit2D hit)
@@ -339,7 +358,8 @@ public class BotMovement : MonoBehaviour
 		}
 		
 		var chunkUnitClick = ChunkManager.Instance.GetChunk(pos);
-		if (chunkUnitClick.CanBreakBlock(pos, layer))
+		
+		if (chunkUnitClick && chunkUnitClick.CanBreakBlock(pos, layer))
 		{
 			chunkUnitClick.DeleteBlock(pos, layer);
 		}

@@ -14,16 +14,27 @@ public class EntityManager : MonoBehaviour
     public List<WorldSaver.EntityUnitData> GetEntitiesData()
     {
         var list = new List<WorldSaver.EntityUnitData>();
+        var chunkManager = ChunkManager.Instance;
         foreach (var entity in _entities)
         {
-            var pos = entity.gameObject.transform.position;
-            var data = new WorldSaver.EntityUnitData()
+            if (entity != null)
             {
-                EntityType = entity.Type,
-                X = pos.x,
-                Y = pos.y
-            };
-            list.Add(data);
+                var pos = entity.gameObject.transform.position;
+                var chunk = chunkManager.GetChunk(pos);
+                if (chunk != null)
+                {
+                    var posChunk = chunk.posChunk;
+                    var data = new WorldSaver.EntityUnitData()
+                    {
+                        EntityType = entity.Type,
+                        X = pos.x,
+                        Y = pos.y,
+                        ChunkX = posChunk.x,
+                        ChunkY = posChunk.y
+                    };
+                    list.Add(data);
+                }
+            }
         }
 
         return list;
@@ -36,7 +47,10 @@ public class EntityManager : MonoBehaviour
     public BotController Create(Vector3 pos, EntityType type)
     {
         var bot = PoolManager.GetObject("Entity", pos, Quaternion.identity).GetComponent<BotController>();
+        
+        bot.EntityManager = this;
         bot.SetEntity(type);
+        
         AddEntity(bot);
         
         return bot;

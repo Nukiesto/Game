@@ -119,7 +119,7 @@ namespace SavingSystem
             
             public WorldSaving( WorldDataList worldList)
             {
-                this._worldList = worldList;
+                _worldList = worldList;
             }
             public bool CreateWorld(WorldDataUnit data)
             {
@@ -211,14 +211,16 @@ namespace SavingSystem
             {             
                 using (var fs = new FileStream(FnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
+                    fs.SetLength(0);//Очистка файла
                     using (var writer = new StreamWriter(fs))
                     {
-                        var data = new string[3];
+                        var data = new string[5];
 
                         data[0] = WorldDataUnit.width.ToString();
                         data[1] = WorldDataUnit.height.ToString();
                         data[2] = WorldDataUnit.toGenerateWorld.ToString();
-                        
+                        data[3] = WorldDataUnit.entitiesCount.ToString();
+                        data[4] = WorldDataUnit.itemsCount.ToString();
                         //Debug.Log(fnameInfo);
                         // Конвертируем в json
                         var jsonString = JsonHelper.ToJson(data, true);
@@ -242,11 +244,15 @@ namespace SavingSystem
                             var w = int.Parse(a[0]);
                             var h = int.Parse(a[1]);
                             var toGenerateWorld = bool.Parse(a[2]);
+                            var entitiesCount = int.Parse(a[3]);
+                            var itemsCount = int.Parse(a[4]);
                             
                             if (w > 0 &&  h > 0) {
                                 WorldDataUnit.width = w;
                                 WorldDataUnit.height = h;
                                 WorldDataUnit.toGenerateWorld = toGenerateWorld;
+                                WorldDataUnit.entitiesCount = entitiesCount;
+                                WorldDataUnit.itemsCount = itemsCount;
                                 return true;
                             }
                             //Debug.Log("x: " + worldDataUnit.width + " ;y: " + worldDataUnit.height);       
@@ -255,7 +261,7 @@ namespace SavingSystem
                 }
                 return false;
             }
-            public void SavePlayerData()
+            public void AddPlayerData()
             {
                 using (var fs = new FileStream(FnamePlayerData, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
@@ -315,10 +321,14 @@ namespace SavingSystem
             public int height;
             public bool toGenerateWorld;
             
+            public int itemsCount;
+            public int entitiesCount;
+            
             public string name;
             public int CountChunks => width * height;
             public string Dirname => DirnameWorlds + "/" + name;
             public List<ChunkData> chunks;
+            
             public WorldDataUnit()
             {
                 chunks = new List<ChunkData>();
@@ -331,6 +341,7 @@ namespace SavingSystem
                     }
                 }
             }
+            
             public void AddChunk(ChunkData data)
             {
                 if (chunks.Count < CountChunks)
@@ -361,6 +372,58 @@ namespace SavingSystem
             {
                 chunks.Clear();
             }
+
+            public void AddEntities(List<WorldSaver.EntityUnitData> entities)
+            {
+                entitiesCount = entities.Count;
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    var entity = entities[i];
+                    //Debug.Log("ChunksCount: " + chunks.Count);
+                    for (var j = 0; j < chunks.Count; j++)
+                    {
+                        var chunk = chunks[j];
+                        //Debug.Log("x1: " + chunk.x + "x2: " + entity.ChunkX +"y1" + chunk.y + "y2" + entity.ChunkY);
+                        if (chunk.x == entity.ChunkX && chunk.y == entity.ChunkY)
+                        {
+                            var entityChunkData = new EntityChunkData()
+                            {
+                                EntityType = entity.EntityType,
+                                X = entity.X,
+                                Y = entity.Y
+                            };
+                            
+                            chunk.AddChunkEntity(entityChunkData);
+                            break;
+                        }
+                            
+                    }
+                }
+            }
+            public void AddItems(List<WorldSaver.ItemUnitData> items)
+            {
+                itemsCount = items.Count;
+                for (var i = 0; i < items.Count; i++)
+                {
+                    var item = items[i];
+                    for (var j = 0; j < chunks.Count; j++)
+                    {
+                        var chunk = chunks[j];
+                        if (chunk.x == item.ChunkX && chunk.y == item.ChunkY)
+                        {
+                            var itemChunkData = new ItemChunkData()
+                            {
+                                Name = item.Name,
+                                X = item.X,
+                                Y = item.Y
+                            };
+                            chunk.AddChunkItem(itemChunkData);
+                            break;
+                        }
+                            
+                    }
+                }
+            }
         }
         #endregion
 
@@ -384,12 +447,12 @@ namespace SavingSystem
                     fs.SetLength(0);//Очистка файла
                     using (var writer = new StreamWriter(fs))
                     {                       
-                        var data = new string[2 + chunkData.blocks.Count + chunkData.items.Count];
+                        var data = new string[3 + chunkData.blocks.Count + chunkData.entities.Count + chunkData.items.Count];
 
                         data[0] = chunkData.blocks.Count.ToString();
-                        data[1] = chunkData.items.Count.ToString();
-
-                        var start = 2;var end = 2 + chunkData.blocks.Count;
+                        data[1] = chunkData.entities.Count.ToString();
+                        data[2] = chunkData.items.Count.ToString();
+                        var start = 3;var end = start + chunkData.blocks.Count;
                         //Debug.Log("Count: " + chunkData.blocks.Count);
                         //Debug.Log("Start: " + start);
                         //Debug.Log("End: " + end);
@@ -417,12 +480,21 @@ namespace SavingSystem
                             }
                             //item.memory.ItemConverterType = 
                             data[i] = JsonConvert.SerializeObject(item);
-                            if (item.memory != null)
-                            {
+                            //if (item.memory != null)
+                            //{
                                 //Debug.Log("Save: " + data[i]);
+                            //}
+                        }
+                        start = end; end = start + chunkData.entities.Count;
+                        if (chunkData.entities.Count > 0)
+                        {
+                            for (var i = start; i < end; i++)
+                            {
+                                //Debug.Log(i + ":Length " + data.Length);
+                                data[i] = JsonConvert.SerializeObject(chunkData.entities[i - start]);
                             }
                         }
-                        start = end + 1; end = start + chunkData.items.Count;
+                        start = end; end = start + chunkData.items.Count;
                         if (chunkData.items.Count > 0)
                         {
                             for (var i = start; i < end; i++)
@@ -431,7 +503,6 @@ namespace SavingSystem
                                 data[i] = JsonConvert.SerializeObject(chunkData.items[i - start]);
                             }
                         }
-                        
                         // Конвертируем в json
                         var jsonString = JsonHelper.ToJson(data, true);
 
@@ -451,17 +522,17 @@ namespace SavingSystem
 
                         if (text != "")
                         {
-                            var data = JsonHelper.FromJson<string>(text);
+                            var json = JsonHelper.FromJson<string>(text);
                             chunkData.blocks.Clear();
 
-                            var start = 2; var end = 2 + int.Parse(data[0]);
+                            var start = 3; var end = start + int.Parse(json[0]);
                             for (var i = start; i < end; i++)
                             {
                                 //Debug.Log("i: " + i + " ;data: " + data[i - start]);
-                                var blockData = JsonConvert.DeserializeObject<BlockChunkData>(data[i]);
+                                var blockData = JsonConvert.DeserializeObject<BlockChunkData>(json[i]);
                                 //DeserializeObject<BlockChunkData>(data[i]);
                                 var l = "'".ToCharArray()[0];
-                                var str = JsonConvert.ToString(data[i], l, StringEscapeHandling.Default);
+                                var str = JsonConvert.ToString(json[i], l, StringEscapeHandling.Default);
                                 
                                 var rg = new Regex(@"memory.:(.*?)}'");
                                 var result = rg.Match(str).Groups[1].Value;
@@ -486,11 +557,17 @@ namespace SavingSystem
                                 
                                 chunkData.AddChunkBlock(blockData);
                             }
-                            start = end + 1; end = start + int.Parse(data[1]);
+                            start = end; end = start + int.Parse(json[1]);
                             for (var i = start; i < end; i++)
                             {
-                                var entityData = JsonConvert.DeserializeObject<ItemChunkData>(data[i - start]);
-                                chunkData.AddChunkItem(entityData);
+                                var entityChunkData = JsonConvert.DeserializeObject<EntityChunkData>(json[i]);
+                                chunkData.AddChunkEntity(entityChunkData);
+                            }
+                            start = end; end = start + int.Parse(json[2]);
+                            for (var i = start; i < end; i++)
+                            {
+                                var itemChunkData = JsonConvert.DeserializeObject<ItemChunkData>(json[i]);
+                                chunkData.AddChunkItem(itemChunkData);
                             }
                          }
                     }
@@ -508,7 +585,9 @@ namespace SavingSystem
             public int y;
 
             public List<BlockChunkData> blocks = new List<BlockChunkData>();
+            public List<EntityChunkData> entities = new List<EntityChunkData>();
             public List<ItemChunkData> items = new List<ItemChunkData>();
+            
             public int chunkSize = GameConstants.ChunkSize;
             public ChunkData(int x, int y)
             {
@@ -534,6 +613,10 @@ namespace SavingSystem
             public void AddChunkItem(ItemChunkData data)
             {
                 items.Add(data);
+            }
+            public void AddChunkEntity(EntityChunkData data)
+            {
+                entities.Add(data);
             }
         }
         [Serializable]
@@ -573,12 +656,15 @@ namespace SavingSystem
         }
         public class EntityChunkData
         {
-            public int X;
-            public int Y;
+            public float X;
+            public float Y;
+            public EntityType EntityType;
         }
         public class ItemChunkData
         {
-            public EntityChunkData Entity;
+            public float X;
+            public float Y;
+            public string Name;
         }
         [JsonObject(IsReference = true)]
         [Serializable]

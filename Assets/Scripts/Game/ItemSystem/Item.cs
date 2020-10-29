@@ -1,22 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using Singleton;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Item : MonoBehaviour
 {
-    [HideInInspector] public ItemData.Data data;
+    public ItemData.Data data;
     [HideInInspector] public SpriteRenderer sprite;
-
+    public ItemManager itemManager;
+    
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
     }
     public void InitSprite()
     {
-        Sprite spr = data.sprite;
+        var spr = data?.sprite;
         if (spr != null)
         {
             sprite.sprite = spr;
         }
-    } 
+    }
+
+    private void OnDisable()
+    {
+        itemManager.RemoveItem(this);
+    }
 }

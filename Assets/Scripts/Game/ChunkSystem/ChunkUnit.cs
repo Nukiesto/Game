@@ -61,7 +61,8 @@ public class ChunkUnit : MonoBehaviour
     private ChunkUnit _chunkDowner;
     private ChunkUnit _chunkUpper;
     private Dictionary<Vector3Int, LightBlock> _lightBlocks;
-
+    public Vector2Int posChunk;
+    
     public bool ToGenerate { private get; set; }
 
     #endregion
@@ -92,9 +93,9 @@ public class ChunkUnit : MonoBehaviour
 
         StartCoroutine(ToBuildGrass());
 
-        var chunkCoord = chunkManager.ChunkPosInWorld(this);
-        _chunkDowner = chunkManager.GetDownerChunk(chunkCoord);
-        _chunkUpper = chunkManager.GetUpperChunk(chunkCoord);
+        posChunk = chunkManager.ChunkPosInWorld(this);
+        _chunkDowner = chunkManager.GetDownerChunk(posChunk);
+        _chunkUpper = chunkManager.GetUpperChunk(posChunk);
     }
 
     private void Update()
@@ -190,43 +191,42 @@ public class ChunkUnit : MonoBehaviour
             return false;
         }
 
-        if (InBounds(pos) && !hasBlock)
-            if (data != null)
+        if (InBounds(pos) && !hasBlock && data != null)
+        {
+            if (data.isSolid)
             {
-                if (data.isSolid)
-                {
-                    tilemap.SetTile(pos, data.tile);
-                }
-                else
-                {
-                    GetTileMap(ChunkTilemap.FrontUnSolid).SetTile(pos, data.tile);
-                }
-
-                if (!data.isLightSource)
-                {
-                    if (layer == BlockLayer.Front && data.isLightObstacle)
-                    {
-                        GetTileMap(ChunkTilemap.FrontLightObstacle).SetTile(pos, data.tile);
-                    }
-                }
-                else
-                {
-                    if (layer == BlockLayer.Front)
-                    {
-                        GetTileMap(ChunkTilemap.FrontLightSource).SetTile(pos, data.tileLightSource);
-                        CreateLightBlock(pos, new Color(1f, 0.75f, 0.13f, 150f / 255f));
-                    }
-                    else
-                    {
-                        GetTileMap(ChunkTilemap.BackLightSource).SetTile(pos, data.tileLightSource);
-                        CreateLightBlock(pos, new Color(1f, 0.75f, 0.13f, 150f / 255f));
-                    }
-                }
-
-                _controller.AddUnit(data, pos, layer, tilemap, toStartCor);
-                return true;
+                tilemap.SetTile(pos, data.tile);
+            }
+            else
+            {
+                GetTileMap(ChunkTilemap.FrontUnSolid).SetTile(pos, data.tile);
             }
 
+            if (!data.isLightSource)
+            {
+                if (layer == BlockLayer.Front && data.isLightObstacle)
+                {
+                    GetTileMap(ChunkTilemap.FrontLightObstacle).SetTile(pos, data.tile);
+                }
+            }
+            else
+            {
+                if (layer == BlockLayer.Front)
+                {
+                    GetTileMap(ChunkTilemap.FrontLightSource).SetTile(pos, data.tileLightSource);
+                    CreateLightBlock(pos, new Color(1f, 0.75f, 0.13f, 150f / 255f));
+                }
+                else
+                {
+                    GetTileMap(ChunkTilemap.BackLightSource).SetTile(pos, data.tileLightSource);
+                    CreateLightBlock(pos, new Color(1f, 0.75f, 0.13f, 150f / 255f));
+                }
+            }
+
+            _controller.AddUnit(data, pos, layer, tilemap, toStartCor);
+            return true;
+        }
+        //Debug.Log("Inbounds: " + InBounds(pos) + " ;HasBlock: " + !hasBlock);
         return false;
     }
 
@@ -263,9 +263,10 @@ public class ChunkUnit : MonoBehaviour
         {
             var blockUnit = _controller.GetBlock(blockPos.x, blockPos.y, layer);
             var blockUpper = GetUpperBlockUnit(blockPos, layer);
-
-            if (blockUnit.Data.isBreackable && blockUpper != null ? !blockUpper.Data.mustHaveDownerBlock : true)
+            
+            if (blockUnit.Data.isBreackable && (blockUpper != null ? !blockUpper.Data.mustHaveDownerBlock : true))
             {
+                //Debug.Log(blockUnit.Data.nameBlock + ":" + blockUnit.Data.isBreackable);
                 return true;
             }
         }
@@ -274,7 +275,7 @@ public class ChunkUnit : MonoBehaviour
     }
 
     //Local
-    public void DeleteBlock(Vector3Int pos, BlockLayer layer)
+    public void DeleteBlock(Vector3Int pos, BlockLayer layer, bool createItem = true)
     {
         if (layer == BlockLayer.Back && HasBlock(pos, BlockLayer.Front))
         {
@@ -306,7 +307,7 @@ public class ChunkUnit : MonoBehaviour
 
                 #region CreateItem
 
-                if (blockUnit.Data.toCreateItem)
+                if (createItem && blockUnit.Data.toCreateItem)
                 {
                     var posCreateItem = new Vector3 //Создание предмета в центре блока
                     {
@@ -323,11 +324,11 @@ public class ChunkUnit : MonoBehaviour
     }
 
     //Global
-    public void DeleteBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front)
+    public void DeleteBlock(Vector3 pos, BlockLayer layer = BlockLayer.Front, bool createItem = true)
     {
         var blockPos = tilemapFrontWorld.WorldToCell(pos); //Получение расположения
 
-        DeleteBlock(blockPos, layer);
+        DeleteBlock(blockPos, layer, createItem);
     }
 
     #endregion
@@ -503,7 +504,6 @@ public class ChunkUnit : MonoBehaviour
 
         private ChunkUnit _chunkUpper;//Чанк сверху
         private ChunkUnit _chunkDowner;//Чанк снизу
-        private Vector2Int _chunkPos;
         private BlockData[,] _chunkFront;// = new BlockData[chunkSize, chunkSize];
         private BlockData[,] _chunkBack;// = new BlockData[chunkSize, chunkSize];
 
@@ -520,9 +520,9 @@ public class ChunkUnit : MonoBehaviour
             
             _generator = _chunkManager.generator;
             WorldHeight = _generator.worldHeight;
-            _chunkPos = _chunkManager.ChunkPosInWorld(_chunkUnit);
+            _chunkUnit.posChunk = _chunkManager.ChunkPosInWorld(_chunkUnit);
 
-            ChunkLevel = _chunkPos.y * chunkSize; //Высота от начала мира до начала чанка
+            ChunkLevel = _chunkUnit.posChunk.y * chunkSize; //Высота от начала мира до начала чанка
 
             var chunkCoord = _chunkManager.ChunkPosInWorld(_chunkUnit);
             _chunkUpper = _chunkManager.GetUpperChunk(chunkCoord);

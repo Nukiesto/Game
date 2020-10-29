@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Game.Bot;
 using JetBrains.Annotations;
 using LeopotamGroup.Math;
@@ -23,7 +25,7 @@ public class ChunkManager : MonoBehaviour
 
     private int _chunkSize;
     public WorldGenerator generator;
-    private WorldSavingSystem.WorldSaving _worldSaving;
+    //private WorldSavingSystem.WorldSaving _worldSaving;
     public static ChunkManager Instance;
     
     private void Awake()
@@ -39,14 +41,70 @@ public class ChunkManager : MonoBehaviour
         RefreshBounds();
         
         BuildChunks();
-        InitWorld();
     }
 
     private void Start()
     {
         MovePlayerToSpawnPoint();
+        StartCoroutine(BuildLimiters());
     }
 
+    private IEnumerator BuildLimiters()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            //Debug.Log("Started");
+            var dataLimiter = dataBase.GetBlock("Limiter");
+            var w = generator.worldWidthInChunks;
+            var h = generator.worldHeightInChunks;
+            for (var i1 = 0; i1 < w; i1++)
+            {
+                for (var j1 = 0; j1 < h; j1++)
+                {
+                    var chunk = _chunks[i1, j1];
+                    if (j1 == 0)
+                    {
+                        for (var i = 0; i < _chunkSize; i++)
+                        {
+                            var pos = new Vector3Int(i, 0, 0);
+                            chunk.DeleteBlock(pos, BlockLayer.Front, false);
+                            chunk.SetBlock(pos , dataLimiter, false);
+                        }
+                    }
+                    if (j1 == h-1)
+                    {
+                        for (var i = 0; i < _chunkSize; i++)
+                        {
+                            var pos = new Vector3Int(i, _chunkSize - 1, 0);
+                            chunk.DeleteBlock(pos, BlockLayer.Front, false);
+                            chunk.SetBlock(pos , dataLimiter, false);
+                        }
+                    }
+                    if (i1 == 0)
+                    {
+                        for (var i = 0; i < _chunkSize; i++)
+                        {
+                            var pos = new Vector3Int(0, i, 0);
+                            chunk.DeleteBlock(pos, BlockLayer.Front, false);
+                            chunk.SetBlock(pos, dataLimiter, false);
+                        }
+                    }
+                    if (i1 == w-1)
+                    {
+                        //Debug.Log("Good");
+                        for (var i = 0; i < _chunkSize; i++)
+                        {
+                            var pos = new Vector3Int(_chunkSize - 1, i, 0);
+                            chunk.DeleteBlock(pos, BlockLayer.Front, false);
+                            chunk.SetBlock(pos, dataLimiter, false);
+                        }
+                    }
+                }
+            }
+            yield break;
+        }
+    }
     public void CreateTestEntity()
     {
         var pos = player.transform.position;
@@ -147,31 +205,11 @@ public class ChunkManager : MonoBehaviour
         return _bounds.Contains(pos);
     }
 
-    public void InitWorld()
+    public void AddDataToWorldSaving(WorldSavingSystem.WorldSaving worldSaving)
     {
-        _worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
-        if (_worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld))
-        {
-            if (!_worldSaving.WorldDataUnit.toGenerateWorld)
-            {
-                //Debug.Log("WorldLoading");
-                ClickLoadWorld();
-            }
-        }
-    }
+        worldSaving.Clear();
+        worldSaving.WorldDataUnit.toGenerateWorld = false;
 
-    public void ClickSaveWorld()
-    {
-        _worldSaving.Clear();
-        _worldSaving.WorldDataUnit.toGenerateWorld = false;
-        var savePos = player.transform.position;
-        var playerData = new WorldSavingSystem.PlayerData();
-        playerData.x = savePos.x;
-        playerData.y = savePos.y;
-        
-        _worldSaving.PlayerData = playerData;
-        _worldSaving.SavePlayerData();
-        
         for (var i = 0; i < generator.worldWidthInChunks; i++)
         for (var j = 0; j < generator.worldHeightInChunks; j++)
         {
@@ -214,37 +252,43 @@ public class ChunkManager : MonoBehaviour
             }
 
             //Debug.Log(chunk.blocks.Count);                
-            _worldSaving.AddChunk(chunk);
+            worldSaving.AddChunk(chunk);
         }
 
-        _worldSaving.SaveWorld();
+       
     }
-    public void ClickLoadWorld()
+    public void LoadWorld(WorldSavingSystem.WorldSaving worldSaving)
     {
-        _worldSaving.LoadWorld();
-        _worldSaving.LoadPlayerData();
-        
-        var playerData = _worldSaving.PlayerData;
-        if (playerData != null)
-        {
-            var newPos = new Vector3();
-            newPos.x = playerData.x;
-            newPos.y = playerData.y;
-            player.transform.position = newPos;
-            cameraMain.transform.position = newPos;
-        }
-
         var count = generator.CountChunks;
+        var toolbox = Toolbox.Instance;
+        var entityManager = toolbox.mEntityManager;
+        var itemManager = toolbox.mItemManager;
         for (var i = 0; i < count; i++)
         {
-            var chunkLoaded = _worldSaving.GetChunkData(i);
+            var chunkLoaded = worldSaving.GetChunkData(i);
             //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;" + j);
             if (chunkLoaded != null)
             {
+                var entities = chunkLoaded.entities;
+                //Debug.Log("EntitiesCount: " + entities.Count);
+                for (var j = 0; j < entities.Count; j++)
+                {
+                    var entity = entities[j];
+                    entityManager.Create(new Vector3(entity.X, entity.Y, 0), entity.EntityType);
+                }
+                var items = chunkLoaded.items;
+                //Debug.Log("ItemsCount: " + items.Count);
+                for (var j = 0; j < items.Count; j++)
+                {
+                    var item = items[j];
+                    
+                    itemManager.CreateItem(new Vector3(item.X, item.Y, 0), dataBase.GetItem(item.Name));
+                }
+                //Debug.Log("ItemsCount: " + items.Count);
+                //Debug.Log("x" + chunkLoaded.x + " ;y" + chunkLoaded.y);
                 var unit = _chunks[chunkLoaded.x, chunkLoaded.y];
                 //unit.Clear(); //Полная очистка чанка
                 unit.ToGenerate = false;
-                
                 var chunkFront = new ChunkUnit.ChunkBuilder.BlockUnitChunk[_chunkSize,_chunkSize];
                 var chunkBack  = new ChunkUnit.ChunkBuilder.BlockUnitChunk[_chunkSize,_chunkSize];
                 for (var n = 0; n < chunkLoaded.blocks.Count; n++)
@@ -256,23 +300,18 @@ public class ChunkManager : MonoBehaviour
                         if (blockData.memory != null)
                         {
                             var mem = blockData.memory as ChestMemory;
-                            //Debug.Log("ChestMem: " + mem);
                         }
                         chunkFront[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.memory, blockData.memStr);
-                        //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Front, false);
                     }
 
                     if (blockData.blockLayer == (int) BlockLayer.Back)
                     {
                         var blockDataMain = dataBase.GetBlock(blockData.name);
                         chunkBack[blockData.x, blockData.y] = new ChunkUnit.ChunkBuilder.BlockUnitChunk(blockDataMain, blockData.memory, blockData.memStr);
-                        //unit.SetBlock(new Vector3Int(blockData.x, blockData.y, 0), blockDataMain, false,BlockLayer.Back);
                     }
                 }
                 unit.chunkBuilder = new ChunkUnit.ChunkBuilder(unit, this);
                 unit.chunkBuilder.Rebuild(chunkFront, chunkBack);
-                //unit.chunkBuilder.Building();
-                //unit.StartCoroutine(unit.ToBuildGrass());
             }
         }
     }

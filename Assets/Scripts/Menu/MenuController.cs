@@ -42,7 +42,7 @@ public class MenuController : MonoBehaviour
     }
     public void SetGame()
     {
-        _gameSceneManager.SetScene(GameScene.Game);        
+        _gameSceneManager.SetScene(GameScene.Game);
     }
 
     private void Awake()

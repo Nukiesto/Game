@@ -6,24 +6,25 @@ public class PoolSetup : MonoBehaviour
 {//обертка для управления статическим классом PoolManager
 
 	#region Unity scene settings
-	[SerializeField] private PoolManager.PoolPart[] pools;
+	[SerializeField] public PoolManager.PoolPart[] pools;
 	#endregion
 
 	#region Methods
-	void OnValidate()
+
+	private void OnValidate()
 	{
-		for (int i = 0; i < pools.Length; i++)
+		for (var i = 0; i < pools.Length; i++)
 		{
 			pools[i].name = pools[i].prefab?.name ?? "";
 		}
 	}
 
-	void Awake()
+	private void Awake()
 	{
 		Initialize();
 	}
 
-	void Initialize()
+	private void Initialize()
 	{
 		PoolManager.Initialize(pools);
 	}

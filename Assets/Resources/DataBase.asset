@@ -29,6 +29,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ea3f46e777002664c8bfcd9ca3ea87de, type: 2}
     - {fileID: 11400000, guid: 1d9af7fbd70129e4d98d7a4c9c56bd74, type: 2}
     - {fileID: 11400000, guid: e913f8b793c19794f8bc14bad785a882, type: 2}
+    - {fileID: 11400000, guid: 446006e7f1407f145a0efca9cee3a715, type: 2}
     items: []
     itemsBlocks:
     - type: 1
@@ -189,7 +190,7 @@ MonoBehaviour:
       description:
         translations: []
       block: {fileID: 11400000, guid: 504e50fd31d9eab40ba66694f3dd084d, type: 2}
-      sprite: {fileID: 21300000, guid: d6a41eeaf6decdd4da798c2380b82373, type: 3}
+      sprite: {fileID: 21300000, guid: 10e40b21ed4772c47b2d62484da21a5c, type: 3}
     - type: 1
       maxCount: 64
       showInSandboxPanel: 1
@@ -260,3 +261,17 @@ MonoBehaviour:
         translations: []
       block: {fileID: 11400000, guid: e913f8b793c19794f8bc14bad785a882, type: 2}
       sprite: {fileID: 21300000, guid: 825e15a3d1d765e4d9e4c794a403ac7a, type: 3}
+    - type: 1
+      maxCount: 64
+      showInSandboxPanel: 1
+      Name: Limiter
+      name:
+        translations:
+        - lang: 1
+          text: Bricks
+        - lang: 2
+          text: "\u041A\u0438\u0440\u043F\u0438\u0447\u0438"
+      description:
+        translations: []
+      block: {fileID: 11400000, guid: 446006e7f1407f145a0efca9cee3a715, type: 2}
+      sprite: {fileID: 21300000, guid: d1c18d24e7a974b46b2c49a6fcab4574, type: 3}

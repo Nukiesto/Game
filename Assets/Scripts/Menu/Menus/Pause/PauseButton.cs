@@ -6,6 +6,7 @@ public class PauseButton : ButtonUnit
     public enum ButtonType
     {
         Continue,
+        SaveGame,
         Settings,
         MainMenu
     }
@@ -24,11 +25,16 @@ public class PauseButton : ButtonUnit
             case ButtonType.Continue:
                 ButtonClickAction = ButtonClickActionContinue;
                 break;
-
+            
+            case ButtonType.SaveGame:
+                ButtonClickAction = ButtonClickActionSaveGame;
+                break;
+            
             case ButtonType.Settings:
                 ButtonClickAction = ButtonClickActionSettings;
                 break;
-
+            
+            
             case ButtonType.MainMenu:
                 ButtonClickAction = ButtonClickActionMainMenu;
                 break;
@@ -38,12 +44,21 @@ public class PauseButton : ButtonUnit
                 break;
         }
     }
-
+    
+    
     private void ButtonClickActionContinue()
     {
         menu.controller.SetActiveCurrentMenu(false);
-        var menu_ = (PauseMenu)menu;
-        menu_.pauseMenuToggle.TogglePauseMenu(false);
+        var pauseMenu = (PauseMenu)menu;
+        pauseMenu.pauseMenuToggle.TogglePauseMenu(false);
+    }
+    private void ButtonClickActionSaveGame()
+    {
+        menu.controller.SetActiveCurrentMenu(false);
+        var pauseMenu = (PauseMenu)menu;
+        pauseMenu.pauseMenuToggle.TogglePauseMenu(false);
+        
+        Toolbox.Instance.mWorldSaver.SaveWorld();
     }
 
     private void ButtonClickActionSettings()
@@ -53,6 +68,7 @@ public class PauseButton : ButtonUnit
 
     private void ButtonClickActionMainMenu()
     {
+        Toolbox.Instance.mWorldSaver.SaveWorld();
         MoveToMainMenu();
     }
 

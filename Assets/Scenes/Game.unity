@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 217124121}
   - component: {fileID: 217124118}
   - component: {fileID: 217124117}
+  - component: {fileID: 217124123}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -755,6 +756,19 @@ MonoBehaviour:
   AmbientLightLayer: 9
   LightObstaclesLayer: 10
   XZPlane: 0
+--- !u!114 &217124123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217124115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2492870b97440a683a944d799c45d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSetup: {fileID: 217124124}
 --- !u!114 &217124124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,7 +790,7 @@ MonoBehaviour:
     prefab: {fileID: -284551291832538760, guid: ba3cf348ebe9df449aafd6aa5be5498c,
       type: 3}
     count: 10
-  - name: Bot
+  - name: Entity
     prefab: {fileID: 8417341942615820558, guid: 7a0bdacbdb0c1f44e8fff8ba24d4dfbe,
       type: 3}
     count: 10
@@ -3439,6 +3453,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1669299589300538768, guid: b960e70da2928eb43a6f7eecb4f6d52c,
+        type: 3}
+      propertyPath: buttonType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1728830194871211727, guid: b960e70da2928eb43a6f7eecb4f6d52c,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3719,6 +3738,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2034849838628095740}
+    - target: {fileID: 8937033107223243300, guid: b960e70da2928eb43a6f7eecb4f6d52c,
+        type: 3}
+      propertyPath: buttonType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9159267976554074651, guid: b960e70da2928eb43a6f7eecb4f6d52c,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D col)
     {
         //Debug.Log(col.gameObject.name);
-        if (col.gameObject.name == "Item(Clone)")
+        if (col.gameObject.CompareTag("Item"))
         {
             var obj = col.gameObject;
             //Debug.Log(obj.GetComponent<Item>().data);

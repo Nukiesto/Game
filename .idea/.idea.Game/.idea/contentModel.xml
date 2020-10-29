@@ -931,6 +931,7 @@
               <e p="AmbientLightController.cs" t="Include" />
               <e p="LightBlock.cs" t="Include" />
             </e>
+            <e p="OnSceneLoadedWorldSaverInit.cs" t="Include" />
             <e p="Player" t="Include">
               <e p="BlockSelector.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2495743460115809693}
   - component: {fileID: 8417341942615820558}
   m_Layer: 12
-  m_Name: Bot
+  m_Name: Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   mustMovingToPlayer: 0
   stopDistanceFindedPlayer: 1
   findPlayerOverSolid: 0
+  canBreackBlock: 1
 --- !u!114 &2495743460115809693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  EntityManager: {fileID: 0}
 --- !u!114 &8417341942615820558
 MonoBehaviour:
   m_ObjectHideFlags: 0
