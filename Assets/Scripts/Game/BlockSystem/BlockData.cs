@@ -1,4 +1,6 @@
-﻿using SimpleLocalizator;
+﻿using System;
+using System.Collections.Generic;
+using SimpleLocalizator;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static ItemData;
@@ -37,8 +39,13 @@ public class BlockData : ScriptableObject
     [Header("Тайл с анимацией")]
     public AnimatedTile tileAnimation;
     public AnimatedTile[] tileAnimationVariables;
-    
-    [Header("Предмет")]
+
+    [Header("Предмет")] 
+    public bool itemDropOverride;
+    public ItemData itemDrop;
+
+    public bool itemCraftable;
+    public ItemCraftUnit itemCraft;
     public TranslateString nameTranslations;
     public TranslateString descriptionTranslations;
     [HideInInspector] public Data Item { get; private set; }
@@ -46,10 +53,12 @@ public class BlockData : ScriptableObject
     private void OnEnable()
     { 
         InitItem();
+        itemCraft.Init();
     }
     public void OnValidate()
     {
         InitItem();
+        itemCraft.Init();
     }
     public void InitItem()
     {
@@ -62,7 +71,41 @@ public class BlockData : ScriptableObject
             Name = nameBlock,
             name = nameTranslations,
             block = this,
-            maxCount = 64
+            maxCount = 64,
+            itemCraft = itemCraft,
+            craftable = itemCraftable
         };
+    }
+}
+[Serializable]
+public struct ItemCraft
+{
+    public List<ItemCraftUnit> items;
+}
+[Serializable]
+public struct ItemCraftUnit
+{
+    public BlockData blockData;
+    public ItemData itemData;
+    
+    [HideInInspector]public Data item;
+    public int count;
+
+    public void Init()
+    {
+        if (blockData != null)
+        {
+            item = blockData.Item;
+            //Debug.Log(item.Name);
+        }
+
+        if (itemData != null)
+        {
+            item = itemData.data;
+            //Debug.Log(item.Name);
+        }
+        
+        //Debug.Log(item);
+        //
     }
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using Prime31;
 using static UnityEngine.Physics2D;
 using Random = UnityEngine.Random;
+using static UsefulScripts.RandomScripts;
 
 public class BotMovement : MonoBehaviour
 {
@@ -103,16 +104,6 @@ public class BotMovement : MonoBehaviour
 	}
 
 	#region Internal
-
-	private bool RandomBool()
-	{
-		return Random.Range(0, 2) == 0;
-	}
-
-	private bool GetBoolChance(int n)
-	{
-		return Random.Range(0, n) == 0;
-	}
 	#endregion
 
 	private bool CheckSolidForDir(bool dir)
@@ -329,11 +320,11 @@ public class BotMovement : MonoBehaviour
 
 			if (CheckForCleft(_isGoingRight, true) && _controller.isGrounded)
 			{ 
-				if (GetBoolChance(250))
+				if (RandomBoolChance(250))
 					Jump();
 				else
 				{
-					if (GetBoolChance(150))
+					if (RandomBoolChance(150))
 						_isGoingRight = !_isGoingRight;
 				}
 					

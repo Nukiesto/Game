@@ -64,7 +64,7 @@ public class ItemList : MonoBehaviour {
 	public void UpdateList(int id) // функция удаления элемента
 	{
 		vPos = scroll.verticalNormalizedPosition; // запоминаем позицию скролла
-		int j = 0;
+		var j = 0;
 		ItemButton item = null;
 		foreach(RectTransform b in buttons)
 		{
@@ -72,8 +72,8 @@ public class ItemList : MonoBehaviour {
 			if(item.id == id) break; // находим нужный элемент
 			j++;
 		}
-		string title = item.mainButtonText.text; // сохраняем заголовок
-		int index = item.id; // сохраняем id
+		var title = item.mainButtonText.text; // сохраняем заголовок
+		var index = item.id; // сохраняем id
 		Destroy(item.gameObject); // удаляем этот элемент из списка
 		buttons.RemoveAt(j); // удаляем этот элемент из массива
 		curY = 0;

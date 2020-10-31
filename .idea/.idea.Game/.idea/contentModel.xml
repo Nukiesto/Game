@@ -9,45 +9,19 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Assets" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="RapidBlurEffect.cs" t="Include" />
-          </e>
-          <e p="Shaders" t="Include">
-            <e p="RapidBlurEffect.shader" t="Include" />
+        <e p="Effects" t="Include">
+          <e p="UIBlur" t="Include">
+            <e p="Readme.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="UIBlur.cs" t="Include" />
+              <e p="UIBlurWithCanvasGroup.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="UIBlur.shader" t="Include" />
+            </e>
           </e>
         </e>
         <e p="GameStructures" t="Include">
-          <e p="EasyButtons" t="Include">
-            <e p="ButtonAttribute.cs" t="Include" />
-            <e p="ButtonsExample.cs" t="Include" />
-            <e p="CustomEditorButtonsExample.cs" t="Include" />
-            <e p="Editor" t="Include">
-              <e p="ButtonEditor.cs" t="Include" />
-              <e p="CustomEditorButtonsExampleEditor.cs" t="Include" />
-              <e p="EasyButtonsEditorExtensions.cs" t="Include" />
-            </e>
-            <e p="ScriptableObjectExample.cs" t="Include" />
-          </e>
-          <e p="UI" t="Include">
-            <e p="Effects" t="Include">
-              <e p="Blur" t="Include">
-                <e p="Demo" t="Include">
-                  <e p="Scripts" t="Include">
-                    <e p="MovingImage.cs" t="Include" />
-                  </e>
-                </e>
-                <e p="Readme.txt" t="Include" />
-                <e p="Scripts" t="Include">
-                  <e p="UIBlur.cs" t="Include" />
-                  <e p="UIBlurWithCanvasGroup.cs" t="Include" />
-                </e>
-                <e p="Shaders" t="Include">
-                  <e p="UIBlur.shader" t="Include" />
-                </e>
-              </e>
-            </e>
-          </e>
           <e p="unity-ui-extensions" t="Include">
             <e p="Editor" t="Include">
               <e p="AccordionElementEditor.cs" t="Include" />
@@ -876,6 +850,17 @@
             <e p="GameInitProperties.cs" t="Include" />
             <e p="TranslateString.cs" t="Include" />
           </e>
+          <e p="EasyButtons" t="Include">
+            <e p="ButtonAttribute.cs" t="Include" />
+            <e p="ButtonsExample.cs" t="Include" />
+            <e p="CustomEditorButtonsExample.cs" t="Include" />
+            <e p="Editor" t="Include">
+              <e p="ButtonEditor.cs" t="Include" />
+              <e p="CustomEditorButtonsExampleEditor.cs" t="Include" />
+              <e p="EasyButtonsEditorExtensions.cs" t="Include" />
+            </e>
+            <e p="ScriptableObjectExample.cs" t="Include" />
+          </e>
           <e p="Editor" t="Include">
             <e p="DataBase" t="Include">
               <e p="BlocksDB.cs" t="Include" />
@@ -915,7 +900,10 @@
               <e p="EntityMovement.cs" t="Include" />
             </e>
             <e p="FunctionalKeys.cs" t="Include" />
+            <e p="GameCond.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
+            <e p="GameSceneManager.cs" t="Include" />
+            <e p="InitGame.cs" t="Include" />
             <e p="ItemSystem" t="Include">
               <e p="Inventory.cs" t="Include" />
               <e p="Item.cs" t="Include" />
@@ -931,7 +919,44 @@
               <e p="AmbientLightController.cs" t="Include" />
               <e p="LightBlock.cs" t="Include" />
             </e>
-            <e p="OnSceneLoadedWorldSaverInit.cs" t="Include" />
+            <e p="Menu" t="Include">
+              <e p="MenuController.cs" t="Include" />
+              <e p="Menus" t="Include">
+                <e p="ButtonUnit.cs" t="Include" />
+                <e p="DialogUnit.cs" t="Include" />
+                <e p="MainMenu" t="Include">
+                  <e p="MainMenu.cs" t="Include" />
+                  <e p="MainMenuButton.cs" t="Include" />
+                  <e p="MainMenuDialog.cs" t="Include" />
+                </e>
+                <e p="Multiplayer" t="Include">
+                  <e p="MultiplayerMenu.cs" t="Include" />
+                  <e p="MultiplayerMenuButton.cs" t="Include" />
+                  <e p="MultiplayerMenuDialog.cs" t="Include" />
+                </e>
+                <e p="Pause" t="Include">
+                  <e p="PauseButton.cs" t="Include" />
+                  <e p="PauseDialog.cs" t="Include" />
+                  <e p="PauseMenu.cs" t="Include" />
+                  <e p="PauseMenuToggleController.cs" t="Include" />
+                </e>
+                <e p="Settings" t="Include">
+                  <e p="SettingsButton.cs" t="Include" />
+                  <e p="SettingsDialog.cs" t="Include" />
+                  <e p="SettingsMenu.cs" t="Include" />
+                </e>
+                <e p="WorldMenu" t="Include">
+                  <e p="WorldMenu.cs" t="Include" />
+                  <e p="WorldMenuButton.cs" t="Include" />
+                  <e p="WorldMenuDialog.cs" t="Include" />
+                </e>
+              </e>
+              <e p="MenuUnit.cs" t="Include" />
+              <e p="Misc" t="Include">
+                <e p="Init_LoadPreferences.cs" t="Include" />
+                <e p="MenuControllerTutor.cs" t="Include" />
+              </e>
+            </e>
             <e p="Player" t="Include">
               <e p="BlockSelector.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />
@@ -954,6 +979,8 @@
             <e p="TakeThumbnail.cs" t="Include" />
             <e p="TimeController.cs" t="Include" />
             <e p="TImerToDelete.cs" t="Include" />
+            <e p="UsefulScripts.cs" t="Include" />
+            <e p="WorldManager.cs" t="Include" />
             <e p="WorldSaver.cs" t="Include" />
           </e>
           <e p="GameConstants.cs" t="Include" />
@@ -1174,58 +1201,14 @@
               <e p="TweeningScale.cs" t="Include" />
             </e>
           </e>
-          <e p="Math" t="Include">
-            <e p="Perlin.cs" t="Include" />
-          </e>
-          <e p="Menu" t="Include">
-            <e p="MenuController.cs" t="Include" />
-            <e p="Menus" t="Include">
-              <e p="ButtonUnit.cs" t="Include" />
-              <e p="DialogUnit.cs" t="Include" />
-              <e p="MainMenu" t="Include">
-                <e p="MainMenu.cs" t="Include" />
-                <e p="MainMenuButton.cs" t="Include" />
-                <e p="MainMenuDialog.cs" t="Include" />
-              </e>
-              <e p="Multiplayer" t="Include">
-                <e p="MultiplayerMenu.cs" t="Include" />
-                <e p="MultiplayerMenuButton.cs" t="Include" />
-                <e p="MultiplayerMenuDialog.cs" t="Include" />
-              </e>
-              <e p="Pause" t="Include">
-                <e p="PauseButton.cs" t="Include" />
-                <e p="PauseDialog.cs" t="Include" />
-                <e p="PauseMenu.cs" t="Include" />
-                <e p="PauseMenuToggleController.cs" t="Include" />
-              </e>
-              <e p="Settings" t="Include">
-                <e p="SettingsButton.cs" t="Include" />
-                <e p="SettingsDialog.cs" t="Include" />
-                <e p="SettingsMenu.cs" t="Include" />
-              </e>
-              <e p="WorldMenu" t="Include">
-                <e p="WorldMenu.cs" t="Include" />
-                <e p="WorldMenuButton.cs" t="Include" />
-                <e p="WorldMenuDialog.cs" t="Include" />
-              </e>
-            </e>
-            <e p="MenuUnit.cs" t="Include" />
-            <e p="Misc" t="Include">
-              <e p="Init_LoadPreferences.cs" t="Include" />
-              <e p="MenuControllerTutor.cs" t="Include" />
-            </e>
-          </e>
-          <e p="MyLib" t="Include">
-            <e p="MyLib.cs" t="Include" />
-          </e>
-          <e p="Native" t="Include">
-            <e p="MessageBox.cs" t="Include" />
-          </e>
           <e p="Occlusion" t="Include">
             <e p="Occlusion.cs" t="Include" />
           </e>
+          <e p="Other" t="Include">
+            <e p="MyLib.cs" t="Include" />
+            <e p="Perlin.cs" t="Include" />
+          </e>
           <e p="Singleton" t="Include">
-            <e p="GameSceneManager.cs" t="Include" />
             <e p="MonoGlobalSingleton.cs" t="Include" />
             <e p="Singleton.cs" t="Include" />
             <e p="Toolbox.cs" t="Include" />

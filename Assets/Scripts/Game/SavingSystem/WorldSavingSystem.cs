@@ -214,7 +214,20 @@ namespace SavingSystem
                     fs.SetLength(0);//Очистка файла
                     using (var writer = new StreamWriter(fs))
                     {
-                        var data = new string[5];
+                        var worldInfoData = new WorldInfoData()
+                        {
+                            Width = WorldDataUnit.width,
+                            Height = WorldDataUnit.height,
+                            ToGenerateWorld = WorldDataUnit.toGenerateWorld,
+                            EntitiesCount = WorldDataUnit.entitiesCount,
+                            ItemsCount = WorldDataUnit.itemsCount
+                        };
+                        var data = new string[1];
+                        data[0] = JsonConvert.SerializeObject(worldInfoData);
+                        var jsonString = JsonHelper.ToJson(data, true);
+                        writer.Write(jsonString);
+                        
+                        /*var data = new string[5];
 
                         data[0] = WorldDataUnit.width.ToString();
                         data[1] = WorldDataUnit.height.ToString();
@@ -225,7 +238,7 @@ namespace SavingSystem
                         // Конвертируем в json
                         var jsonString = JsonHelper.ToJson(data, true);
                         //Writing
-                        writer.Write(jsonString);
+                        writer.Write(jsonString);*/
                     }
                 }
             }
@@ -236,6 +249,21 @@ namespace SavingSystem
                     using (var writer = new StreamReader(fs))
                     {
                         var text = writer.ReadToEnd();
+
+                        if (text != "")
+                        {
+                            var fromJson = JsonHelper.FromJson<string>(text);
+                            var worldInfoData  = JsonConvert.DeserializeObject<WorldInfoData>(fromJson[0]);
+                            
+                            WorldDataUnit.width = worldInfoData.Width;
+                            WorldDataUnit.height = worldInfoData.Height;
+                            WorldDataUnit.toGenerateWorld = worldInfoData.ToGenerateWorld;
+                            WorldDataUnit.entitiesCount = worldInfoData.EntitiesCount;
+                            WorldDataUnit.itemsCount = worldInfoData.ItemsCount;
+                            return true;
+                        }
+                        
+                        /*var text = writer.ReadToEnd();
 
                         if (text != "")
                         {
@@ -256,7 +284,7 @@ namespace SavingSystem
                                 return true;
                             }
                             //Debug.Log("x: " + worldDataUnit.width + " ;y: " + worldDataUnit.height);       
-                        }
+                        }*/
                     }
                 }
                 return false;
@@ -265,10 +293,12 @@ namespace SavingSystem
             {
                 using (var fs = new FileStream(FnamePlayerData, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
+                    fs.SetLength(0);//Очистка файла
                     using (var writer = new StreamWriter(fs))
                     {
-                        var jsonString = JsonConvert.SerializeObject(PlayerData);
-
+                        var data = new string[1];
+                        data[0] = JsonConvert.SerializeObject(PlayerData);
+                        var jsonString = JsonHelper.ToJson(data, true);
                         writer.Write(jsonString);
                     }
                 }
@@ -279,11 +309,12 @@ namespace SavingSystem
                 {
                     using (var writer = new StreamReader(fs))
                     {
-                        var jsonString = writer.ReadToEnd();
+                        var text = writer.ReadToEnd();
 
-                        if (jsonString != "")
+                        if (text != "")
                         {
-                            //PlayerData = JsonConvert.DeserializeObject<PlayerData>(jsonString);
+                            var fromJson = JsonHelper.FromJson<string>(text);
+                            PlayerData = JsonConvert.DeserializeObject<PlayerData>(fromJson[0]);
                             //Debug.Log(PlayerData);
                         }
                     }
@@ -577,7 +608,15 @@ namespace SavingSystem
         #endregion
 
         #region Data
-
+        [Serializable]
+        public class WorldInfoData
+        {
+            public int Width;
+            public int Height;
+            public bool ToGenerateWorld;
+            public int EntitiesCount;
+            public int ItemsCount;
+        }
         [Serializable]
         public class ChunkData
         {
@@ -671,7 +710,19 @@ namespace SavingSystem
         public class PlayerData
         {           
             public float x;
-            public float y;           
+            public float y;
+
+            public float spawnX;
+            public float spawnY;
+            public bool spawnPointInited;
+            
+            public List<ItemPlayerData> items;
+            public struct ItemPlayerData
+            {
+                public InventoryType InventoryType;
+                public int Count;
+                public string Name;
+            }
         }  
 
         #endregion     

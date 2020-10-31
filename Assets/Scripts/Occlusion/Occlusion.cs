@@ -3,7 +3,7 @@
 [RequireComponent(typeof(BoxCollider2D))]
 public class Occlusion : MonoBehaviour
 {
-    [SerializeField]private GameObject prefab;
+    [SerializeField] private GameObject prefab;
     [SerializeField, HideInInspector] private GameObject content;
 
     private void Start()

@@ -15,11 +15,114 @@ MonoBehaviour:
   isSolid: 1
   toCreateItem: 1
   isBreackable: 1
+  toPlaceBack: 1
+  isInteractable: 0
+  mustHaveDownerBlock: 0
+  showInSandboxPanel: 1
+  isLightObstacle: 1
+  isLightSource: 0
+  isLightOnStart: 1
   nameBlock: Stone
   hp: 470
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 11400000, guid: e9aade33db0074f42a47823d913c62e7, type: 2}
+  tileVariables: []
+  tileLightSource: {fileID: 0}
+  tileLightSourceVariables: []
+  tileAnimation: {fileID: 0}
+  tileAnimationVariables: []
+  itemDropOverride: 0
+  itemDrop: {fileID: 0}
+  itemCraftable: 1
+  itemCraft:
+    blockData: {fileID: 11400000, guid: c86498ad90036ab46877f865e4aa8aab, type: 2}
+    itemData: {fileID: 0}
+    item:
+      type: 1
+      maxCount: 64
+      showInSandboxPanel: 1
+      craftable: 0
+      Name: Dirt
+      name:
+        translations:
+        - lang: 1
+          text: DIrt
+        - lang: 2
+          text: "\u0417\u0435\u043C\u043B\u044F"
+      description:
+        translations:
+        - lang: 1
+          text: Usually dirt
+        - lang: 2
+          text: "\u041E\u0431\u044B\u043A\u043D\u043E\u0432\u0435\u043D\u043D\u0430\u044F
+            \u0437\u0435\u043C\u043B\u044F"
+      block: {fileID: 11400000, guid: c86498ad90036ab46877f865e4aa8aab, type: 2}
+      sprite: {fileID: -8275502208090371910, guid: 0f9b90914cd7421449dd1a9ee8005d07,
+        type: 3}
+      itemCraft:
+        blockData: {fileID: 0}
+        itemData: {fileID: 0}
+        item:
+          type: 0
+          maxCount: 0
+          showInSandboxPanel: 1
+          craftable: 0
+          Name: 
+          name:
+            translations: []
+          description:
+            translations: []
+          block: {fileID: 0}
+          sprite: {fileID: 0}
+          itemCraft:
+            blockData: {fileID: 0}
+            itemData: {fileID: 0}
+            item:
+              type: 0
+              maxCount: 0
+              showInSandboxPanel: 1
+              craftable: 0
+              Name: 
+              name:
+                translations: []
+              description:
+                translations: []
+              block: {fileID: 0}
+              sprite: {fileID: 0}
+              itemCraft:
+                blockData: {fileID: 0}
+                itemData: {fileID: 0}
+                item:
+                  type: 0
+                  maxCount: 0
+                  showInSandboxPanel: 1
+                  craftable: 0
+                  Name: 
+                  name:
+                    translations: []
+                  description:
+                    translations: []
+                  block: {fileID: 0}
+                  sprite: {fileID: 0}
+                  itemCraft:
+                    blockData: {fileID: 0}
+                    itemData: {fileID: 0}
+                    item:
+                      type: 0
+                      maxCount: 0
+                      showInSandboxPanel: 1
+                      craftable: 0
+                      Name: 
+                      block: {fileID: 0}
+                      sprite: {fileID: 0}
+                      itemCraft:
+                        count: 0
+                    count: 0
+                count: 0
+            count: 0
+        count: 0
+    count: 5
   nameTranslations:
     translations:
     - lang: 1

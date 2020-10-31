@@ -20,6 +20,7 @@ public class ItemData : ScriptableObject
         public ItemType type;
         public int maxCount;
         public bool showInSandboxPanel = true;
+        public bool craftable;
         
         [Header("Наименование")]
         public string Name;
@@ -29,6 +30,18 @@ public class ItemData : ScriptableObject
 
         [Header("Ресурсы")]
         public Sprite sprite;
+
+        [Header("Другое")] 
+        public ItemCraftUnit itemCraft;
+    }
+    
+    private void OnEnable()
+    {
+        data.itemCraft.Init();
+    }
+    public void OnValidate()
+    {
+        data.itemCraft.Init();
     }
 }
 

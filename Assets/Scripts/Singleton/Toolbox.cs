@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
 namespace Singleton
@@ -23,6 +24,7 @@ namespace Singleton
             AddCompon(ref mWorldSaver);
             AddCompon(ref mEntityManager);
             AddCompon(ref mItemManager);
+            AddCompon(ref mWorldManager);
         }
 
         private T AddCompon<T>(ref T m) where T : UnityEngine.Component
@@ -31,12 +33,14 @@ namespace Singleton
             return m;
         }
 
+        public InitGame InitGame;
         public FpsCounter mFpscounter;
         public GameManager mGameManager;
         public GameSceneManager mGameSceneManager;
         public WorldSaver mWorldSaver;
         public ItemManager mItemManager;
         public EntityManager mEntityManager;
+        public WorldManager mWorldManager;
         
         public Component AddGlobalComponent(ComponentType componentTypeId, Type component)
         {

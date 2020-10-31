@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using UsefulScripts;
 
 public enum BlockLayer
 {
@@ -87,24 +88,23 @@ public class ChunkUnit : MonoBehaviour
         //Debug.Log(ToGenerate);
         if (ToGenerate)
         {
-
             chunkBuilder.GenerateBuild();
         }
-
-        StartCoroutine(ToBuildGrass());
-
+        
         posChunk = chunkManager.ChunkPosInWorld(this);
         _chunkDowner = chunkManager.GetDownerChunk(posChunk);
         _chunkUpper = chunkManager.GetUpperChunk(posChunk);
+
+        StartCoroutine(ToBuildGrass());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            chunkBuilder.BuildingGrass();
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.K))
+    //     {
+    //         chunkBuilder.BuildingGrass();
+    //     }
+    // }
 
     #endregion
 
@@ -113,8 +113,17 @@ public class ChunkUnit : MonoBehaviour
         while (true)
         {
             yield return new WaitForEndOfFrame();
-            //Debug.Log("BuildingGrass");
             chunkBuilder.BuildingGrass();
+            yield break;
+        }
+    }
+
+    private IEnumerator ToBuildTwo()
+    {
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            chunkBuilder.BuildTwo();
             yield break;
         }
     }
@@ -637,6 +646,7 @@ public class ChunkUnit : MonoBehaviour
         {
             GenerateChunk();
             Building();
+            _chunkUnit.StartCoroutine(_chunkUnit.ToBuildTwo());
         }
         public void BuildFillChunk()
         {
@@ -754,6 +764,125 @@ public class ChunkUnit : MonoBehaviour
 
         #endregion
 
+        public void BuildTwo()
+        {
+            GenerateDungeon(
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(1, 2),
+                    new RandomScripts.ChanceItem(2, 4),
+                    new RandomScripts.ChanceItem(3, 7),
+                    new RandomScripts.ChanceItem(4, 5),
+                }), 
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(35, 2),
+                    new RandomScripts.ChanceItem(15, 7),
+                    new RandomScripts.ChanceItem(20, 5),
+                    new RandomScripts.ChanceItem(25, 4),
+                }), 
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(10, 2),
+                    new RandomScripts.ChanceItem(20, 4),
+                    new RandomScripts.ChanceItem(45, 5),
+                    new RandomScripts.ChanceItem(50, 7),
+                }));
+            GenerateOre(
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(2, 2),
+                    new RandomScripts.ChanceItem(3, 4),
+                }), 
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(35, 2),
+                    new RandomScripts.ChanceItem(15, 7),
+                    new RandomScripts.ChanceItem(20, 5),
+                    new RandomScripts.ChanceItem(25, 4),
+                }), 
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(3, 2),
+                    new RandomScripts.ChanceItem(5, 4),
+                    new RandomScripts.ChanceItem(6, 8),
+                }), _generator.ores[0]); //coal
+            GenerateOre(RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(2, 2),
+                    new RandomScripts.ChanceItem(3, 4),
+                }), 
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(35, 2),
+                    new RandomScripts.ChanceItem(15, 7),
+                    new RandomScripts.ChanceItem(20, 5),
+                    new RandomScripts.ChanceItem(25, 4),
+                }), 
+                RandomScripts.Choose<int>(new RandomScripts.ChanceItem[]
+                {
+                    new RandomScripts.ChanceItem(3, 2),
+                    new RandomScripts.ChanceItem(5, 4),
+                    new RandomScripts.ChanceItem(6, 8),
+                }), _generator.ores[1]); //iron
+        }
+        private void GenerateDungeon(int n, int startHeight, int size)
+        {
+            if (ChunkLevel < startHeight)
+            {
+                for (var i = 0; i < n; i += 1) //Количество пещер
+                {
+                    var xx = Random.Range(0, chunkSize);
+                    var yy = Random.Range(0, chunkSize); //Глубина, ниже которой начнут генерироваться пещеры
+                    for (var j = 0; j < size; j += 1) //Размер одной пещеры
+                    {
+                        var rr = Random.Range(0, 4);
+                        if (rr == 0) xx = Mathf.Min(xx + 1, chunkSize);
+                        if (rr == 1) xx = Mathf.Max(xx - 1, 0);
+                        if (rr == 2) yy = Mathf.Min(yy + 1, chunkSize);
+                        if (rr == 3) yy = Mathf.Max(yy - 1, 0);
+                        if ((xx < 0 || xx > chunkSize) && (yy < 0 || yy > startHeight))
+                        {
+                            xx = Random.Range(0, chunkSize);
+                            yy = Random.Range(startHeight, chunkSize);
+                        }
+
+                        //Debug.Log("x: " + xx + " ;y:" + yy);
+                        if (xx < chunkSize && yy < chunkSize)
+                            _chunkUnit.DeleteBlock(new Vector3Int(xx, yy, 0), BlockLayer.Front, false);
+                    }
+                }
+            }
+        }
+
+        private void GenerateOre(int n, int startHeight, int size, BlockData block)
+        {
+            if (ChunkLevel < startHeight)
+            {
+                for (var i = 0; i < n; i += 1) //Количество залежей руды
+                {
+                    var xx = Random.Range(0, chunkSize);
+                    var yy = Random.Range(0, chunkSize); //Глубина, ниже которой начнут генерироваться руда
+                    for (var j = 0; j < size; j += 1) //Кол-во блоков в одной жиле
+                    {
+                        var rr = Random.Range(0, 4);
+                        if (rr == 0) xx = Mathf.Min(xx + 1, chunkSize);
+                        if (rr == 1) xx = Mathf.Max(xx - 1, 0);
+                        if (rr == 2) yy = Mathf.Min(yy + 1, startHeight);
+                        if (rr == 3) yy = Mathf.Max(yy - 1, 0);
+                        if ((xx < 0 || xx > chunkSize) && (yy < 0 || yy > chunkSize))
+                        {
+                            xx = Random.Range(0, chunkSize);
+                            yy = Random.Range(startHeight, chunkSize);
+                        }
+
+                        if (xx < chunkSize && yy < chunkSize)
+                            _chunkUnit.SetBlock(new Vector3Int(xx, yy, 0), block, false, BlockLayer.Front);
+                    }
+                }
+            }
+        }
+        
         public class BlockUnitChunk
         {
             public BlockData Data;

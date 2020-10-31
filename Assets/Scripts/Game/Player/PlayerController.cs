@@ -19,6 +19,19 @@ public class PlayerController : MonoBehaviour
     {
         Instance = this;
         itemMagnet.radius = itemPickRadius;
+        
+        var worldManager = Toolbox.Instance.mWorldManager;
+        if (worldManager.TryGetLoadedPoint(out var loadedPoint))
+        {
+            transform.position = loadedPoint;
+            //Debug.Log("PlayerLoadPoint");
+        }
+        else
+        {
+            transform.position = worldManager.SpawnPoint;
+            //Debug.Log("PlayerSpawnPoint");
+        }
+        worldManager.MoveCameraToPoint(transform.position);
     }
 
     private void Update()

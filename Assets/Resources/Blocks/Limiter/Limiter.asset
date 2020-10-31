@@ -18,7 +18,7 @@ MonoBehaviour:
   toPlaceBack: 1
   isInteractable: 0
   mustHaveDownerBlock: 0
-  showInSandboxPanel: 1
+  showInSandboxPanel: 0
   isLightObstacle: 0
   isLightSource: 0
   isLightOnStart: 1

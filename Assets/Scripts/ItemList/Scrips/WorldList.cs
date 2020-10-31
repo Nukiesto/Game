@@ -57,15 +57,6 @@ public class WorldList : MonoBehaviour {
 
 			var worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
 			
-			//for (var j = 0; j < count; j++)
-			//{
-			//	if (_createWorldName == _itemListUnits[index: j].Title)
-			//	{
-			//		return;
-			//	}
-			//}
-
-			//count++;
 			var world = new WorldSavingSystem.WorldDataUnit
 			{
 				name = _createWorldName,
@@ -108,7 +99,7 @@ public class WorldList : MonoBehaviour {
 		WorldSavingSystem.WorldsList.RemoveWorld(name: _itemListUnits[index: _currentWorldId].Title);
 		_itemListUnits.RemoveAt(index: _currentWorldId);
 		itemList.UpdateList(id: _currentWorldId);
-
+		
 		UnSelect();
 	}
 	private void SetTitle()

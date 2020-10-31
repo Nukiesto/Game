@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using Game;
 using SavingSystem;
 using Singleton;
 using UnityEngine;
@@ -19,50 +21,76 @@ public class WorldSaver : MonoBehaviour
     }
     public void SaveWorld()
     {
-        worldSaving.Clear();
-        worldSaving.WorldDataUnit.toGenerateWorld = false;
+        if (worldSaving != null)
+        {
+            worldSaving.Clear();
+            worldSaving.WorldDataUnit.toGenerateWorld = false;
         
-        var toolbox = Toolbox.Instance;
+            var toolbox = Toolbox.Instance;
         
-        var entities = toolbox.mEntityManager.GetEntitiesData();
-        var items = toolbox.mItemManager.GetItemsData();
-        var player = PlayerController.Instance;
-        //Debug.Log("Entities:" + entities.Count);
-        //Debug.Log("Items:" + items.Count);
+            var entities = toolbox.mEntityManager.GetEntitiesData();
+            var items = toolbox.mItemManager.GetItemsData();
+            
+            //Debug.Log("Entities:" + entities.Count);
+            //Debug.Log("Items:" + items.Count);
+            
+            //Player
+            var player = PlayerController.Instance;
+            var savePos = player.transform.position;
+            var playerData = new WorldSavingSystem.PlayerData();
+            var worldManager = toolbox.mWorldManager;
+            playerData.x = savePos.x;
+            playerData.y = savePos.y;
+            playerData.spawnX = worldManager.SpawnPoint.x;
+            playerData.spawnY = worldManager.SpawnPoint.y;
+            playerData.spawnPointInited = true;
+            
+            var inventory = toolbox.InitGame.inventory;
+            playerData.items = inventory.GetItems();
+            
+            worldSaving.PlayerData = playerData;
+            worldSaving.AddPlayerData();
+
+            ChunkManager.Instance.AddDataToWorldSaving(worldSaving);
         
-        
-        //Player
-        var savePos = player.transform.position;
-        var playerData = new WorldSavingSystem.PlayerData();
-        playerData.x = savePos.x;
-        playerData.y = savePos.y;
-        worldSaving.PlayerData = playerData;
-        worldSaving.AddPlayerData();
-        
-        ChunkManager.Instance.AddDataToWorldSaving(worldSaving);
-        
-        worldSaving.WorldDataUnit.AddEntities(entities);
-        worldSaving.WorldDataUnit.AddItems(items);
-        
-        worldSaving.SaveWorld();
+            worldSaving.WorldDataUnit.AddEntities(entities);
+            worldSaving.WorldDataUnit.AddItems(items);
+            
+            worldSaving.SaveWorld();
+        }
     }
     public void LoadWorld()
     {
+        var toolbox = Toolbox.Instance;
+        
         worldSaving.LoadWorld();
+        var chunkManager = ChunkManager.Instance;
         
-        ChunkManager.Instance.LoadWorld(worldSaving);
+        var world = worldSaving.WorldDataUnit;
+        chunkManager.generator.worldWidth = world.width;
+        chunkManager.generator.worldHeight = world.height;
         
-        //Player
-        worldSaving.LoadPlayerData();
-        var player = PlayerController.Instance;
-        var playerData = worldSaving.PlayerData;
-        if (playerData != null)
+        chunkManager.LoadWorld(worldSaving);
+        
+        toolbox.mWorldManager.InitLoadedPoint();
+
+        StartCoroutine(WriteInventory());
+    }
+
+    private IEnumerator WriteInventory()
+    {
+        while (true)
         {
-            var newPos = new Vector3();
-            newPos.x = playerData.x;
-            newPos.y = playerData.y;
-            player.transform.position = newPos;
-            Camera.current.transform.position = newPos;
+            yield return new WaitForEndOfFrame();
+            //yield return new WaitForSeconds(1f);
+            var playerData = worldSaving.PlayerData;
+            //Debug.Log(GameCond.GetInventory());
+            if (playerData != null)
+            {
+                
+                GameCond.GetInventory().WriteItems(playerData.items);
+            }
+            yield break;
         }
     }
     public struct EntityUnitData
@@ -84,7 +112,7 @@ public class WorldSaver : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        if (Toolbox.Instance.mGameSceneManager.CurrentScene == GameScene.Game)
+        if (GameCond.IsGame)
         {
             Debug.Log("OnQuitSaved");
             SaveWorld();  

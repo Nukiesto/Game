@@ -17,9 +17,9 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private Camera cameraMain;
 
-    private ChunkUnit[,] _chunks;
+    internal ChunkUnit[,] Chunks;
     private Vector3 _posObj;
-    private Vector2Int _posZero;
+    [HideInInspector]public Vector2Int posZero;
 
     private Bounds _bounds;
 
@@ -35,9 +35,9 @@ public class ChunkManager : MonoBehaviour
         
         RefreshPos();
 
-        generator.posZeroWorld = _posZero;
+        generator.posZeroWorld = posZero;
         generator.InitProps();
-
+        generator.chunkManager = this;
         RefreshBounds();
         
         BuildChunks();
@@ -45,10 +45,19 @@ public class ChunkManager : MonoBehaviour
 
     private void Start()
     {
-        MovePlayerToSpawnPoint();
         StartCoroutine(BuildLimiters());
+        StartCoroutine(Generation());
     }
 
+    private IEnumerator Generation()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(4f);
+            generator.Generation();
+            yield break;
+        }
+    }
     private IEnumerator BuildLimiters()
     {
         while (true)
@@ -62,7 +71,7 @@ public class ChunkManager : MonoBehaviour
             {
                 for (var j1 = 0; j1 < h; j1++)
                 {
-                    var chunk = _chunks[i1, j1];
+                    var chunk = Chunks[i1, j1];
                     if (j1 == 0)
                     {
                         for (var i = 0; i < _chunkSize; i++)
@@ -110,20 +119,11 @@ public class ChunkManager : MonoBehaviour
         var pos = player.transform.position;
         Toolbox.Instance.mEntityManager.Create(pos, EntityType.TestBot);
     }
-    public void MovePlayerToSpawnPoint()
-    {
-        var pos = Vector3.zero;
-        pos.x = _posZero.x + generator.worldWidth / 2;
-        pos.y = _posZero.y + generator.worldHeight - 4;
-        player.transform.position = pos;
-        pos.z = -10;
-        cameraMain.transform.position = pos;
-    }
 
     private void RefreshPos()
     {
         _posObj = transform.position;
-        _posZero = new Vector2Int(Mathf.FloorToInt(_posObj.x), Mathf.FloorToInt(_posObj.y));
+        posZero = new Vector2Int(Mathf.FloorToInt(_posObj.x), Mathf.FloorToInt(_posObj.y));
     }
 
     private void RefreshBounds()
@@ -144,7 +144,7 @@ public class ChunkManager : MonoBehaviour
 
     private void BuildChunks()
     {
-        _chunks = new ChunkUnit[generator.worldWidthInChunks, generator.worldHeightInChunks];
+        Chunks = new ChunkUnit[generator.worldWidthInChunks, generator.worldHeightInChunks];
         var posZero = transform.position;
         GameObject chunkObj;
         ChunkUnit chunkUnit;
@@ -163,7 +163,7 @@ public class ChunkManager : MonoBehaviour
             chunkUnit = chunkObj.GetComponent<ChunkUnit>();
             chunkUnit.chunkManager = this;
             chunkUnit.ToGenerate = true;
-            _chunks[i, j] = chunkUnit;
+            Chunks[i, j] = chunkUnit;
             n++;
             //progress.text = n / N * 100 + "%";
             //Debug.Log("World Generated: " + n / N * 100 + "%; " + n);
@@ -176,13 +176,13 @@ public class ChunkManager : MonoBehaviour
         {
             var posInt = new Vector2Int(MathFast.FloorToInt(pos.x), MathFast.FloorToInt(pos.y));
 
-            var pointPos = _posZero - posInt;
+            var pointPos = posZero - posInt;
             int i = Mathf.Abs(Mathf.FloorToInt(pointPos.x / _chunkSize)),
                 j = Mathf.Abs(Mathf.FloorToInt(pointPos.y / _chunkSize));
 
             //Debug.Log("GetChunk Array Pos: " + i + ", " + j + " ;GetChunk Pos: " + posInt);
 
-            return _chunks[i, j];
+            return Chunks[i, j];
         }
 
         return null;
@@ -192,7 +192,7 @@ public class ChunkManager : MonoBehaviour
     {
         for (var i = 0; i < generator.worldWidthInChunks; i++)
         for (var j = 0; j < generator.worldHeightInChunks; j++)
-            if (_chunks[i, j] == unit)
+            if (Chunks[i, j] == unit)
                 return new Vector2Int(i, j);
         return new Vector2Int(-1, -1);
     }
@@ -214,7 +214,7 @@ public class ChunkManager : MonoBehaviour
         for (var j = 0; j < generator.worldHeightInChunks; j++)
         {
             var chunk = new WorldSavingSystem.ChunkData(i, j);
-            var unit = _chunks[i, j];
+            var unit = Chunks[i, j];
             //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;"+ j);
             for (var x = 0; x < _chunkSize; x++)
             for (var y = 0; y < _chunkSize; y++)
@@ -286,7 +286,7 @@ public class ChunkManager : MonoBehaviour
                 }
                 //Debug.Log("ItemsCount: " + items.Count);
                 //Debug.Log("x" + chunkLoaded.x + " ;y" + chunkLoaded.y);
-                var unit = _chunks[chunkLoaded.x, chunkLoaded.y];
+                var unit = Chunks[chunkLoaded.x, chunkLoaded.y];
                 //unit.Clear(); //Полная очистка чанка
                 unit.ToGenerate = false;
                 var chunkFront = new ChunkUnit.ChunkBuilder.BlockUnitChunk[_chunkSize,_chunkSize];
@@ -320,14 +320,14 @@ public class ChunkManager : MonoBehaviour
     {
         //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
         if (pos.y + 1 <= generator.worldHeightInChunks - 1) //Если чанк не на вершине
-            return _chunks[pos.x, pos.y + 1];
+            return Chunks[pos.x, pos.y + 1];
         return null;
     }
     public ChunkUnit GetDownerChunk(Vector2Int pos)
     {
         //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
         if (pos.y - 1 > 0) //Если чанк не самый низкий
-            return _chunks[pos.x, pos.y - 1];
+            return Chunks[pos.x, pos.y - 1];
         return null;
     }
     #region Debugging
@@ -371,12 +371,13 @@ public class WorldGenerator
     [HideInInspector] public int worldWidth;
     [HideInInspector] public int worldHeight;
 
+    public ChunkManager chunkManager;
     [HideInInspector] public Vector2Int posZeroWorld;
     private int _chunkSize;
 
     private BlockData[,] _frontWorld; //Передний мир
     private BlockData[,] _backWorld; //Задний мир
-
+    
     public int CountChunks => worldWidthInChunks * worldHeightInChunks;
 
     public void InitProps()
@@ -390,36 +391,6 @@ public class WorldGenerator
 
     public void Generation()
     {
-        var terrainDestruct = 2;
-
-        _frontWorld = new BlockData[worldWidth, worldHeight]; //Передний мир
-        _backWorld = new BlockData[worldWidth, worldHeight]; //Задний мир
-
-        int meter;
-        var a = Random.Range(12, 18);
-        for (var i = 0; i < worldWidth; i++)
-        {
-            for (meter = a; meter < worldHeight; meter++)
-                if (meter < Random.Range(19, 26))
-                    _frontWorld[i, meter] = dirt;
-                else
-                    _frontWorld[i, meter] = stone;
-            a = Random.Range(12, 18) + Random.Range(-terrainDestruct - 1, terrainDestruct + 1);
-        }
-
-        for (var i = 1; i < worldWidth - 1; i += 1)
-        for (var j = 1; j < worldHeight - 1; j += 1)
-            if (_frontWorld[i, j] == dirt)
-                if (_frontWorld[i - 1, j] == null
-                    && _frontWorld[i + 1, j] == null
-                    && _frontWorld[i, j - 1] == null)
-                    _frontWorld[i, j] = null;
-
-        GenerateDungeon(20, 30, Random.Range(10, 30), _frontWorld);
-        GenerateOre(90, 25, Random.Range(2, 9), _frontWorld, ores[0]); //coal
-        GenerateOre(60, 30, Random.Range(2, 9), _frontWorld, ores[1]); //iron
-
-        MirrorWorld();
     }
 
     private void MirrorWorld()
@@ -432,57 +403,7 @@ public class WorldGenerator
         _frontWorld = mirrored;
     }
 
-    private void GenerateDungeon(int n, int startHeight, int size, BlockData[,] world)
-    {
-        for (var i = 0; i < n; i += 1) //Количество пещер
-        {
-            var xx = Random.Range(0, worldWidth);
-            var yy = Random.Range(startHeight, worldHeight); //Глубина, ниже которой начнут генерироваться пещеры
-            for (var j = 0; j < size; j += 1) //Размер одной пещеры
-            {
-                var rr = Random.Range(0, 4);
-                if (rr == 0) xx = Mathf.Min(xx + 1, worldWidth);
-                if (rr == 1) xx = Mathf.Max(xx - 1, 0);
-                if (rr == 2) yy = Mathf.Min(yy + 1, worldHeight);
-                if (rr == 3) yy = Mathf.Max(yy - 1, 0);
-                if ((xx < 0 || xx > worldWidth)
-                    && yy < 0 || yy > startHeight)
-                {
-                    xx = Random.Range(0, worldWidth);
-                    yy = Random.Range(startHeight, worldHeight);
-                }
-
-                //Debug.Log("x: " + xx + " ;y:" + yy);
-                if (xx < worldWidth && yy < worldHeight)
-                    world[xx, yy] = null;
-            }
-        }
-    }
-
-    private void GenerateOre(int n, int startHeight, int size, BlockData[,] world, BlockData block)
-    {
-        for (var i = 0; i < n; i += 1) //Количество залежей руды
-        {
-            var xx = Random.Range(0, worldWidth);
-            var yy = Random.Range(startHeight, worldHeight); //Глубина, ниже которой начнут генерироваться руда
-            for (var j = 0; j < size; j += 1) //Кол-во блоков в одной жиле
-            {
-                var rr = Random.Range(0, 4);
-                if (rr == 0) xx = Mathf.Min(xx + 1, worldWidth);
-                if (rr == 1) xx = Mathf.Max(xx - 1, 0);
-                if (rr == 2) yy = Mathf.Min(yy + 1, startHeight);
-                if (rr == 3) yy = Mathf.Max(yy - 1, 0);
-                if ((xx < 0 || xx > worldWidth) && yy < 0 || yy > worldHeight)
-                {
-                    xx = Random.Range(0, worldWidth);
-                    yy = Random.Range(startHeight, worldHeight);
-                }
-
-                if (xx < worldWidth && yy < worldHeight)
-                    world[xx, yy] = block;
-            }
-        }
-    }
+    
 
     public BlockData GetBlock(Vector2Int pos)
     {

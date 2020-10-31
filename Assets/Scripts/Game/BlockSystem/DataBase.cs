@@ -85,13 +85,21 @@ public class DataBase : ScriptableObject
     {
         if (name == "")
             return null;
-        return _blocks[name];
+        if (_blocks.TryGetValue(name, out var block))
+        {
+            return block;
+        }
+        return null;
     }
     public ItemData.Data GetItem(string name)
     {
         if (name == "")
             return null;
-        return _items[name];
+        if (_items.TryGetValue(name, out var item))
+        {
+            return item;
+        }
+        return null;
     }
     public void Refresh()
     {

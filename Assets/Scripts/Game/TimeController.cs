@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
-    [SerializeField] private AmbientLightController _ambientLightController;
+    [SerializeField] private AmbientLightController ambientLightController;
     private int _currentTimeDay;
     private int _currentDay = 1;
     private int _globalTime;

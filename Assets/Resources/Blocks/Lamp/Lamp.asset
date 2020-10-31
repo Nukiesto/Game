@@ -21,15 +21,98 @@ MonoBehaviour:
   showInSandboxPanel: 1
   isLightObstacle: 0
   isLightSource: 1
-  isLightOnStart: 1
+  isLightOnStart: 0
   nameBlock: Lamp
   hp: 250
   script: {fileID: 0}
   memory: {fileID: 0}
   tile: {fileID: 11400000, guid: 7add14f360dc9914b85bbfe5b3533a6a, type: 2}
   tileVariables: []
-  tileLightSource: {fileID: 11400000, guid: 9035b993647f9ed4dbfb9b7ca8dfee6f, type: 2}
+  tileLightSource: {fileID: 0}
   tileLightSourceVariables: []
+  tileAnimation: {fileID: 0}
+  tileAnimationVariables: []
+  itemDropOverride: 0
+  itemDrop: {fileID: 0}
+  itemCraftable: 0
+  itemCraft:
+    blockData: {fileID: 0}
+    itemData: {fileID: 0}
+    item:
+      type: 0
+      maxCount: 0
+      showInSandboxPanel: 1
+      craftable: 0
+      Name: 
+      name:
+        translations: []
+      description:
+        translations: []
+      block: {fileID: 0}
+      sprite: {fileID: 0}
+      itemCraft:
+        blockData: {fileID: 0}
+        itemData: {fileID: 0}
+        item:
+          type: 0
+          maxCount: 0
+          showInSandboxPanel: 1
+          craftable: 0
+          Name: 
+          name:
+            translations: []
+          description:
+            translations: []
+          block: {fileID: 0}
+          sprite: {fileID: 0}
+          itemCraft:
+            blockData: {fileID: 0}
+            itemData: {fileID: 0}
+            item:
+              type: 0
+              maxCount: 0
+              showInSandboxPanel: 1
+              craftable: 0
+              Name: 
+              name:
+                translations: []
+              description:
+                translations: []
+              block: {fileID: 0}
+              sprite: {fileID: 0}
+              itemCraft:
+                blockData: {fileID: 0}
+                itemData: {fileID: 0}
+                item:
+                  type: 0
+                  maxCount: 0
+                  showInSandboxPanel: 1
+                  craftable: 0
+                  Name: 
+                  name:
+                    translations: []
+                  description:
+                    translations: []
+                  block: {fileID: 0}
+                  sprite: {fileID: 0}
+                  itemCraft:
+                    blockData: {fileID: 0}
+                    itemData: {fileID: 0}
+                    item:
+                      type: 0
+                      maxCount: 0
+                      showInSandboxPanel: 1
+                      craftable: 0
+                      Name: 
+                      block: {fileID: 0}
+                      sprite: {fileID: 0}
+                      itemCraft:
+                        count: 0
+                    count: 0
+                count: 0
+            count: 0
+        count: 0
+    count: 0
   nameTranslations:
     translations:
     - lang: 1

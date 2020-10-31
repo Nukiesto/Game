@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 217124118}
   - component: {fileID: 217124117}
   - component: {fileID: 217124123}
+  - component: {fileID: 217124126}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -768,7 +769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2492870b97440a683a944d799c45d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSetup: {fileID: 217124124}
+  mainCamera: {fileID: 217124119}
+  inventory: {fileID: 1761289013}
 --- !u!114 &217124124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,6 +814,19 @@ MonoBehaviour:
   - {fileID: 1992137665}
   objectsToToggle:
   - {fileID: 1360276131}
+--- !u!114 &217124126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217124115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589b4e28c136f644aa73e9137571f669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ambientLightController: {fileID: 760045449}
 --- !u!1 &261947802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,8 +1389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a9e455eb4379146ab01dd3d06d9d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightLevel: 75
-  spriteRenderer: {fileID: 760045450}
+  lightLevel: 0.1
+  renderer: {fileID: 760045450}
 --- !u!212 &760045450
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1395,7 +1410,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0d2e0bb3755347a42ba8fe781dcfa6f1, type: 2}
+  - {fileID: 1722690909}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1866,6 +1881,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1479777674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1479777675}
+  m_Layer: 5
+  m_Name: Crafting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1479777675
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479777674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3272838055503463294}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1480077590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,6 +2944,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716517182}
   m_CullTransparentMesh: 0
+--- !u!21 &1722690909
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AmbientLightComputer (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: e3c01cd61ef58b144be454935b099194, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AddMul: 0.125
+    - _EmissionColorMul: 0.06
+    - _ObstacleAdd: 0.1
+    - _ObstacleMul: 5
+    - _Offest: 0.3
+    - _PixelsPerBlock: 2
+    - _SamplingDist: 0.01
+    - _Shininess: 0.7
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!21 &1746778387
 Material:
   serializedVersion: 6
@@ -3006,6 +3097,7 @@ MonoBehaviour:
   dataBase: {fileID: 11400000, guid: 738d056f72c69d744b1478c0f7a05719, type: 2}
   player: {fileID: 1569200278}
   cameraMain: {fileID: 217124119}
+  posZero: {x: 0, y: 0}
   generator:
     heightSurface: 4
     dirtLevelHeightMin: 2
@@ -3021,6 +3113,7 @@ MonoBehaviour:
     endSurface: 0
     worldWidth: 0
     worldHeight: 0
+    chunkManager: {fileID: 0}
     posZeroWorld: {x: 0, y: 0}
 --- !u!1 &1979668437
 GameObject:

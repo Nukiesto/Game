@@ -29,9 +29,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AddMul: 0.125
-    - _EmissionColorMul: 0.1
+    - _EmissionColorMul: 0.06
     - _ObstacleAdd: 0.1
-    - _ObstacleMul: 2
+    - _ObstacleMul: 5
     - _Offest: 0.3
     - _PixelsPerBlock: 2
     - _SamplingDist: 0.01
