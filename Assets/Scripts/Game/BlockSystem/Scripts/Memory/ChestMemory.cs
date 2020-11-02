@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Game.ItemSystem;
 using Newtonsoft.Json;
 using UnityEngine;
 

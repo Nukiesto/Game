@@ -162,6 +162,7 @@ MonoBehaviour:
     type: 0
     maxCount: 0
     showInSandboxPanel: 1
+    craftable: 0
     Name: 
     name:
       translations: []
@@ -169,6 +170,82 @@ MonoBehaviour:
       translations: []
     block: {fileID: 0}
     sprite: {fileID: 0}
+    itemCraft:
+      blockData: {fileID: 0}
+      itemData: {fileID: 0}
+      item:
+        type: 0
+        maxCount: 0
+        showInSandboxPanel: 1
+        craftable: 0
+        Name: 
+        name:
+          translations: []
+        description:
+          translations: []
+        block: {fileID: 0}
+        sprite: {fileID: 0}
+        itemCraft:
+          blockData: {fileID: 0}
+          itemData: {fileID: 0}
+          item:
+            type: 0
+            maxCount: 0
+            showInSandboxPanel: 1
+            craftable: 0
+            Name: 
+            name:
+              translations: []
+            description:
+              translations: []
+            block: {fileID: 0}
+            sprite: {fileID: 0}
+            itemCraft:
+              blockData: {fileID: 0}
+              itemData: {fileID: 0}
+              item:
+                type: 0
+                maxCount: 0
+                showInSandboxPanel: 1
+                craftable: 0
+                Name: 
+                name:
+                  translations: []
+                description:
+                  translations: []
+                block: {fileID: 0}
+                sprite: {fileID: 0}
+                itemCraft:
+                  blockData: {fileID: 0}
+                  itemData: {fileID: 0}
+                  item:
+                    type: 0
+                    maxCount: 0
+                    showInSandboxPanel: 1
+                    craftable: 0
+                    Name: 
+                    name:
+                      translations: []
+                    description:
+                      translations: []
+                    block: {fileID: 0}
+                    sprite: {fileID: 0}
+                    itemCraft:
+                      blockData: {fileID: 0}
+                      itemData: {fileID: 0}
+                      item:
+                        type: 0
+                        maxCount: 0
+                        showInSandboxPanel: 1
+                        craftable: 0
+                        Name: 
+                        itemCraft:
+                          count: 0
+                      count: 0
+                  count: 0
+              count: 0
+          count: 0
+      count: 0
   sprite: {fileID: 0}
   itemManager: {fileID: 0}
 --- !u!114 &9093249134010611974
@@ -186,3 +263,6 @@ MonoBehaviour:
   time: 120
   mode: 1
   repeatOnEnable: 1
+  toBlend: 0
+  spriteRenderer: {fileID: 6364616034339309516}
+  text: {fileID: 0}

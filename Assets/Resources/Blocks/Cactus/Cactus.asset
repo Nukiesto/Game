@@ -17,7 +17,7 @@ MonoBehaviour:
   isBreackable: 1
   toPlaceBack: 1
   isInteractable: 0
-  mustHaveDownerBlock: 0
+  mustHaveDownerBlock: 1
   showInSandboxPanel: 1
   isLightObstacle: 1
   isLightSource: 0
@@ -32,6 +32,87 @@ MonoBehaviour:
   tileLightSourceVariables: []
   tileAnimation: {fileID: 0}
   tileAnimationVariables: []
+  itemDropOverride: 0
+  itemDrop: {fileID: 0}
+  itemCraftable: 0
+  itemCraft:
+    blockData: {fileID: 0}
+    itemData: {fileID: 0}
+    item:
+      type: 0
+      maxCount: 0
+      showInSandboxPanel: 1
+      craftable: 0
+      Name: 
+      name:
+        translations: []
+      description:
+        translations: []
+      block: {fileID: 0}
+      sprite: {fileID: 0}
+      itemCraft:
+        blockData: {fileID: 0}
+        itemData: {fileID: 0}
+        item:
+          type: 0
+          maxCount: 0
+          showInSandboxPanel: 1
+          craftable: 0
+          Name: 
+          name:
+            translations: []
+          description:
+            translations: []
+          block: {fileID: 0}
+          sprite: {fileID: 0}
+          itemCraft:
+            blockData: {fileID: 0}
+            itemData: {fileID: 0}
+            item:
+              type: 0
+              maxCount: 0
+              showInSandboxPanel: 1
+              craftable: 0
+              Name: 
+              name:
+                translations: []
+              description:
+                translations: []
+              block: {fileID: 0}
+              sprite: {fileID: 0}
+              itemCraft:
+                blockData: {fileID: 0}
+                itemData: {fileID: 0}
+                item:
+                  type: 0
+                  maxCount: 0
+                  showInSandboxPanel: 1
+                  craftable: 0
+                  Name: 
+                  name:
+                    translations: []
+                  description:
+                    translations: []
+                  block: {fileID: 0}
+                  sprite: {fileID: 0}
+                  itemCraft:
+                    blockData: {fileID: 0}
+                    itemData: {fileID: 0}
+                    item:
+                      type: 0
+                      maxCount: 0
+                      showInSandboxPanel: 1
+                      craftable: 0
+                      Name: 
+                      block: {fileID: 0}
+                      sprite: {fileID: 0}
+                      itemCraft:
+                        count: 0
+                    count: 0
+                count: 0
+            count: 0
+        count: 0
+    count: 0
   nameTranslations:
     translations:
     - lang: 1

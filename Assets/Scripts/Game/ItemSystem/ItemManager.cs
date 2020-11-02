@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using Game;
 using Game.Bot;
+using Game.ChunkSystem;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 { 
     private List<Item> _items = new List<Item>();
-    
-    public void AddItem(Item item)
+
+    private void AddItem(Item item)
     {
         _items.Add(item);
     }

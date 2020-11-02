@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game;
 using Game.Bot;
+using Game.ChunkSystem;
 using UnityEngine;
 
 public class EntityManager : MonoBehaviour

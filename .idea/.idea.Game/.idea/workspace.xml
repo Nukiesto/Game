@@ -20,221 +20,158 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="WorldList">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HpObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/TimerToDelete.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/ClassicBar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/ClassicBar.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UIBar.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/RandomBack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/RandomBack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scenes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scenes/Demo.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scenes/Demo.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Scripts/RapidBlurEffect.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Shaders.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Shaders/RapidBlurEffect.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/Shaders/RapidBlurEffect.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/ButtonAttribute.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/ButtonAttribute.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/ButtonsExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/ButtonsExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/CustomEditorButtonsExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/CustomEditorButtonsExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor/ButtonEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor/ButtonEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor/CustomEditorButtonsExampleEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor/CustomEditorButtonsExampleEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor/EasyButtonsEditorExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/Editor/EasyButtonsEditorExtensions.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/ScriptableObjectExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/EasyButtons/ScriptableObjectExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Rocket.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Rocket.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Small Examples.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/Small Examples.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials/Ball_0.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials/Ball_0.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials/Ball_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials/Ball_1.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials/Thunder.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Materials/Thunder.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scenes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scenes/Demo.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scenes/Demo.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scenes/DemoSettings.lighting" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scenes/DemoSettings.lighting.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scripts/MovingImage.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Scripts/MovingImage.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Background.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Ball_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Ball_0.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Ball_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Ball_1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Ball_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Ball_2.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Button.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Thunder.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/Thunder.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/UIBlurSprite.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Demo/Sprites/UIBlurSprite.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials/UIBlurMaterial.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Materials/UIBlurMaterial.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Readme.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Scripts/UIBlur.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Scripts/UIBlur.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Scripts/UIBlurWithCanvasGroup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Scripts/UIBlurWithCanvasGroup.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Shaders.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Shaders/UIBlur.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Effects/Blur/Shaders/UIBlur.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Fonts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Fonts/MainFont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Fonts/MainFont.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Fonts/Thintel.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Fonts/Thintel.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Inventory.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Inventory.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Slot.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Game/Items/Slot.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/MainMenu.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/MainMenu.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/PauseMenu.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/PauseMenu.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/Settings.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/Settings.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/Slot.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/Slot.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/SlotSelector.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/SlotSelector.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/WorldListMenu.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/UI/Menu/Menus/WorldList/WorldListMenu.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/LICENSE.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/README.md.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/RELEASENOTES.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/RELEASENOTES.md.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/package.json.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Light2D/Materials/AmbientLightComputer.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light2D/Materials/AmbientLightComputer.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonNetworking-Documentation.chm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonNetworking-Documentation.chm.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonNetworking-Documentation.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonNetworking-Documentation.pdf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/Kenney Assets/Racing Kit/Models/Materials/_defaultMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/Kenney Assets/Racing Kit/Models/Materials/_defaultMat.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Lamp/Lamp.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Lamp/Lamp.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/LimiterTile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/LimiterTile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Stone/Stone.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Stone/Stone.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DataBase.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DataBase.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Cactus/Cactus.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt_1.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Dirt/Dirt_1.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Item.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/CameraManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/CameraManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/DataBase.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/DataBase/BlocksDB.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/DataBase/BlocksDB.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HPObject.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ComponentToggleVisible.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/ComponentToggleVisible.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ComponentToggleVisible.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/ComponentToggleVisible.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/FunctionalKeys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/FunctionalKeys.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/FunctionalKeys.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/FunctionalKeys.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/OnSceneLoadedWorldSaverInit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/OnSceneLoadedWorldSaverInit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/MenuController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/MenuUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuUnit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/MenuUnit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuUnit.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/ButtonUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/ButtonUnit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/ButtonUnit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/ButtonUnit.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/DialogUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/DialogUnit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/DialogUnit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/DialogUnit.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu/MainMenu.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenu.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu/MainMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu/MainMenuButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu/MainMenuDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/MainMenu/MainMenuDialog.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuDialog.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer/MultiplayerMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer/MultiplayerMenu.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenu.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseDialog.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseDialog.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseMenu.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseMenu.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseMenuToggleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseMenuToggleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Pause/PauseMenuToggleController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseMenuToggleController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings/SettingsButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings/SettingsButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings/SettingsButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings/SettingsButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings/SettingsDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings/SettingsDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings/SettingsDialog.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings/SettingsDialog.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings/SettingsMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings/SettingsMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/Settings/SettingsMenu.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Settings/SettingsMenu.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu/WorldMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu/WorldMenu.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenu.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu/WorldMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu/WorldMenuButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu/WorldMenuDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Menus/WorldMenu/WorldMenuDialog.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuDialog.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Misc.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Misc.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Misc/Init_LoadPreferences.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Misc/Init_LoadPreferences.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Misc/Init_LoadPreferences.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Misc/Init_LoadPreferences.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Misc/MenuControllerTutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Misc/MenuControllerTutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Menu/Misc/MenuControllerTutor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Misc/MenuControllerTutor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Math.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Math/Perlin.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Math/Perlin.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/MenuController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/MenuController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/MenuUnit.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/MenuUnit.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/ButtonUnit.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/ButtonUnit.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/DialogUnit.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/DialogUnit.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenu.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuDialog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/MainMenu/MainMenuDialog.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenu.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Multiplayer/MultiplayerMenuDialog.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseDialog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseDialog.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseMenu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseMenu.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseMenuToggleController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseMenuToggleController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings/SettingsButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings/SettingsButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings/SettingsDialog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings/SettingsDialog.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings/SettingsMenu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Settings/SettingsMenu.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenu.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenuButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenuButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenuDialog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/WorldMenu/WorldMenuDialog.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Misc.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Misc/Init_LoadPreferences.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Misc/Init_LoadPreferences.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Misc/MenuControllerTutor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/Misc/MenuControllerTutor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MyLib.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MyLib/MyLib.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MyLib/MyLib.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Native.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Native/MessageBox.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Native/MessageBox.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Occlusion/Occlusion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Occlusion/Occlusion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Singleton/GameSceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Singleton/GameSceneManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/JsonHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/JsonHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/JsonHelper.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/JsonHelper.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TImerToDelete.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TakeThumbnail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/TakeThumbnail.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TakeThumbnail.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/TakeThumbnail.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TimerToDelete.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/TimerToDelete.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/GameConstants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameConstants.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/GameConstants.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/Anim.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Anim/MainButton.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/animations/MainButton.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Anim/MainButton.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/NULLcode Studio.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/NULLcode Studio.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scenes.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/Scenes.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scenes/Demo.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scenes/Demo.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scenes/DemoSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scenes/DemoSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/ItemButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/ItemButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/ItemList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/ItemList.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldList.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Other/MyLib.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Other/MyLib.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnityToolbox/Translation.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,13 +196,14 @@
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Editor/CUIBezierCurveEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameConstants.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/GameConstants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/0b/e1867340/Resources.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UnityToolbox/Utils/UVScroller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BehaviourManager/BehaviourManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonChat/Demos/DemoChat/ChatGui.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://E:/Unity/Editor/2020.1.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/InputField.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightingSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/Light90.shader" root0="FORCE_HIGHLIGHTING" />
@@ -275,13 +213,15 @@
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightObstacleSprite.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/LightBase.cginc" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/CustomSprite.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/59/1df61a39/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/FunctionalKeys.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/FunctionalKeys.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/78/7ac75c54/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/d6/d597ebb7/Void.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TranslationSystem/ComponentsToUse/LabelsData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/RandomBack.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/EditorHelpers/Editor/CreateAssetsBundle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" root0="FORCE_HIGHLIGHTING" />
@@ -291,19 +231,20 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonRealtime/Code/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/LampScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Item.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonChat/Code/ChatChannel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Lighting/LightBlock.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TimerToDelete.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/TimerToDelete.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HpObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/BaseBlockMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/a6/bb35b66d/String.cs" root0="SKIP_HIGHLIGHTING" />
@@ -315,59 +256,43 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/DirtMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/ItemButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/CustomTypes.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/ItemList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/ItemList/ItemList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/PoolManager/PoolManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Occlusion/Occlusion.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/PoolManager/PoolSetup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Singleton/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Singleton/MonoGlobalSingleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Runtime/Scripts/Controls/ComboBox/AutoCompleteComboBox.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/20/ec06df03/IEnumerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/ClassicBar.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/EditorCameraWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/BlockTilingInfoDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/ScriptableObjectCreatorWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/Point2Drawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/ReadOnlyDrawer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Game/Asteroid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://E:/Unity/Editor/2020.1.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Text.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Lobby/LobbyMainPanel.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AlphaBlend.shader" />
-        <option value="$PROJECT_DIR$/Assets/Light2D/Scripts/CustomSprite.cs" />
-        <option value="$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" />
-        <option value="$PROJECT_DIR$/Assets/Light2D/Scripts/LightObstacleSprite.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/LightBlock.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TImerToDelete.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TimerToDelete.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameInit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Singleton/Singleton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Singleton/MonoGlobalSingleton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/FunctionalKeys.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/EditorHelpers/FpsCounter.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BotMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/EditorHelpers/DeveloperConsoleBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/MenuController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/PoolManager/PoolManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/PoolManager/PoolSetup.cs" />
@@ -376,26 +301,46 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Singleton/GameSceneManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Menu/Menus/Pause/PauseButton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/UsefalScripts.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Occlusion/Occlusion.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/RandomBack.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/WorldSaver.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/UsefulScripts.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/HealthBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HPObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UIBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/TimerToDelete.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" />
       </list>
     </option>
   </component>
@@ -415,7 +360,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="Inspections-C#" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -459,6 +404,8 @@
       <workItem from="1603979645762" duration="16741000" />
       <workItem from="1604054037994" duration="11516000" />
       <workItem from="1604152118691" duration="12522000" />
+      <workItem from="1604241867828" duration="2526000" />
+      <workItem from="1604305894891" duration="27549000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>
@@ -609,18 +556,18 @@
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state x="570" y="193" width="579" height="551" key="RiderGenerateDialog/0.0.1280.994@0.0.1280.994" timestamp="1604163332387" />
-    <state x="141" y="142" key="SettingsEditor" timestamp="1603900997610">
+    <state x="170" y="154" width="998" height="708" key="SettingsEditor" timestamp="1604322052191">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="141" y="142" key="SettingsEditor/0.0.1280.994@0.0.1280.994" timestamp="1603900997610" />
+    <state x="170" y="154" width="998" height="708" key="SettingsEditor/0.0.1280.994@0.0.1280.994" timestamp="1604322052191" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1603815387913">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1280.994@0.0.1280.994" timestamp="1603815387913" />
-    <state x="92" y="92" width="1096" height="810" maximized="true" key="VCS.FileHistoryDialog" timestamp="1603983248612">
+    <state x="92" y="92" width="1096" height="810" maximized="true" key="VCS.FileHistoryDialog" timestamp="1604313360373">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="92" y="92" width="1096" height="810" maximized="true" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1603983248612" />
+    <state x="92" y="92" width="1096" height="810" maximized="true" key="VCS.FileHistoryDialog/0.0.1280.994@0.0.1280.994" timestamp="1604313360373" />
     <state x="245" y="108" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603623234970">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
@@ -633,23 +580,23 @@
       <screen x="0" y="0" width="1280" height="994" />
     </state>
     <state x="232" y="60" width="815" height="873" key="find.popup/0.0.1280.994@0.0.1280.994" timestamp="1603900537630" />
-    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup" timestamp="1603655844743">
+    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup" timestamp="1604323371880">
       <screen x="0" y="0" width="1280" height="994" />
     </state>
-    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup/0.0.1280.994@0.0.1280.994" timestamp="1603655844743" />
+    <state x="303" y="213" width="672" height="678" key="search.everywhere.popup/0.0.1280.994@0.0.1280.994" timestamp="1604323371880" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs</url>
-          <line>18</line>
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs</url>
+          <line>19</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SavingSystem/WorldSavingSystem.cs" initialLine="18">
             <startOffsets>
-              <option value="523" />
+              <option value="554" />
             </startOffsets>
             <endOffsets>
-              <option value="524" />
+              <option value="555" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />

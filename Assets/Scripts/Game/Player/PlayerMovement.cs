@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
-
+	
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 
@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
 
-
+	private bool _canMove = true;
+	
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
@@ -51,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         if (_controller.isGrounded)
 			_velocity.y = 0;
 
-		if(Input.GetButton("Right"))//Input.GetKey( KeyCode.RightArrow ) )
+		if(_canMove && Input.GetButton("Right") )//Input.GetKey( KeyCode.RightArrow ) )
 		{
 			normalizedHorizontalSpeed = 1;
 			if( transform.localScale.x < 0f )
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 			if( _controller.isGrounded )
 				_animator.Play( Animator.StringToHash( "Run" ) );
 		}
-		else if(Input.GetButton("Left"))//Input.GetKey( KeyCode.LeftArrow ) )
+		else if(_canMove && Input.GetButton("Left"))//Input.GetKey( KeyCode.LeftArrow ) )
 		{
 			normalizedHorizontalSpeed = -1;
 			if( transform.localScale.x > 0f )
@@ -76,10 +77,10 @@ public class PlayerMovement : MonoBehaviour
 			if( _controller.isGrounded )
 				_animator.Play( Animator.StringToHash( "Idle" ) );
 		}
-
+		
 		
 		// we can only jump whilst grounded
-		if( _controller.isGrounded && Input.GetButton("Jump")) //Input.GetKeyDown( KeyCode.UpArrow ) )
+		if( _canMove && _controller.isGrounded && Input.GetButton("Jump")) //Input.GetKeyDown( KeyCode.UpArrow ) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			_animator.Play( Animator.StringToHash( "Jump" ) );
@@ -100,11 +101,15 @@ public class PlayerMovement : MonoBehaviour
 			_velocity.y *= 3f;
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 		}
-
+		
 		_controller.move( _velocity * Time.deltaTime );
 
 		// grab our current _velocity to use as a base for all calculations
 		_velocity = _controller.velocity;
 	}
 
+	public void SetCanMove(bool value)
+	{
+		_canMove = value;
+	}
 }

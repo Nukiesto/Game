@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.ItemSystem;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIItemPanelSlot : MonoBehaviour
@@ -25,10 +26,10 @@ public class UIItemPanelSlot : MonoBehaviour
     {
         icon.enabled = false;
     }
-    public void SetCount(int count)
+    public void SetCount(int countSet)
     {
         //Debug.Log("Set Count:" + count);
-        this.count.text = count != 0 ? count.ToString() : "";        
+        count.text = countSet != 0 ? countSet.ToString() : "";        
     }
     public void SlotClicked()
     {

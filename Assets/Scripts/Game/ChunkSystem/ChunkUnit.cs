@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Game.Bot;
+using Game.ChunkSystem;
 using Game.Lighting;
 using Singleton;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using UsefulScripts;
@@ -391,7 +389,7 @@ public class ChunkUnit : MonoBehaviour
         tilemapFrontWorldLightSources.ClearAllTiles();
     }
 
-    internal void BuildBackBack(BlockData block)
+    private void BuildBackBack(BlockData block)
     {
         var pos = Vector3Int.zero;
         var tile = block.tile;
@@ -400,8 +398,8 @@ public class ChunkUnit : MonoBehaviour
         {
             pos.x = i;
             pos.y = j;
-                    
-            tilemapBackBackWorld.SetTile(pos, tile);
+
+            if (tilemapBackBackWorld != null) tilemapBackBackWorld.SetTile(pos, tile);
         }
     }
 
@@ -688,7 +686,8 @@ public class ChunkUnit : MonoBehaviour
                 }
             }
         }
-        public void BuildingBackBack()
+
+        private void BuildingBackBack()
         {
             if (ChunkLevel < WorldHeight - 30) //Если уровень чанка ниже по уровня земли
             {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Game.ChunkSystem;
+using Game.ItemSystem;
+using Game.UI;
 using Singleton;
 using UnityEngine;
 
@@ -11,7 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private ChunkManager chunkManager;
     [SerializeField] private GameObject flashLight;
+    [SerializeField] private PlayerMovement playerMovement;
 
+    private bool _canInput;
     private bool _flashLightActive;
     public static PlayerController Instance;
     
@@ -24,18 +28,24 @@ public class PlayerController : MonoBehaviour
         if (worldManager.TryGetLoadedPoint(out var loadedPoint))
         {
             transform.position = loadedPoint;
+            Debug.Log(loadedPoint);
             //Debug.Log("PlayerLoadPoint");
         }
         else
         {
             transform.position = worldManager.SpawnPoint;
+            Debug.Log(worldManager.SpawnPoint);
             //Debug.Log("PlayerSpawnPoint");
         }
         worldManager.MoveCameraToPoint(transform.position);
+
+        Console.OnToggleConsoleEvent += SetCanInput;
     }
 
     private void Update()
     {
+        if (!_canInput) return;
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             _flashLightActive = !_flashLightActive;
@@ -46,13 +56,12 @@ public class PlayerController : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D col)
     {
         //Debug.Log(col.gameObject.name);
-        if (col.gameObject.CompareTag("Item"))
-        {
-            var obj = col.gameObject;
-            //Debug.Log(obj.GetComponent<Item>().data);
-            inventory.AddItem(obj.GetComponent<Item>().data);
-            obj.SetActive(false);
-        }
+        if (!col.gameObject.CompareTag("Item")) return;
+        
+        var obj = col.gameObject;
+        //Debug.Log(obj.GetComponent<Item>().data);
+        inventory.AddItem(obj.GetComponent<Item>().data);
+        obj.SetActive(false);
     }
     public bool CanToCreateItem()
     {
@@ -63,9 +72,18 @@ public class PlayerController : MonoBehaviour
     {
         var pos = itemCreatePos.transform.position;
 
+        var itemManager = Toolbox.Instance.mItemManager;
+
         for (var i = 0; i < count; i++)
         {
-            Toolbox.Instance.mItemManager.CreateItem(pos, data);
+            itemManager.CreateItem(pos, data);
         }       
     }
+
+    private void SetCanInput(bool value)
+    {
+        _canInput = value;
+        playerMovement.SetCanMove(value);
+    }
+    
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
+using Game.Game;
+using Game.World;
 using UnityEngine;
 
 namespace Singleton

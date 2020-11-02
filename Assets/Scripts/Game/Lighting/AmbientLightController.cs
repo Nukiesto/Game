@@ -1,24 +1,48 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class AmbientLightController : MonoBehaviour
+namespace Game.Lighting
 {
-    [Header("Параметры")]
-    [Range(0.1f, 1)] public float lightLevel = 0.1f;
+    public class AmbientLightController : MonoBehaviour
+    {
+        [Header("Параметры")]
+        [Range(0, 1)] public float lightLevel = 0f;
 
-    [SerializeField] private Renderer renderer;
-    
-    private void Start()
-    {
-        UpdateLight();
-    }
-    public void UpdateLight()
-    {
-        renderer.material.SetFloat(2, lightLevel);
-        Debug.Log(lightLevel + ":" + renderer.material.shader.GetPropertyName(2) + " : "+ renderer.material.GetFloat(2));
-    }
-    public void OnValidate()
-    {
-        UpdateLight();
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private AnimationCurve lightLevelTimeDefault;
+        
+        private Color _color;
+        
+        private void Awake()
+        {
+            _color = Color.white;
+            UpdateLight();
+        }
+
+        private void UpdateLight()
+        {
+            _color.a = lightLevel;
+            spriteRenderer.color = _color;
+        }
+        private void SetLight(float a)
+        {
+            lightLevel = a;
+            UpdateLight();
+        }
+        public void OnValidate()
+        {
+            UpdateLight();
+        }
+
+        public void SetTime(float hour)
+        {
+            if (hour < 0 || hour > 24) return;
+            
+            var levelLight = lightLevelTimeDefault.Evaluate(hour);
+            levelLight = levelLight > 1 ? 1 : levelLight < 0 ? 0 : levelLight;
+
+            SetLight(levelLight);
+            UpdateLight();
+        }
     }
 }

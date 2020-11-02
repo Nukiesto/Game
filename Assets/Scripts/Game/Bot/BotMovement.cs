@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using Game.ChunkSystem;
 using Prime31;
 using static UnityEngine.Physics2D;
 using Random = UnityEngine.Random;
