@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 6865791439066272770}
   - component: {fileID: 2495743460115809693}
   - component: {fileID: 8417341942615820558}
+  - component: {fileID: -697431733458876606}
+  - component: {fileID: 2042130170183064682}
   m_Layer: 12
   m_Name: Entity
   m_TagString: Untagged
@@ -236,10 +238,10 @@ MonoBehaviour:
   inAirDamping: 5
   jumpHeight: 3
   viewDistance: 12
-  mustMovingToPlayer: 0
+  mustMovingToPlayer: 1
   stopDistanceFindedPlayer: 1
-  findPlayerOverSolid: 0
-  canBreackBlock: 1
+  findPlayerOverSolid: 1
+  canBreackBlock: 0
 --- !u!114 &2495743460115809693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  hpEntity: {fileID: 2042130170183064682}
   EntityManager: {fileID: 0}
 --- !u!114 &8417341942615820558
 MonoBehaviour:
@@ -266,3 +269,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85b0eb6bb9ad0a41ab74b64b65def34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-697431733458876606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011987602206850352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b985124312f4b334a8954c511d6497f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  updateBar: 0
+  hpBase: {fileID: 0}
+  barManager: {fileID: 0}
+--- !u!114 &2042130170183064682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011987602206850352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c4f1f77616452f93167aa2035b72c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpObject: {fileID: -697431733458876606}
+  movement: {fileID: 6865791439066272770}
+  botController: {fileID: 2495743460115809693}

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
+using Game.Entity;
 using Game.Game;
+using Game.ItemSystem;
 using Game.World;
 using UnityEngine;
 
@@ -20,13 +22,13 @@ namespace Singleton
         
         private void Awake()
         {
-            AddCompon(ref mGameSceneManager);
+            AddCompon(ref mSceneManager);
             AddCompon(ref mFpscounter).enabled = false;
             AddCompon(ref mGameManager);
-            AddCompon(ref mWorldSaver);
             AddCompon(ref mEntityManager);
             AddCompon(ref mItemManager);
             AddCompon(ref mWorldManager);
+            AddCompon(ref mWorldSaver);
         }
 
         private T AddCompon<T>(ref T m) where T : UnityEngine.Component
@@ -38,7 +40,7 @@ namespace Singleton
         public InitGame InitGame;
         public FpsCounter mFpscounter;
         public GameManager mGameManager;
-        public GameSceneManager mGameSceneManager;
+        public SceneManager mSceneManager;
         public WorldSaver mWorldSaver;
         public ItemManager mItemManager;
         public EntityManager mEntityManager;

@@ -11,7 +11,7 @@ public enum GameScene
     Undefined
 }
 
-public class GameSceneManager : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
     [SerializeField] private Dictionary<GameScene, string> gameScenes;
 
@@ -37,23 +37,23 @@ public class GameSceneManager : MonoBehaviour
     }
     public void SetScene(GameScene type)
     {
-        SceneManager.LoadSceneAsync(gameScenes[type]);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(gameScenes[type]);
         CurrentScene = type;
         GameCond.IsGame = type == GameScene.Game;
     }
     public void SetSceneAlt(GameScene type)
     {
-        SceneManager.LoadSceneAsync(gameScenes[type]);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(gameScenes[type]);
         CurrentScene = type;
         GameCond.IsGame = type == GameScene.Game;
     }
     public void SetSceneCurrent()
     {
-        SceneManager.LoadSceneAsync(gameScenes[CurrentScene]);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(gameScenes[CurrentScene]);
     }
     private void SetSceneActive()
     {
-        var scene = SceneManager.GetActiveScene();
+        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         var gameScene = gameScenes.Where(x => x.Value == scene.name).First().Key;
     }
 }

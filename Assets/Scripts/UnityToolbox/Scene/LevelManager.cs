@@ -70,7 +70,7 @@ public static class LevelManager
     public static void LoadLevel(string level)
     {
         PrepareLevel();
-        SceneManager.LoadScene(level);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(level);
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public static class LevelManager
     public static void Restart()
     {
         PrepareLevel();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     #endregion
@@ -89,13 +89,13 @@ public static class LevelManager
     public static AsyncOperation LoadLevelAsync(string level)
     {
         PrepareLevel();
-        return SceneManager.LoadSceneAsync(level);
+        return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(level);
     }
 
     public static AsyncOperation RestartAsync()
     {
         PrepareLevel();
-        return SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     #endregion
@@ -104,7 +104,7 @@ public static class LevelManager
 
     public static string GetLevelNumber()
     {
-        var temp = SceneManager.GetActiveScene().name.Split('_');
+        var temp = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Split('_');
 
         if (temp.Length > 0)
             return temp[temp.Length - 1];
@@ -114,12 +114,12 @@ public static class LevelManager
 
     public static bool IsLevel()
     {
-        return SceneManager.GetActiveScene().name.Contains("Level");
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("Level");
     }
 
     public static int GetLevelId()
     {
-        var temp = SceneManager.GetActiveScene().name.Split('_');
+        var temp = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Split('_');
         int value;
 
         if (int.TryParse(temp[temp.Length - 1], out value))
@@ -130,7 +130,7 @@ public static class LevelManager
 
     public static string GetLevelName()
     {
-        return SceneManager.GetActiveScene().name;
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     }
 
     #endregion

@@ -1,6 +1,8 @@
 ﻿using Game.ChunkSystem;
+using Game.HpSystem;
 using Game.ItemSystem;
 using Game.UI;
+using SavingSystem;
 using Singleton;
 using UnityEngine;
 
@@ -14,8 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ChunkManager chunkManager;
     [SerializeField] private GameObject flashLight;
     [SerializeField] private PlayerMovement playerMovement;
-
-    private bool _canInput;
+    [SerializeField] private HpPlayer hpPlayer;
+    private bool _canInput = true;
     private bool _flashLightActive;
     public static PlayerController Instance;
     
@@ -28,20 +30,62 @@ public class PlayerController : MonoBehaviour
         if (worldManager.TryGetLoadedPoint(out var loadedPoint))
         {
             transform.position = loadedPoint;
-            Debug.Log(loadedPoint);
+            //Debug.Log(loadedPoint);
             //Debug.Log("PlayerLoadPoint");
         }
         else
         {
             transform.position = worldManager.SpawnPoint;
-            Debug.Log(worldManager.SpawnPoint);
+            //Debug.Log(worldManager.SpawnPoint);
             //Debug.Log("PlayerSpawnPoint");
         }
         worldManager.MoveCameraToPoint(transform.position);
 
+        //Events
+        hpPlayer.OnDeathEvent += OnDeath;
         Console.OnToggleConsoleEvent += SetCanInput;
+        var worldSaver = Toolbox.Instance.mWorldSaver;
+        worldSaver.OnSaveEvent += OnSave;
     }
 
+    private void OnSave(WorldSavingSystem.WorldSaving worldSaving)
+    {
+        var savePos = transform.position;
+        var playerData = new WorldSavingSystem.PlayerData();
+        var worldManager = Toolbox.Instance.mWorldManager;
+        playerData.x = savePos.x;
+        playerData.y = savePos.y;
+        playerData.spawnX = worldManager.SpawnPoint.x;
+        playerData.spawnY = worldManager.SpawnPoint.y;
+        playerData.spawnPointInited = true;
+        
+        playerData.items = inventory.GetItems();
+            
+        worldSaving.PlayerData = playerData;
+        worldSaving.AddPlayerData();
+        
+        var worldSaver = Toolbox.Instance.mWorldSaver;
+        worldSaver.OnSaveEvent -= OnSave;
+    }
+    private void OnDeath()
+    {
+        hpPlayer.FillHp();
+        MoveToSpawn();
+    }
+    public void MoveToSpawn()
+    {
+        var worldManager = Toolbox.Instance.mWorldManager;
+        var transform1 = transform;
+        transform1.position = worldManager.SpawnPoint;
+        worldManager.MoveCameraToPoint(transform1.position);
+    }
+    public void MoveToPos(Vector3 pos)
+    {
+        var worldManager = Toolbox.Instance.mWorldManager;
+        var transform1 = transform;
+        transform1.position = pos;
+        worldManager.MoveCameraToPoint(pos);
+    }
     private void Update()
     {
         if (!_canInput) return;

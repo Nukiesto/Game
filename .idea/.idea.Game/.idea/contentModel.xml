@@ -896,9 +896,15 @@
               <e p="CameraManager.cs" t="Include" />
               <e p="GameCond.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
-              <e p="GameSceneManager.cs" t="Include" />
               <e p="InitGame.cs" t="Include" />
+              <e p="SceneManager.cs" t="Include" />
               <e p="TimeController.cs" t="Include" />
+            </e>
+            <e p="HpSystem" t="Include">
+              <e p="HPBase.cs" t="Include" />
+              <e p="HpEntity.cs" t="Include" />
+              <e p="HPObject.cs" t="Include" />
+              <e p="HpPlayer.cs" t="Include" />
             </e>
             <e p="ItemSystem" t="Include">
               <e p="Inventory.cs" t="Include" />
@@ -919,9 +925,7 @@
               <e p="ComponentToggleVisible.cs" t="Include" />
               <e p="FunctionalKeys.cs" t="Include" />
               <e p="GameConstants.cs" t="Include" />
-              <e p="Misc" t="Include">
-                <e p="HPObject.cs" t="Include" />
-              </e>
+              <e p="Movement.cs" t="Include" />
               <e p="TakeThumbnail.cs" t="Include" />
               <e p="TImerToDelete.cs" t="Include" />
             </e>

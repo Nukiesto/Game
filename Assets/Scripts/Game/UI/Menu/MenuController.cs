@@ -33,21 +33,21 @@ public class MenuController : MonoBehaviour
     [SerializeField] private MenuUnit currentMenu;
     private MenuUnit _previousMenu;
 
-    private GameSceneManager _gameSceneManager;
+    private SceneManager _sceneManager;
 
     [SerializeField] private PauseMenuToggleController pauseMenuToggle;
     public void SetMainMenu()
     {
-        _gameSceneManager.SetScene(GameScene.MainMenu);
+        _sceneManager.SetScene(GameScene.MainMenu);
     }
     public void SetGame()
     {
-        _gameSceneManager.SetScene(GameScene.Game);
+        _sceneManager.SetScene(GameScene.Game);
     }
 
     private void Awake()
     {
-        _gameSceneManager = Toolbox.Instance.mGameSceneManager;
+        _sceneManager = Toolbox.Instance.mSceneManager;
         //Debug.Log(gameSceneManager);
 
         SetMenu(startMenu.menuType);

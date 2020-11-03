@@ -1,4 +1,5 @@
-﻿using LeopotamGroup.Math;
+﻿using System;
+using LeopotamGroup.Math;
 using System.Collections;
 using EasyButtons;
 using Game.Lighting;
@@ -33,6 +34,10 @@ public class TimeController : MonoBehaviour
         }
     }
 
+    public string GetTime()
+    {
+        return "CurrentTime: " + GetHoursString() + ":" + GetMinutesString() + " ;Day: " + GetCurrentDay();
+    }
     private IEnumerator EmulateTime()
     {
         while (true)
@@ -53,7 +58,28 @@ public class TimeController : MonoBehaviour
 
     public void SetTime(float time)
     {
-        _currentTimeDay = time * 60;
+        _currentTimeDay = Mathf.Lerp(0, TimeDay, time);
+        ambientLightController.SetTime(_currentTimeDay);
+    }
+    public void SetTime(Time time)
+    {
+        switch (time)    
+        {
+            case Time.Night:
+                _currentTimeDay = 0;
+                break;
+            case Time.Morning:
+                _currentTimeDay = 8f*60f;
+                break;
+            case Time.Day:
+                _currentTimeDay = 14*60f;
+                break;
+            case Time.Evening:
+                _currentTimeDay = 18*60;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(time), time, null);
+        }
         ambientLightController.SetTime(_currentTimeDay / 60);
     }
     private string GetMinutesString()
@@ -94,6 +120,4 @@ public class TimeController : MonoBehaviour
     {
         return Mathf.FloorToInt(f: _currentTimeDay / 60);
     }
-    
-    
 }

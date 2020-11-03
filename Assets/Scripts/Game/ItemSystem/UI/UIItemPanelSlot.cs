@@ -1,6 +1,7 @@
 ﻿using Game.ItemSystem;
 using UnityEngine;
 using UnityEngine.UI;
+using static UsefulScripts.OtherScripts;
 
 public class UIItemPanelSlot : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class UIItemPanelSlot : MonoBehaviour
     public Inventory inventory;
     public void SetSprite(Sprite sprite)
     {
-        if (sprite != null)
+        if (!IsNull(sprite))
         {
             icon.enabled = true;
             icon.sprite = sprite; 

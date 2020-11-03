@@ -157,7 +157,7 @@ namespace Game.ChunkSystem
             return new Vector2Int(-1, -1);
         }
 
-        private bool InBounds(Vector3 pos)
+        public bool InBounds(Vector3 pos)
         {
             //Vector3 point = new Vector3(pos.x, pos.y);
             //Debug.Log("Point: " + point + " ;InBounds: " + bounds.Contains(point));
@@ -173,7 +173,7 @@ namespace Game.ChunkSystem
             for (var i = 0; i < generator.worldWidthInChunks; i++)
             for (var j = 0; j < generator.worldHeightInChunks; j++)
             {
-                var chunk = new WorldSavingSystem.ChunkData(i, j);
+                var chunkData = new WorldSavingSystem.ChunkData(i, j);
                 var unit = _chunks[i, j];
                 //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;"+ j);
                 for (var x = 0; x < _chunkSize; x++)
@@ -195,7 +195,7 @@ namespace Game.ChunkSystem
                         //{
                         //Debug.Log("MemUnitSave: " + memUnit);
                         //}
-                        chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.Data.nameBlock,
+                        chunkData.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitFront.Data.nameBlock,
                             (int) BlockLayer.Front, memUnit));
                     }
 
@@ -206,13 +206,13 @@ namespace Game.ChunkSystem
                         {
                             memUnit1 = blockUnitBack.Memory.GetMemoryUnit();
                         }
-                        chunk.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.Data.nameBlock, 
+                        chunkData.AddChunkBlock(new WorldSavingSystem.BlockChunkData(x, y, blockUnitBack.Data.nameBlock, 
                             (int) BlockLayer.Back, memUnit1));
                     }
                 }
 
                 //Debug.Log(chunk.blocks.Count);                
-                worldSaving.AddChunk(chunk);
+                worldSaving.AddChunk(chunkData);
             }
 
        
@@ -224,6 +224,10 @@ namespace Game.ChunkSystem
             var toolbox = Toolbox.Instance;
             var entityManager = toolbox.mEntityManager;
             var itemManager = toolbox.mItemManager;
+            
+            var world = worldSaving.WorldDataUnit;
+            generator.worldWidth = world.width;
+            generator.worldHeight = world.height;
             for (var i = 0; i < count; i++)
             {
                 var chunkLoaded = worldSaving.GetChunkData(i);
@@ -232,6 +236,7 @@ namespace Game.ChunkSystem
             
                 var entities = chunkLoaded.entities;
                 //Debug.Log("EntitiesCount: " + entities.Count);
+                //Debug.Log(entities.Count);
                 foreach (var entity in entities)
                 {
                     entityManager.Create(new Vector3(entity.X, entity.Y, 0), entity.EntityType);

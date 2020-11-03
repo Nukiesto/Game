@@ -2,12 +2,13 @@
 using UnityEngine;
 using System.Collections;
 using Game.ChunkSystem;
+using Game.Misc;
 using Prime31;
 using static UnityEngine.Physics2D;
 using Random = UnityEngine.Random;
 using static UsefulScripts.RandomScripts;
 
-public class BotMovement : MonoBehaviour
+public class BotMovement : Movement
 {
 	public enum DirMove
 	{
@@ -26,7 +27,7 @@ public class BotMovement : MonoBehaviour
 
 	[HideInInspector] private float normalizedHorizontalSpeed = 0;
 
-	private EntityMovement _controller;
+	
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
@@ -52,12 +53,12 @@ public class BotMovement : MonoBehaviour
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
-		_controller = GetComponent<EntityMovement>();
-		_platformMask = _controller.platformMask;
-		_entityMask = _controller.entityMask;
+		Controller = GetComponent<EntityMovement>();
+		_platformMask = Controller.platformMask;
+		_entityMask = Controller.entityMask;
 		
 		// listen to some events for illustration purposes
-		_controller.onControllerCollidedEvent += OnControllerCollider;
+		Controller.onControllerCollidedEvent += OnControllerCollider;
 	}
 
 	private void OnEnable()
@@ -65,6 +66,7 @@ public class BotMovement : MonoBehaviour
 		//Debug.Log("Enabled");
 		_isGoingRight = RandomBool();
 		StartCoroutine(RanDomMoving());
+		StartCoroutine(CheckFallHp());
 		if (canBreackBlock)
 			StartCoroutine(RandomBreakBlock());
 	}
@@ -96,7 +98,7 @@ public class BotMovement : MonoBehaviour
 	
 	private void Update()
 	{
-		if (_controller.isGrounded)
+		if (Controller.isGrounded)
 			_velocity.y = 0;
 
 		Movement();
@@ -106,13 +108,13 @@ public class BotMovement : MonoBehaviour
 
 	#region Internal
 	#endregion
-
+	
 	private bool CheckSolidForDir(bool dir)
 	{
 		//Проверка коллизии на пути движения
 		queriesStartInColliders = false;
 		var direction = new Vector2(dir ? 0.2f : -0.2f, 0);
-		var pos = dir ? _controller._raycastOrigins.bottomRight : _controller._raycastOrigins.bottomLeft;
+		var pos = dir ? Controller._raycastOrigins.bottomRight : Controller._raycastOrigins.bottomLeft;
 		Debug.DrawRay(pos, new Vector3(direction.x, direction.y, 0), Color.blue);
 		return Raycast( pos, direction, 0.2f, _platformMask);
 	}
@@ -204,17 +206,17 @@ public class BotMovement : MonoBehaviour
 	{
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
 		var smoothedMovementFactor =
-			_controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+			Controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
 		_velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed,
 			Time.deltaTime * smoothedMovementFactor);
 
 		// apply gravity before moving
 		_velocity.y += gravity * Time.deltaTime;
 		
-		_controller.move(_velocity * Time.deltaTime);
+		Controller.move(_velocity * Time.deltaTime);
 
 		// grab our current _velocity to use as a base for all calculations
-		_velocity = _controller.velocity;
+		_velocity = Controller.velocity;
 	}
 
 	private void Movement()
@@ -222,7 +224,6 @@ public class BotMovement : MonoBehaviour
 		if (CheckPlayerForView(viewDistance))
 		{
 			_isMovingToPlayer = true;
-			
 			//StopCoroutine(TimerToStopMovingToPlayer());
 			if (_canToInvoke)
 			{
@@ -282,7 +283,7 @@ public class BotMovement : MonoBehaviour
 				{
 					Jump();
 				}
-				if (_toJumpCliff && CheckForCleft(_playerDir, true) && _controller.isGrounded)
+				if (_toJumpCliff && CheckForCleft(_playerDir, true) && Controller.isGrounded)
 				{
 					Jump();
 				}
@@ -309,7 +310,7 @@ public class BotMovement : MonoBehaviour
 			//	_isGoingRight = !_isGoingRight;
 			//}
 
-			if (CheckSolidForDir(_isGoingRight) && _controller.isGrounded)
+			if (CheckSolidForDir(_isGoingRight) && Controller.isGrounded)
 			{
 				_isGoingRight = !_isGoingRight;
 			}
@@ -319,7 +320,7 @@ public class BotMovement : MonoBehaviour
 			//	_isGoingRight = !_isGoingRight;
 			//}
 
-			if (CheckForCleft(_isGoingRight, true) && _controller.isGrounded)
+			if (CheckForCleft(_isGoingRight, true) && Controller.isGrounded)
 			{ 
 				if (RandomBoolChance(250))
 					Jump();
@@ -381,7 +382,7 @@ public class BotMovement : MonoBehaviour
 		if (transform.localScale.x > 0f)
 			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-		if (_controller.isGrounded)
+		if (Controller.isGrounded)
 			_animator.Play(Animator.StringToHash("Run"));
 	}
 	private void MoveRight()
@@ -390,19 +391,19 @@ public class BotMovement : MonoBehaviour
 		if (transform.localScale.x < 0f)
 			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-		if (_controller.isGrounded)
+		if (Controller.isGrounded)
 			_animator.Play(Animator.StringToHash("Run"));
 	}
 	private void MoveNone()
 	{
 		normalizedHorizontalSpeed = 0;
 
-		if (_controller.isGrounded)
+		if (Controller.isGrounded)
 			_animator.Play(Animator.StringToHash("Idle"));
 	}
 	private void Jump()
 	{
-		if (_controller.isGrounded)
+		if (Controller.isGrounded)
 		{
 			_velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
 			_animator.Play(Animator.StringToHash("Jump"));

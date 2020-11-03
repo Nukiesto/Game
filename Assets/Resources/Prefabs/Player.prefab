@@ -282,9 +282,10 @@ GameObject:
   - component: {fileID: 3502329410718346552}
   - component: {fileID: 3502329410718346551}
   - component: {fileID: 77386682520675614}
-  - component: {fileID: 1440428758822807245}
   - component: {fileID: 1569200281}
   - component: {fileID: 1569200282}
+  - component: {fileID: 1569200283}
+  - component: {fileID: 1440428758822807245}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -507,25 +508,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   totalHorizontalRays: 5
   totalVerticalRays: 8
---- !u!114 &1440428758822807245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3502329410718346550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d298f01f6c7d21b4292734538876c725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemMagnet: {fileID: 2509635685832778705}
-  itemPickRadius: 0.45
-  itemCreatePos: {fileID: 1104163468301940934}
-  inventory: {fileID: 0}
-  chunkManager: {fileID: 0}
-  flashLight: {fileID: 735428635787416496}
-  playerMovement: {fileID: 3502329410718346553}
 --- !u!114 &1569200281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +534,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b985124312f4b334a8954c511d6497f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  autoDestroy: 0
+  maxHp: 10000
+  updateBar: 1
+  hpBase: {fileID: 0}
   barManager: {fileID: 1569200281}
+--- !u!114 &1569200283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502329410718346550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd95878002e343838ad42e7c4ccd1678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpObject: {fileID: 1569200282}
+  movement: {fileID: 3502329410718346553}
+  playerController: {fileID: 1440428758822807245}
+--- !u!114 &1440428758822807245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502329410718346550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d298f01f6c7d21b4292734538876c725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemMagnet: {fileID: 2509635685832778705}
+  itemPickRadius: 0.45
+  itemCreatePos: {fileID: 1104163468301940934}
+  inventory: {fileID: 0}
+  chunkManager: {fileID: 0}
+  flashLight: {fileID: 735428635787416496}
+  playerMovement: {fileID: 3502329410718346553}
+  hpPlayer: {fileID: 1569200283}

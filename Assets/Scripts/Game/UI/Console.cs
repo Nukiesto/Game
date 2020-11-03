@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using Game.ChunkSystem;
+using Game.Game;
 using Game.ItemSystem;
+using Game.Player;
+using Singleton;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +23,7 @@ namespace Game.UI
         [SerializeField] private TimeController timeController;
         [SerializeField] private Inventory inventory;
         [SerializeField] private DataBase dataBase;
+        [SerializeField] private Transform blockSelector;
         private bool _isOpen;
 
         public delegate void OnToggleConsole(bool value);
@@ -67,9 +73,9 @@ namespace Game.UI
             var argument = "";
 
             var giveCommand = true;
-            for (var index = 0; index < input.Length; index++)
+            for (var i = 0; i < input.Length; i++)
             {
-                var t = input[index];
+                var t = input[i];
                 if (giveCommand && t != ' ')
                 {
                     command += t;
@@ -84,7 +90,7 @@ namespace Game.UI
                 if (t != ' ')
                 {
                     argument += t;
-                    if (index == input.Length - 1)
+                    if (i == input.Length - 1)
                     {
                         Debug.Log(argument);
                         arguments.Add(argument);
@@ -107,27 +113,130 @@ namespace Game.UI
 
             switch (command)
             {
-                case "timeset":
+                case "getpos":
+                    Vector3 posGet;
                     if (arguments.Count >= 1)
                     {
                         switch (arguments[0])
                         {
-                            case "day": 
-                                timeController.SetTime(14f);
-                                return "Time Set Day - 14";    
-                            case "night": 
-                                timeController.SetTime(0f);
-                                return "Time Set Night - 0";
-                            case "morning": 
-                                timeController.SetTime(8f);
-                                return "Time Set Morning - 8";
+                            case "sel":
+                                posGet = blockSelector.position;
+                                return "Selector Pos: " + posGet.x + ", " + posGet.y;
+                            case "player":
+                                posGet = PlayerController.Instance.transform.position;
+                                return "Player Pos: " + posGet.x + ", " + posGet.y;
                         }
                     }
-                    else
+            
+                    posGet = PlayerController.Instance.transform.position;
+                    return "Player Pos: " + posGet.x + ", " + posGet.y;
+                case "spawn":
+                    PlayerController.Instance.MoveToSpawn();
+                    return "Tp to spawn";
+                case "spawnset":
+                    if (arguments.Count >= 2)
                     {
-                        return "Invalid Command";
+                        if (int.TryParse(arguments[1], out var x))
+                        {
+                            if (int.TryParse(arguments[2], out var y))
+                            {
+                                var worldManager = Toolbox.Instance.mWorldManager;
+                                worldManager.SetSpawnPoint(new Vector3(x, y, 0));
+                                return "SpawnPointSeted: " + x + ", " + y;
+                            }
+                        }
+                        return "Invalid Arguments";
                     }
-                    break;
+                    if (arguments.Count == 0)
+                    {
+                        var worldManager = Toolbox.Instance.mWorldManager;
+                        var pos = PlayerController.Instance.transform.position;
+                        worldManager.SetSpawnPoint(pos);
+                        return "SpawnPoint Seted: " + pos.x + ", " + pos.y;
+                    }
+                    return "Invalid Command";
+                case "setblock":
+                    if (arguments.Count >= 3)
+                    {
+                        if (int.TryParse(arguments[1], out var x))
+                        {
+                            if (int.TryParse(arguments[2], out var y))
+                            {
+                                var layer = BlockLayer.Front;
+                                if (arguments.Count >= 4 && Enum.TryParse<BlockLayer>(arguments[3], out var _layer))
+                                {
+                                    layer = _layer;
+                                }
+                                var blockname = arguments[0];
+                                var blockdata = dataBase.GetBlock(blockname);
+                                var pos = new Vector3(x, y, 0);
+                                var chunkUnit = ChunkManager.Instance.GetChunk(pos);
+
+                                chunkUnit.SetBlock(pos, blockdata, false, layer, true);
+                                return "Block Seted: " + x + ", " + y;
+                            }
+                        }
+
+                        //return "Invalid Arguments";
+                    }
+                    return "Invalid Command";
+                case "tp":
+                    if (arguments.Count >= 1)
+                    {
+                        switch (arguments[0])
+                        {
+                            case "spawn":
+                                PlayerController.Instance.MoveToSpawn();
+                                return "Tp to spawn";
+                            default:
+                                if (int.TryParse(arguments[0], out var x))
+                                {
+                                    if (int.TryParse(arguments[1], out var y))
+                                    {
+                                        var pos = new Vector3(x, y, 0);
+                                        if (ChunkManager.Instance.InBounds(pos))
+                                        {
+                                            PlayerController.Instance.MoveToPos(pos);
+                                            return "Tp to: " + x + ", " + y;
+                                        }
+                                    }
+                                }
+
+                                return "Invalid Pos";
+                        }
+                    }
+                    return "Invalid Command";
+                case "timeget":
+                    if (arguments.Count == 0)
+                        return timeController.GetTime();
+                    return "Invalid Command";
+                case "timeset":
+                    if (arguments.Count == 1)
+                    {
+                        switch (arguments[0])
+                        {
+                            case "day": 
+                                timeController.SetTime(TimeController.Time.Day);
+                                return "Time Set Day";    
+                            case "night": 
+                                timeController.SetTime(TimeController.Time.Night);
+                                return "Time Set Night";
+                            case "morning": 
+                                timeController.SetTime(TimeController.Time.Morning);
+                                return "Time Set Morning";
+                            case "evening": 
+                                timeController.SetTime(TimeController.Time.Evening);
+                                return "Time Set Evening";
+                            default:
+                                if (float.TryParse(arguments[0], out var time))
+                                {
+                                    timeController.SetTime(time);
+                                    return "Time Set: " + time;
+                                }
+                                break;
+                        }
+                    }
+                    return "Invalid Command";
                 case "give":
                     if (arguments.Count >= 2)
                     {
@@ -139,14 +248,10 @@ namespace Game.UI
                         inventory.AddItemCount(item, count);
                         return "Gived: " + itemName;
                     }
-                    else
-                    {
-                        return "Invalid Command";
-                    }
+                    return "Invalid Command";
                 default:
                     return "Invalid Command";
             }
-            return "";
         }
     }
 }

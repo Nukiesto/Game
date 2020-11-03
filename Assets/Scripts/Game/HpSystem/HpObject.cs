@@ -1,15 +1,16 @@
 ﻿using EasyButtons;
 using UnityEngine;
 
-namespace Game.Misc.Misc
+namespace Game.HpSystem
 {
     public class HpObject : MonoBehaviour
     {
         [SerializeField] private float maxHp = 100;
-        [SerializeField] private bool autoDestroy;
-
+        [SerializeField] private bool updateBar = true;
+        
+        [HideInInspector] public HpBase hpBase;
+        
         public BarManager barManager;
-
         public float CurrentHp { get; private set; }
         public float MaxHp { get => maxHp; }
 
@@ -23,25 +24,36 @@ namespace Game.Misc.Misc
         {
             CurrentHp += value;
             UpdateBar();
-            if (autoDestroy && CurrentHp <= 0)
-            {
-                Destroy(gameObject);
-            }
+            if (CurrentHp <= 0)
+                Death();
         }
         public void UpdateBar()
         {
-            barManager.EnterAllValue(CurrentHp);
+            if (updateBar)
+                barManager.EnterAllValue(CurrentHp);
         }
 
+        [Button]
+        private void DebugHp()
+        {
+            Debug.Log("HP: " + CurrentHp);
+        }
+        
         [Button]
         public void Test()
         {
             Adjust(-5);
         }
         [Button]
-        public void Destroying()
+        private void Death()
         {
-            Destroy(gameObject);
+            hpBase.Death();
+        }
+
+        public void FillHp()
+        {
+            CurrentHp = maxHp;
+            UpdateBar();
         }
     }
 }

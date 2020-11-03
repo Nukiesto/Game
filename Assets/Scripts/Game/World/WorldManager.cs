@@ -1,5 +1,6 @@
 ﻿using Game.ChunkSystem;
 using Game.Game;
+using SavingSystem;
 using Singleton;
 using UnityEngine;
 
@@ -19,21 +20,28 @@ namespace Game.World
         }
         public Camera MainCamera { get; private set; }
 
-        private GameSceneManager _sceneManager;
+        private SceneManager _sceneManager;
         private Toolbox _toolbox;
         public bool IsGame => _sceneManager.CurrentScene == GameScene.Game;
 
         private void Start()
         {
             _toolbox = Toolbox.Instance;
-            _sceneManager = _toolbox.mGameSceneManager;
+            _sceneManager = _toolbox.mSceneManager;
+            
+            var worldSaver = Toolbox.Instance.mWorldSaver;
+            worldSaver.OnLoadEvent += OnLoad;
         }
 
         public void InitCamera(Camera camera)
         {
             MainCamera = camera;
         }
-        
+
+        private void OnLoad(WorldSavingSystem.WorldSaving worldSaving)
+        {
+            InitLoadedPoint();
+        }
         public void InitSpawnPoint()
         {
             var worldSaving = _toolbox.mWorldSaver.worldSaving;
@@ -60,7 +68,8 @@ namespace Game.World
             SpawnPoint = pos;
             //Debug.Log("InitSpawnPoint");
         }
-        public void InitLoadedPoint()
+
+        private void InitLoadedPoint()
         {
             var worldSaving = _toolbox.mWorldSaver.worldSaving;
             worldSaving.LoadPlayerData();
@@ -81,6 +90,11 @@ namespace Game.World
             var posCamera = pos;
             posCamera.z = -10;
             GameCond.MainCamera.transform.position = posCamera;
+        }
+
+        public void SetSpawnPoint(Vector3 pos)
+        {
+            SpawnPoint = pos;
         }
     }
 }

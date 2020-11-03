@@ -87,7 +87,6 @@ namespace SavingSystem
                     SaveList();
                 }
             }
-
             private void SaveList()
             {
                 // Конвертируем в json
@@ -209,7 +208,8 @@ namespace SavingSystem
                 }
                 return false;
             }
-            public void SaveInfo()
+
+            private void SaveInfo()
             {             
                 using (var fs = new FileStream(FnameInfo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
@@ -244,7 +244,8 @@ namespace SavingSystem
                     }
                 }
             }
-            public bool LoadInfo()
+
+            private void LoadInfo()
             {
                 using (var fs = new FileStream(FnameInfo, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
                 {
@@ -262,7 +263,6 @@ namespace SavingSystem
                             WorldDataUnit.toGenerateWorld = worldInfoData.ToGenerateWorld;
                             WorldDataUnit.entitiesCount = worldInfoData.EntitiesCount;
                             WorldDataUnit.itemsCount = worldInfoData.ItemsCount;
-                            return true;
                         }
                         
                         /*var text = writer.ReadToEnd();
@@ -289,7 +289,6 @@ namespace SavingSystem
                         }*/
                     }
                 }
-                return false;
             }
             public void AddPlayerData()
             {
@@ -425,13 +424,13 @@ namespace SavingSystem
                                 X = entity.X,
                                 Y = entity.Y
                             };
-                            
+
                             chunk.AddChunkEntity(entityChunkData);
                             break;
                         }
-                            
                     }
                 }
+                //Debug.Log(entitiesCount);
             }
             public void AddItems(List<WorldSaver.ItemUnitData> items)
             {
@@ -657,6 +656,7 @@ namespace SavingSystem
             }
             public void AddChunkEntity(EntityChunkData data)
             {
+                Debug.Log(data);
                 entities.Add(data);
             }
         }

@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 namespace LeopotamGroup.Common
 {
     /// <summary>
-    /// Диспетчер экрана / сцены, предоставляет API для навигации с поддержкой отката истории.
+    /// Р”РёСЃРїРµС‚С‡РµСЂ СЌРєСЂР°РЅР° / СЃС†РµРЅС‹, РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ API РґР»СЏ РЅР°РІРёРіР°С†РёРё СЃ РїРѕРґРґРµСЂР¶РєРѕР№ РѕС‚РєР°С‚Р° РёСЃС‚РѕСЂРёРё.
     /// </summary>
     internal sealed class ScreenManager : MonoBehaviourService<ScreenManager>
     {
@@ -23,7 +23,7 @@ namespace LeopotamGroup.Common
         /// <summary>
         /// Get current screen name.
         /// </summary>
-        public string Current { get { return SceneManager.GetActiveScene().name; } }
+        public string Current { get { return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name; } }
 
         private readonly Stack<string> _history = new Stack<string>(8);
 
@@ -48,7 +48,7 @@ namespace LeopotamGroup.Common
                 _history.Push(Current);
             }
 
-            SceneManager.LoadScene(screenName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(screenName);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace LeopotamGroup.Common
 #endif
             if (_history.Count > 0)
             {
-                SceneManager.LoadScene(_history.Pop());
+                UnityEngine.SceneManagement.SceneManager.LoadScene(_history.Pop());
             }
         }
 

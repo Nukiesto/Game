@@ -1,4 +1,5 @@
 ﻿using EasyButtons;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI.Bars.Bars
@@ -9,7 +10,8 @@ namespace Game.UI.Bars.Bars
 
         public override void UpdateBar()
         {
-            if (Value < MaxValue)
+            //Debug.Log("Updated: " + Value + ";" + MaxValue);
+            if (Value <= MaxValue)
             {
                 image.fillAmount = 1 - (MaxValue - Value) / MaxValue;
             }

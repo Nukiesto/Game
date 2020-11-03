@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class BarManager : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class BarManager : MonoBehaviour
     }
     public void EnterAllValue(float value)
     {
-        foreach (Bar bar in bars)
+        foreach (var bar in bars)
         {
             bar.EnterValue(value);           
         }
@@ -74,11 +75,14 @@ public abstract class Bar : MonoBehaviour
     }
     protected float Value { get; set; }
     protected float MaxValue { get; set; }
+
+    public Text text;
     public Type type;
     public bool barEnabled;
 
-    public virtual void Enable() 
+    public virtual void Enable()
     {
+        UpdateText();
         barEnabled = true;
     }
     public virtual void Disable()
@@ -88,13 +92,18 @@ public abstract class Bar : MonoBehaviour
     public void EnterValue(float value)
     {
         Value = value;
+        UpdateText();
         UpdateBar();
     }
     public void SetMaxValue(float maxValue)
     {
         MaxValue = maxValue;
-        Value = maxValue;
-        UpdateBar();
+        EnterValue(maxValue);
     }
     public abstract void UpdateBar();
+
+    protected virtual void UpdateText()
+    {
+        text.text = Mathf.Floor(Value) + "/" + Mathf.Floor(MaxValue);
+    }
 }
