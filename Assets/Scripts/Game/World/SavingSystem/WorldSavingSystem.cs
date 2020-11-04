@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using Game;
+using Game.Game;
 using Game.ItemSystem;
 
 namespace SavingSystem
@@ -411,10 +412,12 @@ namespace SavingSystem
                 for (var i = 0; i < entities.Count; i++)
                 {
                     var entity = entities[i];
+                    //Debug.Log(entity.ChunkX + ", " + entity.ChunkY);
                     //Debug.Log("ChunksCount: " + chunks.Count);
                     for (var j = 0; j < chunks.Count; j++)
                     {
                         var chunk = chunks[j];
+                        //Debug.Log(chunk.x + ";" + chunk.y);
                         //Debug.Log("x1: " + chunk.x + "x2: " + entity.ChunkX +"y1" + chunk.y + "y2" + entity.ChunkY);
                         if (chunk.x == entity.ChunkX && chunk.y == entity.ChunkY)
                         {
@@ -656,7 +659,7 @@ namespace SavingSystem
             }
             public void AddChunkEntity(EntityChunkData data)
             {
-                Debug.Log(data);
+                //Debug.Log(data);
                 entities.Add(data);
             }
         }
@@ -699,6 +702,8 @@ namespace SavingSystem
         {
             public float X;
             public float Y;
+            
+            public float hp;
             public EntityType EntityType;
         }
         public class ItemChunkData
@@ -717,8 +722,13 @@ namespace SavingSystem
             public float spawnX;
             public float spawnY;
             public bool spawnPointInited;
+            public string nickname;
             
             public List<ItemPlayerData> items;
+            public GameMode gameMode;
+            public float hp;
+            public float maxHp;
+            
             public struct ItemPlayerData
             {
                 public InventoryType InventoryType;

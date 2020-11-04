@@ -38,5 +38,20 @@ namespace Game.HpSystem
         {
             hpObject.FillHp();
         }
+
+        public void SetGodMode(bool value)
+        {
+            hpObject.SetGodMode(value);
+        }
+
+        public void SetHp(float hp)
+        {
+            hpObject.SetHp(hp);
+        }
+
+        public float GetHp()
+        {
+            return hpObject.CurrentHp;
+        }
     }
 }

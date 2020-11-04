@@ -4,6 +4,7 @@ using Game;
 using Game.Entity;
 using Game.Game;
 using Game.ItemSystem;
+using Game.Misc;
 using Game.World;
 using UnityEngine;
 
@@ -27,8 +28,9 @@ namespace Singleton
             AddCompon(ref mGameManager);
             AddCompon(ref mEntityManager);
             AddCompon(ref mItemManager);
-            AddCompon(ref mWorldManager);
             AddCompon(ref mWorldSaver);
+            AddCompon(ref mWorldManager);
+            AddCompon(ref mMultiPlayerManager);
         }
 
         private T AddCompon<T>(ref T m) where T : UnityEngine.Component
@@ -36,8 +38,7 @@ namespace Singleton
             m = gameObject.AddComponent<T>();
             return m;
         }
-
-        public InitGame InitGame;
+        
         public FpsCounter mFpscounter;
         public GameManager mGameManager;
         public SceneManager mSceneManager;
@@ -45,6 +46,7 @@ namespace Singleton
         public ItemManager mItemManager;
         public EntityManager mEntityManager;
         public WorldManager mWorldManager;
+        public MultiPlayerManager mMultiPlayerManager;
         
         public Component AddGlobalComponent(ComponentType componentTypeId, Type component)
         {

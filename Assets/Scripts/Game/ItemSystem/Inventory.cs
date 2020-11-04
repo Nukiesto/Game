@@ -58,7 +58,7 @@ namespace Game.ItemSystem
         private List<KeyCode> _inventoryKeyCodes;
         private bool _canInput = true;
         //Player
-        [SerializeField] private PlayerController player;
+        public PlayerController player;
         [SerializeField] private BlockSelector blockSelector;
         private Dictionary<InventoryType, PanelItemsBase> _panels;
         
@@ -369,6 +369,7 @@ namespace Game.ItemSystem
 
         private void Start()
         {
+            player = PlayerController.Instance;
             mainItems.SetActive(IsOpen);
             sandboxItems.SetActive(false);
             chestItems.SetActive(false);
@@ -862,8 +863,8 @@ namespace Game.ItemSystem
                     return;
                 }
             }
-
-            if (Inventory.itemSelect.unit != this) return;
+            
+            if (Inventory.itemSelect?.unit != this) return;
             
             uislot.SetIconDisabled();
             Reset();

@@ -37,10 +37,10 @@ public class CameraManager : MonoBehaviour
         cam = GetComponent<Camera>();
         cam.orthographic = true;
         CalculateBounds();
-        FindTarget();
     }
     private void Start()
     {
+        //FindTarget();
         _zoom = normalZoom;
         SetZoom();
         CalculateBounds();

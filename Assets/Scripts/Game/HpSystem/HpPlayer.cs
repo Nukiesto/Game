@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Player;
+using UnityEngine;
 
 namespace Game.HpSystem
 {

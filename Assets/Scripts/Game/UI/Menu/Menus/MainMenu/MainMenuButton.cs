@@ -70,6 +70,6 @@ public class MainMenuButton : ButtonUnit
 
     public void ButtonClick()
     {
-        ButtonClickAction();
+        ButtonClickAction?.Invoke();
     }
 }

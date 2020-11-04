@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01254ed5ae04d278d68bed6e075bc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 8
+  time: 15
   mode: 0
   repeatOnEnable: 1
   toBlend: 1

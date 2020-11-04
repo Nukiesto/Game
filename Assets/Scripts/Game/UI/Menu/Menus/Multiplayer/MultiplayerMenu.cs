@@ -1,22 +1,39 @@
-﻿using static MainMenuDialog;
+﻿using Singleton;
+using UnityEngine;
+using static MainMenuDialog;
 
-public class MultiplayerMenu : MenuUnit
+namespace Game.UI.Menu.Menus.Multiplayer
 {
-    public void StartDialogLocal(DialogType type)
+    public class MultiplayerMenu : MenuUnit
     {
-        foreach (var dialog in dialogs)
+        [SerializeField] private LobbyManager lobbyManager;
+        public void StartDialogLocal(DialogType type)
         {
-            if (dialog.GetTypeDialog() == type)
+            foreach (var dialog in dialogs)
             {
-                dialog.SetActive(true);
-                AddDialog(dialog);
+                if (dialog.GetTypeDialog() == type)
+                {
+                    dialog.SetActive(true);
+                    AddDialog(dialog);
+                }
             }
         }
-    }
 
-    public override void StartDialog(dynamic type)
-    {
-        base.StartDialog();
-        StartDialogLocal((DialogType)type);
+        public override void StartDialog(dynamic type)
+        {
+            base.StartDialog();
+            StartDialogLocal((DialogType)type);
+        }
+
+        public void RandomJoinRoom()
+        {
+            if (Toolbox.Instance.mMultiPlayerManager.IsConnectedToMaster)
+                lobbyManager.JoinRandomRoom();
+        }
+
+        public void CreateRoom()
+        {
+            lobbyManager.CreateRoom();
+        }
     }
 }

@@ -19,10 +19,7 @@ namespace Game.Game
         private void Start()
         {
             var toolbox = Toolbox.Instance;
-            toolbox.InitGame = this;
-            toolbox.mWorldSaver.InitWorld();
-            toolbox.mWorldManager.InitCamera(mainCamera);
-            toolbox.mWorldManager.InitSpawnPoint();
+            toolbox.mWorldManager.SceneStarted();
         }
     }
 }

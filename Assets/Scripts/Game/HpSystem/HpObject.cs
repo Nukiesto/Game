@@ -11,11 +11,14 @@ namespace Game.HpSystem
         [HideInInspector] public HpBase hpBase;
         
         public BarManager barManager;
+        private bool _isGodMode;
+        
         public float CurrentHp { get; private set; }
         public float MaxHp { get => maxHp; }
 
         private void Start()
         {
+            
             CurrentHp = maxHp;
             if (barManager != null) barManager.InitAllBar(maxHp);
         }
@@ -24,15 +27,27 @@ namespace Game.HpSystem
         {
             CurrentHp += value;
             UpdateBar();
-            if (CurrentHp <= 0)
+            if (!_isGodMode && CurrentHp <= 0)
                 Death();
         }
-        public void UpdateBar()
+
+        private void UpdateBar()
         {
             if (updateBar)
                 barManager.EnterAllValue(CurrentHp);
         }
 
+        public void SetGodMode(bool value)
+        {
+            _isGodMode = value;
+            barManager.SetActiveAllBars(!value);
+        }
+
+        public void SetHp(float value)
+        {
+            CurrentHp = value > maxHp ? maxHp : value;
+            UpdateBar();
+        }
         [Button]
         private void DebugHp()
         {

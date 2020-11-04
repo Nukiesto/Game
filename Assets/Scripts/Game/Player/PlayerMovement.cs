@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Game.Misc;
+using Photon.Pun;
 using Prime31;
 
 
@@ -12,7 +13,7 @@ public class PlayerMovement : Movement
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
-	
+	[SerializeField] private PhotonView photonView;
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 	
@@ -53,9 +54,41 @@ public class PlayerMovement : Movement
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	private void Update()
 	{
-        if (Controller.isGrounded)
+		if (Controller.isGrounded)
 			_velocity.y = 0;
 
+		Moving();
+		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+		var smoothedMovementFactor = Controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
+
+		// apply gravity before moving
+		_velocity.y += gravity * Time.deltaTime;
+
+		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
+		// this lets us jump down through one way platforms
+		if( Controller.isGrounded && Input.GetButton("Down"))//Input.GetKey( KeyCode.DownArrow ) )
+		{
+			_velocity.y *= 3f;
+			Controller.ignoreOneWayPlatformsThisFrame = true;
+		}
+		
+		Controller.move( _velocity * Time.deltaTime );
+
+		// grab our current _velocity to use as a base for all calculations
+		_velocity = Controller.velocity;
+	}
+
+	private void Moving()
+	{
+		if (NotMine())
+		{
+			normalizedHorizontalSpeed = 0;
+
+			if( Controller.isGrounded )
+				_animator.Play( Animator.StringToHash( "Idle" ) );
+			return;
+		}
 		if(_canMove && Input.GetButton("Right") )//Input.GetKey( KeyCode.RightArrow ) )
 		{
 			normalizedHorizontalSpeed = 1;
@@ -89,29 +122,11 @@ public class PlayerMovement : Movement
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			_animator.Play( Animator.StringToHash( "Jump" ) );
 		}
-
-
-		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-		var smoothedMovementFactor = Controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
-
-		// apply gravity before moving
-		_velocity.y += gravity * Time.deltaTime;
-
-		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
-		// this lets us jump down through one way platforms
-		if( Controller.isGrounded && Input.GetButton("Down"))//Input.GetKey( KeyCode.DownArrow ) )
-		{
-			_velocity.y *= 3f;
-			Controller.ignoreOneWayPlatformsThisFrame = true;
-		}
-		
-		Controller.move( _velocity * Time.deltaTime );
-
-		// grab our current _velocity to use as a base for all calculations
-		_velocity = Controller.velocity;
 	}
-
+	private bool NotMine()
+	{
+		return PhotonNetwork.InRoom && !photonView.IsMine;
+	}
 	public void SetCanMove(bool value)
 	{
 		_canMove = value;

@@ -19,7 +19,7 @@ namespace Game.Entity
 
         private void OnSave(WorldSavingSystem.WorldSaving worldSaving)
         {
-            //Debug.Log("Invoked");
+            //Debug.Log("Entities");
             worldSaving.WorldDataUnit.AddEntities(GetEntitiesData());
         }
 
@@ -39,7 +39,7 @@ namespace Game.Entity
                 {
                     var pos = entity.gameObject.transform.position;
                     var chunk = chunkManager.GetChunk(pos);
-                    Debug.Log(chunk);
+                    //Debug.Log(chunk);
                     if (chunk != null)
                     {
                         var posChunk = chunk.posChunk;
@@ -56,7 +56,7 @@ namespace Game.Entity
                 }
             }
 
-            Debug.Log("listCount: " + list.Count);
+            //Debug.Log("listCount: " + list.Count);
             return list;
         }
         public void RemoveEntity(BotController entity)

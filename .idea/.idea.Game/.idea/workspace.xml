@@ -20,49 +20,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc722a09-96dd-4047-bba4-eb521458b6fb" name="Default Changelist" comment="WorldList">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HPBase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpEntity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpEntity.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpPlayer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpPlayer.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/MultiPlayerManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/MultiplayerManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/WorldMultiplayerManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/WorldMultiplayerManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/LobbyManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/LobbyManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Blocks/Limiter/Limiter.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Entity.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Entity.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Effects/UIBlur/Materials/UIBlurMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Effects/UIBlur/Materials/UIBlurMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Console/Text.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Console/Text.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Menus/MainMenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Menus/MainMenu.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/WorldList/WorldListMenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/WorldList/WorldListMenu.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/CameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/CameraManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/SceneManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/SceneManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HPObject.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HpObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Game/SceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Game/SceneManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpPlayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuButton.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/Common/ScreenManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/Common/ScreenManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UnityToolbox/Scene/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UnityToolbox/Scene/LevelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,15 +91,20 @@
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Editor/CUIBezierCurveEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/UI/Menu/BrightnessShader/Brightness.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/LobbyManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/GameConstants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/0b/e1867340/Resources.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/CameraManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuUnit.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/38/7c7d1e97/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/MenuController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UnityToolbox/Utils/UVScroller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BehaviourManager/BehaviourManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonChat/Demos/DemoChat/ChatGui.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://E:/Unity/Editor/2020.1.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/ChestMemory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://E:/Unity/Editor/2020.1.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/InputField.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Scripts/LightSprite.cs" root0="FORCE_HIGHLIGHTING" />
@@ -112,12 +121,15 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/FunctionalKeys.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/78/7ac75c54/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/d6/d597ebb7/Void.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonRealtime/Code/LoadbalancingPeer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TranslationSystem/ComponentsToUse/LabelsData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/RandomBack.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonRealtime/Code/LoadBalancingClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/EditorHelpers/Editor/CreateAssetsBundle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04258D1C-DC10-4424-8C2A-17A6A31A3CF7/0f/08c30298/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LeopotamGroupLibrary/SystemUi/Markup/Generators/GridNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -145,6 +157,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Memory/NullScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/DirtScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/Scripts/Script/NullScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/PhotonNetwork.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Resources/Shaders/AlphaBlended.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkBlockController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -161,50 +174,50 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Singleton/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Singleton/MonoGlobalSingleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/PhotonNetworkPart.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameStructures/unity-ui-extensions/Runtime/Scripts/Controls/ComboBox/AutoCompleteComboBox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/PhotonHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/MultiPlayerManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/Views/PhotonRigidbody2DView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7DFC8D61-57EF-4D37-9354-C19104DE3140/f7/0c39996d/PhotonPeer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7DFC8D61-57EF-4D37-9354-C19104DE3140/dd/dfa75b87/PeerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F6747DE9-0205-433F-84EB-50C1DA278135/20/ec06df03/IEnumerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/ClassicBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Misc/WorldMultiplayerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/EditorCameraWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/BlockTilingInfoDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/ScriptableObjectCreatorWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/Point2Drawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Light2D/Editor/ReadOnlyDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpPlayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Game/Asteroid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://E:/Unity/Editor/2020.1.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Text.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scripts/Lobby/LobbyMainPanel.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameCond.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/DataBase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UsefalScripts.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UsefulScripts.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ItemList/Scrips/WorldList.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/BlockSystem/BlockData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Occlusion/Occlusion.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/WorldManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameSceneManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Lighting/AmbientLightController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TimeController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/RandomBack.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkUnit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/InitGame.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/WorldSaver.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/WorldSaver.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameSceneManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/UsefulScripts.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/BlockSelector.cs" />
@@ -212,31 +225,45 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Misc/HPObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UIBar.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/TimerToDelete.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/UI/UIItemPanelSlot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/TimeController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HPBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpPlayer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Bars/UiBar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpEntity.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/SceneManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bot/BotController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/ItemManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Other/UsefulScripts.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entity/EntityManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ChunkSystem/ChunkManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameCond.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/Movement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/HpSystem/HpObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/World/SavingSystem/WorldSavingSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/MainMenu/MainMenuButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/SceneManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldMenuButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenuButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Console.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/MultiplayerManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Singleton/Toolbox.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/WorldMenu/WorldList.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/LobbyManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Pause/PauseButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/CameraManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Game/InitGame.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Bars/Manager/BarManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldSaver.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/World/WorldManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ItemSystem/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Menu/Menus/Multiplayer/MultiplayerMenu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/MultiPlayerManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Misc/WorldMultiplayerManager.cs" />
       </list>
     </option>
   </component>
@@ -325,6 +352,7 @@
       <workItem from="1604305894891" duration="27549000" />
       <workItem from="1604403917885" duration="767000" />
       <workItem from="1604408680462" duration="13327000" />
+      <workItem from="1604477007502" duration="24222000" />
     </task>
     <task id="LOCAL-00001" summary="WorldList">
       <created>1603558209860</created>

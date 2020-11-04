@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Game
 {
@@ -10,10 +11,14 @@ namespace Game.Game
     public class GameManager : MonoBehaviour
     {
         private GameMode _gameMode = GameMode.Survival;
+        public delegate void OnChangeGameMode(GameMode gameMode);
 
+        public event OnChangeGameMode OnChangeGameModeEvent;
+        
         public void SetGameMode(GameMode gameMode)
         {
             _gameMode = gameMode;
+            OnChangeGameModeEvent?.Invoke(gameMode);
         }
 
         public GameMode GetGameMode()

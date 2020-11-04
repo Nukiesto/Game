@@ -1,8 +1,10 @@
 ﻿using System.Collections;
-using Game.ChunkSystem;
+using System.Linq;
 using Game.Game;
+using Photon.Pun;
 using SavingSystem;
 using Singleton;
+using UnityEditor;
 using UnityEngine;
 
 namespace Game
@@ -17,28 +19,35 @@ namespace Game
     
         public delegate void OnSave(WorldSavingSystem.WorldSaving worldSaving);
 
-        public event OnLoad OnSaveEvent;
+        public event OnSave OnSaveEvent;
+
+        private void Start()
+        {
+            var worldManager = Toolbox.Instance.mWorldManager;
+            worldManager.OnStartSceneEvent += InitWorld;
+        }
+
         public void InitWorld()
         {
-            worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
-            
-            if (!worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld)) return;
-            
-            if (!worldSaving.WorldDataUnit.toGenerateWorld)
+            if (PhotonNetwork.IsMasterClient)
             {
-                LoadWorld();
+                worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
+                if (!worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld)) return;
+            
+                if (!worldSaving.WorldDataUnit.toGenerateWorld) LoadWorld();
             }
         }
         public void SaveWorld()
         {
-            //if (worldSaving == null) return;
-        
-            worldSaving.Clear();
-            worldSaving.WorldDataUnit.toGenerateWorld = false;
-        
-            OnSaveEvent?.Invoke(worldSaving);
-
-            worldSaving.SaveWorld();
+            if (worldSaving != null)
+            {
+                worldSaving.Clear();
+                worldSaving.WorldDataUnit.toGenerateWorld = false;
+            
+                OnSaveEvent?.Invoke(worldSaving);
+            
+                worldSaving.SaveWorld();
+            }
         }
 
         private void LoadWorld()
@@ -50,6 +59,23 @@ namespace Game
             StartCoroutine(WriteInventory());
         }
 
+        public void InsertStartOnSave(OnSave method)
+        {
+            var list = OnSaveEvent?.GetInvocationList().ToList();
+
+            if (list != null)
+            {
+                OnSaveEvent = null;
+            
+                list.Insert(0, method);
+
+                foreach (var item in list)
+                {
+                    //Debug.Log(item.Method.Name);
+                    OnSaveEvent += (OnSave)item;
+                }
+            }
+        }
         private IEnumerator WriteInventory()
         {
             while (true)

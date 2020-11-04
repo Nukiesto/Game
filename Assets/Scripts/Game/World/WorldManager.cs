@@ -1,5 +1,6 @@
 ﻿using Game.ChunkSystem;
 using Game.Game;
+using Photon.Pun;
 using SavingSystem;
 using Singleton;
 using UnityEngine;
@@ -13,12 +14,15 @@ namespace Game.World
         private bool _loadedPointIsInit;
         public Vector3 loadedPoint;
 
-        public bool TryGetLoadedPoint(out Vector3 loadedPoint)
+        public delegate void OnStartScene();
+
+        public event OnStartScene OnStartSceneEvent;
+        
+        public bool TryGetLoadedPoint(out Vector3 tryLoadedPoint)
         {
-            loadedPoint = this.loadedPoint;
+            tryLoadedPoint = loadedPoint;
             return _loadedPointIsInit;
         }
-        public Camera MainCamera { get; private set; }
 
         private SceneManager _sceneManager;
         private Toolbox _toolbox;
@@ -31,28 +35,36 @@ namespace Game.World
             
             var worldSaver = Toolbox.Instance.mWorldSaver;
             worldSaver.OnLoadEvent += OnLoad;
-        }
 
-        public void InitCamera(Camera camera)
-        {
-            MainCamera = camera;
+            OnStartSceneEvent += InitSpawnPoint;
         }
-
+        
         private void OnLoad(WorldSavingSystem.WorldSaving worldSaving)
         {
             InitLoadedPoint();
         }
         public void InitSpawnPoint()
         {
-            var worldSaving = _toolbox.mWorldSaver.worldSaving;
-            worldSaving.LoadPlayerData();
-            var playerData = worldSaving.PlayerData;
             var pos = Vector3.zero;
-
-            if (playerData != null && playerData.spawnPointInited)
+            if (PhotonNetwork.IsMasterClient)
             {
-                pos = new Vector3(playerData.spawnX, playerData.spawnY, 0);
-                //Debug.Log("InitSpawnPoint: " + playerData.spawnX + "; " + playerData.spawnY);
+                var worldSaving = _toolbox.mWorldSaver.worldSaving;
+                worldSaving.LoadPlayerData();
+                var playerData = worldSaving.PlayerData;
+                
+                if (playerData != null && playerData.spawnPointInited)
+                {
+                    pos = new Vector3(playerData.spawnX, playerData.spawnY, 0);
+                    //Debug.Log("InitSpawnPoint: " + playerData.spawnX + "; " + playerData.spawnY);
+                }
+                else
+                {
+                    var chunkManager = ChunkManager.Instance;
+                    var generator = chunkManager.generator;
+                    var posZero = chunkManager.posZero;
+                    pos.x = posZero.x + generator.worldWidth / 2;
+                    pos.y = posZero.y + generator.worldHeight - 4;
+                }
             }
             else
             {
@@ -66,7 +78,7 @@ namespace Game.World
             }
             
             SpawnPoint = pos;
-            //Debug.Log("InitSpawnPoint");
+            Debug.Log("InitSpawnPoint");
         }
 
         private void InitLoadedPoint()
@@ -95,6 +107,11 @@ namespace Game.World
         public void SetSpawnPoint(Vector3 pos)
         {
             SpawnPoint = pos;
+        }
+
+        public void SceneStarted()
+        {
+            OnStartSceneEvent?.Invoke();
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using UnityEngine;
+﻿using Game.UI.Menu.Menus.Multiplayer;
+using UnityEngine;
 using static MainMenuDialog;
 
 public class MultiplayerMenuButton : ButtonUnit
 {
     public enum Button
     {
-        NewGame,
-        LoadGame,
-        Settings,
-        Exit,
+        JoinRandomRoom,
         BackToMainMenu
     }
 
@@ -23,6 +21,9 @@ public class MultiplayerMenuButton : ButtonUnit
     {
         switch (buttonType)
         {
+            case Button.JoinRandomRoom:
+                ButtonClickAction = ButtonClickActionJoinRandomRoom;
+                break;
             case Button.BackToMainMenu:
                 ButtonClickAction = ButtonClickActionBackToMainMenu;
                 break;
@@ -32,7 +33,11 @@ public class MultiplayerMenuButton : ButtonUnit
                 break;
         }
     }
-
+    private void ButtonClickActionJoinRandomRoom()
+    {
+        var menu0 = (MultiplayerMenu)menu;
+        menu0.RandomJoinRoom();
+    }
     private void ButtonClickActionBackToMainMenu()
     {
         menu.controller.SetMenu(Menu.Main);

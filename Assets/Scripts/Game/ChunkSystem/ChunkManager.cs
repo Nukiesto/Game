@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using Game.Player;
 using LeopotamGroup.Math;
 using SavingSystem;
 using Singleton;
 using UnityEngine;
+using static UsefulScripts.OtherScripts;
 
 namespace Game.ChunkSystem
 {
@@ -41,7 +43,10 @@ namespace Game.ChunkSystem
         
             var saver = Toolbox.Instance.mWorldSaver;
             saver.OnLoadEvent += LoadWorld;
-            saver.OnSaveEvent += AddDataToWorldSaving;
+
+            
+            saver.InsertStartOnSave(OnSave);
+            //saver.OnSaveEvent += OnSave;
         
             BuildChunks();
         }
@@ -165,8 +170,9 @@ namespace Game.ChunkSystem
             return _bounds.Contains(pos);
         }
 
-        private void AddDataToWorldSaving(WorldSavingSystem.WorldSaving worldSaving)
+        private void OnSave(WorldSavingSystem.WorldSaving worldSaving)
         {
+            //Debug.Log("ChunkManager");
             worldSaving.Clear();
             worldSaving.WorldDataUnit.toGenerateWorld = false;
 

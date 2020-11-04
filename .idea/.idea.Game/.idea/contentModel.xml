@@ -926,8 +926,10 @@
               <e p="FunctionalKeys.cs" t="Include" />
               <e p="GameConstants.cs" t="Include" />
               <e p="Movement.cs" t="Include" />
+              <e p="MultiplayerManager.cs" t="Include" />
               <e p="TakeThumbnail.cs" t="Include" />
               <e p="TImerToDelete.cs" t="Include" />
+              <e p="WorldMultiplayerManager.cs" t="Include" />
             </e>
             <e p="Player" t="Include">
               <e p="BlockSelector.cs" t="Include" />
@@ -970,6 +972,7 @@
                     <e p="MainMenuDialog.cs" t="Include" />
                   </e>
                   <e p="Multiplayer" t="Include">
+                    <e p="LobbyManager.cs" t="Include" />
                     <e p="MultiplayerMenu.cs" t="Include" />
                     <e p="MultiplayerMenuButton.cs" t="Include" />
                     <e p="MultiplayerMenuDialog.cs" t="Include" />

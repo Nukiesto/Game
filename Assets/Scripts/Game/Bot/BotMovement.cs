@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Game.ChunkSystem;
 using Game.Misc;
+using Game.Player;
 using Prime31;
 using static UnityEngine.Physics2D;
 using Random = UnityEngine.Random;

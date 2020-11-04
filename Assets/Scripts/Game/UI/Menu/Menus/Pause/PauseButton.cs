@@ -1,4 +1,6 @@
-﻿using Singleton;
+﻿using System.Collections;
+using Photon.Pun;
+using Singleton;
 using UnityEngine.SceneManagement;
 
 public class PauseButton : ButtonUnit
@@ -70,11 +72,27 @@ public class PauseButton : ButtonUnit
     {
         var toolbox = Toolbox.Instance;
         toolbox.mWorldSaver.SaveWorld();
-        toolbox.InitGame = null;
-        
-        MoveToMainMenu();
+
+        if (PhotonNetwork.InRoom)
+        {
+            StartCoroutine(WaitForDisconnect());
+        }
+        else
+        {
+            MoveToMainMenu();
+        }
     }
 
+    private IEnumerator WaitForDisconnect()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        Toolbox.Instance.mMultiPlayerManager.IsConnectedToMaster = false;
+        
+        while (PhotonNetwork.IsConnected)
+            yield return 0;
+        MoveToMainMenu();
+    }
     private void MoveToMainMenu()
     {
         Toolbox.Instance.mFpscounter.enabled = false;

@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using SavingSystem;
-using UnityEngine.Serialization;
+using Singleton;
 
-public class WorldList : MonoBehaviour {
+public class WorldList : MonoBehaviourPunCallbacks {
 
 	public ItemList itemList;
 	private List<ItemListUnit> _itemListUnits;
@@ -22,6 +23,7 @@ public class WorldList : MonoBehaviour {
 	
 	private string _createWorldName;
 	private bool _toLoadWorld;
+
 	private void Start()
 	{
 		WorldSavingSystem.Init();
@@ -38,8 +40,14 @@ public class WorldList : MonoBehaviour {
 		}
 
 		EndFieldName();
+		
+		PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999);
+		//Log("Player`s name is set to: " + PhotonNetwork.NickName);
+		PhotonNetwork.AutomaticallySyncScene = true;
+		PhotonNetwork.GameVersion = "1";
+		PhotonNetwork.ConnectUsingSettings();
 	}
-
+	
 	public void SetSelect(int id)
 	{
 		_currentWorldId = id;
@@ -91,6 +99,16 @@ public class WorldList : MonoBehaviour {
 	{
 		WorldSavingSystem.CurrentWorld = _itemListUnits[index: _currentWorldId].Title;
 		menuController.SetGame();
+	}
+	public void LoadWorldAsServer()
+	{
+		var cond = Toolbox.Instance.mMultiPlayerManager.IsConnectedToMaster;
+		if (cond)
+		{
+			PhotonNetwork.CreateRoom(null, new RoomOptions() {MaxPlayers = 2});
+			WorldSavingSystem.CurrentWorld = _itemListUnits[index: _currentWorldId].Title;
+        	menuController.SetGame();	
+		}
 	}
 	public void DestroyWorld()
 	{

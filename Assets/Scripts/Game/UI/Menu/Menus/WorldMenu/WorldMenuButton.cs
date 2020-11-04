@@ -5,10 +5,6 @@ public class WorldMenuButton : ButtonUnit
 {
     public enum Button
     {
-        NewGame,
-        LoadGame,
-        Settings,
-        Exit,
         BackToMainMenu
     }
 

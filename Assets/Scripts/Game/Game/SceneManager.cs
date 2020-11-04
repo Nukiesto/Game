@@ -41,9 +41,9 @@ public class SceneManager : MonoBehaviour
         CurrentScene = type;
         GameCond.IsGame = type == GameScene.Game;
     }
+    
     public void SetSceneAlt(GameScene type)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(gameScenes[type]);
         CurrentScene = type;
         GameCond.IsGame = type == GameScene.Game;
     }

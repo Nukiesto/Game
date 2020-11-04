@@ -17,6 +17,7 @@ namespace Game.Game
             //Debug.Log(IsGame);
             return IsGame ? Inventory : null;
         }
+        
         public static bool IsGame;
     }
 }

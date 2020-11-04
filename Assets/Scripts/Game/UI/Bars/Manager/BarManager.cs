@@ -3,9 +3,12 @@ using UnityEngine.UI;
 
 public class BarManager : MonoBehaviour
 {
-    //public
-    public Bar[] bars;
-    
+    private Bar[] bars;
+
+    public void SetBars(Bar[] barsToSet)
+    {
+        bars = barsToSet;
+    }
     public void InitBar(float maxValue, Bar.Type type)
     {
         foreach (var bar in bars)
@@ -43,6 +46,13 @@ public class BarManager : MonoBehaviour
         }
     }
 
+    public void SetActiveAllBars(bool value)
+    {
+        foreach (var bar in bars)
+        {
+            bar.SetActive(value);     
+        }
+    }
     public void Enable(Bar.Type type)
     {
         foreach (var bar in bars)
@@ -105,5 +115,13 @@ public abstract class Bar : MonoBehaviour
     protected virtual void UpdateText()
     {
         text.text = Mathf.Floor(Value) + "/" + Mathf.Floor(MaxValue);
+    }
+
+    public void SetActive(bool value)
+    {
+        if (gameObject != null)
+        {
+            //gameObject.SetActive(value); 
+        }
     }
 }

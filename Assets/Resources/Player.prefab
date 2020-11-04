@@ -286,6 +286,8 @@ GameObject:
   - component: {fileID: 1569200282}
   - component: {fileID: 1569200283}
   - component: {fileID: 1440428758822807245}
+  - component: {fileID: -3743782724474067164}
+  - component: {fileID: 6120857744881450802}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -398,6 +400,7 @@ MonoBehaviour:
   groundDamping: 20
   inAirDamping: 5
   jumpHeight: 3
+  photonView: {fileID: -3743782724474067164}
 --- !u!61 &3502329410718346552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -520,8 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a977fbd454b1d44870fba4a5fdcab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bars:
-  - {fileID: 0}
 --- !u!114 &1569200282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b985124312f4b334a8954c511d6497f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10000
+  maxHp: 100
   updateBar: 1
   hpBase: {fileID: 0}
   barManager: {fileID: 1569200281}
@@ -568,8 +569,47 @@ MonoBehaviour:
   itemMagnet: {fileID: 2509635685832778705}
   itemPickRadius: 0.45
   itemCreatePos: {fileID: 1104163468301940934}
-  inventory: {fileID: 0}
   chunkManager: {fileID: 0}
   flashLight: {fileID: 735428635787416496}
   playerMovement: {fileID: 3502329410718346553}
   hpPlayer: {fileID: 1569200283}
+  photonView: {fileID: -3743782724474067164}
+  nickName: Player
+--- !u!114 &-3743782724474067164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502329410718346550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 6120857744881450802}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6120857744881450802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502329410718346550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1

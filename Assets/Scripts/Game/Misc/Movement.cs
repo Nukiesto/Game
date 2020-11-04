@@ -35,12 +35,12 @@ namespace Game.Misc
                     if (pos.y < startPos.y)
                     {
                         var distance = Vector3.Distance(startPos, pos);
-                        const float minDistance = 3f;
+                        const float minDistance = 5f;
                         if (distance >= minDistance)
                         {
                             //Debug.Log("startpos: " + startPos + " ;distance" + distance + " ;pos" + pos);
                             distance = distance - minDistance;
-                            var hp = -(Mathf.Floor(distance) * Random.Range(4, 6));
+                            var hp = -(Mathf.Floor(distance) * Random.Range(7, 10));
                         
                             OnToFallEvent?.Invoke(hp);
                         }

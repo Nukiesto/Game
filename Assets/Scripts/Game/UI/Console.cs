@@ -61,6 +61,11 @@ namespace Game.UI
             }
         }
 
+        public void WriteString(string inputText)
+        {
+            var newText = Instantiate(text, texts);
+            newText.GetComponent<Text>().text = inputText;;
+        }
         private string ParseCommand(string input)
         {
             if (input.Length > 0 && input[0] != '/') return input;
@@ -92,7 +97,7 @@ namespace Game.UI
                     argument += t;
                     if (i == input.Length - 1)
                     {
-                        Debug.Log(argument);
+                        //Debug.Log(argument);
                         arguments.Add(argument);
                     }
                     continue;
@@ -113,6 +118,31 @@ namespace Game.UI
 
             switch (command)
             {
+                case "gamemode":
+                    var gameManager = Toolbox.Instance.mGameManager;
+                    if (arguments.Count == 1)
+                    {
+                        if (int.TryParse(arguments[0], out var n))
+                        {
+                            GameMode gamemode;
+                            switch (n)
+                            {
+                                case 0:
+                                    gamemode = GameMode.Survival;
+                                    break;
+                                case 1:
+                                    gamemode = GameMode.Sandbox;
+                                    break;
+                                default:
+                                    gamemode = gameManager.GetGameMode();
+                                    break;
+                            }
+                        
+                            gameManager.SetGameMode(gamemode);
+                            return "GameMode: " + gamemode;
+                        }
+                    }
+                    return "GameMode: " + gameManager.GetGameMode();
                 case "getpos":
                     Vector3 posGet;
                     if (arguments.Count >= 1)
