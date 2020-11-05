@@ -48,7 +48,7 @@ MonoBehaviour:
   Color: {r: 1, g: 1, b: 1, a: 0.31764707}
   Sprite: {fileID: 21300000, guid: 0846a06dcf035814d9cee71f4ba273f9, type: 3}
   SortingOrder: 0
-  Material: {fileID: 2100000, guid: 5d8645bc2e5501a4ebd138db5aa609bd, type: 2}
+  Material: {fileID: 2100000, guid: 291ceba0ac547924f9f4289c228a187a, type: 2}
   LightOrigin: {x: 0, y: 0, z: 1}
   Shape: 0
 --- !u!23 &6911954889085757905
@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 1440428758822807245}
   - component: {fileID: -3743782724474067164}
   - component: {fileID: 6120857744881450802}
+  - component: {fileID: -8147939979229176279}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -537,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   updateBar: 1
+  photonView: {fileID: -3743782724474067164}
   hpBase: {fileID: 0}
   barManager: {fileID: 1569200281}
 --- !u!114 &1569200283
@@ -567,13 +569,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMagnet: {fileID: 2509635685832778705}
-  itemPickRadius: 0.45
   itemCreatePos: {fileID: 1104163468301940934}
   chunkManager: {fileID: 0}
   flashLight: {fileID: 735428635787416496}
   playerMovement: {fileID: 3502329410718346553}
   hpPlayer: {fileID: 1569200283}
   photonView: {fileID: -3743782724474067164}
+  itemPickRadius: 0.45
   nickName: Player
 --- !u!114 &-3743782724474067164
 MonoBehaviour:
@@ -594,7 +596,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
+  - {fileID: 1440428758822807245}
   - {fileID: 6120857744881450802}
+  - {fileID: -8147939979229176279}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -613,3 +617,19 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
+--- !u!114 &-8147939979229176279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502329410718346550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3

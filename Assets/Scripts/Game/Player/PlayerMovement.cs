@@ -125,7 +125,7 @@ public class PlayerMovement : Movement
 	}
 	private bool NotMine()
 	{
-		return PhotonNetwork.InRoom && !photonView.IsMine;
+		return PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !photonView.IsMine;
 	}
 	public void SetCanMove(bool value)
 	{

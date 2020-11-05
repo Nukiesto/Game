@@ -976,6 +976,7 @@
                     <e p="MultiplayerMenu.cs" t="Include" />
                     <e p="MultiplayerMenuButton.cs" t="Include" />
                     <e p="MultiplayerMenuDialog.cs" t="Include" />
+                    <e p="RoomListEntry.cs" t="Include" />
                   </e>
                   <e p="Pause" t="Include">
                     <e p="PauseButton.cs" t="Include" />

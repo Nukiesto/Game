@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.ChunkSystem;
 using Game.Lighting;
+using JetBrains.Annotations;
 using Singleton;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -68,8 +69,14 @@ public class ChunkUnit : MonoBehaviour
 
     #endregion
 
+    [ItemCanBeNull]
+    public List<BlockUnit> GetBlocks()
+    {
+        return _controller.GetBlocks();
+    }
     #region UnityEvents
 
+    
     private void Awake()
     {
         Init();
@@ -192,7 +199,9 @@ public class ChunkUnit : MonoBehaviour
     public bool SetBlock(Vector3Int pos, BlockData data, bool checkCollisions, Tilemap tilemap,
         BlockLayer layer = BlockLayer.Front, bool toStartCor = false)
     {
+        if (tilemap == null) return false;
         var hasBlock = checkCollisions && HasBlock(pos, layer);
+        
         if (layer == BlockLayer.Back && !(data?.toPlaceBack ?? false))
         {
             return false;
@@ -202,6 +211,7 @@ public class ChunkUnit : MonoBehaviour
         {
             if (data.isSolid)
             {
+                //Debug.Log(tilemap);
                 tilemap.SetTile(pos, data.tile);
             }
             else

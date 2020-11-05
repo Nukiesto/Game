@@ -1,4 +1,5 @@
 ﻿using EasyButtons;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Game.HpSystem
@@ -7,6 +8,7 @@ namespace Game.HpSystem
     {
         [SerializeField] private float maxHp = 100;
         [SerializeField] private bool updateBar = true;
+        [SerializeField] private PhotonView photonView;
         
         [HideInInspector] public HpBase hpBase;
         
@@ -18,9 +20,12 @@ namespace Game.HpSystem
 
         private void Start()
         {
-            
             CurrentHp = maxHp;
-            if (barManager != null) barManager.InitAllBar(maxHp);
+
+            if (photonView.IsMine)
+            {
+                if (barManager != null) barManager.InitAllBar(maxHp);
+            }
         }
 
         public void Adjust(float value)
@@ -40,7 +45,7 @@ namespace Game.HpSystem
         public void SetGodMode(bool value)
         {
             _isGodMode = value;
-            barManager.SetActiveAllBars(!value);
+            //barManager.SetActiveAllBars(!value);
         }
 
         public void SetHp(float value)

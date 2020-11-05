@@ -43,7 +43,8 @@ namespace Game.World
         {
             InitLoadedPoint();
         }
-        public void InitSpawnPoint()
+
+        private void InitSpawnPoint()
         {
             var pos = Vector3.zero;
             if (PhotonNetwork.IsMasterClient)

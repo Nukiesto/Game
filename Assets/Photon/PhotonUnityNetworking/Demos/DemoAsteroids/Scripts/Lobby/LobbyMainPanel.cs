@@ -178,8 +178,7 @@ namespace Photon.Pun.Demo.Asteroids
                 playerListEntries = new Dictionary<int, GameObject>();
             }
 
-            GameObject entry;
-            if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
+            if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out var entry))
             {
                 object isPlayerReady;
                 if (changedProps.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
@@ -207,14 +206,14 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnCreateRoomButtonClicked()
         {
-            string roomName = RoomNameInputField.text;
+            var roomName = RoomNameInputField.text;
             roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
 
             byte maxPlayers;
             byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
             maxPlayers = (byte) Mathf.Clamp(maxPlayers, 2, 8);
 
-            RoomOptions options = new RoomOptions {MaxPlayers = maxPlayers, PlayerTtl = 10000 };
+            var options = new RoomOptions {MaxPlayers = maxPlayers, PlayerTtl = 10000 };
 
             PhotonNetwork.CreateRoom(roomName, options, null);
         }
@@ -347,10 +346,9 @@ namespace Photon.Pun.Demo.Asteroids
 
         private void UpdateRoomListView()
         {
-            foreach (RoomInfo info in cachedRoomList.Values)
+            foreach (var info in cachedRoomList.Values)
             {
-                GameObject entry = Instantiate(RoomListEntryPrefab);
-                entry.transform.SetParent(RoomListContent.transform);
+                var entry = Instantiate(RoomListEntryPrefab, RoomListContent.transform, true);
                 entry.transform.localScale = Vector3.one;
                 entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
 

@@ -73,7 +73,10 @@ public class CameraManager : MonoBehaviour
     {
         _inst.FindPlayer_inst();
     }
-
+    public static void SetTarget(GameObject target)
+    {
+        _inst.SetPlayer_inst(target);
+    }
     // если в процессе игры, было изменено разрешение экрана
     // или параметр "Orthographic Size", то следует сделать вызов данной функции повторно
     public static void CalculateBounds()
@@ -137,6 +140,19 @@ public class CameraManager : MonoBehaviour
     private void FindPlayer_inst()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (target)
+        {
+            if (face == Mode.Player) direction = target.right; else direction = (Mouse() - target.position).normalized;
+            Vector3 position = target.position + direction * offset;
+            position.z = transform.position.z;
+            transform.position = MoveInside(position, new Vector3(min.x, min.y, position.z), new Vector3(max.x, max.y, position.z));
+        }
+    }
+    
+    private void SetPlayer_inst(GameObject targetSet)
+    {
+        target = targetSet.transform;
 
         if (target)
         {

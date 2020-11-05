@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using Game.ChunkSystem;
 using Game.Game;
 using Photon.Pun;
 using SavingSystem;
@@ -29,12 +30,24 @@ namespace Game
 
         public void InitWorld()
         {
-            if (PhotonNetwork.IsMasterClient)
+            var manager = Toolbox.Instance.mMultiPlayerManager;
+            if (!manager.IsOfflineGame && !PhotonNetwork.IsMasterClient)
             {
-                worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
-                if (!worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld)) return;
+                //Debug.Log("Did`nt created world in not master client");
+                return;
+            }
             
-                if (!worldSaving.WorldDataUnit.toGenerateWorld) LoadWorld();
+            worldSaving = new WorldSavingSystem.WorldSaving(WorldSavingSystem.WorldsList);
+            if (!worldSaving.LoadWorldName(WorldSavingSystem.CurrentWorld)) return;
+        
+            if (!worldSaving.WorldDataUnit.toGenerateWorld)
+            {
+                ChunkManager.Instance.BuildChunks(false);
+                LoadWorld();
+            }
+            else
+            {
+                ChunkManager.Instance.BuildChunks(true);
             }
         }
         public void SaveWorld()

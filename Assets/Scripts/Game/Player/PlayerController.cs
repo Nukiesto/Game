@@ -12,20 +12,22 @@ using Console = Game.UI.Console;
 
 namespace Game.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPunObservable
     {
+        [Header("Components")]
         [SerializeField] private CircleCollider2D itemMagnet;
-        [SerializeField] private float itemPickRadius;
         [SerializeField] private GameObject itemCreatePos;
-        private Inventory inventory;
         [SerializeField] private ChunkManager chunkManager;
         [SerializeField] private GameObject flashLight;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private HpPlayer hpPlayer;
         [SerializeField] private PhotonView photonView;
         
+        [Header("Other")]
+        [SerializeField] private float itemPickRadius;
         [HideInInspector] public string nickName = "Player";
         
+        private Inventory _inventory;
         private bool _canInput = true;
         private bool _flashLightActive;
         public static PlayerController Instance;
@@ -76,7 +78,7 @@ namespace Game.Player
         }
         public void SetInventory(Inventory inventoryToSet)
         {
-            inventory = inventoryToSet;
+            _inventory = inventoryToSet;
         }
         private void OnLoad(WorldSavingSystem.WorldSaving worldSaving)
         {
@@ -98,7 +100,7 @@ namespace Game.Player
             playerData.spawnY = worldManager.SpawnPoint.y;
             playerData.spawnPointInited = true;
             playerData.gameMode = _toolbox.mGameManager.GetGameMode();
-            playerData.items = inventory.GetItems();
+            playerData.items = _inventory.GetItems();
             playerData.hp = hpPlayer.GetHp();
             playerData.nickname = nickName;
             
@@ -133,7 +135,11 @@ namespace Game.Player
         }
         private void Update()
         {
-            if (NotMine()) return;
+            if (NotMine())
+            {
+                flashLight.SetActive(_flashLightActive);
+                return;
+            }
             
             if (!_canInput) return;
         
@@ -153,7 +159,7 @@ namespace Game.Player
         
             var obj = col.gameObject;
             //Debug.Log(obj.GetComponent<Item>().data);
-            inventory.AddItem(obj.GetComponent<Item>().data);
+            _inventory.AddItem(obj.GetComponent<Item>().data);
             obj.SetActive(false);
         }
         public bool CanToCreateItem()
@@ -184,6 +190,18 @@ namespace Game.Player
         private void OnChangeGameMode(GameMode gameMode)
         {
             hpPlayer.SetGodMode(gameMode == GameMode.Sandbox);
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(_flashLightActive);
+            }
+            else
+            {
+                _flashLightActive = (bool) stream.ReceiveNext();
+            }
         }
     }
 }

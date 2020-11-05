@@ -18,7 +18,7 @@ namespace Game.ChunkSystem
         [SerializeField] private PlayerController player;
         [SerializeField] private Camera cameraMain;
 
-        private ChunkUnit[,] _chunks;
+        public ChunkUnit[,] Chunks { get; private set; }
         private Vector3 _posObj;
         [HideInInspector]public Vector2Int posZero;
 
@@ -29,7 +29,6 @@ namespace Game.ChunkSystem
         public static ChunkManager Instance;
 
         #endregion
-    
         private void Awake()
         {
             Instance = this;
@@ -48,12 +47,12 @@ namespace Game.ChunkSystem
             saver.InsertStartOnSave(OnSave);
             //saver.OnSaveEvent += OnSave;
         
-            BuildChunks();
+            //BuildChunks();
         }
 
         private void Start()
         {
-            StartCoroutine(BuildLimiters());
+            //StartCoroutine(BuildLimiters());
         }
     
         private IEnumerator BuildLimiters()
@@ -69,7 +68,7 @@ namespace Game.ChunkSystem
                 {
                     for (var j1 = 0; j1 < h; j1++)
                     {
-                        var chunkUnit = _chunks[i1, j1];
+                        var chunkUnit = Chunks[i1, j1];
                         if (j1 == 0)
                         {
                             for (var i = 0; i < _chunkSize; i++)
@@ -130,11 +129,14 @@ namespace Game.ChunkSystem
             //Debug.Log("min: " + bounds.min + " ;max: " + bounds.max);
         }
 
-        private void BuildChunks()
+        public void BuildChunks(bool generateChunks)
         {
-            _chunks = new ChunkUnit[generator.worldWidthInChunks, generator.worldHeightInChunks];
+            Chunks = new ChunkUnit[generator.worldWidthInChunks, generator.worldHeightInChunks];
             var posObj = transform.position;
 
+            var worldsaver = Toolbox.Instance.mWorldSaver;
+            //worldsaver.worldSaving.WorldDataUnit.toGenerateWorld;
+            
             //float N = width * height;
             for (var i = 0; i < generator.worldWidthInChunks; i++)
             for (var j = 0; j < generator.worldHeightInChunks; j++)
@@ -146,8 +148,8 @@ namespace Game.ChunkSystem
 
                 var chunkUnit = chunkObj.GetComponent<ChunkUnit>();
                 chunkUnit.chunkManager = this;
-                chunkUnit.ToGenerate = true;
-                _chunks[i, j] = chunkUnit;
+                chunkUnit.ToGenerate = generateChunks;
+                Chunks[i, j] = chunkUnit;
                 //progress.text = n / N * 100 + "%";
                 //Debug.Log("World Generated: " + n / N * 100 + "%; " + n);
             }
@@ -157,7 +159,7 @@ namespace Game.ChunkSystem
         {
             for (var i = 0; i < generator.worldWidthInChunks; i++)
             for (var j = 0; j < generator.worldHeightInChunks; j++)
-                if (_chunks[i, j] == unit)
+                if (Chunks[i, j] == unit)
                     return new Vector2Int(i, j);
             return new Vector2Int(-1, -1);
         }
@@ -180,7 +182,7 @@ namespace Game.ChunkSystem
             for (var j = 0; j < generator.worldHeightInChunks; j++)
             {
                 var chunkData = new WorldSavingSystem.ChunkData(i, j);
-                var unit = _chunks[i, j];
+                var unit = Chunks[i, j];
                 //Debug.Log("ChunkData: " + chunk.x + " ;" + chunk.y + " ;ChunkUnit: " + i + " ;"+ j);
                 for (var x = 0; x < _chunkSize; x++)
                 for (var y = 0; y < _chunkSize; y++)
@@ -255,7 +257,7 @@ namespace Game.ChunkSystem
                 }
                 //Debug.Log("ItemsCount: " + items.Count);
                 //Debug.Log("x" + chunkLoaded.x + " ;y" + chunkLoaded.y);
-                var unit = _chunks[chunkLoaded.x, chunkLoaded.y];
+                var unit = Chunks[chunkLoaded.x, chunkLoaded.y];
                 //unit.Clear(); //Полная очистка чанка
                 unit.ToGenerate = false;
                 var chunkFront = new ChunkUnit.ChunkBuilder.BlockUnitChunk[_chunkSize,_chunkSize];
@@ -301,19 +303,19 @@ namespace Game.ChunkSystem
 
             //Debug.Log("GetChunk Array Pos: " + i + ", " + j + " ;GetChunk Pos: " + posInt);
 
-            return _chunks[i, j];
+            return Chunks[i, j];
 
         }
         //Local
         public ChunkUnit GetUpperChunk(Vector2Int pos)
         {
             //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
-            return pos.y + 1 <= generator.worldHeightInChunks - 1 ? _chunks[pos.x, pos.y + 1] : null;
+            return pos.y + 1 <= generator.worldHeightInChunks - 1 ? Chunks[pos.x, pos.y + 1] : null;
         }
         public ChunkUnit GetDownerChunk(Vector2Int pos)
         {
             //Debug.Log((pos.y + 1) + " ;" + generator.worldHeightInChunks);
-            return pos.y - 1 > 0 ? _chunks[pos.x, pos.y - 1] : null;
+            return pos.y - 1 > 0 ? Chunks[pos.x, pos.y - 1] : null;
         }
 
         #endregion

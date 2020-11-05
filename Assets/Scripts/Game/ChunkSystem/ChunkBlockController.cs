@@ -109,6 +109,11 @@ public class ChunkBlockController : MonoBehaviour
         _blocks.Clear();
     }
 
+    public List<BlockUnit> GetBlocks()
+    {
+        return _blocks;
+    }
+
     #endregion
 }
 public class BlockUnit

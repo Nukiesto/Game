@@ -922,6 +922,7 @@ MonoBehaviour:
   bars:
   - {fileID: 1906073225}
   inventory: {fileID: 1761289013}
+  chunkManager: {fileID: 1848369468}
 --- !u!1 &261947802
 GameObject:
   m_ObjectHideFlags: 0

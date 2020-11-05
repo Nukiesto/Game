@@ -114,7 +114,8 @@ public abstract class Bar : MonoBehaviour
 
     protected virtual void UpdateText()
     {
-        text.text = Mathf.Floor(Value) + "/" + Mathf.Floor(MaxValue);
+        if (text != null) 
+            text.text = Mathf.Floor(Value) + "/" + Mathf.Floor(MaxValue);
     }
 
     public void SetActive(bool value)

@@ -73,6 +73,9 @@ public class PauseButton : ButtonUnit
         var toolbox = Toolbox.Instance;
         toolbox.mWorldSaver.SaveWorld();
 
+        var manager = Toolbox.Instance.mMultiPlayerManager;
+        manager.IsOnlineGame = false;
+        manager.IsOfflineGame = false;
         if (PhotonNetwork.InRoom)
         {
             StartCoroutine(WaitForDisconnect());
@@ -87,6 +90,7 @@ public class PauseButton : ButtonUnit
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
+        
         Toolbox.Instance.mMultiPlayerManager.IsConnectedToMaster = false;
         
         while (PhotonNetwork.IsConnected)

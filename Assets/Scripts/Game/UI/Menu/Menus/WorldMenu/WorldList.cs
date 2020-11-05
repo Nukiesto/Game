@@ -97,7 +97,12 @@ public class WorldList : MonoBehaviourPunCallbacks {
 	} 
 	public void LoadWorld()
 	{
+		
 		WorldSavingSystem.CurrentWorld = _itemListUnits[index: _currentWorldId].Title;
+		
+		var manager = Toolbox.Instance.mMultiPlayerManager;
+		manager.IsOfflineGame = true;
+		
 		menuController.SetGame();
 	}
 	public void LoadWorldAsServer()
@@ -107,7 +112,11 @@ public class WorldList : MonoBehaviourPunCallbacks {
 		{
 			PhotonNetwork.CreateRoom(null, new RoomOptions() {MaxPlayers = 2});
 			WorldSavingSystem.CurrentWorld = _itemListUnits[index: _currentWorldId].Title;
-        	menuController.SetGame();	
+			
+			var manager = Toolbox.Instance.mMultiPlayerManager;
+			manager.IsOnlineGame = true;
+			
+        	menuController.SetGame();
 		}
 	}
 	public void DestroyWorld()
